@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -150,9 +150,10 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 <div class="tab-bar">
   <div class="tab active" onclick="switchTab('today')">오늘 할 일</div>
   <div class="tab" onclick="switchTab('brands')">브랜드</div>
+  <div class="tab" onclick="switchTab('meta')">📊 메타</div>
   <div class="tab" onclick="switchTab('automation')">자동화 현황</div>
   <div class="tab" onclick="switchTab('computers')">컴퓨터</div>
-  <div class="tab" onclick="switchTab('flow')">플로우</div><div class="tab" onclick="switchTab('meta')">📊 메타</div>
+  <div class="tab" onclick="switchTab('flow')">플로우</div>
 </div>
 <div class="page active" id="page-today">
   <div class="cal-wrap" style="margin-top:4px;">
@@ -181,7 +182,19 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
     <div class="stat-card"><div class="stat-label">완료</div><div class="stat-value" id="done-count">0</div><div class="stat-sub">오늘</div></div>
     <div class="stat-card"><div class="stat-label">남은 일</div><div class="stat-value" id="left-count">0</div><div class="stat-sub">할 일</div></div>
   </div>
-  <div class="section-title">ONCE Studio 오전 루틴 (9:30 전)</div>
+  <div class="section-title">📊 메타 광고 오늘 현황</div>
+  <div class="card" onclick="switchTab('meta')" style="cursor:pointer;background:linear-gradient(135deg,#1e3c6e 0%,#2952a3 100%);border:none;color:white;margin-bottom:8px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <div style="font-size:11px;opacity:0.65;">📡 04/01 기준</div>
+      <div style="font-size:11px;opacity:0.65;">자세히 보기 →</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+      <div style="text-align:center;"><div style="font-size:10px;opacity:0.65;margin-bottom:3px;">광고 지출</div><div style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;">₩5,199</div></div>
+      <div style="text-align:center;"><div style="font-size:10px;opacity:0.65;margin-bottom:3px;">ROAS</div><div style="font-size:16px;font-weight:700;color:#93C5FD;">12.1x</div></div>
+      <div style="text-align:center;"><div style="font-size:10px;opacity:0.65;margin-bottom:3px;">구매</div><div style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;">2건</div></div>
+    </div>
+  </div>
+    <div class="section-title">ONCE Studio 오전 루틴 (9:30 전)</div>
   <div class="card">
     <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">이지오토 주문 수집 확인</div><span class="task-tag tag-auto">자동</span></div>
     <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">발주 매칭 확인</div><span class="task-tag tag-auto">자동</span></div>
@@ -344,9 +357,9 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 <div class="card" style="background:var(--accent);border:none;color:white;margin-bottom:10px;">
 <div style="display:flex;justify-content:space-between;align-items:flex-start;">
 <div>
-<div style="font-size:11px;opacity:0.6;margin-bottom:4px;">계정 잔액</div>
+<div style="font-size:11px;opacity:0.6;margin-bottom:4px;">광고 충전 잔액</div>
 <div style="font-size:28px;font-weight:700;font-family:'DM Mono',monospace;">₩64,110</div>
-<div style="font-size:11px;opacity:0.5;margin-top:4px;">누적 지출 ₩11,856,577</div>
+<div style="font-size:11px;opacity:0.5;margin-top:4px;">누적 광고비 ₩11,856,577</div>
 </div>
 <div style="background:rgba(255,255,255,0.15);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700;">운영중</div>
 </div>
@@ -372,13 +385,13 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 </div>
 <div class="section-title">최근 7일 집계 (03/25–03/31)</div>
 <div class="card">
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
 <div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">총 지출</div><div style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">₩68,431</div></div>
+<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">총 구매</div><div style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">9건</div></div>
+<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">평균 ROAS</div><div style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;color:var(--green);">6.8x</div></div>
 <div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">총 클릭</div><div style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">655</div></div>
-<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">총 노출</div><div style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">13,523</div></div>
 <div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">평균 CTR</div><div style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">4.84%</div></div>
 <div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">평균 CPC</div><div style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">₩104</div></div>
-<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">도달수</div><div style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">12,197</div></div>
 </div>
 </div>
 <div class="section-title">진행중 캠페인</div>
@@ -413,7 +426,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 <script>
 function updateDate(){const now=new Date();const days=['일','월','화','수','목','금','토'];document.getElementById('current-date').textContent=`${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')} (${days[now.getDay()]})`;}
 updateDate();
-function switchTab(id){const ids=['today','brands','automation','computers','flow','meta'];document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',ids[i]===id));document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+id));if(id==='meta')renderMetaChart();}
+function switchTab(id){const ids=['today','brands','meta','automation','computers','flow'];document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',ids[i]===id));document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+id));if(id==='meta')renderMetaChart();}
 function switchBrand(idx){document.querySelectorAll('.brand-pill').forEach((p,i)=>p.classList.toggle('active',i===idx));document.querySelectorAll('.brand-page').forEach((p,i)=>p.classList.toggle('active',i===idx));}
 function toggleTask(el){const cb=el.querySelector('.checkbox');const txt=el.querySelector('.task-text');cb.classList.toggle('done');txt.classList.toggle('done');updateCounts();saveChecks();}
 function saveChecks(){const tasks=document.querySelectorAll('#page-today .task-item');const state={};tasks.forEach((t,i)=>{state[i]=t.querySelector('.checkbox').classList.contains('done');});try{localStorage.setItem('taskChecks',JSON.stringify(state));}catch(e){}}
