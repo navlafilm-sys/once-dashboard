@@ -6,19 +6,7 @@
 <title>ONCE 대시보드</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #F7F5F0;
-  --surface: #FFFFFF;
-  --border: #E8E4DC;
-  --text: #1A1814;
-  --muted: #8A857A;
-  --accent: #2D2926;
-  --green: #2D6A4F; --green-bg: #EAF4EE;
-  --amber: #92400E; --amber-bg: #FEF3C7;
-  --red: #991B1B; --red-bg: #FEE2E2;
-  --blue: #1E40AF; --blue-bg: #EFF6FF;
-  --purple: #5B21B6; --purple-bg: #F5F3FF;
-}
+:root{--bg:#F7F5F0;--surface:#FFFFFF;--border:#E8E4DC;--text:#1A1814;--muted:#8A857A;--accent:#2D2926;--green:#2D6A4F;--green-bg:#EAF4EE;--amber:#92400E;--amber-bg:#FEF3C7;--red:#991B1B;--red-bg:#FEE2E2;--blue:#1E40AF;--blue-bg:#EFF6FF;--purple:#5B21B6;--purple-bg:#F5F3FF;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:80px;}
 .header{background:var(--accent);color:#fff;padding:20px 20px 14px;position:sticky;top:0;z-index:100;}
@@ -110,6 +98,36 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .dot-scheduled{background:#60A5FA;}
 .pc-task-name{flex:1;}
 .pc-task-time{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;}
+.cal-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;}
+.cal-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;cursor:pointer;user-select:none;}
+.cal-title{font-size:14px;font-weight:700;}
+.cal-arrow{font-size:12px;color:var(--muted);transition:transform 0.2s;}
+.cal-arrow.open{transform:rotate(180deg);}
+.cal-body{display:none;padding:0 16px 14px;}
+.cal-body.open{display:block;}
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.cal-nav-btn{background:none;border:1px solid var(--border);border-radius:8px;padding:4px 12px;font-size:13px;cursor:pointer;color:var(--text);}
+.cal-month{font-size:14px;font-weight:700;font-family:'DM Mono',monospace;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center;}
+.cal-dow{font-size:10px;color:var(--muted);padding:4px 0;font-weight:700;}
+.cal-day{font-size:12px;padding:6px 2px;border-radius:8px;cursor:pointer;position:relative;transition:background 0.1s;}
+.cal-day:hover{background:var(--bg);}
+.cal-day.today{background:var(--accent);color:white;font-weight:700;}
+.cal-day.selected{background:var(--amber-bg);color:var(--amber);font-weight:700;}
+.cal-day.has-note::after{content:'';width:4px;height:4px;border-radius:50%;background:var(--green);position:absolute;bottom:2px;left:50%;transform:translateX(-50%);}
+.cal-day.today.has-note::after{background:white;}
+.cal-day.empty{cursor:default;}
+.cal-log{margin-top:12px;border-top:1px solid var(--border);padding-top:12px;}
+.cal-log-date{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:8px;font-family:'DM Mono',monospace;}
+.cal-log-empty{font-size:13px;color:var(--muted);text-align:center;padding:12px 0;}
+.cal-note-item{display:flex;align-items:flex-start;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.cal-note-item:last-child{border-bottom:none;}
+.cal-note-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:4px;}
+.cal-note-text{flex:1;line-height:1.5;}
+.cal-note-del{color:var(--muted);font-size:16px;cursor:pointer;padding:0 4px;flex-shrink:0;}
+.cal-add-row{display:flex;gap:8px;margin-top:10px;}
+.cal-add-input{flex:1;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:'Noto Sans KR',sans-serif;font-size:13px;color:var(--text);background:var(--bg);outline:none;}
+.cal-add-btn{background:var(--accent);color:white;border:none;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;white-space:nowrap;}
 .fab{position:fixed;bottom:24px;right:20px;background:var(--accent);color:white;border:none;border-radius:50%;width:52px;height:52px;font-size:22px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:200;display:flex;align-items:center;justify-content:center;}
 .add-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:300;align-items:flex-end;}
 .add-modal.open{display:flex;}
@@ -125,10 +143,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 <div class="header">
   <div class="header-row">
     <h1>ONCE 대시보드</h1>
-    <div style="display:flex;align-items:center;">
-      <span class="live-dot"></span>
-      <span class="live-label">라이브</span>
-    </div>
+    <div style="display:flex;align-items:center;"><span class="live-dot"></span><span class="live-label">라이브</span></div>
   </div>
   <div class="header-date" id="current-date"></div>
 </div>
@@ -140,6 +155,28 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
   <div class="tab" onclick="switchTab('flow')">플로우</div>
 </div>
 <div class="page active" id="page-today">
+  <div class="cal-wrap" style="margin-top:4px;">
+    <div class="cal-header" onclick="toggleCal()">
+      <div class="cal-title" id="cal-header-text">📅 2026년 4월</div>
+      <span class="cal-arrow" id="cal-arrow">▼</span>
+    </div>
+    <div class="cal-body" id="cal-body">
+      <div class="cal-nav">
+        <button class="cal-nav-btn" onclick="changeMonth(-1)">◀</button>
+        <span class="cal-month" id="cal-month-label"></span>
+        <button class="cal-nav-btn" onclick="changeMonth(1)">▶</button>
+      </div>
+      <div class="cal-grid" id="cal-grid"></div>
+      <div class="cal-log" id="cal-log">
+        <div class="cal-log-date" id="cal-log-date"></div>
+        <div id="cal-log-items"><div class="cal-log-empty">날짜를 선택하면 기록이 표시됩니다</div></div>
+        <div class="cal-add-row" id="cal-add-row" style="display:none;">
+          <input class="cal-add-input" id="cal-note-input" placeholder="오늘 한 일 입력..." onkeydown="if(event.key==='Enter')addCalNote()"/>
+          <button class="cal-add-btn" onclick="addCalNote()">추가</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="stat-grid">
     <div class="stat-card"><div class="stat-label">완료</div><div class="stat-value" id="done-count">0</div><div class="stat-sub">오늘</div></div>
     <div class="stat-card"><div class="stat-label">남은 일</div><div class="stat-value" id="left-count">0</div><div class="stat-sub">할 일</div></div>
@@ -185,10 +222,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
   </div>
   <div class="brand-page active" id="brand-0">
     <div class="brand-hero">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-        <div><div class="brand-hero-name">ONCE Studio</div><div class="brand-hero-mood">메인 브랜드</div></div>
-        <span class="brand-status-pill status-active">운영중</span>
-      </div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div class="brand-hero-name">ONCE Studio</div><div class="brand-hero-mood">메인 브랜드</div></div><span class="brand-status-pill status-active">운영중</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
       <div class="progress-label"><span>진행도</span><span>80%</span></div>
     </div>
@@ -214,10 +248,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
   </div>
   <div class="brand-page" id="brand-1">
     <div class="brand-hero" style="background:#8B5CF6;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-        <div><div class="brand-hero-name">enblush</div><div class="brand-hero-mood">Blush your everyday · 그라디언트 감성</div></div>
-        <span class="brand-status-pill status-building">구축중</span>
-      </div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div class="brand-hero-name">enblush</div><div class="brand-hero-mood">Blush your everyday · 그라디언트 감성</div></div><span class="brand-status-pill status-building">구축중</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div>
       <div class="progress-label"><span>진행도</span><span>45%</span></div>
     </div>
@@ -236,10 +267,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
   </div>
   <div class="brand-page" id="brand-2">
     <div class="brand-hero" style="background:#374151;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-        <div><div class="brand-hero-name">EFFORTLSS</div><div class="brand-hero-mood">프렌치 무심 감성</div></div>
-        <span class="brand-status-pill status-building">구축중</span>
-      </div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div class="brand-hero-name">EFFORTLSS</div><div class="brand-hero-mood">프렌치 무심 감성</div></div><span class="brand-status-pill status-building">구축중</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div>
       <div class="progress-label"><span>진행도</span><span>25%</span></div>
     </div>
@@ -278,13 +306,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
     <div class="auto-item"><div class="auto-dot dot-off"></div><div class="auto-info"><div class="auto-name">쇼핑몰 간 상품 배포</div><div class="auto-sub">Nextengine</div></div><span class="auto-badge badge-off">미설정</span></div>
   </div>
   <div class="section-title">Cowork 업데이트 로그</div>
-  <div class="card" id="cowork-log"><!-- COWORK_LOG_START -->
-    <div class="log-item"><div class="log-time">2026-03-31</div><div class="log-text" style="color:var(--green);">✅ dashboard-github-sync 생성 — 매 1시간 GitHub Pages 자동 push</div></div>
-    <div class="log-item"><div class="log-time">2026-03-31</div><div class="log-text" style="color:var(--green);">✅ session-context-sync 생성 — 매일 23:01 세션→워크플로우→대시보드→GitHub</div></div>
-    <div class="log-item"><div class="log-time">2026-03-31</div><div class="log-text" style="color:var(--green);">✅ mentor-morning-question 생성 — 매일 08:07 개인 삶/마인드셋 질문 md저장</div></div>
-    <div class="log-item"><div class="log-time">2026-03-31</div><div class="log-text" style="color:var(--green);">✅ once_dashboard_v2.html 생성 — 실시간 대시보드, 2분 새로고침, GitHub Pages 연동</div></div>
-    <!-- COWORK_LOG_END -->
-  </div>
+  <div class="card" id="cowork-log"><div class="log-item"><div class="log-time">대기중</div><div class="log-text" style="color:var(--muted);">Cowork 연결 후 자동으로 업데이트됩니다</div></div></div>
   <div class="section-title">스케줄 태스크</div>
   <div class="card">
     <div class="auto-item"><div class="auto-dot" style="background:#60A5FA;"></div><div class="auto-info"><div class="auto-name">주문 수집 + 발주</div><div class="auto-sub">매일 09:00 · 삼성 컴퓨터</div></div><span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);">09:00</span></div>
@@ -330,13 +352,27 @@ function updateDate(){const now=new Date();const days=['일','월','화','수','
 updateDate();
 function switchTab(id){const ids=['today','brands','automation','computers','flow'];document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',ids[i]===id));document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+id));}
 function switchBrand(idx){document.querySelectorAll('.brand-pill').forEach((p,i)=>p.classList.toggle('active',i===idx));document.querySelectorAll('.brand-page').forEach((p,i)=>p.classList.toggle('active',i===idx));}
-function toggleTask(el){const cb=el.querySelector('.checkbox');const txt=el.querySelector('.task-text');cb.classList.toggle('done');txt.classList.toggle('done');updateCounts();}
+function toggleTask(el){const cb=el.querySelector('.checkbox');const txt=el.querySelector('.task-text');cb.classList.toggle('done');txt.classList.toggle('done');updateCounts();saveChecks();}
+function saveChecks(){const tasks=document.querySelectorAll('#page-today .task-item');const state={};tasks.forEach((t,i)=>{state[i]=t.querySelector('.checkbox').classList.contains('done');});try{localStorage.setItem('taskChecks',JSON.stringify(state));}catch(e){}}
+function loadChecks(){try{const state=JSON.parse(localStorage.getItem('taskChecks')||'{}');const today=new Date().toDateString();const savedDay=localStorage.getItem('taskChecksDay');if(savedDay!==today){localStorage.removeItem('taskChecks');localStorage.setItem('taskChecksDay',today);return;}const tasks=document.querySelectorAll('#page-today .task-item');tasks.forEach((t,i)=>{if(state[i]){t.querySelector('.checkbox').classList.add('done');t.querySelector('.task-text').classList.add('done');}});updateCounts();}catch(e){}}
+if(!localStorage.getItem('taskChecksDay')){localStorage.setItem('taskChecksDay',new Date().toDateString());}
+loadChecks();
 function updateCounts(){const all=document.querySelectorAll('#page-today .task-item').length;const done=document.querySelectorAll('#page-today .checkbox.done').length;document.getElementById('done-count').textContent=done;document.getElementById('left-count').textContent=all-done;}
 updateCounts();
 function openModal(){document.getElementById('add-modal').classList.add('open');}
 function closeModal(){document.getElementById('add-modal').classList.remove('open');}
 function closeModalOutside(e){if(e.target.id==='add-modal')closeModal();}
 function addTask(){const txt=document.getElementById('new-task-text').value.trim();const tag=document.getElementById('new-task-tag').value;if(!txt)return;const labels={'tag-auto':'자동','tag-manual':'직접','tag-check':'확인','tag-urgent':'긴급'};const item=document.createElement('div');item.className='task-item';item.onclick=function(){toggleTask(this);};item.innerHTML=`<div class="checkbox"></div><div class="task-text">${txt}</div><span class="task-tag ${tag}">${labels[tag]}</span>`;document.getElementById('extra-tasks').appendChild(item);document.getElementById('new-task-text').value='';closeModal();updateCounts();}
+let calNotes=JSON.parse(localStorage.getItem('calNotes')||'{}');let calOpen=false;let calYear,calMonth,calSelected;
+function initCal(){const now=new Date();calYear=now.getFullYear();calMonth=now.getMonth();calSelected=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;renderCal();showCalLog(calSelected);document.getElementById('cal-add-row').style.display='flex';}
+function toggleCal(){calOpen=!calOpen;document.getElementById('cal-body').classList.toggle('open',calOpen);document.getElementById('cal-arrow').classList.toggle('open',calOpen);}
+function changeMonth(dir){calMonth+=dir;if(calMonth<0){calMonth=11;calYear--;}if(calMonth>11){calMonth=0;calYear++;}renderCal();}
+function renderCal(){const months=['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];document.getElementById('cal-month-label').textContent=`${calYear}년 ${months[calMonth]}`;document.getElementById('cal-header-text').textContent=`📅 ${calYear}년 ${months[calMonth]}`;const now=new Date();const todayStr=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;let html=['일','월','화','수','목','금','토'].map(d=>`<div class="cal-dow">${d}</div>`).join('');const firstDay=new Date(calYear,calMonth,1).getDay();const lastDate=new Date(calYear,calMonth+1,0).getDate();for(let i=0;i<firstDay;i++)html+=`<div class="cal-day empty"></div>`;for(let d=1;d<=lastDate;d++){const ds=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;const isToday=ds===todayStr,isSel=ds===calSelected;const hasNote=calNotes[ds]&&calNotes[ds].length>0;html+=`<div class="cal-day${isToday?' today':''}${isSel&&!isToday?' selected':''}${hasNote?' has-note':''}" onclick="selectDay('${ds}')">${d}</div>`;}document.getElementById('cal-grid').innerHTML=html;}
+function selectDay(ds){calSelected=ds;renderCal();showCalLog(ds);document.getElementById('cal-add-row').style.display='flex';}
+function showCalLog(ds){const parts=ds.split('-');const days=['일','월','화','수','목','금','토'];const d=new Date(parseInt(parts[0]),parseInt(parts[1])-1,parseInt(parts[2]));document.getElementById('cal-log-date').textContent=`${parts[0]}.${parts[1]}.${parts[2]} (${days[d.getDay()]})`;const notes=calNotes[ds]||[];const el=document.getElementById('cal-log-items');el.innerHTML=notes.length===0?'<div class="cal-log-empty">기록이 없어요. 추가해보세요!</div>':notes.map((n,i)=>`<div class="cal-note-item"><div class="cal-note-dot"></div><div class="cal-note-text">${n}</div><div class="cal-note-del" onclick="delCalNote('${ds}',${i})">×</div></div>`).join('');}
+function addCalNote(){const input=document.getElementById('cal-note-input');const txt=input.value.trim();if(!txt||!calSelected)return;if(!calNotes[calSelected])calNotes[calSelected]=[];calNotes[calSelected].push(txt);localStorage.setItem('calNotes',JSON.stringify(calNotes));input.value='';renderCal();showCalLog(calSelected);}
+function delCalNote(ds,idx){calNotes[ds].splice(idx,1);if(calNotes[ds].length===0)delete calNotes[ds];localStorage.setItem('calNotes',JSON.stringify(calNotes));renderCal();showCalLog(ds);}
+initCal();
 function addCoworkLog(message,type=''){const log=document.getElementById('cowork-log');const now=new Date();const time=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;const item=document.createElement('div');item.className='log-item';item.innerHTML=`<div class="log-time">${time}</div><div class="log-text ${type}">${message}</div>`;if(log.children[0]&&log.children[0].querySelector('.log-time').textContent==='대기중')log.innerHTML='';log.insertBefore(item,log.firstChild);}
 </script>
 </body>
