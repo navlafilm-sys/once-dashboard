@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -351,7 +351,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 </div>
 <div class="page" id="page-meta">
 <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0 4px;">
-<div style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;" id="meta-ts">📡 업데이트: 2026-04-01 09:00</div>
+<div style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;" id="meta-ts">📡 업데이트: 2026-04-02 09:00</div>
 <a href="https://www.facebook.com/adsmanager" target="_blank" style="font-size:12px;color:var(--blue);text-decoration:none;font-weight:500;">Ads Manager →</a>
 </div>
 <div class="card" style="background:var(--accent);border:none;color:white;margin-bottom:10px;">
@@ -454,7 +454,7 @@ function renderMetaChart(){
 var bd=document.getElementById('meta-bars');
 var ld=document.getElementById('meta-labels');
 if(!bd||!ld||bd.innerHTML!='')return;
-var data=[{d:'3/25',v:4305,e:0},{d:'3/26',v:9200,e:1},{d:'3/27',v:10800,e:1},{d:'3/28',v:11300,e:1},{d:'3/29',v:10600,e:1},{d:'3/30',v:9750,e:1},{d:'3/31',v:12476,e:0}];
+var data=[{d:'3/26',v:8274,e:1},{d:'3/27',v:9712,e:1},{d:'3/28',v:10162,e:1},{d:'3/29',v:9533,e:1},{d:'3/30',v:8768,e:1},{d:'3/31',v:12476,e:0},{d:'4/01',v:13886,e:0}];
 var max=0;for(var i=0;i<data.length;i++)if(data[i].v>max)max=data[i].v;
 var bh='',bl='';
 for(var i=0;i<data.length;i++){
