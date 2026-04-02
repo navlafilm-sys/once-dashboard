@@ -373,15 +373,15 @@ var metaUpdated = '2026-04-02 16:57';
 </div>
 <div class="section-title">오늘 성과 (04/01)</div>
 <div class="stat-grid">
-<div class="stat-card"><div class="stat-label">광고 지출</div><div class="stat-value" style="font-size:20px;">₩13,886</div><div class="stat-sub">어제 ₩12,476</div></div>
-<div class="stat-card"><div class="stat-label">구매</div><div class="stat-value">3건</div><div class="stat-sub">어제 3건</div></div>
+<div class="stat-card"><div class="stat-label">광고 지출</div><div class="stat-value" id="mc-spend" style="font-size:20px;">₩13,886</div><div class="stat-sub">어제 ₩12,476</div></div>
+<div class="stat-card"><div class="stat-label">구매</div><div class="stat-value" id="mc-purchases">3건</div><div class="stat-sub">어제 3건</div></div>
 </div>
 <div class="stat-grid">
-<div class="stat-card"><div class="stat-label">ROAS</div><div class="stat-value" style="color:var(--green);">6.27x</div><div class="stat-sub">매출 ₩87,065</div></div>
+<div class="stat-card"><div class="stat-label">ROAS</div><div class="stat-value" id="mc-roas" style="color:var(--green);">6.27x</div><div class="stat-sub">매출 ₩87,065</div></div>
 <div class="stat-card"><div class="stat-label">CTR</div><div class="stat-value" style="font-size:20px;">3.93%</div><div class="stat-sub">CPC ₩137</div></div>
 </div>
 <div class="stat-grid">
-<div class="stat-card"><div class="stat-label">노출수</div><div class="stat-value" style="font-size:20px;">2,879</div><div class="stat-sub">도달 2,614명</div></div>
+<div class="stat-card"><div class="stat-label">노출수</div><div class="stat-value" id="mc-impressions" style="font-size:20px;">2,879</div><div class="stat-sub">도달 2,614명</div></div>
 <div class="stat-card"><div class="stat-label">클릭수</div><div class="stat-value">38</div><div class="stat-sub">장바구니 4건</div></div>
 </div>
 <div class="section-title">7일 지출 추이</div>
@@ -393,9 +393,9 @@ var metaUpdated = '2026-04-02 16:57';
 <div class="section-title">최근 7일 집계 (03/26–04/01)</div>
 <div class="card">
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
-<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">총 지출</div><div style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">₩72,813</div></div>
-<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">총 구매</div><div style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">12건</div></div>
-<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">평균 ROAS</div><div style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;color:var(--green);">4.16x</div></div>
+<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">총 지출</div><div id="mc-7d-spend" style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">₩72,813</div></div>
+<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">총 구매</div><div id="mc-7d-purchases" style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">12건</div></div>
+<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">평균 ROAS</div><div id="mc-7d-roas" style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;color:var(--green);">4.16x</div></div>
 <div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">총 클릭</div><div style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">655</div></div>
 <div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">평균 CTR</div><div style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">4.84%</div></div>
 <div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">평균 CPC</div><div style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">₩104</div></div>
@@ -472,5 +472,20 @@ bl+='<span>'+data[i].d+'</span>';
 }
 bd.innerHTML=bh;ld.innerHTML=bl;
 }</script>
+<script>
+(function(){
+  if(typeof metaToday === 'undefined') return;
+  var fmt = function(n){ return '\u20a9' + parseInt(n).toLocaleString('ko-KR'); };
+  var el = function(id){ return document.getElementById(id); };
+  if(el('mc-spend'))       el('mc-spend').textContent       = fmt(metaToday.spend);
+  if(el('mc-purchases'))   el('mc-purchases').textContent   = metaToday.purchases + '건';
+  if(el('mc-roas'))        el('mc-roas').textContent        = metaToday.roas + 'x';
+  if(el('mc-impressions')) el('mc-impressions').textContent = parseInt(metaToday.impressions).toLocaleString('ko-KR');
+  if(el('mc-7d-spend'))    el('mc-7d-spend').textContent    = fmt(meta7day.spend);
+  if(el('mc-7d-purchases'))el('mc-7d-purchases').textContent= meta7day.purchases + '건';
+  if(el('mc-7d-roas'))     el('mc-7d-roas').textContent     = meta7day.roas + 'x';
+  if(el('meta-ts'))        el('meta-ts').textContent        = '\uD83D\uDCE1 업데이트: ' + metaUpdated;
+})();
+</script>
 </body>
 </html>
