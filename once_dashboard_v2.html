@@ -362,14 +362,32 @@ var metaUpdated = '2026-04-02 16:57';
 <a href="https://www.facebook.com/adsmanager" target="_blank" style="font-size:12px;color:var(--blue);text-decoration:none;font-weight:500;">Ads Manager →</a>
 </div>
 <div class="card" style="background:var(--accent);border:none;color:white;margin-bottom:10px;">
-<div style="display:flex;justify-content:space-between;align-items:flex-start;">
+<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
 <div>
-<div style="font-size:11px;opacity:0.6;margin-bottom:4px;">광고 충전 잔액</div>
-<div style="font-size:28px;font-weight:700;font-family:'DM Mono',monospace;">₩64,110</div>
-<div style="font-size:11px;opacity:0.5;margin-top:4px;">누적 광고비 ₩11,856,577</div>
+<div style="font-size:11px;opacity:0.6;margin-bottom:4px;">이번달 누적 광고비</div>
+<div id="mc-month-spend" style="font-size:28px;font-weight:700;font-family:'DM Mono',monospace;">₩13,886</div>
+<div id="mc-month-projection" style="font-size:11px;opacity:0.5;margin-top:4px;">이번달 예상 총지출 ₩364,786</div>
 </div>
 <div style="background:rgba(255,255,255,0.15);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700;">운영중</div>
 </div>
+<div style="background:rgba(0,0,0,0.2);border-radius:6px;height:4px;margin-bottom:12px;">
+<div id="mc-month-bar" style="background:white;border-radius:6px;height:4px;width:2.8%;transition:width 0.3s;"></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+<div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:8px;text-align:center;">
+<div style="font-size:10px;opacity:0.7;margin-bottom:3px;">이번달 ROAS</div>
+<div id="mc-month-roas" style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;">6.27x</div>
+</div>
+<div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:8px;text-align:center;">
+<div style="font-size:10px;opacity:0.7;margin-bottom:3px;">이번달 매출</div>
+<div id="mc-month-revenue" style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;">₩87,065</div>
+</div>
+<div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:8px;text-align:center;">
+<div style="font-size:10px;opacity:0.7;margin-bottom:3px;">이번달 구매</div>
+<div id="mc-month-purchases" style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;">3건</div>
+</div>
+</div>
+<div id="mc-month-limit" style="font-size:10px;opacity:0.5;margin-top:8px;text-align:right;">월 상한 ₩500,000</div>
 </div>
 <div class="section-title">오늘 성과 (04/01)</div>
 <div class="stat-grid">
@@ -619,6 +637,14 @@ bd.innerHTML=bh;ld.innerHTML=bl;
   if(el('mc-7d-purchases'))el('mc-7d-purchases').textContent= meta7day.purchases + '건';
   if(el('mc-7d-roas'))     el('mc-7d-roas').textContent     = meta7day.roas + 'x';
   if(el('meta-ts'))        el('meta-ts').textContent        = '\uD83D\uDCE1 업데이트: ' + metaUpdated;
+  if(typeof metaMonth !== 'undefined'){
+    if(el('mc-month-spend'))     el('mc-month-spend').textContent      = fmt(metaMonth.spend);
+    if(el('mc-month-roas'))      el('mc-month-roas').textContent       = metaMonth.roas + 'x';
+    if(el('mc-month-revenue'))   el('mc-month-revenue').textContent    = fmt(metaMonth.revenue);
+    if(el('mc-month-purchases')) el('mc-month-purchases').textContent  = metaMonth.purchases + '건';
+    if(el('mc-month-projection'))el('mc-month-projection').textContent = '\uc774\ubc88\ub2ec \uc608\uc0c1 \ucd1d\uc9c0\uc785 ' + fmt(metaMonth.projected);
+    if(el('mc-month-bar'))       el('mc-month-bar').style.width        = Math.min(metaMonth.spend/500000*100,100).toFixed(1) + '%';
+  }
 })();
 </script>
 </body>
