@@ -142,8 +142,9 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 <script>
 var metaToday = {date:'2026-04-05',spend:14128,roas:1.84,purchases:1,impressions:3307,reach:2953};
 var meta7day = {spend:82316,roas:3.63,purchases:12,period:'2026-03-30 ~ 2026-04-05'};
-var metaMonth = {spend:59692,roas:3.8,revenue:226830,purchases:9,projected:362192,period:'2026-04-01 ~ 2026-04-05'};
-var metaUpdated = '2026-04-06 13:18';
+var metaMonth = {spend:59692,roas:3.8,revenue:226830,purchases:9,projected:184692,period:'2026-04-01 ~ 2026-04-05'};
+var metaUpdated = '2026-04-06 13:34';
+var metaDailyHistory = [{date:'2026-04-01',spend:13886,roas:6.27,purchases:3},{date:'2026-04-02',spend:11297,roas:4.07,purchases:2},{date:'2026-04-03',spend:9825,roas:2.44,purchases:1},{date:'2026-04-04',spend:10556,roas:4.17,purchases:2},{date:'2026-04-05',spend:14128,roas:1.84,purchases:1}];
 </script>
 <!-- meta-data-end -->
 </head>
@@ -364,6 +365,30 @@ var metaUpdated = '2026-04-06 13:18';
 <div class="page" id="page-meta">
 <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0 4px;">
 <div style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;" id="meta-ts">📡 업데이트: 2026-04-02 09:00</div>
+<!-- meta-daily-history-start -->
+<div style="margin-top:12px;">
+<div style="font-size:11px;opacity:0.6;margin-bottom:6px;font-weight:600;letter-spacing:0.05em;">일별 성과</div>
+<div id="meta-daily-table" style="font-size:11px;"></div>
+</div>
+<script>
+(function(){
+  if(typeof metaDailyHistory==='undefined'||!metaDailyHistory.length) return;
+  var fmt=function(n){return '\u20a9'+parseInt(n).toLocaleString('ko-KR');};
+  var rows=metaDailyHistory.slice().reverse().map(function(d){
+    var roasColor=d.roas>=3.0?'#4caf50':d.roas>=2.0?'#ff9800':'#f44336';
+    var mmdd=d.date.substring(5).replace('-','/');
+    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.07);">'+
+      '<span style="opacity:0.7;width:36px;">'+mmdd+'</span>'+
+      '<span>'+fmt(d.spend)+'</span>'+
+      '<span style="color:'+roasColor+';font-weight:700;">'+d.roas+'x</span>'+
+      '<span>'+d.purchases+'건</span>'+
+    '</div>';
+  }).join('');
+  var el=document.getElementById('meta-daily-table');
+  if(el) el.innerHTML=rows;
+})();
+</script>
+<!-- meta-daily-history-end -->
 <a href="https://www.facebook.com/adsmanager" target="_blank" style="font-size:12px;color:var(--blue);text-decoration:none;font-weight:500;">Ads Manager →</a>
 </div>
 <div class="card" style="background:var(--accent);border:none;color:white;margin-bottom:10px;">
