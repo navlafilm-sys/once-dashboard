@@ -140,12 +140,19 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 </style>
 <!-- meta-data-start -->
 <script>
-var metaToday = {date:'2026-04-06',spend:12430,roas:7.56,purchases:4,impressions:3086,reach:2822};
-var meta7day = {spend:72122,roas:4.45,purchases:13,period:'2026-03-31 ~ 2026-04-06'};
-var metaMonth = {spend:72122,roas:4.45,revenue:321000,purchases:13,projected:360610,period:'2026-04-01 ~ 2026-04-06'};
-var metaUpdated = '2026-04-06 22:10';
-var metaDailyHistory = [{date:'2026-04-01',spend:13886,roas:6.27,purchases:3},{date:'2026-04-02',spend:11297,roas:4.07,purchases:2},{date:'2026-04-03',spend:9825,roas:2.44,purchases:1},{date:'2026-04-04',spend:10556,roas:4.17,purchases:2},{date:'2026-04-05',spend:14128,roas:1.84,purchases:1},{date:'2026-04-06',spend:12430,roas:7.56,purchases:4}];
-addCoworkLog('2026-04-06 16:25', '운송장 등록 완료', '허스크→이지어드민 4건 처리완료 (이소민/이가은/서희진/김나영, 한진택배)', 'success');
+var metaToday = {date:'2026-04-06',spend:13592,roas:6.92,purchases:4,impressions:3286,reach:2997,clicks:130,ctr:3.96,cpc:105,addToCart:6,checkout:5,revenue:94000};
+var meta7day = {spend:73284,roas:4.35,purchases:13,period:'2026-04-01 ~ 2026-04-06',clicks:682,ctr:4.10,cpc:108};
+var metaMonth = {spend:73766,roas:4.35,revenue:321000,purchases:13,projected:315726,period:'2026-04-01 ~ 2026-04-07'};
+var metaUpdated = '2026-04-07 09:00';
+var metaDailyHistory = [
+  {date:'2026-04-01',spend:13886,roas:6.27,purchases:3},
+  {date:'2026-04-02',spend:11297,roas:4.07,purchases:2},
+  {date:'2026-04-03',spend:9825,roas:2.44,purchases:1},
+  {date:'2026-04-04',spend:10556,roas:4.17,purchases:2},
+  {date:'2026-04-05',spend:14128,roas:1.84,purchases:1},
+  {date:'2026-04-06',spend:13592,roas:6.92,purchases:4}
+];
+addCoworkLog('2026-04-07 09:00', '硫뷀? 愿묎퀬 由ы룷??, '?댁젣(04/06) 吏異???3,592 쨌 ROAS 6.92x 쨌 援щℓ 4嫄?쨌 ?대쾲???꾩쟻 ??3,766', 'success');
 </script>
 <!-- meta-data-end -->
 </head>
@@ -200,7 +207,7 @@ addCoworkLog('2026-04-06 16:25', '운송장 등록 완료', '허스크→이지�
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
       <div style="text-align:center;"><div style="font-size:10px;opacity:0.65;margin-bottom:3px;">광고 지출</div><div style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;">₩13,886</div></div>
-      <div style="text-align:center;"><div style="font-size:10px;opacity:0.65;margin-bottom:3px;">ROAS</div><div style="font-size:16px;font-weight:700;color:#93C5FD;">6.27x</div></div>
+      <div style="text-align:center;"><div style="font-size:10px;opacity:0.65;margin-bottom:3px;">ROAS</div><div id="today-meta-roas" style="font-size:16px;font-weight:700;color:#93C5FD;">-</div></div>
       <div style="text-align:center;"><div style="font-size:10px;opacity:0.65;margin-bottom:3px;">구매</div><div style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;">3건</div></div>
     </div>
   </div>
@@ -433,11 +440,11 @@ addCoworkLog('2026-04-06 16:25', '운송장 등록 완료', '허스크→이지�
 </div>
 <div class="stat-grid">
 <div class="stat-card"><div class="stat-label">ROAS</div><div class="stat-value" id="mc-roas" style="color:var(--green);">6.27x</div><div class="stat-sub">매출 ₩87,065</div></div>
-<div class="stat-card"><div class="stat-label">CTR</div><div class="stat-value" style="font-size:20px;">3.93%</div><div class="stat-sub">CPC ₩137</div></div>
+<div class="stat-card"><div class="stat-label">CTR</div><div class="stat-value" id="mc-ctr" style="font-size:20px;">-</div><div class="stat-sub">CPC ₩137</div></div>
 </div>
 <div class="stat-grid">
 <div class="stat-card"><div class="stat-label">노출수</div><div class="stat-value" id="mc-impressions" style="font-size:20px;">2,879</div><div class="stat-sub">도달 2,614명</div></div>
-<div class="stat-card"><div class="stat-label">클릭수</div><div class="stat-value">38</div><div class="stat-sub">장바구니 4건</div></div>
+<div class="stat-card"><div class="stat-label">클릭수</div><div class="stat-value" id="mc-clicks">-</div><div class="stat-sub">장바구니 4건</div></div>
 </div>
 <div class="section-title">7일 지출 추이</div>
 <div class="card">
@@ -465,7 +472,7 @@ addCoworkLog('2026-04-06 16:25', '운송장 등록 완료', '허스크→이지�
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;">
 <div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);margin-bottom:2px;">오늘 지출</div><div style="font-size:13px;font-weight:700;">₩13,886</div></div>
 <div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);margin-bottom:2px;">구매수</div><div style="font-size:13px;font-weight:700;">3건</div></div>
-<div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);margin-bottom:2px;">ROAS</div><div style="font-size:13px;font-weight:700;color:var(--green);">6.27x</div></div>
+<div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);margin-bottom:2px;">ROAS</div><div id="mc-camp-roas" style="font-size:13px;font-weight:700;color:var(--green);">-</div></div>
 </div>
 <div style="font-size:12px;color:var(--muted);padding-top:8px;border-top:1px solid var(--border);">어제: 지출 ₩12,476 · 구매 3건 · ROAS 5.8x · CTR 4.60%</div>
 </div>
@@ -685,6 +692,95 @@ bd.innerHTML=bh;ld.innerHTML=bl;
   }
 })();
 addCoworkLog('2026-04-06 16:25', '운송장 등록 완료', '허스크→이지어드민 4건 처리완료 (이소민/이가은/서희진/김나영, 한진택배)', 'success');
+</script>
+<script>
+/* ===== DYNAMIC META UI ??auto-injected ===== */
+function addCoworkLog(a,b,c,d){
+  var log=document.getElementById('cowork-log');if(!log)return;
+  var ts,msg,type;
+  if(typeof c!=='undefined'){
+    ts=a.substring(0,10);
+    msg=(b?'<strong>'+b+'</strong>':'')+(c?' ??'+c:'');
+    type=d||'success';
+  } else { ts=new Date().toISOString().substring(0,10); msg=a; type=b||''; }
+  var item=document.createElement('div');item.className='log-item';
+  item.innerHTML='<div class="log-time">'+ts+'</div><div class="log-text '+type+'">'+msg+'</div>';
+  if(log.children[0]&&log.children[0].querySelector('.log-time')
+    &&log.children[0].querySelector('.log-time').textContent==='?湲곗쨷')log.innerHTML='';
+  log.insertBefore(item,log.firstChild);
+}
+function renderMetaChart(){
+  var bd=document.getElementById('meta-bars'),ld=document.getElementById('meta-labels');
+  if(!bd||!ld){return;}
+  bd.innerHTML='';ld.innerHTML='';
+  var data=typeof metaDailyHistory!=='undefined'?metaDailyHistory.slice(-7).map(function(d){
+    return {d:d.date.substring(5).replace('-','/'),v:d.spend,e:0};
+  }):[{d:'--',v:0,e:0}];
+  var max=1;for(var i=0;i<data.length;i++)if(data[i].v>max)max=data[i].v;
+  var bh='',bl='';
+  for(var i=0;i<data.length;i++){
+    var h=Math.round((data[i].v/max)*72)+4;
+    bh+='<div style="flex:1;background:#60A5FA;height:'+h+'px;border-radius:3px 3px 0 0;min-width:0;" title="'+data[i].d+': \u20a9'+data[i].v.toLocaleString()+'"></div>';
+    bl+='<span>'+data[i].d+'</span>';
+  }
+  bd.innerHTML=bh;ld.innerHTML=bl;
+}(function(){
+  if(typeof metaToday==='undefined')return;
+  var d=metaToday,fmt=function(n){return '\u20a9'+parseInt(n).toLocaleString('ko-KR');};
+  var el=function(id){return document.getElementById(id);};
+  var mmdd=d.date.substring(5).replace('-','/');
+  if(el('today-meta-date'))el('today-meta-date').textContent='\uD83D\uDCE1 '+mmdd+' \uAE30\uC900';
+  if(el('today-meta-spend'))el('today-meta-spend').textContent=fmt(d.spend);
+  if(el('today-meta-roas'))el('today-meta-roas').textContent=d.roas+'x';
+  if(el('today-meta-purchases'))el('today-meta-purchases').textContent=d.purchases+'\uAC74';
+  if(!el('today-meta-date')){
+    var bc=document.querySelector('.card[onclick*="switchTab"]');
+    if(bc){
+      var op=bc.querySelectorAll('[style*="opacity:0.65"]');
+      if(op[0])op[0].textContent='\uD83D\uDCE1 '+mmdd+' \uAE30\uC900';
+      var vd=bc.querySelectorAll('[style*="font-size:16px"]');
+      if(vd[0])vd[0].textContent=fmt(d.spend);
+      if(vd[1])vd[1].textContent=d.roas+'x';
+      if(vd[2])vd[2].textContent=d.purchases+'\uAC74';
+    }
+  }  if(el('meta-today-title'))el('meta-today-title').textContent='\uC624\uB298 \uC131\uACFC ('+mmdd+')';
+  if(el('meta-7d-title')&&typeof meta7day!=='undefined')
+    el('meta-7d-title').textContent='\uCD5C\uADFC 7\uC77C \uC9D1\uACC4 ('+meta7day.period+')';
+  if(el('mc-spend-sub'))el('mc-spend-sub').textContent='\uC5B4\uC81C '+fmt(d.spend);
+  if(el('mc-purchases-sub'))el('mc-purchases-sub').textContent='\uC5B4\uC81C '+d.purchases+'\uAC74';
+  if(el('mc-roas-sub'))el('mc-roas-sub').textContent='\uB9E4\uCD9C '+fmt(d.revenue||Math.round(d.roas*d.spend));
+  if(el('mc-ctr'))el('mc-ctr').textContent=d.ctr.toFixed(2)+'%';
+  if(el('mc-cpc-sub'))el('mc-cpc-sub').textContent='CPC '+fmt(d.cpc);
+  if(el('mc-reach-sub'))el('mc-reach-sub').textContent='\uB3C4\uB2EC '+parseInt(d.reach).toLocaleString('ko-KR')+'\uBA85';
+  if(el('mc-clicks'))el('mc-clicks').textContent=d.clicks;
+  if(el('mc-cart-sub'))el('mc-cart-sub').textContent='\uC7A5\uBC14\uAD6C\uB2C8 '+d.addToCart+'\uAC74';
+  if(typeof meta7day!=='undefined'){
+    if(el('mc-7d-clicks'))el('mc-7d-clicks').textContent=meta7day.clicks||'-';
+    if(el('mc-7d-ctr'))el('mc-7d-ctr').textContent=meta7day.ctr?meta7day.ctr.toFixed(2)+'%':'-';
+    if(el('mc-7d-cpc'))el('mc-7d-cpc').textContent=meta7day.cpc?fmt(meta7day.cpc):'-';
+    if(!el('mc-7d-clicks')){
+      document.querySelectorAll('[style*="font-size:17px;font-weight:700"]').forEach(function(div){
+        var p=div.previousElementSibling;if(!p)return;
+        if(p.textContent==='\uCD1D \uD074\uB9AD')div.textContent=meta7day.clicks||'-';
+        else if(p.textContent==='\uD3C9\uADE0 CTR')div.textContent=meta7day.ctr?meta7day.ctr.toFixed(2)+'%':'-';
+        else if(p.textContent==='\uD3C9\uADE0 CPC')div.textContent=meta7day.cpc?fmt(meta7day.cpc):'-';
+      });
+    }
+  }
+  if(el('mc-camp-spend'))el('mc-camp-spend').textContent=fmt(d.spend);
+  if(el('mc-camp-purchases'))el('mc-camp-purchases').textContent=d.purchases+'\uAC74';
+  if(el('mc-camp-roas'))el('mc-camp-roas').textContent=d.roas+'x';
+  if(el('mc-camp-info')&&typeof meta7day!=='undefined')
+    el('mc-camp-info').textContent='7\uC77C \uD3C9\uADE0: \uC9C0\uCD9C '+fmt(Math.round(meta7day.spend/7))+' \u00B7 \uAD6C\uB9E4 '+(meta7day.purchases/7).toFixed(1)+'\uAC74 \u00B7 ROAS '+meta7day.roas+'x';
+  if(!el('mc-camp-spend')){
+    document.querySelectorAll('[style*="font-size:13px;font-weight:700"]').forEach(function(div){
+      var p=div.previousElementSibling;if(!p)return;
+      if(p.textContent==='\uC624\uB298 \uC9C0\uCD9C')div.textContent=fmt(d.spend);
+      else if(p.textContent==='\uAD6C\uB9E4\uC218')div.textContent=d.purchases+'\uAC74';
+      else if(p.textContent==='ROAS')div.style.color&&(div.textContent=d.roas+'x');
+    });
+  }
+})();
 </script>
 </body>
 </html>
