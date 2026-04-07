@@ -140,33 +140,19 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 </style>
 <!-- meta-data-start -->
 <script>
-var metaToday = {date:'2026-04-06',spend:13598,roas:6.91,purchases:4,impressions:3289,reach:3002,clicks:130,ctr:3.95,cpc:105,addToCart:6,checkout:5,revenue:94000};
-var meta7day = {spend:85766,roas:4.58,purchases:16,period:'2026-03-31 ~ 2026-04-06',clicks:789,ctr:4.16,cpc:109};
+var metaToday = {date:'2026-04-06',spend:13592,roas:6.92,purchases:4,impressions:3286,reach:2997,clicks:130,ctr:3.96,cpc:105,addToCart:6,checkout:5,revenue:94000};
+var meta7day = {spend:73284,roas:4.35,purchases:13,period:'2026-04-01 ~ 2026-04-06',clicks:682,ctr:4.10,cpc:108};
+var metaMonth = {spend:73766,roas:4.35,revenue:321000,purchases:13,projected:315726,period:'2026-04-01 ~ 2026-04-07'};
+var metaUpdated = '2026-04-07 09:00';
 var metaDailyHistory = [
-  {date:"2026-03-31",spend:12476,roas:5.77,purchases:3},
-  {date:"2026-04-01",spend:13886,roas:6.27,purchases:3},
-  {date:"2026-04-02",spend:11297,roas:4.07,purchases:2},
-  {date:"2026-04-03",spend:9825,roas:2.44,purchases:1},
-  {date:"2026-04-04",spend:10556,roas:4.17,purchases:2},
-  {date:"2026-04-05",spend:14128,roas:1.84,purchases:1},
-  {date:"2026-04-06",spend:13598,roas:6.91,purchases:4}
+  {date:'2026-04-01',spend:13886,roas:6.27,purchases:3},
+  {date:'2026-04-02',spend:11297,roas:4.07,purchases:2},
+  {date:'2026-04-03',spend:9825,roas:2.44,purchases:1},
+  {date:'2026-04-04',spend:10556,roas:4.17,purchases:2},
+  {date:'2026-04-05',spend:14128,roas:1.84,purchases:1},
+  {date:'2026-04-06',spend:13592,roas:6.92,purchases:4}
 ];
-var dashData = {
-  dailyBudget:16317,
-  orderToday:4,orderPending:0,
-  pessimisticRoas:2.7,costPerOrder:25000,
-  autoStatus:{ezauto:"on",aiFile:"on",mockup:"on",orderMatch:"on",huskerks:"pending",inquiry:"pending",freepik:"pending",insta:"off",nextengine:"off"},
-  computers:{samsung:{status:"online",lastSeen:"12:04"},gram:{status:"online",lastSeen:""},main:{status:"manual"}},
-  brands:[{id:0,progress:80,status:"active"},{id:1,progress:45,status:"building"},{id:2,progress:25,status:"building"}],
-  budgetHistory:[
-    {date:"3/29 이전",memo:"초기 고정값",amount:10000,change:""},
-    {date:"3/31",memo:"ROAS 5.77 → +10% 자동 증액",amount:11000,change:"up"},
-    {date:"4/1",memo:"ROAS 6.27 → +10% 자동 증액",amount:12100,change:"up"},
-    {date:"4/2",memo:"ROAS 4.07 → +10% 자동 증액",amount:13310,change:"up"},
-    {date:"4/3~4/5",memo:"ROAS 하락 구간 (유지~감액)",amount:14641,change:"up"},
-    {date:"현재 (4/7)",memo:"Meta API 실제 설정값",amount:16317,change:"current"}
-  ]
-};
+addCoworkLog('2026-04-07 09:00', '硫뷀? 愿묎퀬 由ы룷??, '?댁젣(04/06) 吏異???3,592 쨌 ROAS 6.92x 쨌 援щℓ 4嫄?쨌 ?대쾲???꾩쟻 ??3,766', 'success');
 </script>
 <!-- meta-data-end -->
 </head>
@@ -264,10 +250,10 @@ var dashData = {
     <div class="brand-pill" onclick="switchBrand(8)">브랜드 9</div>
     <div class="brand-pill" onclick="switchBrand(9)">브랜드 10</div>
   </div>
-  <div clbrand-page active" id="brand-0">
-    <div class="brand-hero" style="background:var(--accent);">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div class="brand-hero-name">ONCE Studio</div><div class="brand-hero-mood">현대적 미니멀 · 메인 브랜드</div></div><span class="brand-status-pill status-active" id="brand-0-status">운영중</span></div>
-      <div class="progress-bar"><div class="progress-fill" id="brand-0-progress" style="width:80%"></div></div>
+  <div class="brand-page active" id="brand-0">
+    <div class="brand-hero">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div class="brand-hero-name">ONCE Studio</div><div class="brand-hero-mood">메인 브랜드</div></div><span class="brand-status-pill status-active">운영중</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
       <div class="progress-label"><span>진행도</span><span>80%</span></div>
     </div>
     <div class="step-grid">
@@ -309,7 +295,7 @@ var dashData = {
       <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">인스타 계정 세팅</div><span class="task-tag tag-manual">직접</span></div>
     </div>
   </div>
-  <div class="brand-page" id="brand-2" data-brand="2" data-brand="2">
+  <div class="brand-page" id="brand-2">
     <div class="brand-hero" style="background:#374151;">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div class="brand-hero-name">EFFORTLSS</div><div class="brand-hero-mood">프렌치 무심 감성</div></div><span class="brand-status-pill status-building">구축중</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div>
@@ -338,7 +324,7 @@ var dashData = {
 </div>
 <div class="page" id="page-automation">
   <div class="section-title">자동화 상태</div>
-  <div class="card" id="auto-status-card">
+  <div class="card">
     <div class="auto-item"><div class="auto-dot dot-on"></div><div class="auto-info"><div class="auto-name">이지오토 주문 수집</div><div class="auto-sub">흰색 그램 · 상시 가동</div></div><span class="auto-badge badge-on">실행중</span></div>
     <div class="auto-item"><div class="auto-dot dot-on"></div><div class="auto-info"><div class="auto-name">AI 파일 대량 생성</div><div class="auto-sub">삼성 컴퓨터 · Illustrator JS</div></div><span class="auto-badge badge-on">실행중</span></div>
     <div class="auto-item"><div class="auto-dot dot-on"></div><div class="auto-info"><div class="auto-name">Photoshop 목업 생성</div><div class="auto-sub">삼성 컴퓨터 · JS</div></div><span class="auto-badge badge-on">실행중</span></div>
@@ -373,9 +359,9 @@ var dashData = {
 </div>
 <div class="page" id="page-computers">
   <div class="section-title">3대 가동 현황</div>
-  <div id="pc-status-container"><div class="pc-card"><div class="pc-header"><div class="pc-name">삼성 컴퓨터 (상시 가동 1)</div><div class="pc-online"><span class="live-dot"></span> 가동중</div></div><div class="pc-tasks"><div class="pc-task-item"><div class="pc-task-dot dot-running"></div><div class="pc-task-name">Photoshop JS 목업 생성</div><div class="pc-task-time">상시</div></div><div class="pc-task-item"><div class="pc-task-dot dot-running"></div><div class="pc-task-name">Illustrator AI 파일 대량 생성</div><div class="pc-task-time">상시</div></div><div class="pc-task-item"><div class="pc-task-dot dot-scheduled"></div><div class="pc-task-name">주문 수집 + 발주 매칭</div><div class="pc-task-time">09:00</div></div><div class="pc-task-item"><div class="pc-task-dot dot-scheduled"></div><div class="pc-task-name">메타 광고 리포트</div><div class="pc-task-time">09:00</div></div></div></div>
+  <div class="pc-card"><div class="pc-header"><div class="pc-name">삼성 컴퓨터 (상시 가동 1)</div><div class="pc-online"><span class="live-dot"></span> 가동중</div></div><div class="pc-tasks"><div class="pc-task-item"><div class="pc-task-dot dot-running"></div><div class="pc-task-name">Photoshop JS 목업 생성</div><div class="pc-task-time">상시</div></div><div class="pc-task-item"><div class="pc-task-dot dot-running"></div><div class="pc-task-name">Illustrator AI 파일 대량 생성</div><div class="pc-task-time">상시</div></div><div class="pc-task-item"><div class="pc-task-dot dot-scheduled"></div><div class="pc-task-name">주문 수집 + 발주 매칭</div><div class="pc-task-time">09:00</div></div><div class="pc-task-item"><div class="pc-task-dot dot-scheduled"></div><div class="pc-task-name">메타 광고 리포트</div><div class="pc-task-time">09:00</div></div></div></div>
   <div class="pc-card"><div class="pc-header"><div class="pc-name">흰색 그램 (상시 가동 2)</div><div class="pc-online"><span class="live-dot"></span> 가동중</div></div><div class="pc-tasks"><div class="pc-task-item"><div class="pc-task-dot dot-running"></div><div class="pc-task-name">이지오토 주문 수집</div><div class="pc-task-time">상시</div></div><div class="pc-task-item"><div class="pc-task-dot dot-scheduled"></div><div class="pc-task-name">문의 수집</div><div class="pc-task-time">30분</div></div><div class="pc-task-item"><div class="pc-task-dot dot-idle"></div><div class="pc-task-name">허스크 발주 자동화</div><div class="pc-task-time">연결 필요</div></div><div class="pc-task-item"><div class="pc-task-dot dot-idle"></div><div class="pc-task-name">인스타 자동 업로드</div><div class="pc-task-time">미설정</div></div></div></div>
-  <div class="pc-card"><div class="pc-header" style="background:#3D3A36;"><div class="pc-name">메인 (들고 다니는 것)</div><div class="pc-online">모니터링</div></div><div class="pc-tasks"><div class="pc-task-item"><div class="pc-task-dot dot-idle"></div><div class="pc-task-name">쇼핑몰 업무 총괄</div><div class="pc-task-time">직접</div></div><div class="pc-task-item"><div class="pc-task-dot dot-idle"></div><div class="pc-task-name">신규 발주 파일 작업</div><div class="pc-task-time">직접</div></div><div class="pc-task-item"><div class="pc-task-dot dot-idle"></div><div class="pc-task-name">문의 직접 확인</div><div class="pc-task-time">직접</div></div></div></div></div>
+  <div class="pc-card"><div class="pc-header" style="background:#3D3A36;"><div class="pc-name">메인 (들고 다니는 것)</div><div class="pc-online">모니터링</div></div><div class="pc-tasks"><div class="pc-task-item"><div class="pc-task-dot dot-idle"></div><div class="pc-task-name">쇼핑몰 업무 총괄</div><div class="pc-task-time">직접</div></div><div class="pc-task-item"><div class="pc-task-dot dot-idle"></div><div class="pc-task-name">신규 발주 파일 작업</div><div class="pc-task-time">직접</div></div><div class="pc-task-item"><div class="pc-task-dot dot-idle"></div><div class="pc-task-name">문의 직접 확인</div><div class="pc-task-time">직접</div></div></div></div>
 </div>
 <div class="page" id="page-flow">
   <div class="section-title">전체 자동화 플로우</div>
@@ -546,7 +532,7 @@ addCoworkLog('2026-04-06 16:25', '운송장 등록 완료', '허스크→이지�
 
 <div class="section-title">🔮 예산별 가상 시나리오 (월 30일 기준)</div>
 <div class="card">
-<div style="font-size:11px;color:var(--muted);margin-bottom:12px;"><span id="scenario-roas-label">-</span></div>
+<div style="font-size:11px;color:var(--muted);margin-bottom:12px;">최근 7일 ROAS 6.27 기준 (낙관) / 14일 ROAS 2.71 기준 (보수)</div>
 <div id="scenario-container" style="display:flex;flex-direction:column;gap:8px;">
 
   <div style="padding:10px;background:var(--bg);border-radius:8px;">
@@ -671,7 +657,7 @@ function renderMetaChart(){
 var bd=document.getElementById('meta-bars');
 var ld=document.getElementById('meta-labels');
 if(!bd||!ld||bd.innerHTML!='')return;
-var src=(typeof metaDailyHistory!=="undefined"&&metaDailyHistory.length)?metaDailyHistory:[{date:"",spend:0,roas:0}];var data=src.slice(-7).map(function(x){var mm=x.date?x.date.substring(5).replace("-","/"):"";return {d:mm,v:x.spend,e:0};});
+var data=[{d:'3/26',v:8274,e:1},{d:'3/27',v:9712,e:1},{d:'3/28',v:10162,e:1},{d:'3/29',v:9533,e:1},{d:'3/30',v:8768,e:1},{d:'3/31',v:12476,e:0},{d:'4/01',v:13886,e:0}];
 var max=0;for(var i=0;i<data.length;i++)if(data[i].v>max)max=data[i].v;
 var bh='',bl='';
 for(var i=0;i<data.length;i++){
@@ -807,8 +793,8 @@ addCoworkLog('2026-04-06 16:25', '운송장 등록 완료', '허스크→이지�
   /* Budget scenario section - dynamic recalc */
   var sc=el('scenario-container');
   if(sc&&typeof meta7day!=='undefined'){
-    var rOpt=meta7day.roas,rPes=(typeof dashData!=="undefined"&&dashData.pessimisticRoas?dashData.pessimisticRoas:meta7day.roas*0.6),cost=(typeof dashData!=="undefined"?dashData.costPerOrder:25000),budgets=[
-      {label:'\uD83D\uDCCC \ud604\uc7ac',daily:(typeof dashData!=="undefined"?dashData.dailyBudget:12100),color:'var(--blue)'},
+    var rOpt=meta7day.roas,rPes=meta7day.roas*0.6,cost=25000,budgets=[
+      {label:'\uD83D\uDCCC \ud604\uc7ac',daily:Math.round(d.cpc*d.clicks/d.purchases||12100),color:'var(--blue)'},
       {label:'\uD83D\uDCC8 \u20a915,000/\uc77c\uc73c\ub85c \uc99d\uc561',daily:15000,color:'var(--green)'},
       {label:'\uD83C\uDFD4 \uc6d4 \uc0c1\ud55c \ud480 \ud65c\uc6a9',daily:16667,color:'#F59E0B'},
       {label:'\uD83D\uDCC9 \u20a910,000/\uc77c\ub85c \uac10\uc561',daily:10000,color:'#EF4444'}
@@ -829,100 +815,6 @@ addCoworkLog('2026-04-06 16:25', '운송장 등록 완료', '허스크→이지�
 })();
 </script>
 
-<script>
-/* ALL TABS DYNAMIC v1 */
-(function(){
-  function el(id){return document.getElementById(id);}
-  function fmt(n){return "\u20a9"+Number(n).toLocaleString("ko-KR");}
-  var d=(typeof dashData!=="undefined")?dashData:{};
-  var brands=d.brands||[];
-  var autoSt=d.autoStatus||{};
-  var comps=d.computers||{};
-  var budget=d.dailyBudget||12100;
-  var roas7=(typeof meta7day!=="undefined"&&meta7day.roas)?meta7day.roas:(d.pessimisticRoas||2.71);
-  /* 1. budget-current */
-  if(el("budget-current"))el("budget-current").textContent=fmt(budget)+"/\uc77c";
-  /* 2. scenario-roas-label */
-  if(el("scenario-roas-label"))el("scenario-roas-label").textContent="7\uc77c \ud3c9\uade0 ROAS "+roas7.toFixed(2)+"x \uae30\uc900";
-  /* 3. Brand progress bars */
-  var brandCfg=[{id:"brand-0",idx:0},{id:"brand-1",idx:1},{id:"brand-2",idx:2}];
-  brandCfg.forEach(function(cfg){
-    var pg=el(cfg.id);if(!pg)return;
-    var data=brands[cfg.idx]||{};
-    var pct=data.progress!=null?data.progress:(cfg.idx===0?80:cfg.idx===1?45:25);
-    var st=data.status||(cfg.idx===0?"active":"building");
-    var fill=pg.querySelector(".progress-fill");
-    var lbl=pg.querySelector(".progress-label span:last-child");
-    var pill=pg.querySelector(".brand-status-pill");
-    if(fill)fill.style.width=pct+"%";
-    if(lbl)lbl.textContent=pct+"%";
-    if(pill){var sm={active:"\uc6b4\uc601\uc911",building:"\uad6c\ucd95\uc911",planned:"\uc608\uc815"};pill.textContent=sm[st]||st;pill.className="brand-status-pill status-"+st;}
-  });
-  /* 4. Auto-status-card re-render */
-  var asc=el("auto-status-card");
-  if(asc){
-    var items=[
-      {key:"ezauto",name:"\uc774\uc9c0\uc624\ud1a0 \uc8fc\ubb38 \uc218\uc9d1",sub:"\ud754\uc0c9 \uadf8\ub7a8 \u00b7 \uc0c1\uc2dc \uac00\ub3d9"},
-      {key:"aiFile",name:"AI \ud30c\uc77c \ub300\ub7c9 \uc0dd\uc131",sub:"\uc0bc\uc131 \ucef4\ud53c\ud130 \u00b7 Illustrator JS"},
-      {key:"mockup",name:"Photoshop \ubaa9\uc5c5 \uc0dd\uc131",sub:"\uc0bc\uc131 \ucef4\ud53c\ud130 \u00b7 JS"},
-      {key:"orderMatch",name:"\ubc1c\uc8fc \ub9e4\uce845",sub:"\uc0bc\uc131 \ucef4\ud53c\ud130 \u00b7 Python \u00b7 09:00"},
-      {key:"huskerks",name:"\ud5c8\uc2a4\ud06c \ubc1c\uc8fc \uc790\ub3d9\ud654",sub:"\ud754\uc0c9 \uadf8\ub7a8 \u00b7 \ube0c\ub77c\uc6b0\uc800 \uc790\ub3d9\ud654"},
-      {key:"inquiry",name:"\ubb38\uc758 \uc790\ub3d9 \uc751\ub2f5",sub:"\ud754\uc0c9 \uadf8\ub7a8 \u00b7 30\ubd84\ub9c8\ub2e4"},
-      {key:"freepik",name:"Freepik \ub514\uc790\uc778 \uc5f0\ub3d9",sub:"Freepik \u2192 Google Drive \uc790\ub3d9 \uc800\uc7a5"},
-      {key:"insta",name:"\uc778\uc2a4\ud0c0 \uc790\ub3d9 \uc5c5\ub85c\ub4dc",sub:"\ud754\uc0c9 \uadf8\ub7a8 \u00b7 \uc790\ub3d9\ud654"},
-      {key:"nextengine",name:"Nextengine \uc0c1\ud488 \ubc30\ud3ec",sub:"\ud754\uc0c9 \uadf8\ub7a8 \u00b7 \uc678\ubd80 \ud504\ub85c\uadf8\ub7a8"}
-    ];
-    var stMap={on:{dot:"dot-on",badge:"badge-on",text:"\uc2e4\ud589\uc911"},pending:{dot:"dot-pending",badge:"badge-pending",text:"\uc5f0\uacb0 \ud544\uc694"},off:{dot:"dot-off",badge:"badge-off",text:"\ubbf8\uc124\uc815"}};
-    asc.innerHTML=items.map(function(it){
-      var sv=autoSt[it.key]||"off";
-      var sc=stMap[sv]||stMap.off;
-      return "<div class=\"auto-item\"><div class=\"auto-dot "+sc.dot+"\"></div><div class=\"auto-info\"><div class=\"auto-name\">"+it.name+"</div><div class=\"auto-sub\">"+it.sub+"</div></div><span class=\"auto-badge "+sc.badge+"\">"+sc.text+"</span></div>";
-    }).join("");
-  }
-  /* 5. PC status container */
-  var pcc=el("pc-status-container");
-  if(pcc){
-    var pcList=[
-      {key:"samsung",name:"\uc0bc\uc131 \ucef4\ud53c\ud130 (\uc0c1\uc2dc \uac00\ub3d9 1)",tasks:[
-        {dot:"dot-running",name:"Photoshop JS \ubaa9\uc5c5 \uc0dd\uc131",time:"\uc0c1\uc2dc"},
-        {dot:"dot-running",name:"Illustrator AI \ud30c\uc77c \ub300\ub7c9 \uc0dd\uc131",time:"\uc0c1\uc2dc"},
-        {dot:"dot-scheduled",name:"\uc8fc\ubb38 \uc218\uc9d1 + \ubc1c\uc8fc \ub9e4\uce845",time:"09:00"},
-        {dot:"dot-scheduled",name:"\uba54\ud0c0 \uad11\uace0 \ub9ac\ud3ec\ud2b8",time:"09:00"}
-      ]},
-      {key:"gram",name:"\ud754\uc0c9 \uadf8\ub7a8 (\uc0c1\uc2dc \uac00\ub3d9 2)",tasks:[
-        {dot:"dot-running",name:"\uc774\uc9c0\uc624\ud1a0 \uc8fc\ubb38 \uc218\uc9d1",time:"\uc0c1\uc2dc"},
-        {dot:"dot-scheduled",name:"\ubb38\uc758 \uc218\uc9d1",time:"30\ubd84"},
-        {dot:"dot-idle",name:"\ud5c8\uc2a4\ud06c \ubc1c\uc8fc \uc790\ub3d9\ud654",time:"\uc5f0\uacb0 \ud544\uc694"},
-        {dot:"dot-idle",name:"\uc778\uc2a4\ud0c0 \uc790\ub3d9 \uc5c5\ub85c\ub4dc",time:"\ubbf8\uc2e4\ud589"}
-      ]}
-    ];
-    /* 6. 예산 조정 이력 동적 렌더링 */
-  var bhl=el("budget-history-list");
-  if(bhl&&d.budgetHistory&&d.budgetHistory.length){
-    bhl.innerHTML=d.budgetHistory.map(function(h){
-      var col=h.change==="up"?"var(--green)":h.change==="down"?"#EF4444":h.change==="current"?"var(--blue)":"var(--text)";
-      var arr=h.change==="up"?" \u2191":h.change==="down"?" \u2193":"";
-      return '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px;background:var(--bg);border-radius:8px;">'+
-        '<div><div style="font-size:12px;font-weight:600;">'+h.date+'</div>'+
-        '<div style="font-size:11px;color:var(--muted);">'+h.memo+'</div></div>'+
-        '<div style="font-family:\'DM Mono\',monospace;font-size:13px;font-weight:700;color:'+col+';">\u20a9'+Number(h.amount).toLocaleString('ko-KR')+'/\uc77c'+arr+'</div>'+
-        '</div>';
-    }).join("");
-  }
-
-  pcc.innerHTML=pcList.map(function(pc){
-      var cdata=comps[pc.key]||{};
-      var isOn=cdata.status!=="offline";
-      var lastSeen=cdata.lastSeen?(" \u00b7 "+cdata.lastSeen):"";
-      var statusHtml=isOn?"<span class=\"live-dot\"></span> \uac00\ub3d9\uc911"+lastSeen:"\uc624\ud504\ub77c\uc778";
-      var taskHtml=pc.tasks.map(function(t){
-        return "<div class=\"pc-task-item\"><div class=\"pc-task-dot "+t.dot+"\"></div><div class=\"pc-task-name\">"+t.name+"</div><div class=\"pc-task-time\">"+t.time+"</div></div>";
-      }).join("");
-      return "<div class=\"pc-card\"><div class=\"pc-header\"><div class=\"pc-name\">"+pc.name+"</div><div class=\"pc-"+(isOn?"online":"offline")+"\">"+statusHtml+"</div></div><div class=\"pc-tasks\">"+taskHtml+"</div></div>";
-    }).join("");
-  }
-})();
-</script>
 </body>
 </html>
 
