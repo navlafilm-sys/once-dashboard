@@ -1,4 +1,4 @@
-﻿﻿﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -417,25 +417,29 @@ addCoworkLog('2026-04-07 09:00', '메타 광고 리포트', '어제(04/06) 지�
   </div>
 </div>
 <div class="page" id="page-meta">
-<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0 4px;">
+<<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0 4px;">
 <div style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;" id="meta-ts">📡 업데이트: 2026-04-07 09:00</div>
+<a href="https://www.facebook.com/adsmanager" target="_blank" style="font-size:12px;color:var(--blue);text-decoration:none;font-weight:500;">Ads Manager →</a>
+</div>
 <!-- meta-daily-history-start -->
-<div style="margin-top:12px;">
-<div style="font-size:11px;opacity:0.6;margin-bottom:6px;font-weight:600;letter-spacing:0.05em;">일별 성과</div>
-<div id="meta-daily-table" style="font-size:11px;"></div>
+<div class="card" style="margin-bottom:10px;padding:12px;">
+<div style="font-size:11px;opacity:0.6;margin-bottom:8px;font-weight:600;letter-spacing:0.05em;">📅 일별 성과</div>
+<div id="meta-daily-table" style="font-size:12px;line-height:1.8;"></div>
 </div>
 <script>
 (function(){
   if(typeof metaDailyHistory==='undefined'||!metaDailyHistory.length) return;
-  var fmt=function(n){return '\u20a9'+parseInt(n).toLocaleString('ko-KR');};
+  var fmt=function(n){return '₩'+parseInt(n).toLocaleString('ko-KR');};
   var rows=metaDailyHistory.slice().reverse().map(function(d){
-    var roasColor=d.roas>=3.0?'#4caf50':d.roas>=2.0?'#ff9800':'#f44336';
+    var roasColor=d.roas>=3.0?'var(--green)':d.roas>=2.0?'var(--amber)':'#EF4444';
     var mmdd=d.date.substring(5).replace('-','/');
-    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.07);">'+
-      '<span style="opacity:0.7;width:36px;">'+mmdd+'</span>'+
-      '<span>'+fmt(d.spend)+'</span>'+
-      '<span style="color:'+roasColor+';font-weight:700;">'+d.roas+'x</span>'+
-      '<span>'+d.purchases+'건</span>'+
+    var partialBadge=d.partial?"<span style='font-size:9px;background:rgba(96,165,250,0.2);color:var(--blue);padding:1px 5px;border-radius:8px;margin-left:4px;'>진행중</span>":"";
+    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border);">'+
+      '<span style="opacity:0.7;width:40px;font-size:11px;">'+mmdd+'</span>'+
+      '<span style="font-family:DM Mono,monospace;font-size:12px;">'+fmt(d.spend)+'</span>'+
+      '<span style="color:'+roasColor+';font-weight:700;width:48px;text-align:right;">'+d.roas+'x</span>'+
+      '<span style="width:32px;text-align:right;">'+d.purchases+'건</span>'+
+      partialBadge+
     '</div>';
   }).join('');
   var el=document.getElementById('meta-daily-table');
@@ -444,8 +448,6 @@ addCoworkLog('2026-04-07 09:00', '메타 광고 리포트', '어제(04/06) 지�
 addCoworkLog('2026-04-06 16:25', '운송장 등록 완료', '허스크→이지어드민 4건 처리완료 (이소민/이가은/서희진/김나영, 한진택배)', 'success');
 </script>
 <!-- meta-daily-history-end -->
-<a href="https://www.facebook.com/adsmanager" target="_blank" style="font-size:12px;color:var(--blue);text-decoration:none;font-weight:500;">Ads Manager →</a>
-</div>
 <div class="card" style="background:var(--accent);border:none;color:white;margin-bottom:10px;">
 <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
 <div>
