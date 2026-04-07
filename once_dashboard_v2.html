@@ -172,8 +172,7 @@ addCoworkLog('2026-04-07 09:00', '메타 광고 리포트', '어제(04/06) 지�
   <div class="tab" onclick="switchTab('automation')">자동화 현황</div>
   <div class="tab" onclick="switchTab('computers')">컴퓨터</div>
   <div class="tab" onclick="switchTab('flow')">플로우</div>
-  <div class="tab" onclick="switchTab('profit')">💰 수익</div>
-  <div class="tab" onclick="switchTab('profit')">💰 수익</div>
+  <div class="tab" onclick="switchTab('profit')">💰 수익</div>
 </div>
 <div class="page active" id="page-today">
   <div class="cal-wrap" style="margin-top:4px;">
@@ -818,11 +817,13 @@ addCoworkLog('2026-04-06 16:25', '운송장 등록 완료', '허스크→이지�
 })();
 </script>
 
+
+
+
+
 <!-- ===== 수익 트래킹 페이지 ===== -->
 <div class="page" id="page-profit">
   <div class="section-title">월별 수익 트래킹</div>
-
-  <!-- 요약 카드 -->
   <div class="stat-grid" style="grid-template-columns:1fr 1fr 1fr;gap:10px;">
     <div class="stat-card" style="border-left:3px solid var(--green);">
       <div class="stat-label">3월 매출</div>
@@ -837,484 +838,100 @@ addCoworkLog('2026-04-06 16:25', '운송장 등록 완료', '허스크→이지�
       <div class="stat-value" id="pr-profit-3" style="font-size:18px;">—</div>
     </div>
   </div>
-
-  <!-- 월별 상세 테이블 -->
   <div class="card" style="padding:0;overflow:hidden;">
     <div style="overflow-x:auto;">
-      <table id="profit-table" style="width:100%;border-collapse:collapse;font-size:12px;">
+      <table style="width:100%;border-collapse:collapse;font-size:12px;">
         <thead>
           <tr style="background:var(--accent);color:#fff;">
             <th style="padding:10px 12px;text-align:left;font-weight:600;">항목</th>
-            <th style="padding:10px 8px;text-align:right;white-space:nowrap;">1월</th>
-            <th style="padding:10px 8px;text-align:right;white-space:nowrap;">2월</th>
-            <th style="padding:10px 8px;text-align:right;white-space:nowrap;">3월</th>
+            <th style="padding:10px 8px;text-align:right;">1월</th>
+            <th style="padding:10px 8px;text-align:right;">2월</th>
+            <th style="padding:10px 8px;text-align:right;">3월</th>
           </tr>
         </thead>
         <tbody id="profit-tbody"></tbody>
       </table>
     </div>
   </div>
-
-  <!-- 입력 패널 -->
   <div class="card">
     <div style="font-size:12px;font-weight:700;margin-bottom:12px;color:var(--accent);">📝 매출 / 비용 직접 입력</div>
     <div style="display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:8px;align-items:center;" id="pr-input-grid"></div>
     <div style="margin-top:12px;">
       <div style="font-size:11px;color:var(--muted);margin-bottom:6px;">플랫폼 수수료율 (%)</div>
       <div style="display:flex;align-items:center;gap:8px;">
-        <input type="number" id="pr-fee-rate" value="5" min="0" max="30" step="0.1"
-          style="width:80px;padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:13px;text-align:center;"
-          oninput="renderProfitTable()"/>
+        <input type="number" id="pr-fee-rate" value="5" min="0" max="30" step="0.1" style="width:80px;padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:13px;text-align:center;" oninput="renderProfitTable()"/>
         <span style="font-size:11px;color:var(--muted);">% (스마트스토어·카페24 평균)</span>
       </div>
     </div>
     <button onclick="saveProfitData()" style="margin-top:12px;width:100%;padding:10px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">저장</button>
   </div>
-
-  <!-- 추이 차트 -->
   <div class="card">
     <div style="font-size:12px;font-weight:700;margin-bottom:12px;color:var(--accent);">📊 월별 추이</div>
     <canvas id="profitChart" height="180"></canvas>
   </div>
-
-  <div style="font-size:10px;color:var(--muted);text-align:center;margin-top:4px;padding-bottom:20px;">
-    허스크 원가는 월정산 파일에서 자동 반영 · 매출·광고비는 직접 입력
-  </div>
+  <div style="font-size:10px;color:var(--muted);text-align:center;margin-top:4px;padding-bottom:20px;">허스크 원가는 월정산 파일에서 자동 반영 · 매출·광고비는 직접 입력</div>
 </div>
-
 <script>
 (function(){
-  var huskCost   = {1:500720, 2:529100, 3:829510};
-  var huskOrders = {1:109,    2:114,    3:179};
-
-  function loadData(){ try{ return JSON.parse(localStorage.getItem('pr_data')||'null'); }catch(e){ return null; } }
-  function saveLocalData(d){ localStorage.setItem('pr_data', JSON.stringify(d)); }
-
-  var pd = loadData() || {revenue:{1:0,2:0,3:0}, adCost:{1:0,2:0,3:0}, etcCost:{1:0,2:0,3:0}, feeRate:5};
-
-  function buildInputs(){
-    var grid = document.getElementById('pr-input-grid');
-    if(!grid) return;
-    var fields = [
-      {key:'revenue', label:'매출 (₩)', color:'var(--green)'},
-      {key:'adCost',  label:'광고비 (₩)', color:'#EF4444'},
-      {key:'etcCost', label:'기타비용 (₩)', color:'var(--muted)'}
-    ];
-    grid.innerHTML='';
-    ['항목','1월','2월','3월'].forEach(function(h){
-      var d=document.createElement('div');
-      d.style.cssText='font-size:11px;font-weight:700;color:var(--muted);padding:4px 0;text-align:center;';
-      d.textContent=h; grid.appendChild(d);
-    });
-    fields.forEach(function(f){
-      var lbl=document.createElement('div');
-      lbl.style.cssText='font-size:11px;color:var(--accent);padding:4px 0;white-space:nowrap;';
-      lbl.textContent=f.label; grid.appendChild(lbl);
-      [1,2,3].forEach(function(m){
-        var inp=document.createElement('input');
-        inp.type='number'; inp.id='pr-inp-'+f.key+'-'+m;
-        inp.value=pd[f.key]&&pd[f.key][m]?pd[f.key][m]:0;
-        inp.min=0;
-        inp.style.cssText='width:100%;padding:5px 6px;border:1px solid var(--border);border-radius:6px;font-size:12px;text-align:right;';
-        inp.oninput=function(){ renderProfitTable(); };
-        grid.appendChild(inp);
-      });
-    });
-  }
-
-  function getVals(){
-    var out={revenue:{},adCost:{},etcCost:{}};
-    ['revenue','adCost','etcCost'].forEach(function(k){
-      [1,2,3].forEach(function(m){
-        var el=document.getElementById('pr-inp-'+k+'-'+m);
-        out[k][m]=el?(parseFloat(el.value)||0):0;
-      });
-    });
-    out.feeRate=parseFloat(document.getElementById('pr-fee-rate').value)||5;
-    return out;
-  }
-
-  function calcMonth(m,v){
-    var rev=v.revenue[m]||0;
-    var husk=huskCost[m];
-    var fee=Math.round(rev*v.feeRate/100);
-    var ad=v.adCost[m]||0;
-    var etc=v.etcCost[m]||0;
-    var profit=rev-husk-fee-ad-etc;
-    var margin=rev>0?(profit/rev*100).toFixed(1):'—';
-    return {rev:rev,husk:husk,fee:fee,ad:ad,etc:etc,profit:profit,margin:margin,orders:huskOrders[m]};
-  }
-
-  window.renderProfitTable=function(){
-    var v=getVals();
-    var c={1:calcMonth(1,v),2:calcMonth(2,v),3:calcMonth(3,v)};
-
-    var e3rev=document.getElementById('pr-rev-3');
-    if(e3rev) e3rev.textContent=c[3].rev>0?'₩'+c[3].rev.toLocaleString('ko-KR'):'미입력';
-    var e3cost=document.getElementById('pr-cost-3');
-    if(e3cost) e3cost.textContent='₩'+(c[3].husk+c[3].fee+c[3].ad+c[3].etc).toLocaleString('ko-KR');
-    var e3prof=document.getElementById('pr-profit-3');
-    if(e3prof){
-      e3prof.textContent=c[3].rev>0?'₩'+c[3].profit.toLocaleString('ko-KR'):'미입력';
-      e3prof.style.color=c[3].profit>=0?'var(--green)':'var(--red)';
-    }
-
-    var rows=[
-      {label:'📦 매출',           key:'rev',    bold:true,  color:'var(--green)'},
-      {label:'  └ 제조원가(허스크)',key:'husk',   bold:false, color:'var(--red)'},
-      {label:'  └ 플랫폼 수수료', key:'fee',    bold:false, color:'var(--red)'},
-      {label:'  └ 광고비',        key:'ad',     bold:false, color:'var(--red)'},
-      {label:'  └ 기타비용',      key:'etc',    bold:false, color:'var(--red)'},
-      {label:'💰 순수익',         key:'profit', bold:true,  color:''},
-      {label:'  마진율',          key:'margin', bold:false, color:'var(--muted)'},
-      {label:'  주문수량',        key:'orders', bold:false, color:'var(--muted)'}
-    ];
-
-    var tbody=document.getElementById('profit-tbody');
-    if(!tbody) return;
-    tbody.innerHTML=rows.map(function(r,i){
-      var bg=i%2===0?'var(--bg)':'#fff';
-      var cells=[1,2,3].map(function(m){
-        var val=c[m][r.key];
-        var disp='';
-        if(r.key==='margin') disp=val==='—'?'—':val+'%';
-        else if(r.key==='orders') disp=val+'건';
-        else if(r.key==='rev'||r.key==='profit') disp=val===0?'<span style="color:var(--muted)">미입력</span>':'₩'+Math.round(val).toLocaleString('ko-KR');
-        else disp='₩'+Math.round(val).toLocaleString('ko-KR');
-        var cc=r.key==='profit'?(val>=0?'var(--green)':'var(--red)'):(r.color||'');
-        return '<td style="padding:9px 8px;text-align:right;color:'+cc+';">'+disp+'</td>';
-      }).join('');
-      return '<tr style="background:'+bg+';border-bottom:1px solid var(--border);">'+
-        '<td style="padding:9px 12px;font-size:11px;font-weight:'+(r.bold?'700':'400')+';color:'+(r.bold?'var(--accent)':'var(--muted)')+';">'+r.label+'</td>'+
-        cells+'</tr>';
+var H={1:500720,2:529100,3:829510},O={1:109,2:114,3:179};
+function ld(){try{return JSON.parse(localStorage.getItem('pr_data')||'null');}catch(e){return null;}}
+function sd(d){localStorage.setItem('pr_data',JSON.stringify(d));}
+var pd=ld()||{revenue:{1:0,2:0,3:0},adCost:{1:0,2:0,3:0},etcCost:{1:0,2:0,3:0},feeRate:5};
+function buildInputs(){
+  var g=document.getElementById('pr-input-grid');if(!g)return;
+  var F=[{k:'revenue',l:'매출 (₩)'},{k:'adCost',l:'광고비 (₩)'},{k:'etcCost',l:'기타비용 (₩)'}];
+  g.innerHTML='';
+  ['항목','1월','2월','3월'].forEach(function(h){var d=document.createElement('div');d.style.cssText='font-size:11px;font-weight:700;color:var(--muted);padding:4px 0;text-align:center;';d.textContent=h;g.appendChild(d);});
+  F.forEach(function(f){
+    var lb=document.createElement('div');lb.style.cssText='font-size:11px;color:var(--accent);padding:4px 0;white-space:nowrap;';lb.textContent=f.l;g.appendChild(lb);
+    [1,2,3].forEach(function(m){var i=document.createElement('input');i.type='number';i.id='pr-inp-'+f.k+'-'+m;i.value=pd[f.k]&&pd[f.k][m]?pd[f.k][m]:0;i.min=0;i.style.cssText='width:100%;padding:5px 6px;border:1px solid var(--border);border-radius:6px;font-size:12px;text-align:right;';i.oninput=function(){renderProfitTable();};g.appendChild(i);});
+  });
+}
+function gv(){var o={revenue:{},adCost:{},etcCost:{}};['revenue','adCost','etcCost'].forEach(function(k){[1,2,3].forEach(function(m){var e=document.getElementById('pr-inp-'+k+'-'+m);o[k][m]=e?(parseFloat(e.value)||0):0;});});o.feeRate=parseFloat(document.getElementById('pr-fee-rate').value)||5;return o;}
+function cm(m,v){var r=v.revenue[m]||0,h=H[m],f=Math.round(r*v.feeRate/100),a=v.adCost[m]||0,e=v.etcCost[m]||0,p=r-h-f-a-e;return{rev:r,husk:h,fee:f,ad:a,etc:e,profit:p,margin:r>0?(p/r*100).toFixed(1):'—',orders:O[m]};}
+window.renderProfitTable=function(){
+  var v=gv(),c={1:cm(1,v),2:cm(2,v),3:cm(3,v)};
+  var e=document.getElementById('pr-rev-3');if(e)e.textContent=c[3].rev>0?'₩'+c[3].rev.toLocaleString('ko-KR'):'미입력';
+  e=document.getElementById('pr-cost-3');if(e)e.textContent='₩'+(c[3].husk+c[3].fee+c[3].ad+c[3].etc).toLocaleString('ko-KR');
+  e=document.getElementById('pr-profit-3');if(e){e.textContent=c[3].rev>0?'₩'+c[3].profit.toLocaleString('ko-KR'):'미입력';e.style.color=c[3].profit>=0?'var(--green)':'var(--red)';}
+  var rows=[
+    {l:'📦 매출',k:'rev',b:true,c:'var(--green)'},
+    {l:'  └ 제조원가(허스크)',k:'husk',b:false,c:'var(--red)'},
+    {l:'  └ 플랫폼 수수료',k:'fee',b:false,c:'var(--red)'},
+    {l:'  └ 광고비',k:'ad',b:false,c:'var(--red)'},
+    {l:'  └ 기타비용',k:'etc',b:false,c:'var(--red)'},
+    {l:'💰 순수익',k:'profit',b:true,c:''},
+    {l:'  마진율',k:'margin',b:false,c:'var(--muted)'},
+    {l:'  주문수량',k:'orders',b:false,c:'var(--muted)'}
+  ];
+  var tb=document.getElementById('profit-tbody');if(!tb)return;
+  tb.innerHTML=rows.map(function(r,i){
+    var bg=i%2===0?'var(--bg)':'#fff';
+    var cells=[1,2,3].map(function(m){
+      var val=c[m][r.k],disp='';
+      if(r.k==='margin')disp=val==='—'?'—':val+'%';
+      else if(r.k==='orders')disp=val+'건';
+      else if(r.k==='rev'||r.k==='profit')disp=val===0?'<span style="color:var(--muted)">미입력</span>':'₩'+Math.round(val).toLocaleString('ko-KR');
+      else disp='₩'+Math.round(val).toLocaleString('ko-KR');
+      var cc=r.k==='profit'?(val>=0?'var(--green)':'var(--red)'):(r.c||'');
+      return '<td style="padding:9px 8px;text-align:right;color:'+cc+';">'+disp+'</td>';
     }).join('');
-
-    drawProfitChart(c);
-  };
-
-  var chartInst=null;
-  function drawProfitChart(c){
-    var canvas=document.getElementById('profitChart');
-    if(!canvas||typeof Chart==='undefined') return;
-    var revD=[c[1].rev,c[2].rev,c[3].rev];
-    var costD=[c[1].husk+c[1].fee+c[1].ad+c[1].etc, c[2].husk+c[2].fee+c[2].ad+c[2].etc, c[3].husk+c[3].fee+c[3].ad+c[3].etc];
-    var profD=[c[1].profit,c[2].profit,c[3].profit];
-    if(chartInst) chartInst.destroy();
-    chartInst=new Chart(canvas,{
-      type:'bar',
-      data:{labels:['1월','2월','3월'],datasets:[
-        {label:'매출',data:revD,backgroundColor:'rgba(45,106,79,0.75)',borderRadius:4},
-        {label:'총비용',data:costD,backgroundColor:'rgba(153,27,27,0.55)',borderRadius:4},
-        {label:'순수익',data:profD,backgroundColor:'rgba(30,64,175,0.75)',borderRadius:4}
-      ]},
-      options:{responsive:true,maintainAspectRatio:true,
-        plugins:{legend:{position:'bottom',labels:{font:{size:11}}}},
-        scales:{y:{ticks:{callback:function(v){return v>=10000?'₩'+(v/10000).toFixed(0)+'만':v;},font:{size:10}},grid:{color:'rgba(0,0,0,0.05)'}}},
-        animation:{duration:300}}
-    });
-  }
-
-  window.saveProfitData=function(){
-    var v=getVals();
-    saveLocalData({revenue:v.revenue,adCost:v.adCost,etcCost:v.etcCost,feeRate:v.feeRate});
-    var btn=document.querySelector('#page-profit button[onclick="saveProfitData()"]');
-    if(btn){btn.textContent='✓ 저장됨';btn.style.background='var(--green)';setTimeout(function(){btn.textContent='저장';btn.style.background='var(--accent)';},2000);}
-    if(typeof addCoworkLog==='function') addCoworkLog(new Date().toISOString().slice(0,16).replace('T',' '),'수익 데이터 저장','1~3월 매출·비용 업데이트','success');
-  };
-
-  var _orig=window.switchTab;
-  window.switchTab=function(name){
-    _orig(name);
-    if(name==='profit'){
-      var saved=loadData();
-      if(saved){
-        var fr=document.getElementById('pr-fee-rate');
-        if(fr&&saved.feeRate) fr.value=saved.feeRate;
-        ['revenue','adCost','etcCost'].forEach(function(k){
-          [1,2,3].forEach(function(m){
-            var el=document.getElementById('pr-inp-'+k+'-'+m);
-            if(el&&saved[k]&&saved[k][m]!==undefined) el.value=saved[k][m];
-          });
-        });
-      }
-      renderProfitTable();
-    }
-  };
-
-  function init(){
-    buildInputs();
-    var saved=loadData();
-    if(saved){
-      var fr=document.getElementById('pr-fee-rate');
-      if(fr&&saved.feeRate) fr.value=saved.feeRate;
-      ['revenue','adCost','etcCost'].forEach(function(k){
-        [1,2,3].forEach(function(m){
-          var el=document.getElementById('pr-inp-'+k+'-'+m);
-          if(el&&saved[k]&&saved[k][m]!==undefined) el.value=saved[k][m];
-        });
-      });
-    }
-    renderProfitTable();
-  }
-
-  if(typeof Chart!=='undefined'){
-    init();
-  } else {
-    var s=document.createElement('script');
-    s.src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js';
-    s.onload=init;
-    document.head.appendChild(s);
-  }
-})();
-</script>
-
-<!-- ===== 수익 트래킹 페이지 ===== -->
-<div class="page" id="page-profit">
-  <div class="section-title">월별 수익 트래킹</div>
-
-  <!-- 요약 카드 -->
-  <div class="stat-grid" style="grid-template-columns:1fr 1fr 1fr;gap:10px;">
-    <div class="stat-card" style="border-left:3px solid var(--green);">
-      <div class="stat-label">3월 매출</div>
-      <div class="stat-value" id="pr-rev-3" style="font-size:18px;color:var(--green)">—</div>
-    </div>
-    <div class="stat-card" style="border-left:3px solid var(--red);">
-      <div class="stat-label">3월 총비용</div>
-      <div class="stat-value" id="pr-cost-3" style="font-size:18px;color:var(--red)">—</div>
-    </div>
-    <div class="stat-card" style="border-left:3px solid var(--blue);">
-      <div class="stat-label">3월 순수익</div>
-      <div class="stat-value" id="pr-profit-3" style="font-size:18px;">—</div>
-    </div>
-  </div>
-
-  <!-- 월별 상세 테이블 -->
-  <div class="card" style="padding:0;overflow:hidden;">
-    <div style="overflow-x:auto;">
-      <table id="profit-table" style="width:100%;border-collapse:collapse;font-size:12px;">
-        <thead>
-          <tr style="background:var(--accent);color:#fff;">
-            <th style="padding:10px 12px;text-align:left;font-weight:600;">항목</th>
-            <th style="padding:10px 8px;text-align:right;white-space:nowrap;">1월</th>
-            <th style="padding:10px 8px;text-align:right;white-space:nowrap;">2월</th>
-            <th style="padding:10px 8px;text-align:right;white-space:nowrap;">3월</th>
-          </tr>
-        </thead>
-        <tbody id="profit-tbody"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- 입력 패널 -->
-  <div class="card">
-    <div style="font-size:12px;font-weight:700;margin-bottom:12px;color:var(--accent);">📝 매출 / 비용 직접 입력</div>
-    <div style="display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:8px;align-items:center;" id="pr-input-grid"></div>
-    <div style="margin-top:12px;">
-      <div style="font-size:11px;color:var(--muted);margin-bottom:6px;">플랫폼 수수료율 (%)</div>
-      <div style="display:flex;align-items:center;gap:8px;">
-        <input type="number" id="pr-fee-rate" value="5" min="0" max="30" step="0.1"
-          style="width:80px;padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:13px;text-align:center;"
-          oninput="renderProfitTable()"/>
-        <span style="font-size:11px;color:var(--muted);">% (스마트스토어·카페24 평균)</span>
-      </div>
-    </div>
-    <button onclick="saveProfitData()" style="margin-top:12px;width:100%;padding:10px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">저장</button>
-  </div>
-
-  <!-- 추이 차트 -->
-  <div class="card">
-    <div style="font-size:12px;font-weight:700;margin-bottom:12px;color:var(--accent);">📊 월별 추이</div>
-    <canvas id="profitChart" height="180"></canvas>
-  </div>
-
-  <div style="font-size:10px;color:var(--muted);text-align:center;margin-top:4px;padding-bottom:20px;">
-    허스크 원가는 월정산 파일에서 자동 반영 · 매출·광고비는 직접 입력
-  </div>
-</div>
-
-<script>
-(function(){
-  var huskCost   = {1:500720, 2:529100, 3:829510};
-  var huskOrders = {1:109,    2:114,    3:179};
-
-  function loadData(){ try{ return JSON.parse(localStorage.getItem('pr_data')||'null'); }catch(e){ return null; } }
-  function saveLocalData(d){ localStorage.setItem('pr_data', JSON.stringify(d)); }
-
-  var pd = loadData() || {revenue:{1:0,2:0,3:0}, adCost:{1:0,2:0,3:0}, etcCost:{1:0,2:0,3:0}, feeRate:5};
-
-  function buildInputs(){
-    var grid = document.getElementById('pr-input-grid');
-    if(!grid) return;
-    var fields = [
-      {key:'revenue', label:'매출 (₩)', color:'var(--green)'},
-      {key:'adCost',  label:'광고비 (₩)', color:'#EF4444'},
-      {key:'etcCost', label:'기타비용 (₩)', color:'var(--muted)'}
-    ];
-    grid.innerHTML='';
-    ['항목','1월','2월','3월'].forEach(function(h){
-      var d=document.createElement('div');
-      d.style.cssText='font-size:11px;font-weight:700;color:var(--muted);padding:4px 0;text-align:center;';
-      d.textContent=h; grid.appendChild(d);
-    });
-    fields.forEach(function(f){
-      var lbl=document.createElement('div');
-      lbl.style.cssText='font-size:11px;color:var(--accent);padding:4px 0;white-space:nowrap;';
-      lbl.textContent=f.label; grid.appendChild(lbl);
-      [1,2,3].forEach(function(m){
-        var inp=document.createElement('input');
-        inp.type='number'; inp.id='pr-inp-'+f.key+'-'+m;
-        inp.value=pd[f.key]&&pd[f.key][m]?pd[f.key][m]:0;
-        inp.min=0;
-        inp.style.cssText='width:100%;padding:5px 6px;border:1px solid var(--border);border-radius:6px;font-size:12px;text-align:right;';
-        inp.oninput=function(){ renderProfitTable(); };
-        grid.appendChild(inp);
-      });
-    });
-  }
-
-  function getVals(){
-    var out={revenue:{},adCost:{},etcCost:{}};
-    ['revenue','adCost','etcCost'].forEach(function(k){
-      [1,2,3].forEach(function(m){
-        var el=document.getElementById('pr-inp-'+k+'-'+m);
-        out[k][m]=el?(parseFloat(el.value)||0):0;
-      });
-    });
-    out.feeRate=parseFloat(document.getElementById('pr-fee-rate').value)||5;
-    return out;
-  }
-
-  function calcMonth(m,v){
-    var rev=v.revenue[m]||0;
-    var husk=huskCost[m];
-    var fee=Math.round(rev*v.feeRate/100);
-    var ad=v.adCost[m]||0;
-    var etc=v.etcCost[m]||0;
-    var profit=rev-husk-fee-ad-etc;
-    var margin=rev>0?(profit/rev*100).toFixed(1):'—';
-    return {rev:rev,husk:husk,fee:fee,ad:ad,etc:etc,profit:profit,margin:margin,orders:huskOrders[m]};
-  }
-
-  window.renderProfitTable=function(){
-    var v=getVals();
-    var c={1:calcMonth(1,v),2:calcMonth(2,v),3:calcMonth(3,v)};
-
-    var e3rev=document.getElementById('pr-rev-3');
-    if(e3rev) e3rev.textContent=c[3].rev>0?'₩'+c[3].rev.toLocaleString('ko-KR'):'미입력';
-    var e3cost=document.getElementById('pr-cost-3');
-    if(e3cost) e3cost.textContent='₩'+(c[3].husk+c[3].fee+c[3].ad+c[3].etc).toLocaleString('ko-KR');
-    var e3prof=document.getElementById('pr-profit-3');
-    if(e3prof){
-      e3prof.textContent=c[3].rev>0?'₩'+c[3].profit.toLocaleString('ko-KR'):'미입력';
-      e3prof.style.color=c[3].profit>=0?'var(--green)':'var(--red)';
-    }
-
-    var rows=[
-      {label:'📦 매출',           key:'rev',    bold:true,  color:'var(--green)'},
-      {label:'  └ 제조원가(허스크)',key:'husk',   bold:false, color:'var(--red)'},
-      {label:'  └ 플랫폼 수수료', key:'fee',    bold:false, color:'var(--red)'},
-      {label:'  └ 광고비',        key:'ad',     bold:false, color:'var(--red)'},
-      {label:'  └ 기타비용',      key:'etc',    bold:false, color:'var(--red)'},
-      {label:'💰 순수익',         key:'profit', bold:true,  color:''},
-      {label:'  마진율',          key:'margin', bold:false, color:'var(--muted)'},
-      {label:'  주문수량',        key:'orders', bold:false, color:'var(--muted)'}
-    ];
-
-    var tbody=document.getElementById('profit-tbody');
-    if(!tbody) return;
-    tbody.innerHTML=rows.map(function(r,i){
-      var bg=i%2===0?'var(--bg)':'#fff';
-      var cells=[1,2,3].map(function(m){
-        var val=c[m][r.key];
-        var disp='';
-        if(r.key==='margin') disp=val==='—'?'—':val+'%';
-        else if(r.key==='orders') disp=val+'건';
-        else if(r.key==='rev'||r.key==='profit') disp=val===0?'<span style="color:var(--muted)">미입력</span>':'₩'+Math.round(val).toLocaleString('ko-KR');
-        else disp='₩'+Math.round(val).toLocaleString('ko-KR');
-        var cc=r.key==='profit'?(val>=0?'var(--green)':'var(--red)'):(r.color||'');
-        return '<td style="padding:9px 8px;text-align:right;color:'+cc+';">'+disp+'</td>';
-      }).join('');
-      return '<tr style="background:'+bg+';border-bottom:1px solid var(--border);">'+
-        '<td style="padding:9px 12px;font-size:11px;font-weight:'+(r.bold?'700':'400')+';color:'+(r.bold?'var(--accent)':'var(--muted)')+';">'+r.label+'</td>'+
-        cells+'</tr>';
-    }).join('');
-
-    drawProfitChart(c);
-  };
-
-  var chartInst=null;
-  function drawProfitChart(c){
-    var canvas=document.getElementById('profitChart');
-    if(!canvas||typeof Chart==='undefined') return;
-    var revD=[c[1].rev,c[2].rev,c[3].rev];
-    var costD=[c[1].husk+c[1].fee+c[1].ad+c[1].etc, c[2].husk+c[2].fee+c[2].ad+c[2].etc, c[3].husk+c[3].fee+c[3].ad+c[3].etc];
-    var profD=[c[1].profit,c[2].profit,c[3].profit];
-    if(chartInst) chartInst.destroy();
-    chartInst=new Chart(canvas,{
-      type:'bar',
-      data:{labels:['1월','2월','3월'],datasets:[
-        {label:'매출',data:revD,backgroundColor:'rgba(45,106,79,0.75)',borderRadius:4},
-        {label:'총비용',data:costD,backgroundColor:'rgba(153,27,27,0.55)',borderRadius:4},
-        {label:'순수익',data:profD,backgroundColor:'rgba(30,64,175,0.75)',borderRadius:4}
-      ]},
-      options:{responsive:true,maintainAspectRatio:true,
-        plugins:{legend:{position:'bottom',labels:{font:{size:11}}}},
-        scales:{y:{ticks:{callback:function(v){return v>=10000?'₩'+(v/10000).toFixed(0)+'만':v;},font:{size:10}},grid:{color:'rgba(0,0,0,0.05)'}}},
-        animation:{duration:300}}
-    });
-  }
-
-  window.saveProfitData=function(){
-    var v=getVals();
-    saveLocalData({revenue:v.revenue,adCost:v.adCost,etcCost:v.etcCost,feeRate:v.feeRate});
-    var btn=document.querySelector('#page-profit button[onclick="saveProfitData()"]');
-    if(btn){btn.textContent='✓ 저장됨';btn.style.background='var(--green)';setTimeout(function(){btn.textContent='저장';btn.style.background='var(--accent)';},2000);}
-    if(typeof addCoworkLog==='function') addCoworkLog(new Date().toISOString().slice(0,16).replace('T',' '),'수익 데이터 저장','1~3월 매출·비용 업데이트','success');
-  };
-
-  var _orig=window.switchTab;
-  window.switchTab=function(name){
-    _orig(name);
-    if(name==='profit'){
-      var saved=loadData();
-      if(saved){
-        var fr=document.getElementById('pr-fee-rate');
-        if(fr&&saved.feeRate) fr.value=saved.feeRate;
-        ['revenue','adCost','etcCost'].forEach(function(k){
-          [1,2,3].forEach(function(m){
-            var el=document.getElementById('pr-inp-'+k+'-'+m);
-            if(el&&saved[k]&&saved[k][m]!==undefined) el.value=saved[k][m];
-          });
-        });
-      }
-      renderProfitTable();
-    }
-  };
-
-  function init(){
-    buildInputs();
-    var saved=loadData();
-    if(saved){
-      var fr=document.getElementById('pr-fee-rate');
-      if(fr&&saved.feeRate) fr.value=saved.feeRate;
-      ['revenue','adCost','etcCost'].forEach(function(k){
-        [1,2,3].forEach(function(m){
-          var el=document.getElementById('pr-inp-'+k+'-'+m);
-          if(el&&saved[k]&&saved[k][m]!==undefined) el.value=saved[k][m];
-        });
-      });
-    }
-    renderProfitTable();
-  }
-
-  if(typeof Chart!=='undefined'){
-    init();
-  } else {
-    var s=document.createElement('script');
-    s.src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js';
-    s.onload=init;
-    document.head.appendChild(s);
-  }
+    return '<tr style="background:'+bg+';border-bottom:1px solid var(--border);"><td style="padding:9px 12px;font-size:11px;font-weight:'+(r.b?'700':'400')+';color:'+(r.b?'var(--accent)':'var(--muted)')+';">'+r.l+'</td>'+cells+'</tr>';
+  }).join('');
+  dpc(c);
+};
+var ci=null;
+function dpc(c){
+  var cv=document.getElementById('profitChart');if(!cv||typeof Chart==='undefined')return;
+  var rd=[c[1].rev,c[2].rev,c[3].rev],cd=[c[1].husk+c[1].fee+c[1].ad+c[1].etc,c[2].husk+c[2].fee+c[2].ad+c[2].etc,c[3].husk+c[3].fee+c[3].ad+c[3].etc],pd=[c[1].profit,c[2].profit,c[3].profit];
+  if(ci)ci.destroy();
+  ci=new Chart(cv,{type:'bar',data:{labels:['1월','2월','3월'],datasets:[{label:'매출',data:rd,backgroundColor:'rgba(45,106,79,0.75)',borderRadius:4},{label:'총비용',data:cd,backgroundColor:'rgba(153,27,27,0.55)',borderRadius:4},{label:'순수익',data:pd,backgroundColor:'rgba(30,64,175,0.75)',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{position:'bottom',labels:{font:{size:11}}}},scales:{y:{ticks:{callback:function(v){return v>=10000?'₩'+(v/10000).toFixed(0)+'만':v;},font:{size:10}},grid:{color:'rgba(0,0,0,0.05)'}}},animation:{duration:300}}});
+}
+window.saveProfitData=function(){var v=gv();sd({revenue:v.revenue,adCost:v.adCost,etcCost:v.etcCost,feeRate:v.feeRate});var btn=document.querySelector('#page-profit button');if(btn){btn.textContent='✓ 저장됨';btn.style.background='var(--green)';setTimeout(function(){btn.textContent='저장';btn.style.background='var(--accent)';},2000);}if(typeof addCoworkLog==='function')addCoworkLog(new Date().toISOString().slice(0,16).replace('T',' '),'수익 데이터 저장','1~3월 매출·비용 업데이트','success');};
+var _o=window.switchTab;
+window.switchTab=function(n){_o(n);if(n==='profit'){var s=ld();if(s){var fr=document.getElementById('pr-fee-rate');if(fr&&s.feeRate)fr.value=s.feeRate;['revenue','adCost','etcCost'].forEach(function(k){[1,2,3].forEach(function(m){var el=document.getElementById('pr-inp-'+k+'-'+m);if(el&&s[k]&&s[k][m]!==undefined)el.value=s[k][m];});});}renderProfitTable();}};
+function init(){buildInputs();var s=ld();if(s){var fr=document.getElementById('pr-fee-rate');if(fr&&s.feeRate)fr.value=s.feeRate;['revenue','adCost','etcCost'].forEach(function(k){[1,2,3].forEach(function(m){var el=document.getElementById('pr-inp-'+k+'-'+m);if(el&&s[k]&&s[k][m]!==undefined)el.value=s[k][m];});});}renderProfitTable();}
+if(typeof Chart!=='undefined'){init();}else{var sc=document.createElement('script');sc.src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js';sc.onload=init;document.head.appendChild(sc);}
 })();
 </script>
 
