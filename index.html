@@ -1,4 +1,4 @@
-﻿﻿﻿<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -144,14 +144,21 @@ var metaToday = {date:'2026-04-06',spend:13598,roas:6.91,purchases:4,impressions
 var meta7day = {spend:85766,roas:4.58,purchases:16,period:'2026-03-31 ~ 2026-04-06',clicks:789,ctr:4.16,cpc:109};
 var metaMonth = {spend:79558,roas:4.03,revenue:321000,purchases:13,projected:340500,period:'2026-04-01 ~ 2026-04-07'};
 var metaUpdated = '2026-04-07 09:00';
+var metaCampaign = {dailyBudget:16317, name:'어드밴티지+ 쇼핑 캠페인', status:'ACTIVE'};
+var metaBudgetHistory = [
+  {date:'2026-04-07',from:16317,to:16317,reason:'ROAS 6.91x 폭발 구간 - 증액 미승인'},
+  {date:'2026-04-05',from:16317,to:16317,reason:'ROAS 1.84x 주의 구간 유지'},
+  {date:'2026-03-31',from:14000,to:16317,reason:'ROAS 5.77x 호조 증액'}
+];
 var metaDailyHistory = [
-  {date:'2026-03-31',spend:12476,roas:5.77,purchases:3},
-  {date:'2026-04-01',spend:13886,roas:6.27,purchases:3},
-  {date:'2026-04-02',spend:11297,roas:4.07,purchases:2},
-  {date:'2026-04-03',spend:9825,roas:2.44,purchases:1},
-  {date:'2026-04-04',spend:10556,roas:4.17,purchases:2},
-  {date:'2026-04-05',spend:14128,roas:1.84,purchases:1},
-  {date:'2026-04-06',spend:13598,roas:6.91,purchases:4}
+  {date:'2026-03-31',spend:12476,roas:5.77,purchases:3,revenue:71988,impressions:2800,reach:2550,clicks:115,ctr:4.11,cpc:109,atc:4,checkout:3},
+  {date:'2026-04-01',spend:13886,roas:6.27,purchases:3,revenue:87000,impressions:2879,reach:2614,clicks:120,ctr:4.17,cpc:116,atc:5,checkout:3},
+  {date:'2026-04-02',spend:11297,roas:4.07,purchases:2,revenue:46000,impressions:2415,reach:2162,clicks:103,ctr:4.27,cpc:110,atc:8,checkout:3},
+  {date:'2026-04-03',spend:9825,roas:2.44,purchases:1,revenue:24000,impressions:2163,reach:1973,clicks:86,ctr:3.98,cpc:114,atc:1,checkout:1},
+  {date:'2026-04-04',spend:10556,roas:4.17,purchases:2,revenue:44000,impressions:2506,reach:2344,clicks:114,ctr:4.55,cpc:93,atc:3,checkout:2},
+  {date:'2026-04-05',spend:14128,roas:1.84,purchases:1,revenue:26000,impressions:3307,reach:2953,clicks:125,ctr:3.78,cpc:113,atc:8,checkout:3},
+  {date:'2026-04-06',spend:13598,roas:6.91,purchases:4,revenue:94000,impressions:3289,reach:3002,clicks:130,ctr:3.95,cpc:105,atc:6,checkout:5},
+  {date:'2026-04-07',spend:8983,roas:0,purchases:0,revenue:0,impressions:1683,reach:1501,clicks:84,ctr:4.99,cpc:107,atc:2,checkout:2,partial:true}
 ];
 addCoworkLog('2026-04-07 09:00', '메타 광고 리포트', '어제(04/06) 지출 ₩13,598 · ROAS 6.91x · 구매 4건 / 7일(3/31~4/6) 지출 ₩85,766 · ROAS 4.58x · 구매 16건', 'success');
 </script>
@@ -533,59 +540,46 @@ addCoworkLog('2026-04-06 16:25', '운송장 등록 완료', '허스크→이지�
 
 <div class="section-title">🔮 예산별 가상 시나리오 (월 30일 기준)</div>
 <div class="card">
-<div style="font-size:11px;color:var(--muted);margin-bottom:12px;">최근 7일 ROAS <b>4.58x</b> 기준 (낙관) / 보수(×0.6) ROAS <b>2.75x</b> 기준 · 현재 일예산 ₩16,317</div>
-<div id="scenario-container" style="display:flex;flex-direction:column;gap:8px;">
-
-  <div style="padding:10px;background:var(--bg);border-radius:8px;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-      <div style="font-size:12px;font-weight:700;">📌 현재 ₩12,100/일</div>
-      <span style="font-size:10px;background:rgba(96,165,250,0.2);color:var(--blue);padding:2px 8px;border-radius:10px;">월 ₩363,000</span>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;">
-      <div>보수적(ROAS 2.71): 순이익 <b>+₩620,730</b></div>
-      <div>낙관적(ROAS 6.27): 순이익 <b>+₩1,912,890</b></div>
-    </div>
-  </div>
-
-  <div style="padding:10px;background:var(--bg);border-radius:8px;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-      <div style="font-size:12px;font-weight:700;">📈 ₩15,000/일로 증액 시</div>
-      <span style="font-size:10px;background:rgba(52,211,153,0.2);color:var(--green);padding:2px 8px;border-radius:10px;">월 ₩450,000</span>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;">
-      <div>보수적: 순이익 <b>+₩769,500</b> (+₩148,770↑)</div>
-      <div>낙관적: 순이익 <b>+₩2,371,500</b> (+₩458,610↑)</div>
-    </div>
-  </div>
-
-  <div style="padding:10px;background:var(--bg);border-radius:8px;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-      <div style="font-size:12px;font-weight:700;">🏔 월 상한 풀 활용 ₩16,667/일</div>
-      <span style="font-size:10px;background:rgba(251,191,36,0.2);color:#F59E0B;padding:2px 8px;border-radius:10px;">월 ₩500,000</span>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;">
-      <div>보수적: 순이익 <b>+₩855,000</b></div>
-      <div>낙관적: 순이익 <b>+₩2,635,050</b></div>
-    </div>
-  </div>
-
-  <div style="padding:10px;background:var(--bg);border-radius:8px;opacity:0.7;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-      <div style="font-size:12px;font-weight:700;">📉 ₩10,000/일로 감액 시</div>
-      <span style="font-size:10px;background:rgba(239,68,68,0.15);color:#EF4444;padding:2px 8px;border-radius:10px;">월 ₩300,000</span>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;">
-      <div>보수적: 순이익 <b>+₩513,000</b> (-₩107,730↓)</div>
-      <div>낙관적: 순이익 <b>+₩1,581,000</b> (-₩331,890↓)</div>
-    </div>
-  </div>
-
-</div>
+<div id="scenario-desc" style="font-size:11px;color:var(--muted);margin-bottom:12px;">로딩 중...</div>
+<div id="scenario-container" style="display:flex;flex-direction:column;gap:8px;"></div>
 <div style="margin-top:12px;padding:8px;background:rgba(251,191,36,0.1);border-radius:8px;font-size:11px;color:var(--muted);">
-  💡 ROAS가 3.0 이상 유지되는 한 현재 예산 증액은 수익에 긍정적입니다. 단, ROAS가 2.71 수준으로 떨어지면 월 상한(₩500,000)까지 쓰는 것이 최적은 아닐 수 있습니다.
+  💡 ROAS 3.0 이상 유지 시 증액이 수익에 긍정적입니다. ROAS가 낮아지면 예산 축소를 검토하세요.
 </div>
 </div>
-
+<script>
+(function(){
+  if(typeof meta7day==="undefined"||typeof metaCampaign==="undefined") return;
+  var rOpt=meta7day.roas;
+  var rPes=Math.round(meta7day.roas*0.6*100)/100;
+  var cost=25000;
+  var curBudget=metaCampaign.dailyBudget;
+  var desc=document.getElementById("scenario-desc");
+  if(desc) desc.textContent="최근 7일 ROAS "+rOpt+"x 기준(낙관) / 보수(x0.6) ROAS "+rPes+"x · 현재 일예산 "+curBudget.toLocaleString("ko-KR")+"원";
+  var budgets=[
+    {label:"📌 현재",daily:curBudget,color:"var(--blue)",badge:"rgba(96,165,250,0.2)"},
+    {label:"📈 20,000/일로 증액",daily:20000,color:"var(--green)",badge:"rgba(52,211,153,0.2)"},
+    {label:"🏔 월 상한 풀 활용",daily:16667,color:"#F59E0B",badge:"rgba(251,191,36,0.2)"},
+    {label:"📉 10,000/일로 감액",daily:10000,color:"#EF4444",badge:"rgba(239,68,68,0.15)"}
+  ];
+  var won=function(n){return n.toLocaleString("ko-KR")+"원";};
+  var fmt=function(n){return (n>=0?"+":"-")+Math.abs(Math.round(n)).toLocaleString("ko-KR")+"원";};
+  var sc=document.getElementById("scenario-container");
+  if(!sc) return;
+  sc.innerHTML=budgets.map(function(b){
+    var mo=b.daily*30;
+    var pOpt=mo*rOpt-mo-cost*30;
+    var pPes=mo*rPes-mo-cost*30;
+    return "<div style='padding:10px;background:var(--bg);border-radius:8px;'>"
+      +"<div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;'>"
+      +"<div style='font-size:12px;font-weight:700;'>"+b.label+" "+won(b.daily)+"/일</div>"
+      +"<span style='font-size:10px;background:"+b.badge+";color:"+b.color+";padding:2px 8px;border-radius:10px;'>월 "+won(mo)+"</span>"
+      +"</div><div style='display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;'>"
+      +"<div>보수(ROAS "+rPes+"x): <b>"+fmt(pPes)+"</b></div>"
+      +"<div>낙관(ROAS "+rOpt+"x): <b>"+fmt(pOpt)+"</b></div>"
+      +"</div></div>";
+  }).join("");
+})();
+</script>
 <div class="section-title">🤖 자동 조정 규칙 (현재)</div>
 <div class="card">
 <div style="display:flex;flex-direction:column;gap:6px;font-size:12px;">
