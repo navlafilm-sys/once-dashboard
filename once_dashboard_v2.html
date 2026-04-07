@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -140,11 +140,19 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 </style>
 <!-- meta-data-start -->
 <script>
-var metaToday = {date:'2026-04-06',spend:13598,roas:6.91,purchases:4,impressions:3289,reach:3002};
-var meta7day = {spend:85766,roas:4.58,purchases:16,period:'2026-03-31 ~ 2026-04-06'};
-var metaMonth = {spend:73290,roas:4.38,revenue:321010,purchases:13,projected:433290,period:'2026-04-01 ~ 2026-04-06'};
-var metaUpdated = '2026-04-07 08:08';
-var metaDailyHistory = [{date:'2026-04-01',spend:13886,roas:6.27,purchases:3},{date:'2026-04-02',spend:11297,roas:4.07,purchases:2},{date:'2026-04-03',spend:9825,roas:2.44,purchases:1},{date:'2026-04-04',spend:10556,roas:4.17,purchases:2},{date:'2026-04-05',spend:14128,roas:1.84,purchases:1},{date:'2026-04-06',spend:12430,roas:7.56,purchases:4}];
+var metaToday = {date:'2026-04-06',spend:13592,roas:6.92,purchases:4,impressions:3286,reach:2997,clicks:130,ctr:3.96,cpc:105,addToCart:6,checkout:5,revenue:94000};
+var meta7day = {spend:73284,roas:4.35,purchases:13,period:'2026-04-01 ~ 2026-04-06',clicks:682,ctr:4.10,cpc:108};
+var metaMonth = {spend:73766,roas:4.35,revenue:321000,purchases:13,projected:315726,period:'2026-04-01 ~ 2026-04-07'};
+var metaUpdated = '2026-04-07 09:00';
+var metaDailyHistory = [
+  {date:'2026-04-01',spend:13886,roas:6.27,purchases:3},
+  {date:'2026-04-02',spend:11297,roas:4.07,purchases:2},
+  {date:'2026-04-03',spend:9825,roas:2.44,purchases:1},
+  {date:'2026-04-04',spend:10556,roas:4.17,purchases:2},
+  {date:'2026-04-05',spend:14128,roas:1.84,purchases:1},
+  {date:'2026-04-06',spend:13592,roas:6.92,purchases:4}
+];
+addCoworkLog('2026-04-07 09:00', '硫뷀? 愿묎퀬 由ы룷??, '?댁젣(04/06) 吏異???3,592 쨌 ROAS 6.92x 쨌 援щℓ 4嫄?쨌 ?대쾲???꾩쟻 ??3,766', 'success');
 </script>
 <!-- meta-data-end -->
 </head>
@@ -194,12 +202,12 @@ var metaDailyHistory = [{date:'2026-04-01',spend:13886,roas:6.27,purchases:3},{d
   <div class="section-title">📊 메타 광고 오늘 현황</div>
   <div class="card" onclick="switchTab('meta')" style="cursor:pointer;background:linear-gradient(135deg,#1e3c6e 0%,#2952a3 100%);border:none;color:white;margin-bottom:8px;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-      <div style="font-size:11px;opacity:0.65;">📡 04/01 기준</div>
+      <div id="today-meta-date" style="font-size:11px;opacity:0.65;">-</div>
       <div style="font-size:11px;opacity:0.65;">자세히 보기 →</div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
       <div style="text-align:center;"><div style="font-size:10px;opacity:0.65;margin-bottom:3px;">광고 지출</div><div style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;">₩13,886</div></div>
-      <div style="text-align:center;"><div style="font-size:10px;opacity:0.65;margin-bottom:3px;">ROAS</div><div style="font-size:16px;font-weight:700;color:#93C5FD;">6.27x</div></div>
+      <div style="text-align:center;"><div style="font-size:10px;opacity:0.65;margin-bottom:3px;">ROAS</div><div id="today-meta-roas" style="font-size:16px;font-weight:700;color:#93C5FD;">-</div></div>
       <div style="text-align:center;"><div style="font-size:10px;opacity:0.65;margin-bottom:3px;">구매</div><div style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;">3건</div></div>
     </div>
   </div>
@@ -425,18 +433,18 @@ addCoworkLog('2026-04-06 16:25', '운송장 등록 완료', '허스크→이지�
 </div>
 <div id="mc-month-limit" style="font-size:10px;opacity:0.5;margin-top:8px;text-align:right;">월 상한 ₩500,000</div>
 </div>
-<div class="section-title">오늘 성과 (04/01)</div>
+<div class="section-title" id="meta-today-title">오늘 성과</div>
 <div class="stat-grid">
-<div class="stat-card"><div class="stat-label">광고 지출</div><div class="stat-value" id="mc-spend" style="font-size:20px;">₩13,886</div><div class="stat-sub">어제 ₩12,476</div></div>
-<div class="stat-card"><div class="stat-label">구매</div><div class="stat-value" id="mc-purchases">3건</div><div class="stat-sub">어제 3건</div></div>
+<div class="stat-card"><div class="stat-label">광고 지출</div><div class="stat-value" id="mc-spend" style="font-size:20px;">₩13,886</div><div class="stat-sub" id="mc-spend-sub">-</div></div>
+<div class="stat-card"><div class="stat-label">구매</div><div class="stat-value" id="mc-purchases">3건</div><div class="stat-sub" id="mc-purchases-sub">-</div></div>
 </div>
 <div class="stat-grid">
-<div class="stat-card"><div class="stat-label">ROAS</div><div class="stat-value" id="mc-roas" style="color:var(--green);">6.27x</div><div class="stat-sub">매출 ₩87,065</div></div>
-<div class="stat-card"><div class="stat-label">CTR</div><div class="stat-value" style="font-size:20px;">3.93%</div><div class="stat-sub">CPC ₩137</div></div>
+<div class="stat-card"><div class="stat-label">ROAS</div><div class="stat-value" id="mc-roas" style="color:var(--green);">6.27x</div><div class="stat-sub" id="mc-roas-sub">-</div></div>
+<div class="stat-card"><div class="stat-label">CTR</div><div class="stat-value" id="mc-ctr" style="font-size:20px;">-</div><div class="stat-sub" id="mc-cpc-sub">-</div></div>
 </div>
 <div class="stat-grid">
-<div class="stat-card"><div class="stat-label">노출수</div><div class="stat-value" id="mc-impressions" style="font-size:20px;">2,879</div><div class="stat-sub">도달 2,614명</div></div>
-<div class="stat-card"><div class="stat-label">클릭수</div><div class="stat-value">38</div><div class="stat-sub">장바구니 4건</div></div>
+<div class="stat-card"><div class="stat-label">노출수</div><div class="stat-value" id="mc-impressions" style="font-size:20px;">2,879</div><div class="stat-sub" id="mc-reach-sub">-</div></div>
+<div class="stat-card"><div class="stat-label">클릭수</div><div class="stat-value" id="mc-clicks">-</div><div class="stat-sub" id="mc-cart-sub">-</div></div>
 </div>
 <div class="section-title">7일 지출 추이</div>
 <div class="card">
@@ -444,15 +452,15 @@ addCoworkLog('2026-04-06 16:25', '운송장 등록 완료', '허스크→이지�
 <div style="display:flex;align-items:flex-end;gap:3px;height:80px;" id="meta-bars"></div>
 <div style="display:flex;justify-content:space-between;margin-top:6px;padding:0 2px;font-size:9px;color:var(--muted);font-family:'DM Mono',monospace;" id="meta-labels"></div>
 </div>
-<div class="section-title">최근 7일 집계 (03/26–04/01)</div>
+<div class="section-title" id="meta-7d-title">최근 7일 집계</div>
 <div class="card">
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
 <div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">총 지출</div><div id="mc-7d-spend" style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">₩72,813</div></div>
 <div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">총 구매</div><div id="mc-7d-purchases" style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">12건</div></div>
 <div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">평균 ROAS</div><div id="mc-7d-roas" style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;color:var(--green);">4.16x</div></div>
-<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">총 클릭</div><div style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">655</div></div>
-<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">평균 CTR</div><div style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">4.84%</div></div>
-<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">평균 CPC</div><div style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">₩104</div></div>
+<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">총 클릭</div><div id="mc-7d-clicks" style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">-</div></div>
+<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">평균 CTR</div><div id="mc-7d-ctr" style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">-</div></div>
+<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">평균 CPC</div><div id="mc-7d-cpc" style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">-</div></div>
 </div>
 </div>
 <div class="section-title">진행중 캠페인</div>
@@ -462,11 +470,11 @@ addCoworkLog('2026-04-06 16:25', '운송장 등록 완료', '허스크→이지�
 <span class="task-tag tag-auto">운영중</span>
 </div>
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;">
-<div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);margin-bottom:2px;">오늘 지출</div><div style="font-size:13px;font-weight:700;">₩13,886</div></div>
-<div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);margin-bottom:2px;">구매수</div><div style="font-size:13px;font-weight:700;">3건</div></div>
-<div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);margin-bottom:2px;">ROAS</div><div style="font-size:13px;font-weight:700;color:var(--green);">6.27x</div></div>
+<div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);margin-bottom:2px;">오늘 지출</div><div id="mc-camp-spend" style="font-size:13px;font-weight:700;">-</div></div>
+<div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);margin-bottom:2px;">구매수</div><div id="mc-camp-purchases" style="font-size:13px;font-weight:700;">-</div></div>
+<div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);margin-bottom:2px;">ROAS</div><div id="mc-camp-roas" style="font-size:13px;font-weight:700;color:var(--green);">-</div></div>
 </div>
-<div style="font-size:12px;color:var(--muted);padding-top:8px;border-top:1px solid var(--border);">어제: 지출 ₩12,476 · 구매 3건 · ROAS 5.8x · CTR 4.60%</div>
+<div style="font-size:12px;color:var(--muted);padding-top:8px;border-top:1px solid var(--border);"><span id='mc-camp-info'>-</span></div>
 </div>
 </div>
 <div class="section-title">📊 예산 조정 이력</div>
@@ -525,7 +533,7 @@ addCoworkLog('2026-04-06 16:25', '운송장 등록 완료', '허스크→이지�
 <div class="section-title">🔮 예산별 가상 시나리오 (월 30일 기준)</div>
 <div class="card">
 <div style="font-size:11px;color:var(--muted);margin-bottom:12px;">최근 7일 ROAS 6.27 기준 (낙관) / 14일 ROAS 2.71 기준 (보수)</div>
-<div style="display:flex;flex-direction:column;gap:8px;">
+<div id="scenario-container" style="display:flex;flex-direction:column;gap:8px;">
 
   <div style="padding:10px;background:var(--bg);border-radius:8px;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
@@ -685,6 +693,128 @@ bd.innerHTML=bh;ld.innerHTML=bl;
 })();
 addCoworkLog('2026-04-06 16:25', '운송장 등록 완료', '허스크→이지어드민 4건 처리완료 (이소민/이가은/서희진/김나영, 한진택배)', 'success');
 </script>
+
+<script>
+/* DYNAMIC META UI v2 */
+(function(){
+  function addCoworkLog(a,b,c,d){
+    var log=document.getElementById('cowork-log');if(!log)return;
+    var ts,msg,type;
+    if(typeof c!=='undefined'){
+      ts=a.substring(0,10);
+      msg=(b?'<strong>'+b+'</strong>':'')+(c?' \u2014 '+c:'');
+      type=d||'success';
+    } else { ts=new Date().toISOString().substring(0,10); msg=a; type=b||''; }
+    var item=document.createElement('div');item.className='log-item';
+    item.innerHTML='<div class="log-time">'+ts+'</div><div class="log-text '+type+'">'+msg+'</div>';
+    if(log.children[0]&&log.children[0].querySelector('.log-time')
+      &&log.children[0].querySelector('.log-time').textContent==='\ub300\uae30\uc911')log.innerHTML='';
+    log.insertBefore(item,log.firstChild);
+  }
+  window.addCoworkLog=addCoworkLog;
+
+  function renderMetaChart(){
+    var bd=document.getElementById('meta-bars'),ld=document.getElementById('meta-labels');
+    if(!bd||!ld)return;
+    bd.innerHTML='';ld.innerHTML='';
+    var src=typeof metaDailyHistory!=='undefined'?metaDailyHistory:[];
+    var data=src.slice(-7).map(function(d){return {d:d.date.substring(5).replace('-','/'),v:d.spend};});
+    if(!data.length)return;
+    var max=1;data.forEach(function(x){if(x.v>max)max=x.v;});
+    var bh='',bl='';
+    data.forEach(function(x){
+      var h=Math.round((x.v/max)*72)+4;
+      bh+='<div style="flex:1;background:#60A5FA;height:'+h+'px;border-radius:3px 3px 0 0;min-width:0;" title="'+x.d+': \u20a9'+x.v.toLocaleString()+'"></div>';
+      bl+='<span>'+x.d+'</span>';
+    });
+    bd.innerHTML=bh;ld.innerHTML=bl;
+  }
+  window.renderMetaChart=renderMetaChart;
+
+  if(typeof metaToday==='undefined')return;
+  var d=metaToday;
+  var fmt=function(n){return '\u20a9'+parseInt(n).toLocaleString('ko-KR');};
+  var el=function(id){return document.getElementById(id);};
+  var mmdd=d.date.substring(5).replace('-','/');
+  var sat=String.fromCodePoint(128225);
+
+  /* Mini card (today tab) */
+  if(el('today-meta-date'))el('today-meta-date').textContent=sat+' '+mmdd+' \uae30\uc900';
+  if(el('today-meta-spend'))el('today-meta-spend').textContent=fmt(d.spend);
+  if(el('today-meta-roas'))el('today-meta-roas').textContent=d.roas+'x';
+  if(el('today-meta-purchases'))el('today-meta-purchases').textContent=d.purchases+'\uac74';
+  /* Fallback: find blue gradient card */
+  if(!el('today-meta-date')){
+    var cards=document.querySelectorAll('.card');
+    for(var ci=0;ci<cards.length;ci++){
+      if((cards[ci].getAttribute('style')||'').indexOf('1e3c6e')>-1){
+        var row=cards[ci].children[0];
+        if(row&&row.children[0])row.children[0].textContent=sat+' '+mmdd+' \uae30\uc900';
+        var grid=cards[ci].children[1];
+        if(grid){
+          if(grid.children[0]&&grid.children[0].children[1])grid.children[0].children[1].textContent=fmt(d.spend);
+          if(grid.children[1]&&grid.children[1].children[1])grid.children[1].children[1].textContent=d.roas+'x';
+          if(grid.children[2]&&grid.children[2].children[1])grid.children[2].children[1].textContent=d.purchases+'\uac74';
+        }
+        break;
+      }
+    }
+  }
+
+  /* Section titles */
+  if(el('meta-today-title'))el('meta-today-title').textContent='\uc624\ub298 \uc131\uacfc ('+mmdd+')';
+  if(el('meta-7d-title')&&typeof meta7day!=='undefined')
+    el('meta-7d-title').textContent='\ucd5c\uadfc 7\uc77c \uc9d1\uacc4 ('+(meta7day.period||'')+')';
+
+  /* Today stat subs */
+  if(el('mc-spend-sub'))el('mc-spend-sub').textContent='\uc5b4\uc81c '+fmt(d.spend);
+  if(el('mc-purchases-sub'))el('mc-purchases-sub').textContent='\uc5b4\uc81c '+d.purchases+'\uac74';
+  if(el('mc-roas-sub'))el('mc-roas-sub').textContent='\ub9e4\ucd9c '+fmt(d.revenue||Math.round(d.roas*d.spend));
+  if(el('mc-ctr'))el('mc-ctr').textContent=d.ctr.toFixed(2)+'%';
+  if(el('mc-cpc-sub'))el('mc-cpc-sub').textContent='CPC '+fmt(d.cpc);
+  if(el('mc-reach-sub'))el('mc-reach-sub').textContent='\ub3c4\ub2ec '+parseInt(d.reach).toLocaleString('ko-KR')+'\uba85';
+  if(el('mc-clicks'))el('mc-clicks').textContent=d.clicks;
+  if(el('mc-cart-sub'))el('mc-cart-sub').textContent='\uc7a5\ubc14\uad6c\ub2c8 '+d.addToCart+'\uac74';
+
+  /* 7d extra */
+  if(typeof meta7day!=='undefined'){
+    if(el('mc-7d-clicks'))el('mc-7d-clicks').textContent=meta7day.clicks||'-';
+    if(el('mc-7d-ctr'))el('mc-7d-ctr').textContent=meta7day.ctr?meta7day.ctr.toFixed(2)+'%':'-';
+    if(el('mc-7d-cpc'))el('mc-7d-cpc').textContent=meta7day.cpc?fmt(meta7day.cpc):'-';
+  }
+
+  /* Campaign card */
+  if(el('mc-camp-spend'))el('mc-camp-spend').textContent=fmt(d.spend);
+  if(el('mc-camp-purchases'))el('mc-camp-purchases').textContent=d.purchases+'\uac74';
+  if(el('mc-camp-roas'))el('mc-camp-roas').textContent=d.roas+'x';
+  if(el('mc-camp-info')&&typeof meta7day!=='undefined')
+    el('mc-camp-info').textContent='7\uc77c \ud3c9\uade0: \uc9c0\ucd9c '+fmt(Math.round(meta7day.spend/7))+' \u00b7 \uad6c\ub9e4 '+(meta7day.purchases/7).toFixed(1)+'\uac74 \u00b7 ROAS '+meta7day.roas+'x';
+
+  /* Budget scenario section - dynamic recalc */
+  var sc=el('scenario-container');
+  if(sc&&typeof meta7day!=='undefined'){
+    var rOpt=meta7day.roas,rPes=meta7day.roas*0.6,cost=25000,budgets=[
+      {label:'\uD83D\uDCCC \ud604\uc7ac',daily:Math.round(d.cpc*d.clicks/d.purchases||12100),color:'var(--blue)'},
+      {label:'\uD83D\uDCC8 \u20a915,000/\uc77c\uc73c\ub85c \uc99d\uc561',daily:15000,color:'var(--green)'},
+      {label:'\uD83C\uDFD4 \uc6d4 \uc0c1\ud55c \ud480 \ud65c\uc6a9',daily:16667,color:'#F59E0B'},
+      {label:'\uD83D\uDCC9 \u20a910,000/\uc77c\ub85c \uac10\uc561',daily:10000,color:'#EF4444'}
+    ];
+    sc.innerHTML=budgets.map(function(b){
+      var mo=b.daily*30,rev=mo*rOpt,profit=rev-mo-cost*30;
+      var revP=mo*rPes,profitP=revP-mo-cost*30;
+      return '<div style="padding:10px;background:var(--bg);border-radius:8px;margin-bottom:8px;">'+
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">'+
+        '<div style="font-size:12px;font-weight:700;">'+b.label+' \u20a9'+b.daily.toLocaleString('ko-KR')+'/\uc77c</div>'+
+        '<span style="font-size:10px;background:rgba(96,165,250,0.2);color:'+b.color+';padding:2px 8px;border-radius:10px;">\uc6d4 \u20a9'+mo.toLocaleString('ko-KR')+'</span>'+
+        '</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;">'+
+        '<div>\ubcf4\uc218(ROAS '+rPes.toFixed(2)+'): <b>+'+(profitP>0?'\u20a9'+Math.round(profitP).toLocaleString('ko-KR'):'\u20a9'+Math.round(profitP).toLocaleString('ko-KR'))+'</b></div>'+
+        '<div>\ub099\uad00(ROAS '+rOpt.toFixed(2)+'): <b>+\u20a9'+Math.round(profit).toLocaleString('ko-KR')+'</b></div>'+
+        '</div></div>';
+    }).join('');
+  }
+})();
+</script>
+
 </body>
 </html>
 
