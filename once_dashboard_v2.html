@@ -1,9 +1,9 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ONCE ëìë³´ë</title>
+<title>ONCE 대시보드</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#F7F5F0;--surface:#FFFFFF;--border:#E8E4DC;--text:#1A1814;--muted:#8A857A;--accent:#2D2926;--green:#2D6A4F;--green-bg:#EAF4EE;--amber:#92400E;--amber-bg:#FEF3C7;--red:#991B1B;--red-bg:#FEE2E2;--blue:#1E40AF;--blue-bg:#EFF6FF;--purple:#5B21B6;--purple-bg:#F5F3FF;}
@@ -34,7 +34,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .task-item:last-child{border-bottom:none;}
 .checkbox{width:20px;height:20px;border:2px solid var(--border);border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s;}
 .checkbox.done{background:var(--accent);border-color:var(--accent);}
-.checkbox.done::after{content:'â';color:white;font-size:12px;font-weight:700;}
+.checkbox.done::after{content:'✓';color:white;font-size:12px;font-weight:700;}
 .task-text{font-size:14px;flex:1;line-height:1.4;}
 .task-text.done{text-decoration:line-through;color:var(--muted);}
 .task-tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;}
@@ -140,18 +140,19 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 </style>
 <!-- meta-data-start -->
 <script>
-var metaToday = {date:'2026-04-09',spend:7801,roas:0,purchases:3,impressions:1708,reach:1524};
-var meta7day = {spend:89886,roas:0,purchases:0,period:'2026-04-03 ~ 2026-04-09'};
-var metaMonth = {spend:115712,roas:0,revenue:0,purchases:0,projected:241712,period:'2026-04-01 ~ 2026-04-09'};
-var metaUpdated = '2026-04-10 10:28';
-var metaDailyHistory = [{date:'2026-03-31',spend:12476,roas:5.77,purchases:3},
+var metaToday = {date:'2026-04-11',spend:5134,roas:0,purchases:0,impressions:1137,reach:1046};
+var meta7day = {spend:80412,roas:3.16,purchases:11,period:'2026-04-05 ~ 2026-04-11'};
+var metaMonth = {spend:125976,roas:3.61,revenue:454773,purchases:19,projected:239976,period:'2026-04-01 ~ 2026-04-11'};
+var metaUpdated = '2026-04-12 12:05';
+var metaDailyHistory = [
+  {date:'2026-03-31',spend:12476,roas:5.77,purchases:3},
   {date:'2026-04-01',spend:13886,roas:6.27,purchases:3},
   {date:'2026-04-02',spend:11297,roas:4.07,purchases:2},
   {date:'2026-04-03',spend:9825,roas:2.44,purchases:1},
   {date:'2026-04-04',spend:10556,roas:4.17,purchases:2},
   {date:'2026-04-05',spend:14128,roas:1.84,purchases:1},
   {date:'2026-04-06',spend:13598,roas:6.91,purchases:4}
-,{date:'2026-04-07',spend:20611,roas:1.07,purchases:1},{date:'2026-04-08',spend:13999,roas:1.57,purchases:1},{date:'2026-04-09',spend:7801,roas:0,purchases:3}];
+,{date:'2026-04-07',spend:20611,roas:1.07,purchases:1},{date:'2026-04-08',spend:13999,roas:1.57,purchases:1},{date:'2026-04-11',spend:5134,roas:0,purchases:0}];
 </script>
 <!-- meta-data-end -->
 <style>
@@ -161,83 +162,83 @@ var metaDailyHistory = [{date:'2026-03-31',spend:12476,roas:5.77,purchases:3},
 <body>
 <div class="header">
   <div class="header-row">
-    <h1>ONCE ëìë³´ë</h1>
-    <div style="display:flex;align-items:center;"><span class="live-dot"></span><span class="live-label">ë¼ì´ë¸</span></div>
+    <h1>ONCE 대시보드</h1>
+    <div style="display:flex;align-items:center;"><span class="live-dot"></span><span class="live-label">라이브</span></div>
   </div>
   <div class="header-date" id="current-date"></div>
 </div>
 <div class="tab-bar">
-  <div class="tab active" onclick="switchTab('today')">ì¤ë í  ì¼</div>
-  <div class="tab" onclick="switchTab('brands')">ë¸ëë</div>
-  <div class="tab" onclick="switchTab('meta')">ð ë©í</div>
-  <div class="tab" onclick="switchTab('automation')">ìëí íí©</div>
-  <div class="tab" onclick="switchTab('computers')">ì»´í¨í°</div>
-  <div class="tab" onclick="switchTab('flow')">íë¡ì°</div>
-  <div class="tab" onclick="switchTab('profit')">ð° ììµ</div>
+  <div class="tab active" onclick="switchTab('today')">오늘 할 일</div>
+  <div class="tab" onclick="switchTab('brands')">브랜드</div>
+  <div class="tab" onclick="switchTab('meta')">📊 메타</div>
+  <div class="tab" onclick="switchTab('automation')">자동화 현황</div>
+  <div class="tab" onclick="switchTab('computers')">컴퓨터</div>
+  <div class="tab" onclick="switchTab('flow')">플로우</div>
+  <div class="tab" onclick="switchTab('profit')">💰 수익</div>
 </div>
 <div class="page active" id="page-today">
   <div class="cal-wrap" style="margin-top:4px;">
     <div class="cal-header" onclick="toggleCal()">
-      <div class="cal-title" id="cal-header-text">ð 2026ë 4ì</div>
-      <span class="cal-arrow" id="cal-arrow">â¼</span>
+      <div class="cal-title" id="cal-header-text">📅 2026년 4월</div>
+      <span class="cal-arrow" id="cal-arrow">▼</span>
     </div>
     <div class="cal-body" id="cal-body">
       <div class="cal-nav">
-        <button class="cal-nav-btn" onclick="changeMonth(-1)">â</button>
+        <button class="cal-nav-btn" onclick="changeMonth(-1)">◀</button>
         <span class="cal-month" id="cal-month-label"></span>
-        <button class="cal-nav-btn" onclick="changeMonth(1)">â¶</button>
+        <button class="cal-nav-btn" onclick="changeMonth(1)">▶</button>
       </div>
       <div class="cal-grid" id="cal-grid"></div>
       <div class="cal-log" id="cal-log">
         <div class="cal-log-date" id="cal-log-date"></div>
-        <div id="cal-log-items"><div class="cal-log-empty">ë ì§ë¥¼ ì ííë©´ ê¸°ë¡ì´ íìë©ëë¤</div></div>
+        <div id="cal-log-items"><div class="cal-log-empty">날짜를 선택하면 기록이 표시됩니다</div></div>
         <div class="cal-add-row" id="cal-add-row" style="display:none;">
-          <input class="cal-add-input" id="cal-note-input" placeholder="ì¤ë í ì¼ ìë ¥..." onkeydown="if(event.key==='Enter')addCalNote()"/>
-          <button class="cal-add-btn" onclick="addCalNote()">ì¶ê°</button>
+          <input class="cal-add-input" id="cal-note-input" placeholder="오늘 한 일 입력..." onkeydown="if(event.key==='Enter')addCalNote()"/>
+          <button class="cal-add-btn" onclick="addCalNote()">추가</button>
         </div>
       </div>
     </div>
   </div>
   <div class="stat-grid">
-    <div class="stat-card"><div class="stat-label">ìë£</div><div class="stat-value" id="done-count">0</div><div class="stat-sub">ì¤ë</div></div>
-    <div class="stat-card"><div class="stat-label">ë¨ì ì¼</div><div class="stat-value" id="left-count">0</div><div class="stat-sub">í  ì¼</div></div>
+    <div class="stat-card"><div class="stat-label">완료</div><div class="stat-value" id="done-count">0</div><div class="stat-sub">오늘</div></div>
+    <div class="stat-card"><div class="stat-label">남은 일</div><div class="stat-value" id="left-count">0</div><div class="stat-sub">할 일</div></div>
   </div>
-  <div class="section-title">ð ë©í ê´ê³  ì¤ë íí©</div>
+  <div class="section-title">📊 메타 광고 오늘 현황</div>
   <div class="card" onclick="switchTab('meta')" style="cursor:pointer;background:linear-gradient(135deg,#1e3c6e 0%,#2952a3 100%);border:none;color:white;margin-bottom:8px;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
       <div id="today-meta-date" style="font-size:11px;opacity:0.65;">-</div>
-      <div style="font-size:11px;opacity:0.65;">ìì¸í ë³´ê¸° â</div>
+      <div style="font-size:11px;opacity:0.65;">자세히 보기 →</div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
-      <div style="text-align:center;"><div style="font-size:10px;opacity:0.65;margin-bottom:3px;">ê´ê³  ì§ì¶</div><div id="today-meta-spend" style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;">-</div></div>
+      <div style="text-align:center;"><div style="font-size:10px;opacity:0.65;margin-bottom:3px;">광고 지출</div><div id="today-meta-spend" style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;">-</div></div>
       <div style="text-align:center;"><div style="font-size:10px;opacity:0.65;margin-bottom:3px;">ROAS</div><div id="today-meta-roas" style="font-size:16px;font-weight:700;color:#93C5FD;">-</div></div>
-      <div style="text-align:center;"><div style="font-size:10px;opacity:0.65;margin-bottom:3px;">êµ¬ë§¤</div><div id="today-meta-purchases" style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;">-</div></div>
+      <div style="text-align:center;"><div style="font-size:10px;opacity:0.65;margin-bottom:3px;">구매</div><div id="today-meta-purchases" style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;">-</div></div>
     </div>
   </div>
-    <div class="section-title">ð ë©í ê´ê³  ë¶ì (ì¤ë ì¡ì)</div><div class="card" style="border-left:3px solid #4ADE80;margin-bottom:10px;"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;"><div style="background:var(--green-bg);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--green);font-weight:700;margin-bottom:2px;">ì´ì  ROAS</div><div style="font-size:18px;font-weight:700;color:var(--green);font-family:DM Mono,monospace;">6.91x ð</div><div style="font-size:10px;color:var(--muted);">ëª©í 3.0x ëë¹ +130%</div></div><div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:2px;">7ì¼ ROAS</div><div style="font-size:18px;font-weight:700;font-family:DM Mono,monospace;">4.58x</div><div style="font-size:10px;color:var(--muted);">3/31~4/6 íê· </div></div></div><div style="background:var(--green-bg);border-radius:8px;padding:10px;margin-bottom:8px;"><div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:4px;">â ìì° íì : íì¬ ì ì§ or ì¦ì¡ ê²í </div><div style="font-size:11px;line-height:1.6;">ì´ì  ROAS 6.91x â ê·ì¹ì 5.0âì´ë©´ ìë¦¼ í ì¦ì¡ ê²í <br>íì¬ ì¼ìì° â©16,317 Â· ììí â©500,000 (ìì¬ ì½ â©420,000)<br>ì¤ë(04/07) íì¬: ì§ì¶ â©6,268 Â· êµ¬ë§¤ 0ê±´ (ì¤ì  ê¸°ì¤)</div></div><div style="background:var(--amber-bg);border-radius:8px;padding:10px;margin-bottom:8px;"><div style="font-size:12px;font-weight:700;color:var(--amber);margin-bottom:4px;">â ï¸ í ìì¼(04/05) ROAS 1.84x ìµì  ì£¼ì</div><div style="font-size:11px;line-height:1.6;">í ìì¼ 7ì¼ ì¤ ìµì  Â· ì¼ìì¼(04/06) 6.91x ìµê³ <br>ìì¼ë³ ìì° ì¤ì¼ì¤ë§ ì¤ì  ê²í  ê¶ì¥</div></div><div style="font-size:11px;color:var(--muted);">ð¡ íì¬ â©16,317ì´ ì´ë¯¸ ììí(â©500K) ê·¼ì . ì¦ì¡ ì â©16,667 ìµë.</div></div><div class="section-title">ONCE Studio ì¤ì  ë£¨í´ (9:30 ì )</div>
+    <div class="section-title">📈 메타 광고 분석 (오늘 액션)</div><div class="card" style="border-left:3px solid #4ADE80;margin-bottom:10px;"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;"><div style="background:var(--green-bg);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--green);font-weight:700;margin-bottom:2px;">어제 ROAS</div><div style="font-size:18px;font-weight:700;color:var(--green);font-family:DM Mono,monospace;">6.91x 🚀</div><div style="font-size:10px;color:var(--muted);">목표 3.0x 대비 +130%</div></div><div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:2px;">7일 ROAS</div><div style="font-size:18px;font-weight:700;font-family:DM Mono,monospace;">4.58x</div><div style="font-size:10px;color:var(--muted);">3/31~4/6 평균</div></div></div><div style="background:var(--green-bg);border-radius:8px;padding:10px;margin-bottom:8px;"><div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:4px;">✅ 예산 판정: 현재 유지 or 증액 검토</div><div style="font-size:11px;line-height:1.6;">어제 ROAS 6.91x → 규칙상 5.0↑이면 알림 후 증액 검토<br>현재 일예산 ₩16,317 · 월상한 ₩500,000 (잔여 약 ₩420,000)<br>오늘(04/07) 현재: 지출 ₩6,268 · 구매 0건 (오전 기준)</div></div><div style="background:var(--amber-bg);border-radius:8px;padding:10px;margin-bottom:8px;"><div style="font-size:12px;font-weight:700;color:var(--amber);margin-bottom:4px;">⚠️ 토요일(04/05) ROAS 1.84x 최저 주의</div><div style="font-size:11px;line-height:1.6;">토요일 7일 중 최저 · 일요일(04/06) 6.91x 최고<br>요일별 예산 스케줄링 설정 검토 권장</div></div><div style="font-size:11px;color:var(--muted);">💡 현재 ₩16,317이 이미 월상한(₩500K) 근접. 증액 시 ₩16,667 최대.</div></div><div class="section-title">ONCE Studio 오전 루틴 (9:30 전)</div>
   <div class="card">
-    <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">ì´ì§ì¤í  ì£¼ë¬¸ ìì§ íì¸</div><span class="task-tag tag-auto">ìë</span></div>
-    <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">ë°ì£¼ ë§¤ì¹­ íì¸</div><span class="task-tag tag-auto">ìë</span></div>
-    <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">íì¤í¬ ë°ì£¼ ìë£ íì¸</div><span class="task-tag tag-check">íì¸</span></div>
-    <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">ë¬¸ì íì¸ ë° ì²ë¦¬</div><span class="task-tag tag-manual">ì§ì </span></div>
+    <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">이지오토 주문 수집 확인</div><span class="task-tag tag-auto">자동</span></div>
+    <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">발주 매칭 확인</div><span class="task-tag tag-auto">자동</span></div>
+    <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">허스크 발주 완료 확인</div><span class="task-tag tag-check">확인</span></div>
+    <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">문의 확인 및 처리</div><span class="task-tag tag-manual">직접</span></div>
   </div>
-  <div class="section-title">ë¸ëëë³ ì¤ë í  ì¼</div>
+  <div class="section-title">브랜드별 오늘 할 일</div>
   <div class="card" style="margin-bottom:8px;">
     <div style="font-size:13px;font-weight:700;color:var(--muted);margin-bottom:10px;">ONCE Studio</div>
-    <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">ì ê· ëìì¸ ìì±</div><span class="task-tag tag-manual">ì§ì </span></div>
-    <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">ëª©ì ì´ë¯¸ì§ íì¸</div><span class="task-tag tag-check">íì¸</span></div>
-    <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">ë©í ê´ê³  ë¦¬í¬í¸ íì¸</div><span class="task-tag tag-auto">ìë</span></div>
+    <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">신규 디자인 생성</div><span class="task-tag tag-manual">직접</span></div>
+    <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">목업 이미지 확인</div><span class="task-tag tag-check">확인</span></div>
+    <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">메타 광고 리포트 확인</div><span class="task-tag tag-auto">자동</span></div>
   </div>
   <div class="card" style="margin-bottom:8px;">
     <div style="font-size:13px;font-weight:700;color:var(--muted);margin-bottom:10px;">enblush</div>
-    <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">ìëí ì°ê²° ìì</div><span class="task-tag tag-manual">ì§ì </span></div>
-    <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">ì¸ì¤í ì¸í íì¸</div><span class="task-tag tag-check">íì¸</span></div>
+    <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">자동화 연결 작업</div><span class="task-tag tag-manual">직접</span></div>
+    <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">인스타 세팅 확인</div><span class="task-tag tag-check">확인</span></div>
   </div>
   <div class="card" style="margin-bottom:8px;">
     <div style="font-size:13px;font-weight:700;color:var(--muted);margin-bottom:10px;">EFFORTLSS</div>
-    <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">ìí ë±ë¡ ì§í</div><span class="task-tag tag-manual">ì§ì </span></div>
+    <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">상품 등록 진행</div><span class="task-tag tag-manual">직접</span></div>
   </div>
-  <div class="section-title">ì¶ê° í  ì¼</div>
+  <div class="section-title">추가 할 일</div>
   <div class="card" id="extra-tasks"></div>
 </div>
 <div class="page" id="page-brands">
@@ -245,145 +246,148 @@ var metaDailyHistory = [{date:'2026-03-31',spend:12476,roas:5.77,purchases:3},
     <div class="brand-pill active" onclick="switchBrand(0)">ONCE Studio</div>
     <div class="brand-pill" onclick="switchBrand(1)">enblush</div>
     <div class="brand-pill" onclick="switchBrand(2)">EFFORTLSS</div>
-    <div class="brand-pill" onclick="switchBrand(3)">ë¸ëë 4</div>
-    <div class="brand-pill" onclick="switchBrand(4)">ë¸ëë 5</div>
-    <div class="brand-pill" onclick="switchBrand(5)">ë¸ëë 6</div>
-    <div class="brand-pill" onclick="switchBrand(6)">ë¸ëë 7</div>
-    <div class="brand-pill" onclick="switchBrand(7)">ë¸ëë 8</div>
-    <div class="brand-pill" onclick="switchBrand(8)">ë¸ëë 9</div>
-    <div class="brand-pill" onclick="switchBrand(9)">ë¸ëë 10</div>
+    <div class="brand-pill" onclick="switchBrand(3)">브랜드 4</div>
+    <div class="brand-pill" onclick="switchBrand(4)">브랜드 5</div>
+    <div class="brand-pill" onclick="switchBrand(5)">브랜드 6</div>
+    <div class="brand-pill" onclick="switchBrand(6)">브랜드 7</div>
+    <div class="brand-pill" onclick="switchBrand(7)">브랜드 8</div>
+    <div class="brand-pill" onclick="switchBrand(8)">브랜드 9</div>
+    <div class="brand-pill" onclick="switchBrand(9)">브랜드 10</div>
   </div>
   <div class="brand-page active" id="brand-0">
     <div class="brand-hero">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div class="brand-hero-name">ONCE Studio</div><div class="brand-hero-mood">ë©ì¸ ë¸ëë</div></div><span class="brand-status-pill status-active">ì´ìì¤</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div class="brand-hero-name">ONCE Studio</div><div class="brand-hero-mood">메인 브랜드</div></div><span class="brand-status-pill status-active">운영중</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
-      <div class="progress-label"><span>ì§íë</span><span>80%</span></div>
+      <div class="progress-label"><span>진행도</span><span>80%</span></div>
     </div>
     <div class="step-grid">
-      <div class="step-box done"><div class="step-icon">ð¨</div><div class="step-name">ëìì¸</div></div>
-      <div class="step-box done"><div class="step-icon">ð</div><div class="step-name">ë±ë¡</div></div>
-      <div class="step-box done"><div class="step-icon">âï¸</div><div class="step-name">ìëí</div></div>
-      <div class="step-box done"><div class="step-icon">ð¸</div><div class="step-name">ì¸ì¤í</div></div>
-      <div class="step-box current"><div class="step-icon">ð¢</div><div class="step-name">ê´ê³ </div></div>
+      <div class="step-box done"><div class="step-icon">🎨</div><div class="step-name">디자인</div></div>
+      <div class="step-box done"><div class="step-icon">🛍</div><div class="step-name">등록</div></div>
+      <div class="step-box done"><div class="step-icon">⚙️</div><div class="step-name">자동화</div></div>
+      <div class="step-box done"><div class="step-icon">📸</div><div class="step-name">인스타</div></div>
+      <div class="step-box current"><div class="step-icon">📢</div><div class="step-name">광고</div></div>
     </div>
-    <div class="section-title">ì´ë² ì£¼ í  ì¼</div>
+    <div class="section-title">이번 주 할 일</div>
     <div class="card">
-      <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">ë´ ì ì ëìì¸ ê¸°í</div><span class="task-tag tag-manual">ì§ì </span></div>
-      <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">ë©í ê´ê³  ì¸í</div><span class="task-tag tag-manual">ì§ì </span></div>
-      <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">ë¦´ì¤ ìë¡ë</div><span class="task-tag tag-auto">ìë</span></div>
+      <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">봄 신상 디자인 기획</div><span class="task-tag tag-manual">직접</span></div>
+      <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">메타 광고 세팅</div><span class="task-tag tag-manual">직접</span></div>
+      <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">릴스 업로드</div><span class="task-tag tag-auto">자동</span></div>
     </div>
-    <div class="section-title">íë«í¼</div>
+    <div class="section-title">플랫폼</div>
     <div class="card">
-      <div class="task-item"><div class="task-text">ì¤ë§í¸ì¤í ì´</div><span class="task-tag tag-auto">ì°ê²°ë¨</span></div>
-      <div class="task-item"><div class="task-text">Cafe24</div><span class="task-tag tag-auto">ì°ê²°ë¨</span></div>
-      <div class="task-item"><div class="task-text">ë¬´ì ì¬</div><span class="task-tag tag-manual">ì°ê²° íì</span></div>
+      <div class="task-item"><div class="task-text">스마트스토어</div><span class="task-tag tag-auto">연결됨</span></div>
+      <div class="task-item"><div class="task-text">Cafe24</div><span class="task-tag tag-auto">연결됨</span></div>
+      <div class="task-item"><div class="task-text">무신사</div><span class="task-tag tag-manual">연결 필요</span></div>
     </div>
   </div>
   <div class="brand-page" id="brand-1">
     <div class="brand-hero" style="background:#8B5CF6;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div class="brand-hero-name">enblush</div><div class="brand-hero-mood">Blush your everyday Â· ê·¸ë¼ëì¸í¸ ê°ì±</div></div><span class="brand-status-pill status-building">êµ¬ì¶ì¤</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div class="brand-hero-name">enblush</div><div class="brand-hero-mood">Blush your everyday · 그라디언트 감성</div></div><span class="brand-status-pill status-building">구축중</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div>
-      <div class="progress-label"><span>ì§íë</span><span>45%</span></div>
+      <div class="progress-label"><span>진행도</span><span>45%</span></div>
     </div>
     <div class="step-grid">
-      <div class="step-box done"><div class="step-icon">ð¨</div><div class="step-name">ëìì¸</div></div>
-      <div class="step-box done"><div class="step-icon">ð</div><div class="step-name">ë±ë¡</div></div>
-      <div class="step-box current"><div class="step-icon">âï¸</div><div class="step-name">ìëí</div></div>
-      <div class="step-box"><div class="step-icon">ð¸</div><div class="step-name">ì¸ì¤í</div></div>
-      <div class="step-box"><div class="step-icon">ð¢</div><div class="step-name">ê´ê³ </div></div>
+      <div class="step-box done"><div class="step-icon">🎨</div><div class="step-name">디자인</div></div>
+      <div class="step-box done"><div class="step-icon">🛍</div><div class="step-name">등록</div></div>
+      <div class="step-box current"><div class="step-icon">⚙️</div><div class="step-name">자동화</div></div>
+      <div class="step-box"><div class="step-icon">📸</div><div class="step-name">인스타</div></div>
+      <div class="step-box"><div class="step-icon">📢</div><div class="step-name">광고</div></div>
     </div>
-    <div class="section-title">ì§ê¸ í´ì¼ í  ê²</div>
+    <div class="section-title">지금 해야 할 것</div>
     <div class="card">
-      <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">Cowork ìëí ì°ê²°</div><span class="task-tag tag-urgent">ê¸´ê¸</span></div>
-      <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">ì¸ì¤í ê³ì  ì¸í</div><span class="task-tag tag-manual">ì§ì </span></div>
+      <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">Cowork 자동화 연결</div><span class="task-tag tag-urgent">긴급</span></div>
+      <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">인스타 계정 세팅</div><span class="task-tag tag-manual">직접</span></div>
     </div>
   </div>
   <div class="brand-page" id="brand-2">
     <div class="brand-hero" style="background:#374151;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div class="brand-hero-name">EFFORTLSS</div><div class="brand-hero-mood">íë ì¹ ë¬´ì¬ ê°ì±</div></div><span class="brand-status-pill status-building">êµ¬ì¶ì¤</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div class="brand-hero-name">EFFORTLSS</div><div class="brand-hero-mood">프렌치 무심 감성</div></div><span class="brand-status-pill status-building">구축중</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div>
-      <div class="progress-label"><span>ì§íë</span><span>25%</span></div>
+      <div class="progress-label"><span>진행도</span><span>25%</span></div>
     </div>
     <div class="step-grid">
-      <div class="step-box done"><div class="step-icon">ð¨</div><div class="step-name">ëìì¸</div></div>
-      <div class="step-box current"><div class="step-icon">ð</div><div class="step-name">ë±ë¡</div></div>
-      <div class="step-box"><div class="step-icon">âï¸</div><div class="step-name">ìëí</div></div>
-      <div class="step-box"><div class="step-icon">ð¸</div><div class="step-name">ì¸ì¤í</div></div>
-      <div class="step-box"><div class="step-icon">ð¢</div><div class="step-name">ê´ê³ </div></div>
+      <div class="step-box done"><div class="step-icon">🎨</div><div class="step-name">디자인</div></div>
+      <div class="step-box current"><div class="step-icon">🛍</div><div class="step-name">등록</div></div>
+      <div class="step-box"><div class="step-icon">⚙️</div><div class="step-name">자동화</div></div>
+      <div class="step-box"><div class="step-icon">📸</div><div class="step-name">인스타</div></div>
+      <div class="step-box"><div class="step-icon">📢</div><div class="step-name">광고</div></div>
     </div>
-    <div class="section-title">ì§ê¸ í´ì¼ í  ê²</div>
+    <div class="section-title">지금 해야 할 것</div>
     <div class="card">
-      <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">ì¤ë§í¸ì¤í ì´ ìí ë±ë¡</div><span class="task-tag tag-manual">ì§ì </span></div>
-      <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">Cafe24 ë±ë¡</div><span class="task-tag tag-manual">ì§ì </span></div>
+      <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">스마트스토어 상품 등록</div><span class="task-tag tag-manual">직접</span></div>
+      <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">Cafe24 등록</div><span class="task-tag tag-manual">직접</span></div>
     </div>
   </div>
-  <div class="brand-page" id="brand-3"><div class="brand-hero" style="background:#6B7280;"><div class="brand-hero-name">ë¸ëë 4</div><div class="brand-hero-mood">ì´ë¦/ë¬´ë ë¯¸ì </div><div style="margin-top:10px;"><span class="brand-status-pill status-planned">ìì </span></div></div><div class="card" style="text-align:center;padding:30px;color:var(--muted);"><div style="font-size:32px;margin-bottom:10px;">+</div><div style="font-size:14px;">ë¸ëë ì ë³´ë¥¼ ì¶ê°í´ì£¼ì¸ì</div></div></div>
-  <div class="brand-page" id="brand-4"><div class="brand-hero" style="background:#6B7280;"><div class="brand-hero-name">ë¸ëë 5</div><div class="brand-hero-mood">ì´ë¦/ë¬´ë ë¯¸ì </div><div style="margin-top:10px;"><span class="brand-status-pill status-planned">ìì </span></div></div><div class="card" style="text-align:center;padding:30px;color:var(--muted);"><div style="font-size:32px;margin-bottom:10px;">+</div><div style="font-size:14px;">ë¸ëë ì ë³´ë¥¼ ì¶ê°í´ì£¼ì¸ì</div></div></div>
-  <div class="brand-page" id="brand-5"><div class="brand-hero" style="background:#6B7280;"><div class="brand-hero-name">ë¸ëë 6</div><div class="brand-hero-mood">ì´ë¦/ë¬´ë ë¯¸ì </div><div style="margin-top:10px;"><span class="brand-status-pill status-planned">ìì </span></div></div><div class="card" style="text-align:center;padding:30px;color:var(--muted);"><div style="font-size:32px;margin-bottom:10px;">+</div><div style="font-size:14px;">ë¸ëë ì ë³´ë¥¼ ì¶ê°í´ì£¼ì¸ì</div></div></div>
-  <div class="brand-page" id="brand-6"><div class="brand-hero" style="background:#6B7280;"><div class="brand-hero-name">ë¸ëë 7</div><div class="brand-hero-mood">ì´ë¦/ë¬´ë ë¯¸ì </div><div style="margin-top:10px;"><span class="brand-status-pill status-planned">ìì </span></div></div><div class="card" style="text-align:center;padding:30px;color:var(--muted);"><div style="font-size:32px;margin-bottom:10px;">+</div><div style="font-size:14px;">ë¸ëë ì ë³´ë¥¼ ì¶ê°í´ì£¼ì¸ì</div></div></div>
-  <div class="brand-page" id="brand-7"><div class="brand-hero" style="background:#6B7280;"><div class="brand-hero-name">ë¸ëë 8</div><div class="brand-hero-mood">ì´ë¦/ë¬´ë ë¯¸ì </div><div style="margin-top:10px;"><span class="brand-status-pill status-planned">ìì </span></div></div><div class="card" style="text-align:center;padding:30px;color:var(--muted);"><div style="font-size:32px;margin-bottom:10px;">+</div><div style="font-size:14px;">ë¸ëë ì ë³´ë¥¼ ì¶ê°í´ì£¼ì¸ì</div></div></div>
-  <div class="brand-page" id="brand-8"><div class="brand-hero" style="background:#6B7280;"><div class="brand-hero-name">ë¸ëë 9</div><div class="brand-hero-mood">ì´ë¦/ë¬´ë ë¯¸ì </div><div style="margin-top:10px;"><span class="brand-status-pill status-planned">ìì </span></div></div><div class="card" style="text-align:center;padding:30px;color:var(--muted);"><div style="font-size:32px;margin-bottom:10px;">+</div><div style="font-size:14px;">ë¸ëë ì ë³´ë¥¼ ì¶ê°í´ì£¼ì¸ì</div></div></div>
-  <div class="brand-page" id="brand-9"><div class="brand-hero" style="background:#6B7280;"><div class="brand-hero-name">ë¸ëë 10</div><div class="brand-hero-mood">ì´ë¦/ë¬´ë ë¯¸ì </div><div style="margin-top:10px;"><span class="brand-status-pill status-planned">ìì </span></div></div><div class="card" style="text-align:center;padding:30px;color:var(--muted);"><div style="font-size:32px;margin-bottom:10px;">+</div><div style="font-size:14px;">ë¸ëë ì ë³´ë¥¼ ì¶ê°í´ì£¼ì¸ì</div></div></div>
+  <div class="brand-page" id="brand-3"><div class="brand-hero" style="background:#6B7280;"><div class="brand-hero-name">브랜드 4</div><div class="brand-hero-mood">이름/무드 미정</div><div style="margin-top:10px;"><span class="brand-status-pill status-planned">예정</span></div></div><div class="card" style="text-align:center;padding:30px;color:var(--muted);"><div style="font-size:32px;margin-bottom:10px;">+</div><div style="font-size:14px;">브랜드 정보를 추가해주세요</div></div></div>
+  <div class="brand-page" id="brand-4"><div class="brand-hero" style="background:#6B7280;"><div class="brand-hero-name">브랜드 5</div><div class="brand-hero-mood">이름/무드 미정</div><div style="margin-top:10px;"><span class="brand-status-pill status-planned">예정</span></div></div><div class="card" style="text-align:center;padding:30px;color:var(--muted);"><div style="font-size:32px;margin-bottom:10px;">+</div><div style="font-size:14px;">브랜드 정보를 추가해주세요</div></div></div>
+  <div class="brand-page" id="brand-5"><div class="brand-hero" style="background:#6B7280;"><div class="brand-hero-name">브랜드 6</div><div class="brand-hero-mood">이름/무드 미정</div><div style="margin-top:10px;"><span class="brand-status-pill status-planned">예정</span></div></div><div class="card" style="text-align:center;padding:30px;color:var(--muted);"><div style="font-size:32px;margin-bottom:10px;">+</div><div style="font-size:14px;">브랜드 정보를 추가해주세요</div></div></div>
+  <div class="brand-page" id="brand-6"><div class="brand-hero" style="background:#6B7280;"><div class="brand-hero-name">브랜드 7</div><div class="brand-hero-mood">이름/무드 미정</div><div style="margin-top:10px;"><span class="brand-status-pill status-planned">예정</span></div></div><div class="card" style="text-align:center;padding:30px;color:var(--muted);"><div style="font-size:32px;margin-bottom:10px;">+</div><div style="font-size:14px;">브랜드 정보를 추가해주세요</div></div></div>
+  <div class="brand-page" id="brand-7"><div class="brand-hero" style="background:#6B7280;"><div class="brand-hero-name">브랜드 8</div><div class="brand-hero-mood">이름/무드 미정</div><div style="margin-top:10px;"><span class="brand-status-pill status-planned">예정</span></div></div><div class="card" style="text-align:center;padding:30px;color:var(--muted);"><div style="font-size:32px;margin-bottom:10px;">+</div><div style="font-size:14px;">브랜드 정보를 추가해주세요</div></div></div>
+  <div class="brand-page" id="brand-8"><div class="brand-hero" style="background:#6B7280;"><div class="brand-hero-name">브랜드 9</div><div class="brand-hero-mood">이름/무드 미정</div><div style="margin-top:10px;"><span class="brand-status-pill status-planned">예정</span></div></div><div class="card" style="text-align:center;padding:30px;color:var(--muted);"><div style="font-size:32px;margin-bottom:10px;">+</div><div style="font-size:14px;">브랜드 정보를 추가해주세요</div></div></div>
+  <div class="brand-page" id="brand-9"><div class="brand-hero" style="background:#6B7280;"><div class="brand-hero-name">브랜드 10</div><div class="brand-hero-mood">이름/무드 미정</div><div style="margin-top:10px;"><span class="brand-status-pill status-planned">예정</span></div></div><div class="card" style="text-align:center;padding:30px;color:var(--muted);"><div style="font-size:32px;margin-bottom:10px;">+</div><div style="font-size:14px;">브랜드 정보를 추가해주세요</div></div></div>
 </div>
 <div class="page" id="page-automation">
-  <div class="section-title">ìëí ìí</div>
+  <div class="section-title">자동화 상태</div>
   <div class="card">
-    <div class="auto-item"><div class="auto-dot dot-on"></div><div class="auto-info"><div class="auto-name">ì´ì§ì¤í  ì£¼ë¬¸ ìì§</div><div class="auto-sub">í°ì ê·¸ë¨ Â· ìì ê°ë</div></div><span class="auto-badge badge-on">ì¤íì¤</span></div>
-    <div class="auto-item"><div class="auto-dot dot-on"></div><div class="auto-info"><div class="auto-name">AI íì¼ ëë ìì±</div><div class="auto-sub">ì¼ì± ì»´í¨í° Â· Illustrator JS</div></div><span class="auto-badge badge-on">ì¤íì¤</span></div>
-    <div class="auto-item"><div class="auto-dot dot-on"></div><div class="auto-info"><div class="auto-name">Photoshop ëª©ì ìì±</div><div class="auto-sub">ì¼ì± ì»´í¨í° Â· JS</div></div><span class="auto-badge badge-on">ì¤íì¤</span></div>
-    <div class="auto-item"><div class="auto-dot dot-on"></div><div class="auto-info"><div class="auto-name">ë°ì£¼ ë§¤ì¹­</div><div class="auto-sub">ì¼ì± ì»´í¨í° Â· Python Â· 09:00</div></div><span class="auto-badge badge-on">ì¤íì¤</span></div>
-    <div class="auto-item"><div class="auto-dot dot-pending"></div><div class="auto-info"><div class="auto-name">íì¤í¬ ë°ì£¼ ìëí</div><div class="auto-sub">í°ì ê·¸ë¨ Â· ë¸ë¼ì°ì  ìëí</div></div><span class="auto-badge badge-pending">ì°ê²° íì</span></div>
-    <div class="auto-item"><div class="auto-dot dot-pending"></div><div class="auto-info"><div class="auto-name">ë¬¸ì ìë ìëµ</div><div class="auto-sub">í°ì ê·¸ë¨ Â· 30ë¶ë§ë¤</div></div><span class="auto-badge badge-pending">ì°ê²° íì</span></div>
-    <div class="auto-item"><div class="auto-dot dot-pending"></div><div class="auto-info"><div class="auto-name">Freepik â Drive ìë ì ì¥</div><div class="auto-sub">Cowork Dispatch í¸ë¦¬ê±°</div></div><span class="auto-badge badge-pending">ì°ê²° íì</span></div>
-    <div class="auto-item"><div class="auto-dot dot-off"></div><div class="auto-info"><div class="auto-name">ì¸ì¤í ìë ìë¡ë</div><div class="auto-sub">í°ì ê·¸ë¨</div></div><span class="auto-badge badge-off">ë¯¸ì¤ì </span></div>
-    <div class="auto-item"><div class="auto-dot dot-off"></div><div class="auto-info"><div class="auto-name">ì¼íëª° ê° ìí ë°°í¬</div><div class="auto-sub">Nextengine</div></div><span class="auto-badge badge-off">ë¯¸ì¤ì </span></div>
+    <div class="auto-item"><div class="auto-dot dot-on"></div><div class="auto-info"><div class="auto-name">이지오토 주문 수집</div><div class="auto-sub">흰색 그램 · 상시 가동</div></div><span class="auto-badge badge-on">실행중</span></div>
+    <div class="auto-item"><div class="auto-dot dot-on"></div><div class="auto-info"><div class="auto-name">AI 파일 대량 생성</div><div class="auto-sub">삼성 컴퓨터 · Illustrator JS</div></div><span class="auto-badge badge-on">실행중</span></div>
+    <div class="auto-item"><div class="auto-dot dot-on"></div><div class="auto-info"><div class="auto-name">Photoshop 목업 생성</div><div class="auto-sub">삼성 컴퓨터 · JS</div></div><span class="auto-badge badge-on">실행중</span></div>
+    <div class="auto-item"><div class="auto-dot dot-on"></div><div class="auto-info"><div class="auto-name">발주 매칭</div><div class="auto-sub">삼성 컴퓨터 · Python · 09:00</div></div><span class="auto-badge badge-on">실행중</span></div>
+    <div class="auto-item"><div class="auto-dot dot-pending"></div><div class="auto-info"><div class="auto-name">허스크 발주 자동화</div><div class="auto-sub">흰색 그램 · 브라우저 자동화</div></div><span class="auto-badge badge-pending">연결 필요</span></div>
+    <div class="auto-item"><div class="auto-dot dot-pending"></div><div class="auto-info"><div class="auto-name">문의 자동 응답</div><div class="auto-sub">흰색 그램 · 30분마다</div></div><span class="auto-badge badge-pending">연결 필요</span></div>
+    <div class="auto-item"><div class="auto-dot dot-pending"></div><div class="auto-info"><div class="auto-name">Freepik → Drive 자동 저장</div><div class="auto-sub">Cowork Dispatch 트리거</div></div><span class="auto-badge badge-pending">연결 필요</span></div>
+    <div class="auto-item"><div class="auto-dot dot-off"></div><div class="auto-info"><div class="auto-name">인스타 자동 업로드</div><div class="auto-sub">흰색 그램</div></div><span class="auto-badge badge-off">미설정</span></div>
+    <div class="auto-item"><div class="auto-dot dot-off"></div><div class="auto-info"><div class="auto-name">쇼핑몰 간 상품 배포</div><div class="auto-sub">Nextengine</div></div><span class="auto-badge badge-off">미설정</span></div>
   </div>
-  <div class="section-title">Cowork ìë°ì´í¸ ë¡ê·¸</div>
+  <div class="section-title">Cowork 업데이트 로그</div>
   <div class="card" id="cowork-log"><!-- COWORK_LOG_START -->
-<div class="log-item"><div class="log-time">2026-04-06</div><div class="log-text" style="color:var(--green);">â ì¸ì ì»¨íì¤í¸ ëê¸°í ì¤í â ìí¬íë¡ì° ìë°ì´í¸ ë° ëìë³´ë ë¡ê·¸ ì£¼ì</div></div>
-<div class="log-item"><div class="log-time">2026-04-06</div><div class="log-text" style="color:var(--green);">â ì¤ì  ìëë°ì£¼ ìë£ â PDFìì 10ê±´ / ë§ë¤ì´ì¼í¨ 15ê±´ (ì´ 25ê±´)</div></div>
-<div class="log-item"><div class="log-time">2026-04-06</div><div class="log-text" style="color:var(--green);">â ë©í  ë§ì¸ëì ì§ë¬¸ ìì± â mentor_question_2026-04-06.md ìì±</div></div>
-<div class="log-item"><div class="log-time">2026-04-06</div><div class="log-text" style="color:var(--green);">â ì´ì§ì¤í  ìê°ë³ í´ë¦­ ìë ì¤í â ìëë°ì£¼ + íë§¤ì² ì¡ì¥ë±ë¡</div></div>
-<div class="log-item"><div class="log-time">2026-04-06</div><div class="log-text" style="color:var(--green);">â Daily AI ë´ì¤ ìì½ ìëí ì¸ì ìì â X/Threads AI ë´ì¤ â ì¬ì ì ì© ìëë¦¬ì¤ ë§¤ì¼ 09:00</div></div>
-<div class="log-item"><div class="log-time">2026-04-05</div><div class="log-text" style="color:var(--green);">â ì¸ì ì»¨íì¤í¸ ëê¸°í ì¤í â ìí¬íë¡ì° ìë°ì´í¸ ë° ëìë³´ë ë¡ê·¸ ì£¼ì</div></div>
-<div class="log-item"><div class="log-time">2026-04-05</div><div class="log-text" style="color:var(--green);">â ì´ì§ì¤í  ìê°ë³ í´ë¦­ ì¤í â ìëë°ì£¼ + íë§¤ì² ì¡ì¥ë±ë¡ í´ë¦­ (16:34)</div></div>
-<div class="log-item"><div class="log-time">2026-04-05</div><div class="log-text" style="color:var(--green);">â ë©í  ë§ì¸ëì ì§ë¬¸ ì¸ì ì¤í â mentor_question_2026-04-05.md ìì± ì§í ì¤</div></div>
-<div class="log-item"><div class="log-time">2026-04-03</div><div class="log-text" style="color:var(--green);">â ì¸ì ì»¨íì¤í¸ ëê¸°í ì¤í â ìí¬íë¡ì° ìë°ì´í¸ ë° ëìë³´ë ë¡ê·¸ ì£¼ì</div></div>
-<div class="log-item"><div class="log-time">2026-04-03</div><div class="log-text" style="color:var(--yellow);">â ï¸ ì¤ì  ìëë°ì£¼ STEP 2 ì¤ë¥ â EzAdmin íììì (STEP 3,4 ë¯¸ì¤í, ìë ì²ë¦¬ íì)</div></div>
-<div class="log-item"><div class="log-time">2026-04-03</div><div class="log-text" style="color:var(--green);">â ë©í  ë§ì¸ëì ì§ë¬¸ ìì± ìë£ â mentor_question_2026-04-03.md ì ì¥</div></div>
-<div class="log-item"><div class="log-time">2026-04-01</div><div class="log-text" style="color:var(--green);">â ì¸ì ì»¨íì¤í¸ ëê¸°í ì¤í â ìí¬íë¡ì° ìë°ì´í¸ ë° ëìë³´ë ë¡ê·¸ ì£¼ì</div></div>
+<div class="log-item"><div class="log-time">2026-04-10</div><div class="log-text" style="color:var(--green);">✅ 세션 컨텍스트 동기화 실행 — 워크플로우 업데이트 및 대시보드 로그 주입</div></div>
+<div class="log-item"><div class="log-time">2026-04-10</div><div class="log-text" style="color:var(--green);">✅ 대시보드 GitHub Pages push 완료 — commit 1142577edf568983c7b38eaf298a9178b1fa58cf</div></div>
+<div class="log-item"><div class="log-time">2026-04-10</div><div class="log-text" style="color:var(--green);">✅ 멘토 마인드셋 질문 생성 — 자동화의 진짜 목적: 자유인가 두려움인가 (mentor_question_2026-04-10.md)</div></div>
+<div class="log-item"><div class="log-time">2026-04-10</div><div class="log-text" style="color:var(--yellow);">⚠️ 이지오토 시간별 클릭 실패 — openpos3.exe 미실행, 수동 실행 필요</div></div>
+<div class="log-item"><div class="log-time">2026-04-10</div><div class="log-text" style="color:var(--green);">✅ Daily AI 뉴스 요약 스케줄 태스크 신규 세팅 — 매일 09:00 자동 실행</div></div>
+<div class="log-item"><div class="log-time">2026-04-06</div><div class="log-text" style="color:var(--green);">✅ 세션 컨텍스트 동기화 실행 — 워크플로우 업데이트 및 대시보드 로그 주입</div></div>
+<div class="log-item"><div class="log-time">2026-04-06</div><div class="log-text" style="color:var(--green);">✅ 오전 자동발주 완료 — PDF있음 10건 / 만들어야함 15건 (총 25건)</div></div>
+<div class="log-item"><div class="log-time">2026-04-06</div><div class="log-text" style="color:var(--green);">✅ 멘토 마인드셋 질문 생성 — mentor_question_2026-04-06.md 생성</div></div>
+<div class="log-item"><div class="log-time">2026-04-06</div><div class="log-text" style="color:var(--green);">✅ 이지오토 시간별 클릭 자동 실행 — 자동발주 + 판매처 송장등록</div></div>
+<div class="log-item"><div class="log-time">2026-04-05</div><div class="log-text" style="color:var(--green);">✅ 세션 컨텍스트 동기화 실행 — 워크플로우 업데이트 및 대시보드 로그 주입</div></div>
+<div class="log-item"><div class="log-time">2026-04-05</div><div class="log-text" style="color:var(--green);">✅ 이지오토 시간별 클릭 실행 — 자동발주 + 판매처 송장등록 클릭 (16:34)</div></div>
+<div class="log-item"><div class="log-time">2026-04-05</div><div class="log-text" style="color:var(--green);">✅ 멘토 마인드셋 질문 세션 실행 — mentor_question_2026-04-05.md 생성</div></div>
+<div class="log-item"><div class="log-time">2026-04-03</div><div class="log-text" style="color:var(--green);">✅ 세션 컨텍스트 동기화 실행 — 워크플로우 업데이트 및 대시보드 로그 주입</div></div>
+<div class="log-item"><div class="log-time">2026-04-03</div><div class="log-text" style="color:var(--yellow);">⚠️ 오전 자동발주 STEP 2 오류 — EzAdmin 타임아웃 (수동 처리 필요)</div></div>
+<div class="log-item"><div class="log-time">2026-04-03</div><div class="log-text" style="color:var(--green);">✅ 멘토 마인드셋 질문 생성 완료 → mentor_question_2026-04-03.md 저장</div></div>
 <!-- COWORK_LOG_END --></div>
-  <div class="section-title">ì¤ì¼ì¤ íì¤í¬</div>
+  <div class="section-title">스케줄 태스크</div>
   <div class="card">
-    <div class="auto-item"><div class="auto-dot" style="background:#60A5FA;"></div><div class="auto-info"><div class="auto-name">ì£¼ë¬¸ ìì§ + ë°ì£¼</div><div class="auto-sub">ë§¤ì¼ 09:00 Â· ì¼ì± ì»´í¨í°</div></div><span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);">09:00</span></div>
-    <div class="auto-item"><div class="auto-dot" style="background:#60A5FA;"></div><div class="auto-info"><div class="auto-name">ë©í ê´ê³  ë¦¬í¬í¸</div><div class="auto-sub">ë§¤ì¼ 09:00 Â· ìë ë°ì¡</div></div><span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);">09:00</span></div>
-    <div class="auto-item"><div class="auto-dot" style="background:#60A5FA;"></div><div class="auto-info"><div class="auto-name">ë¬¸ì ìì§</div><div class="auto-sub">í°ì ê·¸ë¨ Â· ë°ë³µ</div></div><span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);">30ë¶</span></div>
+    <div class="auto-item"><div class="auto-dot" style="background:#60A5FA;"></div><div class="auto-info"><div class="auto-name">주문 수집 + 발주</div><div class="auto-sub">매일 09:00 · 삼성 컴퓨터</div></div><span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);">09:00</span></div>
+    <div class="auto-item"><div class="auto-dot" style="background:#60A5FA;"></div><div class="auto-info"><div class="auto-name">메타 광고 리포트</div><div class="auto-sub">매일 09:00 · 자동 발송</div></div><span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);">09:00</span></div>
+    <div class="auto-item"><div class="auto-dot" style="background:#60A5FA;"></div><div class="auto-info"><div class="auto-name">문의 수집</div><div class="auto-sub">흰색 그램 · 반복</div></div><span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);">30분</span></div>
   </div>
 </div>
 <div class="page" id="page-computers">
-  <div class="section-title">3ë ê°ë íí©</div>
-  <div class="pc-card"><div class="pc-header"><div class="pc-name">ì¼ì± ì»´í¨í° (ìì ê°ë 1)</div><div class="pc-online"><span class="live-dot"></span> ê°ëì¤</div></div><div class="pc-tasks"><div class="pc-task-item"><div class="pc-task-dot dot-running"></div><div class="pc-task-name">Photoshop JS ëª©ì ìì±</div><div class="pc-task-time">ìì</div></div><div class="pc-task-item"><div class="pc-task-dot dot-running"></div><div class="pc-task-name">Illustrator AI íì¼ ëë ìì±</div><div class="pc-task-time">ìì</div></div><div class="pc-task-item"><div class="pc-task-dot dot-scheduled"></div><div class="pc-task-name">ì£¼ë¬¸ ìì§ + ë°ì£¼ ë§¤ì¹­</div><div class="pc-task-time">09:00</div></div><div class="pc-task-item"><div class="pc-task-dot dot-scheduled"></div><div class="pc-task-name">ë©í ê´ê³  ë¦¬í¬í¸</div><div class="pc-task-time">09:00</div></div></div></div>
-  <div class="pc-card"><div class="pc-header"><div class="pc-name">í°ì ê·¸ë¨ (ìì ê°ë 2)</div><div class="pc-online"><span class="live-dot"></span> ê°ëì¤</div></div><div class="pc-tasks"><div class="pc-task-item"><div class="pc-task-dot dot-running"></div><div class="pc-task-name">ì´ì§ì¤í  ì£¼ë¬¸ ìì§</div><div class="pc-task-time">ìì</div></div><div class="pc-task-item"><div class="pc-task-dot dot-scheduled"></div><div class="pc-task-name">ë¬¸ì ìì§</div><div class="pc-task-time">30ë¶</div></div><div class="pc-task-item"><div class="pc-task-dot dot-idle"></div><div class="pc-task-name">íì¤í¬ ë°ì£¼ ìëí</div><div class="pc-task-time">ì°ê²° íì</div></div><div class="pc-task-item"><div class="pc-task-dot dot-idle"></div><div class="pc-task-name">ì¸ì¤í ìë ìë¡ë</div><div class="pc-task-time">ë¯¸ì¤ì </div></div></div></div>
-  <div class="pc-card"><div class="pc-header" style="background:#3D3A36;"><div class="pc-name">ë©ì¸ (ë¤ê³  ë¤ëë ê²)</div><div class="pc-online">ëª¨ëí°ë§</div></div><div class="pc-tasks"><div class="pc-task-item"><div class="pc-task-dot dot-idle"></div><div class="pc-task-name">ì¼íëª° ìë¬´ ì´ê´</div><div class="pc-task-time">ì§ì </div></div><div class="pc-task-item"><div class="pc-task-dot dot-idle"></div><div class="pc-task-name">ì ê· ë°ì£¼ íì¼ ìì</div><div class="pc-task-time">ì§ì </div></div><div class="pc-task-item"><div class="pc-task-dot dot-idle"></div><div class="pc-task-name">ë¬¸ì ì§ì  íì¸</div><div class="pc-task-time">ì§ì </div></div></div></div>
+  <div class="section-title">3대 가동 현황</div>
+  <div class="pc-card"><div class="pc-header"><div class="pc-name">삼성 컴퓨터 (상시 가동 1)</div><div class="pc-online"><span class="live-dot"></span> 가동중</div></div><div class="pc-tasks"><div class="pc-task-item"><div class="pc-task-dot dot-running"></div><div class="pc-task-name">Photoshop JS 목업 생성</div><div class="pc-task-time">상시</div></div><div class="pc-task-item"><div class="pc-task-dot dot-running"></div><div class="pc-task-name">Illustrator AI 파일 대량 생성</div><div class="pc-task-time">상시</div></div><div class="pc-task-item"><div class="pc-task-dot dot-scheduled"></div><div class="pc-task-name">주문 수집 + 발주 매칭</div><div class="pc-task-time">09:00</div></div><div class="pc-task-item"><div class="pc-task-dot dot-scheduled"></div><div class="pc-task-name">메타 광고 리포트</div><div class="pc-task-time">09:00</div></div></div></div>
+  <div class="pc-card"><div class="pc-header"><div class="pc-name">흰색 그램 (상시 가동 2)</div><div class="pc-online"><span class="live-dot"></span> 가동중</div></div><div class="pc-tasks"><div class="pc-task-item"><div class="pc-task-dot dot-running"></div><div class="pc-task-name">이지오토 주문 수집</div><div class="pc-task-time">상시</div></div><div class="pc-task-item"><div class="pc-task-dot dot-scheduled"></div><div class="pc-task-name">문의 수집</div><div class="pc-task-time">30분</div></div><div class="pc-task-item"><div class="pc-task-dot dot-idle"></div><div class="pc-task-name">허스크 발주 자동화</div><div class="pc-task-time">연결 필요</div></div><div class="pc-task-item"><div class="pc-task-dot dot-idle"></div><div class="pc-task-name">인스타 자동 업로드</div><div class="pc-task-time">미설정</div></div></div></div>
+  <div class="pc-card"><div class="pc-header" style="background:#3D3A36;"><div class="pc-name">메인 (들고 다니는 것)</div><div class="pc-online">모니터링</div></div><div class="pc-tasks"><div class="pc-task-item"><div class="pc-task-dot dot-idle"></div><div class="pc-task-name">쇼핑몰 업무 총괄</div><div class="pc-task-time">직접</div></div><div class="pc-task-item"><div class="pc-task-dot dot-idle"></div><div class="pc-task-name">신규 발주 파일 작업</div><div class="pc-task-time">직접</div></div><div class="pc-task-item"><div class="pc-task-dot dot-idle"></div><div class="pc-task-name">문의 직접 확인</div><div class="pc-task-time">직접</div></div></div></div>
 </div>
 <div class="page" id="page-flow">
-  <div class="section-title">ì ì²´ ìëí íë¡ì°</div>
+  <div class="section-title">전체 자동화 플로우</div>
   <div class="card">
-    <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);align-items:flex-start;"><div style="width:24px;height:24px;border-radius:50%;background:var(--accent);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">1</div><div><div style="font-size:14px;font-weight:500;margin-bottom:3px;">ëìì¸ ìì±</div><div style="font-size:12px;color:var(--muted);">Freepik / Gemini / ëë¸ë°ëë â ë§ì§ë§ í°ì¹ â Google Drive</div></div></div>
-    <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);align-items:flex-start;"><div style="width:24px;height:24px;border-radius:50%;background:var(--accent);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">2</div><div><div style="font-size:14px;font-weight:500;margin-bottom:3px;">ëª©ì + ìí ë±ë¡</div><div style="font-size:12px;color:var(--muted);">JS ëª©ì ìì± â ì¤ë§í¸ì¤í ì´/Cafe24 ë±ë¡ â Nextengine ë°°í¬</div></div></div>
-    <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);align-items:flex-start;"><div style="width:24px;height:24px;border-radius:50%;background:var(--blue);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">3</div><div><div style="font-size:14px;font-weight:500;margin-bottom:3px;">AI íì¼ ì¬ì  ìì± (ë³ë ¬)</div><div style="font-size:12px;color:var(--muted);">Illustrator JS Â· 500ê°+ ìµì ë¯¸ë¦¬ ì ì²´ ìì± â í´ë ì ì¥</div></div></div>
-    <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);align-items:flex-start;"><div style="width:24px;height:24px;border-radius:50%;background:var(--accent);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">4</div><div><div style="font-size:14px;font-weight:500;margin-bottom:3px;">ì£¼ë¬¸ ìì§ + ë°ì£¼ ë§¤ì¹­</div><div style="font-size:12px;color:var(--muted);">ì´ì§ì¤í  â AI íì¼ ë§¤ì¹­ â PDF ë°ì£¼ íì¼ ìì±</div></div></div>
-    <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);align-items:flex-start;"><div style="width:24px;height:24px;border-radius:50%;background:var(--accent);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">5</div><div><div style="font-size:14px;font-weight:500;margin-bottom:3px;">íì¤í¬ ë°ì£¼ + ë°°ì¡</div><div style="font-size:12px;color:var(--muted);">PDF ìë¡ë â ì£¼ì ìë ìë ¥ â ë°ì£¼ ìë£ (9:30 ì )</div></div></div>
-    <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);align-items:flex-start;"><div style="width:24px;height:24px;border-radius:50%;background:var(--accent);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">6</div><div><div style="font-size:14px;font-weight:500;margin-bottom:3px;">ë¬¸ì ìë ìëµ</div><div style="font-size:12px;color:var(--muted);">30ë¶ë§ë¤ ìì§ â ìë ìëµ ì²ë¦¬</div></div></div>
-    <div style="display:flex;gap:12px;padding:10px 0;align-items:flex-start;"><div style="width:24px;height:24px;border-radius:50%;background:var(--accent);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">7</div><div><div style="font-size:14px;font-weight:500;margin-bottom:3px;">ì¸ì¤í ì´ì</div><div style="font-size:12px;color:var(--muted);">ì íì· / ë¦´ì¤ ìë ìë¡ë</div></div></div>
+    <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);align-items:flex-start;"><div style="width:24px;height:24px;border-radius:50%;background:var(--accent);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">1</div><div><div style="font-size:14px;font-weight:500;margin-bottom:3px;">디자인 생성</div><div style="font-size:12px;color:var(--muted);">Freepik / Gemini / 나노바나나 → 마지막 터치 → Google Drive</div></div></div>
+    <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);align-items:flex-start;"><div style="width:24px;height:24px;border-radius:50%;background:var(--accent);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">2</div><div><div style="font-size:14px;font-weight:500;margin-bottom:3px;">목업 + 상품 등록</div><div style="font-size:12px;color:var(--muted);">JS 목업 생성 → 스마트스토어/Cafe24 등록 → Nextengine 배포</div></div></div>
+    <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);align-items:flex-start;"><div style="width:24px;height:24px;border-radius:50%;background:var(--blue);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">3</div><div><div style="font-size:14px;font-weight:500;margin-bottom:3px;">AI 파일 사전 생성 (병렬)</div><div style="font-size:12px;color:var(--muted);">Illustrator JS · 500개+ 옵션 미리 전체 생성 → 폴더 저장</div></div></div>
+    <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);align-items:flex-start;"><div style="width:24px;height:24px;border-radius:50%;background:var(--accent);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">4</div><div><div style="font-size:14px;font-weight:500;margin-bottom:3px;">주문 수집 + 발주 매칭</div><div style="font-size:12px;color:var(--muted);">이지오토 → AI 파일 매칭 → PDF 발주 파일 생성</div></div></div>
+    <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);align-items:flex-start;"><div style="width:24px;height:24px;border-radius:50%;background:var(--accent);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">5</div><div><div style="font-size:14px;font-weight:500;margin-bottom:3px;">허스크 발주 + 배송</div><div style="font-size:12px;color:var(--muted);">PDF 업로드 → 주소 자동 입력 → 발주 완료 (9:30 전)</div></div></div>
+    <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);align-items:flex-start;"><div style="width:24px;height:24px;border-radius:50%;background:var(--accent);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">6</div><div><div style="font-size:14px;font-weight:500;margin-bottom:3px;">문의 자동 응답</div><div style="font-size:12px;color:var(--muted);">30분마다 수집 → 자동 응답 처리</div></div></div>
+    <div style="display:flex;gap:12px;padding:10px 0;align-items:flex-start;"><div style="width:24px;height:24px;border-radius:50%;background:var(--accent);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">7</div><div><div style="font-size:14px;font-weight:500;margin-bottom:3px;">인스타 운영</div><div style="font-size:12px;color:var(--muted);">제품샷 / 릴스 자동 업로드</div></div></div>
   </div>
 </div>
 <div class="page" id="page-meta">
 <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0 4px;">
-<div style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;" id="meta-ts">ð¡ ìë°ì´í¸: 2026-04-07 09:00</div>
+<div style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;" id="meta-ts">📡 업데이트: 2026-04-07 09:00</div>
 <!-- meta-daily-history-start -->
 <div style="margin-top:12px;">
-<div style="font-size:11px;opacity:0.6;margin-bottom:6px;font-weight:600;letter-spacing:0.05em;">ì¼ë³ ì±ê³¼</div>
+<div style="font-size:11px;opacity:0.6;margin-bottom:6px;font-weight:600;letter-spacing:0.05em;">일별 성과</div>
 <div id="meta-daily-table" style="font-size:11px;"></div>
 </div>
 <script>
@@ -397,240 +401,240 @@ var metaDailyHistory = [{date:'2026-03-31',spend:12476,roas:5.77,purchases:3},
       '<span style="opacity:0.7;width:36px;">'+mmdd+'</span>'+
       '<span>'+fmt(d.spend)+'</span>'+
       '<span style="color:'+roasColor+';font-weight:700;">'+d.roas+'x</span>'+
-      '<span>'+d.purchases+'ê±´</span>'+
+      '<span>'+d.purchases+'건</span>'+
     '</div>';
   }).join('');
   var el=document.getElementById('meta-daily-table');
   if(el) el.innerHTML=rows;
 })();
-addCoworkLog('2026-04-06 16:25', 'ì´ì¡ì¥ ë±ë¡ ìë£', 'íì¤í¬âì´ì§ì´ëë¯¼ 4ê±´ ì²ë¦¬ìë£ (ì´ìë¯¼/ì´ê°ì/ìí¬ì§/ê¹ëì, íì§íë°°)', 'success');
+addCoworkLog('2026-04-06 16:25', '운송장 등록 완료', '허스크→이지어드민 4건 처리완료 (이소민/이가은/서희진/김나영, 한진택배)', 'success');
 </script>
 <!-- meta-daily-history-end -->
-<a href="https://www.facebook.com/adsmanager" target="_blank" style="font-size:12px;color:var(--blue);text-decoration:none;font-weight:500;">Ads Manager â</a>
+<a href="https://www.facebook.com/adsmanager" target="_blank" style="font-size:12px;color:var(--blue);text-decoration:none;font-weight:500;">Ads Manager →</a>
 </div>
 <div class="card" style="background:var(--accent);border:none;color:white;margin-bottom:10px;">
 <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
 <div>
-<div style="font-size:11px;opacity:0.6;margin-bottom:4px;">ì´ë²ë¬ ëì  ê´ê³ ë¹</div>
-<div id="mc-month-spend" style="font-size:28px;font-weight:700;font-family:'DM Mono',monospace;">â©13,886</div>
-<div id="mc-month-projection" style="font-size:11px;opacity:0.5;margin-top:4px;">ì´ë²ë¬ ìì ì´ì§ì¶ â©364,786</div>
+<div style="font-size:11px;opacity:0.6;margin-bottom:4px;">이번달 누적 광고비</div>
+<div id="mc-month-spend" style="font-size:28px;font-weight:700;font-family:'DM Mono',monospace;">₩13,886</div>
+<div id="mc-month-projection" style="font-size:11px;opacity:0.5;margin-top:4px;">이번달 예상 총지출 ₩364,786</div>
 </div>
-<div style="background:rgba(255,255,255,0.15);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700;">ì´ìì¤</div>
+<div style="background:rgba(255,255,255,0.15);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700;">운영중</div>
 </div>
 <div style="background:rgba(0,0,0,0.2);border-radius:6px;height:4px;margin-bottom:12px;">
 <div id="mc-month-bar" style="background:white;border-radius:6px;height:4px;width:2.8%;transition:width 0.3s;"></div>
 </div>
 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
 <div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:8px;text-align:center;">
-<div style="font-size:10px;opacity:0.7;margin-bottom:3px;">ì´ë²ë¬ ROAS</div>
+<div style="font-size:10px;opacity:0.7;margin-bottom:3px;">이번달 ROAS</div>
 <div id="mc-month-roas" style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;">6.27x</div>
 </div>
 <div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:8px;text-align:center;">
-<div style="font-size:10px;opacity:0.7;margin-bottom:3px;">ì´ë²ë¬ ë§¤ì¶</div>
-<div id="mc-month-revenue" style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;">â©87,065</div>
+<div style="font-size:10px;opacity:0.7;margin-bottom:3px;">이번달 매출</div>
+<div id="mc-month-revenue" style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;">₩87,065</div>
 </div>
 <div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:8px;text-align:center;">
-<div style="font-size:10px;opacity:0.7;margin-bottom:3px;">ì´ë²ë¬ êµ¬ë§¤</div>
-<div id="mc-month-purchases" style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;">3ê±´</div>
+<div style="font-size:10px;opacity:0.7;margin-bottom:3px;">이번달 구매</div>
+<div id="mc-month-purchases" style="font-size:16px;font-weight:700;font-family:'DM Mono',monospace;">3건</div>
 </div>
 </div>
-<div id="mc-month-limit" style="font-size:10px;opacity:0.5;margin-top:8px;text-align:right;">ì ìí â©500,000</div>
+<div id="mc-month-limit" style="font-size:10px;opacity:0.5;margin-top:8px;text-align:right;">월 상한 ₩500,000</div>
 </div>
-<div class="section-title" id="meta-today-title">ì¤ë ì±ê³¼</div>
+<div class="section-title" id="meta-today-title">오늘 성과</div>
 <div class="stat-grid">
-<div class="stat-card"><div class="stat-label">ê´ê³  ì§ì¶</div><div class="stat-value" id="mc-spend" style="font-size:20px;">â©13,886</div><div class="stat-sub" id="mc-spend-sub">-</div></div>
-<div class="stat-card"><div class="stat-label">êµ¬ë§¤</div><div class="stat-value" id="mc-purchases">3ê±´</div><div class="stat-sub" id="mc-purchases-sub">-</div></div>
+<div class="stat-card"><div class="stat-label">광고 지출</div><div class="stat-value" id="mc-spend" style="font-size:20px;">₩13,886</div><div class="stat-sub" id="mc-spend-sub">-</div></div>
+<div class="stat-card"><div class="stat-label">구매</div><div class="stat-value" id="mc-purchases">3건</div><div class="stat-sub" id="mc-purchases-sub">-</div></div>
 </div>
 <div class="stat-grid">
 <div class="stat-card"><div class="stat-label">ROAS</div><div class="stat-value" id="mc-roas" style="color:var(--green);">6.27x</div><div class="stat-sub" id="mc-roas-sub">-</div></div>
 <div class="stat-card"><div class="stat-label">CTR</div><div class="stat-value" id="mc-ctr" style="font-size:20px;">-</div><div class="stat-sub" id="mc-cpc-sub">-</div></div>
 </div>
 <div class="stat-grid">
-<div class="stat-card"><div class="stat-label">ë¸ì¶ì</div><div class="stat-value" id="mc-impressions" style="font-size:20px;">2,879</div><div class="stat-sub" id="mc-reach-sub">-</div></div>
-<div class="stat-card"><div class="stat-label">í´ë¦­ì</div><div class="stat-value" id="mc-clicks">-</div><div class="stat-sub" id="mc-cart-sub">-</div></div>
+<div class="stat-card"><div class="stat-label">노출수</div><div class="stat-value" id="mc-impressions" style="font-size:20px;">2,879</div><div class="stat-sub" id="mc-reach-sub">-</div></div>
+<div class="stat-card"><div class="stat-label">클릭수</div><div class="stat-value" id="mc-clicks">-</div><div class="stat-sub" id="mc-cart-sub">-</div></div>
 </div>
-<div class="section-title">7ì¼ ì§ì¶ ì¶ì´</div>
+<div class="section-title">7일 지출 추이</div>
 <div class="card">
-<div style="font-size:11px;color:var(--muted);margin-bottom:10px;">ì¼ë³ ì§ì¶ (KRW) Â· ðµíì¸ê° Â· â¬ì¶ì ê°</div>
+<div style="font-size:11px;color:var(--muted);margin-bottom:10px;">일별 지출 (KRW) · 🔵확인값 · ⬜추정값</div>
 <div style="display:flex;align-items:flex-end;gap:3px;height:80px;" id="meta-bars"></div>
 <div style="display:flex;justify-content:space-between;margin-top:6px;padding:0 2px;font-size:9px;color:var(--muted);font-family:'DM Mono',monospace;" id="meta-labels"></div>
 </div>
-<div class="section-title" id="meta-7d-title">ìµê·¼ 7ì¼ ì§ê³</div>
+<div class="section-title" id="meta-7d-title">최근 7일 집계</div>
 <div class="card">
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
-<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">ì´ ì§ì¶</div><div id="mc-7d-spend" style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">â©72,813</div></div>
-<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">ì´ êµ¬ë§¤</div><div id="mc-7d-purchases" style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">12ê±´</div></div>
-<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">íê·  ROAS</div><div id="mc-7d-roas" style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;color:var(--green);">4.16x</div></div>
-<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">ì´ í´ë¦­</div><div id="mc-7d-clicks" style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">-</div></div>
-<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">íê·  CTR</div><div id="mc-7d-ctr" style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">-</div></div>
-<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">íê·  CPC</div><div id="mc-7d-cpc" style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">-</div></div>
+<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">총 지출</div><div id="mc-7d-spend" style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">₩72,813</div></div>
+<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">총 구매</div><div id="mc-7d-purchases" style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">12건</div></div>
+<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">평균 ROAS</div><div id="mc-7d-roas" style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;color:var(--green);">4.16x</div></div>
+<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">총 클릭</div><div id="mc-7d-clicks" style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">-</div></div>
+<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">평균 CTR</div><div id="mc-7d-ctr" style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">-</div></div>
+<div><div style="font-size:11px;color:var(--muted);margin-bottom:3px;">평균 CPC</div><div id="mc-7d-cpc" style="font-size:17px;font-weight:700;font-family:'DM Mono',monospace;">-</div></div>
 </div>
 </div>
-<div class="section-title">ì§íì¤ ìº íì¸</div>
+<div class="section-title">진행중 캠페인</div>
 <div class="card">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-<div style="font-size:13px;font-weight:600;">ì´ëë°´í°ì§+ ì¼í ìº íì¸</div>
-<span class="task-tag tag-auto">ì´ìì¤</span>
+<div style="font-size:13px;font-weight:600;">어드밴티지+ 쇼핑 캠페인</div>
+<span class="task-tag tag-auto">운영중</span>
 </div>
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;">
-<div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);margin-bottom:2px;">ì¤ë ì§ì¶</div><div id="mc-camp-spend" style="font-size:13px;font-weight:700;">-</div></div>
-<div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);margin-bottom:2px;">êµ¬ë§¤ì</div><div id="mc-camp-purchases" style="font-size:13px;font-weight:700;">-</div></div>
+<div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);margin-bottom:2px;">오늘 지출</div><div id="mc-camp-spend" style="font-size:13px;font-weight:700;">-</div></div>
+<div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);margin-bottom:2px;">구매수</div><div id="mc-camp-purchases" style="font-size:13px;font-weight:700;">-</div></div>
 <div style="background:var(--bg);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:10px;color:var(--muted);margin-bottom:2px;">ROAS</div><div id="mc-camp-roas" style="font-size:13px;font-weight:700;color:var(--green);">-</div></div>
 </div>
 <div style="font-size:12px;color:var(--muted);padding-top:8px;border-top:1px solid var(--border);"><span id='mc-camp-info'>-</span></div>
 </div>
 </div>
-<div class="section-title">ð ìì° ì¡°ì  ì´ë ¥</div>
+<div class="section-title">📊 예산 조정 이력</div>
 <div class="card" id="budget-history-card">
-<div style="font-size:11px;color:var(--muted);margin-bottom:10px;">ìë ì¡°ì  ìì¤í ëì ì´í ë³ê²½ ë´ì­</div>
+<div style="font-size:11px;color:var(--muted);margin-bottom:10px;">자동 조정 시스템 도입 이후 변경 내역</div>
 <div style="display:flex;flex-direction:column;gap:8px;" id="budget-history-list">
 <div style="display:flex;justify-content:space-between;align-items:center;padding:8px;background:var(--bg);border-radius:8px;">
-  <div><div style="font-size:12px;font-weight:600;">3/29 ì´ì </div><div style="font-size:11px;color:var(--muted);">ì´ê¸° ê³ ì ê°</div></div>
-  <div style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;">â©10,000/ì¼</div>
+  <div><div style="font-size:12px;font-weight:600;">3/29 이전</div><div style="font-size:11px;color:var(--muted);">초기 고정값</div></div>
+  <div style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;">₩10,000/일</div>
 </div>
 <div style="display:flex;justify-content:space-between;align-items:center;padding:8px;background:var(--bg);border-radius:8px;">
-  <div><div style="font-size:12px;font-weight:600;">3/31</div><div style="font-size:11px;color:var(--muted);">ROAS 5.77 â +10% ìë ì¦ì¡</div></div>
-  <div style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--green);">â©11,000/ì¼ â</div>
+  <div><div style="font-size:12px;font-weight:600;">3/31</div><div style="font-size:11px;color:var(--muted);">ROAS 5.77 → +10% 자동 증액</div></div>
+  <div style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--green);">₩11,000/일 ↑</div>
 </div>
 <div style="display:flex;justify-content:space-between;align-items:center;padding:8px;background:var(--bg);border-radius:8px;">
-  <div><div style="font-size:12px;font-weight:600;">4/1</div><div style="font-size:11px;color:var(--muted);">ROAS 6.27 â +10% ìë ì¦ì¡</div></div>
-  <div style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--green);">â©12,100/ì¼ â</div>
+  <div><div style="font-size:12px;font-weight:600;">4/1</div><div style="font-size:11px;color:var(--muted);">ROAS 6.27 → +10% 자동 증액</div></div>
+  <div style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--green);">₩12,100/일 ↑</div>
 </div>
 <div style="display:flex;justify-content:space-between;align-items:center;padding:8px;background:rgba(96,165,250,0.1);border-radius:8px;border:1px solid rgba(96,165,250,0.3);">
-  <div><div style="font-size:12px;font-weight:600;">íì¬ (4/2~)</div><div style="font-size:11px;color:var(--muted);">ì¤ë§í¸ ì¡°ì  ìì¤í ê°ëì¤</div></div>
-  <div id="budget-current" style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--blue);">â©16,317/ì¼</div>
+  <div><div style="font-size:12px;font-weight:600;">현재 (4/2~)</div><div style="font-size:11px;color:var(--muted);">스마트 조정 시스템 가동중</div></div>
+  <div id="budget-current" style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--blue);">₩16,317/일</div>
 </div>
 </div>
 </div>
 
-<div class="section-title">âï¸ ìì¤í ëì ì  vs í</div>
+<div class="section-title">⚖️ 시스템 도입 전 vs 후</div>
 <div class="card">
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
   <div style="background:var(--bg);border-radius:10px;padding:12px;">
-    <div style="font-size:10px;color:var(--muted);margin-bottom:6px;font-weight:600;">BEFORE (3/19~3/28 Â· 10ì¼)</div>
-    <div style="font-size:11px;color:var(--muted);">ì´ ê´ê³ ë¹</div>
-    <div style="font-size:15px;font-weight:700;font-family:'DM Mono',monospace;margin-bottom:4px;">â©99,713</div>
-    <div style="font-size:11px;color:var(--muted);">ì´ ë§¤ì¶</div>
-    <div style="font-size:15px;font-weight:700;font-family:'DM Mono',monospace;margin-bottom:4px;">â©240,126</div>
-    <div style="font-size:11px;color:var(--muted);">ì¼ íê·  ìì´ìµ</div>
-    <div style="font-size:15px;font-weight:700;font-family:'DM Mono',monospace;color:var(--muted);">â©14,041</div>
-    <div style="font-size:11px;margin-top:6px;color:var(--muted);">êµ¬ë§¤ 10ê±´ Â· íê·  ROAS 2.41</div>
+    <div style="font-size:10px;color:var(--muted);margin-bottom:6px;font-weight:600;">BEFORE (3/19~3/28 · 10일)</div>
+    <div style="font-size:11px;color:var(--muted);">총 광고비</div>
+    <div style="font-size:15px;font-weight:700;font-family:'DM Mono',monospace;margin-bottom:4px;">₩99,713</div>
+    <div style="font-size:11px;color:var(--muted);">총 매출</div>
+    <div style="font-size:15px;font-weight:700;font-family:'DM Mono',monospace;margin-bottom:4px;">₩240,126</div>
+    <div style="font-size:11px;color:var(--muted);">일 평균 순이익</div>
+    <div style="font-size:15px;font-weight:700;font-family:'DM Mono',monospace;color:var(--muted);">₩14,041</div>
+    <div style="font-size:11px;margin-top:6px;color:var(--muted);">구매 10건 · 평균 ROAS 2.41</div>
   </div>
   <div style="background:var(--bg);border-radius:10px;padding:12px;">
-    <div style="font-size:10px;color:var(--green);margin-bottom:6px;font-weight:600;">AFTER (3/31~4/6 Â· 7ì¼)</div>
-    <div style="font-size:11px;color:var(--muted);">ì´ ê´ê³ ë¹</div>
-    <div style="font-size:15px;font-weight:700;font-family:'DM Mono',monospace;margin-bottom:4px;">â©85,766</div>
-    <div style="font-size:11px;color:var(--muted);">ì´ ë§¤ì¶</div>
-    <div style="font-size:15px;font-weight:700;font-family:'DM Mono',monospace;margin-bottom:4px;">â©393,000</div>
-    <div style="font-size:11px;color:var(--muted);">ì¼ íê·  ìì´ìµ</div>
-    <div style="font-size:15px;font-weight:700;font-family:'DM Mono',monospace;color:var(--green);">â©43,891</div>
-    <div style="font-size:11px;margin-top:6px;color:var(--green);">êµ¬ë§¤ 16ê±´ Â· íê·  ROAS 4.58x â</div>
+    <div style="font-size:10px;color:var(--green);margin-bottom:6px;font-weight:600;">AFTER (3/31~4/6 · 7일)</div>
+    <div style="font-size:11px;color:var(--muted);">총 광고비</div>
+    <div style="font-size:15px;font-weight:700;font-family:'DM Mono',monospace;margin-bottom:4px;">₩85,766</div>
+    <div style="font-size:11px;color:var(--muted);">총 매출</div>
+    <div style="font-size:15px;font-weight:700;font-family:'DM Mono',monospace;margin-bottom:4px;">₩393,000</div>
+    <div style="font-size:11px;color:var(--muted);">일 평균 순이익</div>
+    <div style="font-size:15px;font-weight:700;font-family:'DM Mono',monospace;color:var(--green);">₩43,891</div>
+    <div style="font-size:11px;margin-top:6px;color:var(--green);">구매 16건 · 평균 ROAS 4.58x ↑</div>
   </div>
 </div>
 <div style="background:rgba(52,211,153,0.1);border-radius:8px;padding:10px;text-align:center;">
-  <div style="font-size:11px;color:var(--muted);">ì¼ íê·  ìì´ìµ ë³í</div>
-  <div style="font-size:20px;font-weight:700;color:var(--green);">+â©52,304 / ì¼ (+372%)</div>
+  <div style="font-size:11px;color:var(--muted);">일 평균 순이익 변화</div>
+  <div style="font-size:20px;font-weight:700;color:var(--green);">+₩52,304 / 일 (+372%)</div>
 </div>
 </div>
 
-<div class="section-title">ð® ìì°ë³ ê°ì ìëë¦¬ì¤ (ì 30ì¼ ê¸°ì¤)</div>
+<div class="section-title">🔮 예산별 가상 시나리오 (월 30일 기준)</div>
 <div class="card">
-<div style="font-size:11px;color:var(--muted);margin-bottom:12px;">ìµê·¼ 7ì¼ ROAS <b>4.58x</b> ê¸°ì¤ (ëê´) / ë³´ì(Ã0.6) ROAS <b>2.75x</b> ê¸°ì¤ Â· íì¬ ì¼ìì° â©16,317</div>
+<div style="font-size:11px;color:var(--muted);margin-bottom:12px;">최근 7일 ROAS <b>4.58x</b> 기준 (낙관) / 보수(×0.6) ROAS <b>2.75x</b> 기준 · 현재 일예산 ₩16,317</div>
 <div id="scenario-container" style="display:flex;flex-direction:column;gap:8px;">
 
   <div style="padding:10px;background:var(--bg);border-radius:8px;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-      <div style="font-size:12px;font-weight:700;">ð íì¬ â©12,100/ì¼</div>
-      <span style="font-size:10px;background:rgba(96,165,250,0.2);color:var(--blue);padding:2px 8px;border-radius:10px;">ì â©363,000</span>
+      <div style="font-size:12px;font-weight:700;">📌 현재 ₩12,100/일</div>
+      <span style="font-size:10px;background:rgba(96,165,250,0.2);color:var(--blue);padding:2px 8px;border-radius:10px;">월 ₩363,000</span>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;">
-      <div>ë³´ìì (ROAS 2.71): ìì´ìµ <b>+â©620,730</b></div>
-      <div>ëê´ì (ROAS 6.27): ìì´ìµ <b>+â©1,912,890</b></div>
+      <div>보수적(ROAS 2.71): 순이익 <b>+₩620,730</b></div>
+      <div>낙관적(ROAS 6.27): 순이익 <b>+₩1,912,890</b></div>
     </div>
   </div>
 
   <div style="padding:10px;background:var(--bg);border-radius:8px;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-      <div style="font-size:12px;font-weight:700;">ð â©15,000/ì¼ë¡ ì¦ì¡ ì</div>
-      <span style="font-size:10px;background:rgba(52,211,153,0.2);color:var(--green);padding:2px 8px;border-radius:10px;">ì â©450,000</span>
+      <div style="font-size:12px;font-weight:700;">📈 ₩15,000/일로 증액 시</div>
+      <span style="font-size:10px;background:rgba(52,211,153,0.2);color:var(--green);padding:2px 8px;border-radius:10px;">월 ₩450,000</span>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;">
-      <div>ë³´ìì : ìì´ìµ <b>+â©769,500</b> (+â©148,770â)</div>
-      <div>ëê´ì : ìì´ìµ <b>+â©2,371,500</b> (+â©458,610â)</div>
+      <div>보수적: 순이익 <b>+₩769,500</b> (+₩148,770↑)</div>
+      <div>낙관적: 순이익 <b>+₩2,371,500</b> (+₩458,610↑)</div>
     </div>
   </div>
 
   <div style="padding:10px;background:var(--bg);border-radius:8px;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-      <div style="font-size:12px;font-weight:700;">ð ì ìí í íì© â©16,667/ì¼</div>
-      <span style="font-size:10px;background:rgba(251,191,36,0.2);color:#F59E0B;padding:2px 8px;border-radius:10px;">ì â©500,000</span>
+      <div style="font-size:12px;font-weight:700;">🏔 월 상한 풀 활용 ₩16,667/일</div>
+      <span style="font-size:10px;background:rgba(251,191,36,0.2);color:#F59E0B;padding:2px 8px;border-radius:10px;">월 ₩500,000</span>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;">
-      <div>ë³´ìì : ìì´ìµ <b>+â©855,000</b></div>
-      <div>ëê´ì : ìì´ìµ <b>+â©2,635,050</b></div>
+      <div>보수적: 순이익 <b>+₩855,000</b></div>
+      <div>낙관적: 순이익 <b>+₩2,635,050</b></div>
     </div>
   </div>
 
   <div style="padding:10px;background:var(--bg);border-radius:8px;opacity:0.7;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-      <div style="font-size:12px;font-weight:700;">ð â©10,000/ì¼ë¡ ê°ì¡ ì</div>
-      <span style="font-size:10px;background:rgba(239,68,68,0.15);color:#EF4444;padding:2px 8px;border-radius:10px;">ì â©300,000</span>
+      <div style="font-size:12px;font-weight:700;">📉 ₩10,000/일로 감액 시</div>
+      <span style="font-size:10px;background:rgba(239,68,68,0.15);color:#EF4444;padding:2px 8px;border-radius:10px;">월 ₩300,000</span>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;">
-      <div>ë³´ìì : ìì´ìµ <b>+â©513,000</b> (-â©107,730â)</div>
-      <div>ëê´ì : ìì´ìµ <b>+â©1,581,000</b> (-â©331,890â)</div>
+      <div>보수적: 순이익 <b>+₩513,000</b> (-₩107,730↓)</div>
+      <div>낙관적: 순이익 <b>+₩1,581,000</b> (-₩331,890↓)</div>
     </div>
   </div>
 
 </div>
 <div style="margin-top:12px;padding:8px;background:rgba(251,191,36,0.1);border-radius:8px;font-size:11px;color:var(--muted);">
-  ð¡ ROASê° 3.0 ì´ì ì ì§ëë í íì¬ ìì° ì¦ì¡ì ììµì ê¸ì ì ìëë¤. ë¨, ROASê° 2.71 ìì¤ì¼ë¡ ë¨ì´ì§ë©´ ì ìí(â©500,000)ê¹ì§ ì°ë ê²ì´ ìµì ì ìë ì ììµëë¤.
+  💡 ROAS가 3.0 이상 유지되는 한 현재 예산 증액은 수익에 긍정적입니다. 단, ROAS가 2.71 수준으로 떨어지면 월 상한(₩500,000)까지 쓰는 것이 최적은 아닐 수 있습니다.
 </div>
 </div>
 
-<div class="section-title">ð¤ ìë ì¡°ì  ê·ì¹ (íì¬)</div>
+<div class="section-title">🤖 자동 조정 규칙 (현재)</div>
 <div class="card">
 <div style="display:flex;flex-direction:column;gap:6px;font-size:12px;">
   <div style="display:flex;gap:10px;align-items:center;padding:6px;background:var(--bg);border-radius:6px;">
-    <span style="font-size:16px;">ð</span><div>ROAS 5.0â â ìë¦¼ (ì¬ì©ì íë¨ í ì¦ì¡)</div>
+    <span style="font-size:16px;">🚀</span><div>ROAS 5.0↑ → 알림 (사용자 판단 후 증액)</div>
   </div>
   <div style="display:flex;gap:10px;align-items:center;padding:6px;background:var(--bg);border-radius:6px;">
-    <span style="font-size:16px;">ð</span><div>ROAS 3.0~5.0 + ì ìí ì¬ì  ìì â +10% ìë ì¦ì¡</div>
+    <span style="font-size:16px;">📈</span><div>ROAS 3.0~5.0 + 월 상한 여유 있음 → +10% 자동 증액</div>
   </div>
   <div style="display:flex;gap:10px;align-items:center;padding:6px;background:var(--bg);border-radius:6px;">
-    <span style="font-size:16px;">â</span><div>ROAS 2.7~3.0 â ì ì§ (ê°ì¡ ìì)</div>
+    <span style="font-size:16px;">✋</span><div>ROAS 2.7~3.0 → 유지 (감액 없음)</div>
   </div>
   <div style="display:flex;gap:10px;align-items:center;padding:6px;background:var(--bg);border-radius:6px;">
-    <span style="font-size:16px;">ð</span><div>ROAS 2.0~2.7 â -10% ìë ê°ì¡</div>
+    <span style="font-size:16px;">📉</span><div>ROAS 2.0~2.7 → -10% 자동 감액</div>
   </div>
   <div style="display:flex;gap:10px;align-items:center;padding:6px;background:var(--bg);border-radius:6px;">
-    <span style="font-size:16px;">ð</span><div>ROAS 2.0â â -10% ê°ì¡</div>
+    <span style="font-size:16px;">🛑</span><div>ROAS 2.0↓ → -10% 감액</div>
   </div>
   <div style="display:flex;gap:10px;align-items:center;padding:6px;background:rgba(52,211,153,0.1);border-radius:6px;">
-    <span style="font-size:16px;">â</span><div>ì£¼ 50ê±´ ë¬ì± â ìì° ì ì§ (ë¨¸ì ë¬ë ìë£)</div>
+    <span style="font-size:16px;">✅</span><div>주 50건 달성 → 예산 유지 (머신러닝 완료)</div>
   </div>
   <div style="display:flex;gap:10px;align-items:center;padding:6px;background:var(--bg);border-radius:6px;">
-    <span style="font-size:16px;">ð</span><div>ì ìí â©500,000 / ìµì ì¼ ìì° â©5,000</div>
+    <span style="font-size:16px;">🔒</span><div>월 상한 ₩500,000 / 최소 일 예산 ₩5,000</div>
   </div>
 </div>
 </div>
 <button class="fab" onclick="openModal()">+</button>
 <div class="add-modal" id="add-modal" onclick="closeModalOutside(event)">
   <div class="modal-content">
-    <button class="modal-close" onclick="closeModal()">â</button>
-    <div class="modal-title">í  ì¼ ì¶ê°</div>
-    <input class="modal-input" type="text" id="new-task-text" placeholder="í  ì¼ ìë ¥..." />
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-title">할 일 추가</div>
+    <input class="modal-input" type="text" id="new-task-text" placeholder="할 일 입력..." />
     <select class="modal-select" id="new-task-tag">
-      <option value="tag-manual">ì§ì </option>
-      <option value="tag-auto">ìë</option>
-      <option value="tag-check">íì¸</option>
-      <option value="tag-urgent">ê¸´ê¸</option>
+      <option value="tag-manual">직접</option>
+      <option value="tag-auto">자동</option>
+      <option value="tag-check">확인</option>
+      <option value="tag-urgent">긴급</option>
     </select>
-    <button class="modal-btn" onclick="addTask()">ì¶ê°íê¸°</button>
+    <button class="modal-btn" onclick="addTask()">추가하기</button>
   </div>
 </div>
 <script>
-function updateDate(){const now=new Date();const days=['ì¼','ì','í','ì','ëª©','ê¸','í '];document.getElementById('current-date').textContent=`${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')} (${days[now.getDay()]})`;}
+function updateDate(){const now=new Date();const days=['일','월','화','수','목','금','토'];document.getElementById('current-date').textContent=`${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')} (${days[now.getDay()]})`;}
 updateDate();
 function switchTab(id){const ids=['today','brands','meta','automation','computers','flow'];document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',ids[i]===id));document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+id));if(id==='meta')renderMetaChart();}
 function switchBrand(idx){document.querySelectorAll('.brand-pill').forEach((p,i)=>p.classList.toggle('active',i===idx));document.querySelectorAll('.brand-page').forEach((p,i)=>p.classList.toggle('active',i===idx));}
@@ -644,18 +648,18 @@ updateCounts();
 function openModal(){document.getElementById('add-modal').classList.add('open');}
 function closeModal(){document.getElementById('add-modal').classList.remove('open');}
 function closeModalOutside(e){if(e.target.id==='add-modal')closeModal();}
-function addTask(){const txt=document.getElementById('new-task-text').value.trim();const tag=document.getElementById('new-task-tag').value;if(!txt)return;const labels={'tag-auto':'ìë','tag-manual':'ì§ì ','tag-check':'íì¸','tag-urgent':'ê¸´ê¸'};const item=document.createElement('div');item.className='task-item';item.onclick=function(){toggleTask(this);};item.innerHTML=`<div class="checkbox"></div><div class="task-text">${txt}</div><span class="task-tag ${tag}">${labels[tag]}</span>`;document.getElementById('extra-tasks').appendChild(item);document.getElementById('new-task-text').value='';closeModal();updateCounts();}
+function addTask(){const txt=document.getElementById('new-task-text').value.trim();const tag=document.getElementById('new-task-tag').value;if(!txt)return;const labels={'tag-auto':'자동','tag-manual':'직접','tag-check':'확인','tag-urgent':'긴급'};const item=document.createElement('div');item.className='task-item';item.onclick=function(){toggleTask(this);};item.innerHTML=`<div class="checkbox"></div><div class="task-text">${txt}</div><span class="task-tag ${tag}">${labels[tag]}</span>`;document.getElementById('extra-tasks').appendChild(item);document.getElementById('new-task-text').value='';closeModal();updateCounts();}
 let calNotes=JSON.parse(localStorage.getItem('calNotes')||'{}');let calOpen=false;let calYear,calMonth,calSelected;
 function initCal(){const now=new Date();calYear=now.getFullYear();calMonth=now.getMonth();calSelected=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;renderCal();showCalLog(calSelected);document.getElementById('cal-add-row').style.display='flex';}
 function toggleCal(){calOpen=!calOpen;document.getElementById('cal-body').classList.toggle('open',calOpen);document.getElementById('cal-arrow').classList.toggle('open',calOpen);}
 function changeMonth(dir){calMonth+=dir;if(calMonth<0){calMonth=11;calYear--;}if(calMonth>11){calMonth=0;calYear++;}renderCal();}
-function renderCal(){const months=['1ì','2ì','3ì','4ì','5ì','6ì','7ì','8ì','9ì','10ì','11ì','12ì'];document.getElementById('cal-month-label').textContent=`${calYear}ë ${months[calMonth]}`;document.getElementById('cal-header-text').textContent=`ð ${calYear}ë ${months[calMonth]}`;const now=new Date();const todayStr=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;let html=['ì¼','ì','í','ì','ëª©','ê¸','í '].map(d=>`<div class="cal-dow">${d}</div>`).join('');const firstDay=new Date(calYear,calMonth,1).getDay();const lastDate=new Date(calYear,calMonth+1,0).getDate();for(let i=0;i<firstDay;i++)html+=`<div class="cal-day empty"></div>`;for(let d=1;d<=lastDate;d++){const ds=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;const isToday=ds===todayStr,isSel=ds===calSelected;const hasNote=calNotes[ds]&&calNotes[ds].length>0;html+=`<div class="cal-day${isToday?' today':''}${isSel&&!isToday?' selected':''}${hasNote?' has-note':''}" onclick="selectDay('${ds}')">${d}</div>`;}document.getElementById('cal-grid').innerHTML=html;}
+function renderCal(){const months=['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];document.getElementById('cal-month-label').textContent=`${calYear}년 ${months[calMonth]}`;document.getElementById('cal-header-text').textContent=`📅 ${calYear}년 ${months[calMonth]}`;const now=new Date();const todayStr=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;let html=['일','월','화','수','목','금','토'].map(d=>`<div class="cal-dow">${d}</div>`).join('');const firstDay=new Date(calYear,calMonth,1).getDay();const lastDate=new Date(calYear,calMonth+1,0).getDate();for(let i=0;i<firstDay;i++)html+=`<div class="cal-day empty"></div>`;for(let d=1;d<=lastDate;d++){const ds=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;const isToday=ds===todayStr,isSel=ds===calSelected;const hasNote=calNotes[ds]&&calNotes[ds].length>0;html+=`<div class="cal-day${isToday?' today':''}${isSel&&!isToday?' selected':''}${hasNote?' has-note':''}" onclick="selectDay('${ds}')">${d}</div>`;}document.getElementById('cal-grid').innerHTML=html;}
 function selectDay(ds){calSelected=ds;renderCal();showCalLog(ds);document.getElementById('cal-add-row').style.display='flex';}
-function showCalLog(ds){const parts=ds.split('-');const days=['ì¼','ì','í','ì','ëª©','ê¸','í '];const d=new Date(parseInt(parts[0]),parseInt(parts[1])-1,parseInt(parts[2]));document.getElementById('cal-log-date').textContent=`${parts[0]}.${parts[1]}.${parts[2]} (${days[d.getDay()]})`;const notes=calNotes[ds]||[];const el=document.getElementById('cal-log-items');el.innerHTML=notes.length===0?'<div class="cal-log-empty">ê¸°ë¡ì´ ìì´ì. ì¶ê°í´ë³´ì¸ì!</div>':notes.map((n,i)=>`<div class="cal-note-item"><div class="cal-note-dot"></div><div class="cal-note-text">${n}</div><div class="cal-note-del" onclick="delCalNote('${ds}',${i})">Ã</div></div>`).join('');}
+function showCalLog(ds){const parts=ds.split('-');const days=['일','월','화','수','목','금','토'];const d=new Date(parseInt(parts[0]),parseInt(parts[1])-1,parseInt(parts[2]));document.getElementById('cal-log-date').textContent=`${parts[0]}.${parts[1]}.${parts[2]} (${days[d.getDay()]})`;const notes=calNotes[ds]||[];const el=document.getElementById('cal-log-items');el.innerHTML=notes.length===0?'<div class="cal-log-empty">기록이 없어요. 추가해보세요!</div>':notes.map((n,i)=>`<div class="cal-note-item"><div class="cal-note-dot"></div><div class="cal-note-text">${n}</div><div class="cal-note-del" onclick="delCalNote('${ds}',${i})">×</div></div>`).join('');}
 function addCalNote(){const input=document.getElementById('cal-note-input');const txt=input.value.trim();if(!txt||!calSelected)return;if(!calNotes[calSelected])calNotes[calSelected]=[];calNotes[calSelected].push(txt);localStorage.setItem('calNotes',JSON.stringify(calNotes));input.value='';renderCal();showCalLog(calSelected);}
 function delCalNote(ds,idx){calNotes[ds].splice(idx,1);if(calNotes[ds].length===0)delete calNotes[ds];localStorage.setItem('calNotes',JSON.stringify(calNotes));renderCal();showCalLog(ds);}
 initCal();
-function addCoworkLog(message,type=''){const log=document.getElementById('cowork-log');const now=new Date();const time=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;const item=document.createElement('div');item.className='log-item';item.innerHTML=`<div class="log-time">${time}</div><div class="log-text ${type}">${message}</div>`;if(log.children[0]&&log.children[0].querySelector('.log-time').textContent==='ëê¸°ì¤')log.innerHTML='';log.insertBefore(item,log.firstChild);}
+function addCoworkLog(message,type=''){const log=document.getElementById('cowork-log');const now=new Date();const time=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;const item=document.createElement('div');item.className='log-item';item.innerHTML=`<div class="log-time">${time}</div><div class="log-text ${type}">${message}</div>`;if(log.children[0]&&log.children[0].querySelector('.log-time').textContent==='대기중')log.innerHTML='';log.insertBefore(item,log.firstChild);}
 function renderMetaChart(){
 var bd=document.getElementById('meta-bars');
 var ld=document.getElementById('meta-labels');
@@ -670,7 +674,7 @@ bh+='<div style="flex:1;background:'+bg+';height:'+h+'px;border-radius:3px 3px 0
 bl+='<span>'+data[i].d+'</span>';
 }
 bd.innerHTML=bh;ld.innerHTML=bl;
-}addCoworkLog('2026-04-06 16:25', 'ì´ì¡ì¥ ë±ë¡ ìë£', 'íì¤í¬âì´ì§ì´ëë¯¼ 4ê±´ ì²ë¦¬ìë£ (ì´ìë¯¼/ì´ê°ì/ìí¬ì§/ê¹ëì, íì§íë°°)', 'success');
+}addCoworkLog('2026-04-06 16:25', '운송장 등록 완료', '허스크→이지어드민 4건 처리완료 (이소민/이가은/서희진/김나영, 한진택배)', 'success');
 </script>
 <script>
 (function(){
@@ -678,23 +682,23 @@ bd.innerHTML=bh;ld.innerHTML=bl;
   var fmt = function(n){ return '\u20a9' + parseInt(n).toLocaleString('ko-KR'); };
   var el = function(id){ return document.getElementById(id); };
   if(el('mc-spend'))       el('mc-spend').textContent       = fmt(metaToday.spend);
-  if(el('mc-purchases'))   el('mc-purchases').textContent   = metaToday.purchases + 'ê±´';
+  if(el('mc-purchases'))   el('mc-purchases').textContent   = metaToday.purchases + '건';
   if(el('mc-roas'))        el('mc-roas').textContent        = metaToday.roas + 'x';
   if(el('mc-impressions')) el('mc-impressions').textContent = parseInt(metaToday.impressions).toLocaleString('ko-KR');
   if(el('mc-7d-spend'))    el('mc-7d-spend').textContent    = fmt(meta7day.spend);
-  if(el('mc-7d-purchases'))el('mc-7d-purchases').textContent= meta7day.purchases + 'ê±´';
+  if(el('mc-7d-purchases'))el('mc-7d-purchases').textContent= meta7day.purchases + '건';
   if(el('mc-7d-roas'))     el('mc-7d-roas').textContent     = meta7day.roas + 'x';
-  if(el('meta-ts'))        el('meta-ts').textContent        = '\uD83D\uDCE1 ìë°ì´í¸: ' + metaUpdated;
+  if(el('meta-ts'))        el('meta-ts').textContent        = '\uD83D\uDCE1 업데이트: ' + metaUpdated;
   if(typeof metaMonth !== 'undefined'){
     if(el('mc-month-spend'))     el('mc-month-spend').textContent      = fmt(metaMonth.spend);
     if(el('mc-month-roas'))      el('mc-month-roas').textContent       = metaMonth.roas + 'x';
     if(el('mc-month-revenue'))   el('mc-month-revenue').textContent    = fmt(metaMonth.revenue);
-    if(el('mc-month-purchases')) el('mc-month-purchases').textContent  = metaMonth.purchases + 'ê±´';
+    if(el('mc-month-purchases')) el('mc-month-purchases').textContent  = metaMonth.purchases + '건';
     if(el('mc-month-projection'))el('mc-month-projection').textContent = '\uc774\ubc88\ub2ec \uc608\uc0c1 \ucd1d\uc9c0\uc785 ' + fmt(metaMonth.projected);
     if(el('mc-month-bar'))       el('mc-month-bar').style.width        = Math.min(metaMonth.spend/500000*100,100).toFixed(1) + '%';
   }
 })();
-addCoworkLog('2026-04-06 16:25', 'ì´ì¡ì¥ ë±ë¡ ìë£', 'íì¤í¬âì´ì§ì´ëë¯¼ 4ê±´ ì²ë¦¬ìë£ (ì´ìë¯¼/ì´ê°ì/ìí¬ì§/ê¹ëì, íì§íë°°)', 'success');
+addCoworkLog('2026-04-06 16:25', '운송장 등록 완료', '허스크→이지어드민 4건 처리완료 (이소민/이가은/서희진/김나영, 한진택배)', 'success');
 </script>
 
 <script>
@@ -822,21 +826,21 @@ addCoworkLog('2026-04-06 16:25', 'ì´ì¡ì¥ ë±ë¡ ìë£',
 
 
 
-<!-- ===== ììµ í¸ëí¹ íì´ì§ ===== -->
+<!-- ===== 수익 트래킹 페이지 ===== -->
 <div class="page" id="page-profit">
-  <div class="section-title">ìë³ ììµ í¸ëí¹</div>
+  <div class="section-title">월별 수익 트래킹</div>
   <div class="stat-grid" style="grid-template-columns:1fr 1fr 1fr;gap:10px;">
     <div class="stat-card" style="border-left:3px solid var(--green);">
-      <div class="stat-label">3ì ë§¤ì¶</div>
-      <div class="stat-value" id="pr-rev-3" style="font-size:18px;color:var(--green)">â</div>
+      <div class="stat-label">3월 매출</div>
+      <div class="stat-value" id="pr-rev-3" style="font-size:18px;color:var(--green)">—</div>
     </div>
     <div class="stat-card" style="border-left:3px solid var(--red);">
-      <div class="stat-label">3ì ì´ë¹ì©</div>
-      <div class="stat-value" id="pr-cost-3" style="font-size:18px;color:var(--red)">â</div>
+      <div class="stat-label">3월 총비용</div>
+      <div class="stat-value" id="pr-cost-3" style="font-size:18px;color:var(--red)">—</div>
     </div>
     <div class="stat-card" style="border-left:3px solid var(--blue);">
-      <div class="stat-label">3ì ìììµ</div>
-      <div class="stat-value" id="pr-profit-3" style="font-size:18px;">â</div>
+      <div class="stat-label">3월 순수익</div>
+      <div class="stat-value" id="pr-profit-3" style="font-size:18px;">—</div>
     </div>
   </div>
   <div class="card" style="padding:0;overflow:hidden;">
@@ -844,10 +848,10 @@ addCoworkLog('2026-04-06 16:25', 'ì´ì¡ì¥ ë±ë¡ ìë£',
       <table style="width:100%;border-collapse:collapse;font-size:12px;">
         <thead>
           <tr style="background:var(--accent);color:#fff;">
-            <th style="padding:10px 12px;text-align:left;font-weight:600;">í­ëª©</th>
-            <th style="padding:10px 8px;text-align:right;">1ì</th>
-            <th style="padding:10px 8px;text-align:right;">2ì</th>
-            <th style="padding:10px 8px;text-align:right;">3ì</th>
+            <th style="padding:10px 12px;text-align:left;font-weight:600;">항목</th>
+            <th style="padding:10px 8px;text-align:right;">1월</th>
+            <th style="padding:10px 8px;text-align:right;">2월</th>
+            <th style="padding:10px 8px;text-align:right;">3월</th>
           </tr>
         </thead>
         <tbody id="profit-tbody"></tbody>
@@ -855,22 +859,22 @@ addCoworkLog('2026-04-06 16:25', 'ì´ì¡ì¥ ë±ë¡ ìë£',
     </div>
   </div>
   <div class="card">
-    <div style="font-size:12px;font-weight:700;margin-bottom:12px;color:var(--accent);">ð ë§¤ì¶ / ë¹ì© ì§ì  ìë ¥</div>
+    <div style="font-size:12px;font-weight:700;margin-bottom:12px;color:var(--accent);">📝 매출 / 비용 직접 입력</div>
     <div style="display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:8px;align-items:center;" id="pr-input-grid"></div>
     <div style="margin-top:12px;">
-      <div style="font-size:11px;color:var(--muted);margin-bottom:6px;">íë«í¼ ììë£ì¨ (%)</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:6px;">플랫폼 수수료율 (%)</div>
       <div style="display:flex;align-items:center;gap:8px;">
         <input type="number" id="pr-fee-rate" value="5" min="0" max="30" step="0.1" style="width:80px;padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:13px;text-align:center;" oninput="renderProfitTable()"/>
-        <span style="font-size:11px;color:var(--muted);">% (ì¤ë§í¸ì¤í ì´Â·ì¹´í24 íê· )</span>
+        <span style="font-size:11px;color:var(--muted);">% (스마트스토어·카페24 평균)</span>
       </div>
     </div>
-    <button onclick="saveProfitData()" style="margin-top:12px;width:100%;padding:10px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">ì ì¥</button>
+    <button onclick="saveProfitData()" style="margin-top:12px;width:100%;padding:10px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">저장</button>
   </div>
   <div class="card">
-    <div style="font-size:12px;font-weight:700;margin-bottom:12px;color:var(--accent);">ð ìë³ ì¶ì´</div>
+    <div style="font-size:12px;font-weight:700;margin-bottom:12px;color:var(--accent);">📊 월별 추이</div>
     <canvas id="profitChart" height="180"></canvas>
   </div>
-  <div style="font-size:10px;color:var(--muted);text-align:center;margin-top:4px;padding-bottom:20px;">íì¤í¬ ìê°ë ìì ì° íì¼ìì ìë ë°ì Â· ë§¤ì¶Â·ê´ê³ ë¹ë ì§ì  ìë ¥</div>
+  <div style="font-size:10px;color:var(--muted);text-align:center;margin-top:4px;padding-bottom:20px;">허스크 원가는 월정산 파일에서 자동 반영 · 매출·광고비는 직접 입력</div>
 </div>
 <script>
 (function(){
@@ -880,41 +884,41 @@ function sd(d){localStorage.setItem('pr_data',JSON.stringify(d));}
 var pd=ld()||{revenue:{1:0,2:0,3:0},adCost:{1:0,2:0,3:0},etcCost:{1:0,2:0,3:0},feeRate:5};
 function buildInputs(){
   var g=document.getElementById('pr-input-grid');if(!g)return;
-  var F=[{k:'revenue',l:'ë§¤ì¶ (â©)'},{k:'adCost',l:'ê´ê³ ë¹ (â©)'},{k:'etcCost',l:'ê¸°íë¹ì© (â©)'}];
+  var F=[{k:'revenue',l:'매출 (₩)'},{k:'adCost',l:'광고비 (₩)'},{k:'etcCost',l:'기타비용 (₩)'}];
   g.innerHTML='';
-  ['í­ëª©','1ì','2ì','3ì'].forEach(function(h){var d=document.createElement('div');d.style.cssText='font-size:11px;font-weight:700;color:var(--muted);padding:4px 0;text-align:center;';d.textContent=h;g.appendChild(d);});
+  ['항목','1월','2월','3월'].forEach(function(h){var d=document.createElement('div');d.style.cssText='font-size:11px;font-weight:700;color:var(--muted);padding:4px 0;text-align:center;';d.textContent=h;g.appendChild(d);});
   F.forEach(function(f){
     var lb=document.createElement('div');lb.style.cssText='font-size:11px;color:var(--accent);padding:4px 0;white-space:nowrap;';lb.textContent=f.l;g.appendChild(lb);
     [1,2,3].forEach(function(m){var i=document.createElement('input');i.type='number';i.id='pr-inp-'+f.k+'-'+m;i.value=pd[f.k]&&pd[f.k][m]?pd[f.k][m]:0;i.min=0;i.style.cssText='width:100%;padding:5px 6px;border:1px solid var(--border);border-radius:6px;font-size:12px;text-align:right;';i.oninput=function(){renderProfitTable();};g.appendChild(i);});
   });
 }
 function gv(){var o={revenue:{},adCost:{},etcCost:{}};['revenue','adCost','etcCost'].forEach(function(k){[1,2,3].forEach(function(m){var e=document.getElementById('pr-inp-'+k+'-'+m);o[k][m]=e?(parseFloat(e.value)||0):0;});});o.feeRate=parseFloat(document.getElementById('pr-fee-rate').value)||5;return o;}
-function cm(m,v){var r=v.revenue[m]||0,h=H[m],sh=S[m],f=Math.round(r*v.feeRate/100),a=v.adCost[m]||0,e=v.etcCost[m]||0,p=r-h-sh-f-a-e;return{rev:r,husk:h,ship:sh,fee:f,ad:a,etc:e,profit:p,margin:r>0?(p/r*100).toFixed(1):'â',orders:O[m]};}
+function cm(m,v){var r=v.revenue[m]||0,h=H[m],sh=S[m],f=Math.round(r*v.feeRate/100),a=v.adCost[m]||0,e=v.etcCost[m]||0,p=r-h-sh-f-a-e;return{rev:r,husk:h,ship:sh,fee:f,ad:a,etc:e,profit:p,margin:r>0?(p/r*100).toFixed(1):'—',orders:O[m]};}
 window.renderProfitTable=function(){
   var v=gv(),c={1:cm(1,v),2:cm(2,v),3:cm(3,v)};
-  var e=document.getElementById('pr-rev-3');if(e)e.textContent=c[3].rev>0?'â©'+c[3].rev.toLocaleString('ko-KR'):'ë¯¸ìë ¥';
-  e=document.getElementById('pr-cost-3');if(e)e.textContent='â©'+(c[3].husk+c[3].ship+c[3].fee+c[3].ad+c[3].etc).toLocaleString('ko-KR');
-  e=document.getElementById('pr-profit-3');if(e){e.textContent=c[3].rev>0?'â©'+c[3].profit.toLocaleString('ko-KR'):'ë¯¸ìë ¥';e.style.color=c[3].profit>=0?'var(--green)':'var(--red)';}
+  var e=document.getElementById('pr-rev-3');if(e)e.textContent=c[3].rev>0?'₩'+c[3].rev.toLocaleString('ko-KR'):'미입력';
+  e=document.getElementById('pr-cost-3');if(e)e.textContent='₩'+(c[3].husk+c[3].ship+c[3].fee+c[3].ad+c[3].etc).toLocaleString('ko-KR');
+  e=document.getElementById('pr-profit-3');if(e){e.textContent=c[3].rev>0?'₩'+c[3].profit.toLocaleString('ko-KR'):'미입력';e.style.color=c[3].profit>=0?'var(--green)':'var(--red)';}
   var rows=[
-    {l:'ð¦ ë§¤ì¶',k:'rev',b:true,c:'var(--green)'},
-    {l:'  â ì ì¡°ìê°(íì¤í¬)',k:'husk',b:false,c:'var(--red)'},
-      {l:'  â ë°°ì¡ë¹(íì¤í¬)',k:'ship',b:false,c:'var(--red)'},
-    {l:'  â íë«í¼ ììë£',k:'fee',b:false,c:'var(--red)'},
-    {l:'  â ê´ê³ ë¹',k:'ad',b:false,c:'var(--red)'},
-    {l:'  â ê¸°íë¹ì©',k:'etc',b:false,c:'var(--red)'},
-    {l:'ð° ìììµ',k:'profit',b:true,c:''},
-    {l:'  ë§ì§ì¨',k:'margin',b:false,c:'var(--muted)'},
-    {l:'  ì£¼ë¬¸ìë',k:'orders',b:false,c:'var(--muted)'}
+    {l:'📦 매출',k:'rev',b:true,c:'var(--green)'},
+    {l:'  └ 제조원가(허스크)',k:'husk',b:false,c:'var(--red)'},
+      {l:'  └ 배송비(허스크)',k:'ship',b:false,c:'var(--red)'},
+    {l:'  └ 플랫폼 수수료',k:'fee',b:false,c:'var(--red)'},
+    {l:'  └ 광고비',k:'ad',b:false,c:'var(--red)'},
+    {l:'  └ 기타비용',k:'etc',b:false,c:'var(--red)'},
+    {l:'💰 순수익',k:'profit',b:true,c:''},
+    {l:'  마진율',k:'margin',b:false,c:'var(--muted)'},
+    {l:'  주문수량',k:'orders',b:false,c:'var(--muted)'}
   ];
   var tb=document.getElementById('profit-tbody');if(!tb)return;
   tb.innerHTML=rows.map(function(r,i){
     var bg=i%2===0?'var(--bg)':'#fff';
     var cells=[1,2,3].map(function(m){
       var val=c[m][r.k],disp='';
-      if(r.k==='margin')disp=val==='â'?'â':val+'%';
-      else if(r.k==='orders')disp=val+'ê±´';
-      else if(r.k==='rev'||r.k==='profit')disp=val===0?'<span style="color:var(--muted)">ë¯¸ìë ¥</span>':'â©'+Math.round(val).toLocaleString('ko-KR');
-      else disp='â©'+Math.round(val).toLocaleString('ko-KR');
+      if(r.k==='margin')disp=val==='—'?'—':val+'%';
+      else if(r.k==='orders')disp=val+'건';
+      else if(r.k==='rev'||r.k==='profit')disp=val===0?'<span style="color:var(--muted)">미입력</span>':'₩'+Math.round(val).toLocaleString('ko-KR');
+      else disp='₩'+Math.round(val).toLocaleString('ko-KR');
       var cc=r.k==='profit'?(val>=0?'var(--green)':'var(--red)'):(r.c||'');
       return '<td style="padding:9px 8px;text-align:right;color:'+cc+';">'+disp+'</td>';
     }).join('');
@@ -927,9 +931,9 @@ function dpc(c){
   var cv=document.getElementById('profitChart');if(!cv||typeof Chart==='undefined')return;
   var rd=[c[1].rev,c[2].rev,c[3].rev],cd=[c[1].husk+c[1].fee+c[1].ad+c[1].etc,c[2].husk+c[2].fee+c[2].ad+c[2].etc,c[3].husk+c[3].ship+c[3].fee+c[3].ad+c[3].etc],pd=[c[1].profit,c[2].profit,c[3].profit];
   if(ci)ci.destroy();
-  ci=new Chart(cv,{type:'bar',data:{labels:['1ì','2ì','3ì'],datasets:[{label:'ë§¤ì¶',data:rd,backgroundColor:'rgba(45,106,79,0.75)',borderRadius:4},{label:'ì´ë¹ì©',data:cd,backgroundColor:'rgba(153,27,27,0.55)',borderRadius:4},{label:'ìììµ',data:pd,backgroundColor:'rgba(30,64,175,0.75)',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{position:'bottom',labels:{font:{size:11}}}},scales:{y:{ticks:{callback:function(v){return v>=10000?'â©'+(v/10000).toFixed(0)+'ë§':v;},font:{size:10}},grid:{color:'rgba(0,0,0,0.05)'}}},animation:{duration:300}}});
+  ci=new Chart(cv,{type:'bar',data:{labels:['1월','2월','3월'],datasets:[{label:'매출',data:rd,backgroundColor:'rgba(45,106,79,0.75)',borderRadius:4},{label:'총비용',data:cd,backgroundColor:'rgba(153,27,27,0.55)',borderRadius:4},{label:'순수익',data:pd,backgroundColor:'rgba(30,64,175,0.75)',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{position:'bottom',labels:{font:{size:11}}}},scales:{y:{ticks:{callback:function(v){return v>=10000?'₩'+(v/10000).toFixed(0)+'만':v;},font:{size:10}},grid:{color:'rgba(0,0,0,0.05)'}}},animation:{duration:300}}});
 }
-window.saveProfitData=function(){var v=gv();sd({revenue:v.revenue,adCost:v.adCost,etcCost:v.etcCost,feeRate:v.feeRate});var btn=document.querySelector('#page-profit button');if(btn){btn.textContent='â ì ì¥ë¨';btn.style.background='var(--green)';setTimeout(function(){btn.textContent='ì ì¥';btn.style.background='var(--accent)';},2000);}if(typeof addCoworkLog==='function')addCoworkLog(new Date().toISOString().slice(0,16).replace('T',' '),'ììµ ë°ì´í° ì ì¥','1~3ì ë§¤ì¶Â·ë¹ì© ìë°ì´í¸','success');};
+window.saveProfitData=function(){var v=gv();sd({revenue:v.revenue,adCost:v.adCost,etcCost:v.etcCost,feeRate:v.feeRate});var btn=document.querySelector('#page-profit button');if(btn){btn.textContent='✓ 저장됨';btn.style.background='var(--green)';setTimeout(function(){btn.textContent='저장';btn.style.background='var(--accent)';},2000);}if(typeof addCoworkLog==='function')addCoworkLog(new Date().toISOString().slice(0,16).replace('T',' '),'수익 데이터 저장','1~3월 매출·비용 업데이트','success');};
 var _o=window.switchTab;
 window.switchTab=function(n){_o(n);if(n==='profit'){setTimeout(function(){var pp=document.getElementById('page-profit');if(pp){var top=pp.getBoundingClientRect().top+window.pageYOffset-120;window.scrollTo({top:top,behavior:'smooth'});}},50);var s=ld();if(s){var fr=document.getElementById('pr-fee-rate');if(fr&&s.feeRate)fr.value=s.feeRate;['revenue','adCost','etcCost'].forEach(function(k){[1,2,3].forEach(function(m){var el=document.getElementById('pr-inp-'+k+'-'+m);if(el&&s[k]&&s[k][m]!==undefined)el.value=s[k][m];});});}renderProfitTable();}};
 function init(){buildInputs();var s=ld();if(s){var fr=document.getElementById('pr-fee-rate');if(fr&&s.feeRate)fr.value=s.feeRate;['revenue','adCost','etcCost'].forEach(function(k){[1,2,3].forEach(function(m){var el=document.getElementById('pr-inp-'+k+'-'+m);if(el&&s[k]&&s[k][m]!==undefined)el.value=s[k][m];});});}renderProfitTable();}
