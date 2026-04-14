@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -592,26 +592,27 @@ addCoworkLog('2026-04-06 16:25', '운송장 등록 완료', '허스크→이지�
 </div>
 </div>
 
-<div class="section-title">🤖 자동 조정 규칙 (현재)</div>
+<div class="section-title">🤖 자동 조정 규칙 v2 (2캠페인 통합)</div>
 <div class="card">
+<div style="font-size:11px;color:var(--muted);margin-bottom:8px;">계정 전체 ROAS 기준 · Adv+ 72% / RT 28% 비율 유지</div>
 <div style="display:flex;flex-direction:column;gap:6px;font-size:12px;">
   <div style="display:flex;gap:10px;align-items:center;padding:6px;background:var(--bg);border-radius:6px;">
-    <span style="font-size:16px;">🚀</span><div>ROAS 5.0↑ → 알림 (사용자 판단 후 증액)</div>
+    <span style="font-size:16px;">🚀</span><div>ROAS 5.0↑ → +10% 자동 증액 (상한까지)</div>
   </div>
   <div style="display:flex;gap:10px;align-items:center;padding:6px;background:var(--bg);border-radius:6px;">
-    <span style="font-size:16px;">📈</span><div>ROAS 3.0~5.0 + 월 상한 여유 있음 → +10% 자동 증액</div>
+    <span style="font-size:16px;">📈</span><div>ROAS 3.0~5.0 + 월 여유 → +10% 자동 증액</div>
   </div>
   <div style="display:flex;gap:10px;align-items:center;padding:6px;background:var(--bg);border-radius:6px;">
-    <span style="font-size:16px;">✋</span><div>ROAS 2.7~3.0 → 유지 (감액 없음)</div>
+    <span style="font-size:16px;">✋</span><div>ROAS 2.7~3.0 → 유지</div>
   </div>
   <div style="display:flex;gap:10px;align-items:center;padding:6px;background:var(--bg);border-radius:6px;">
-    <span style="font-size:16px;">📉</span><div>ROAS 2.0~2.7 → -10% 자동 감액</div>
+    <span style="font-size:16px;">📉</span><div>ROAS 2.0~2.7 → -10% 감액</div>
   </div>
   <div style="display:flex;gap:10px;align-items:center;padding:6px;background:var(--bg);border-radius:6px;">
-    <span style="font-size:16px;">🛑</span><div>ROAS 2.0↓ → -10% 감액</div>
+    <span style="font-size:16px;">🛑</span><div>ROAS &lt;2.0 → -10% 감액</div>
   </div>
-  <div style="display:flex;gap:10px;align-items:center;padding:6px;background:var(--bg);border-radius:6px;">
-    <span style="font-size:16px;">🔒</span><div>월 상한 ₩500,000 / 최소 일 예산 ₩10,000</div>
+  <div style="display:flex;gap:10px;align-items:center;padding:6px;background:rgba(96,165,250,0.1);border-radius:6px;">
+    <span style="font-size:16px;">🔒</span><div>총 상한 ₩16,667/일 · 최소 ₩8,000/일 · 72:28 비율 자동 분배</div>
   </div>
 </div>
 </div>
