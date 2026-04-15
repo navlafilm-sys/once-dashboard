@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -140,10 +140,10 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 </style>
 <!-- meta-data-start -->
 <script>
-var metaToday = {date:'2026-04-13',spend:8502,roas:5.18,purchases:2,impressions:1732,reach:1599};
-var meta7day = {spend:68232,roas:3.58,purchases:11,period:'2026-04-07 ~ 2026-04-13'};
-var metaMonth = {spend:141522,roas:3.99,revenue:564673,purchases:24,projected:277522,period:'2026-04-01 ~ 2026-04-13'};
-var metaUpdated = '2026-04-14 08:08';
+var metaToday = {date:'2026-04-14',spend:10631,roas:0,purchases:0,impressions:1653,reach:1573};
+var meta7day = {spend:58241,roas:3.81,purchases:10,period:'2026-04-08 ~ 2026-04-14'};
+var metaMonth = {spend:152153,roas:3.71,revenue:564488,purchases:24,projected:536153,period:'2026-04-01 ~ 2026-04-14'};
+var metaUpdated = '2026-04-15 11:12';
 var metaDailyHistory = [
   {date:'2026-03-31',spend:12476,roas:5.77,purchases:3},
   {date:'2026-04-01',spend:13886,roas:6.27,purchases:3},
@@ -152,7 +152,7 @@ var metaDailyHistory = [
   {date:'2026-04-04',spend:10556,roas:4.17,purchases:2},
   {date:'2026-04-05',spend:14128,roas:1.84,purchases:1},
   {date:'2026-04-06',spend:13598,roas:6.91,purchases:4}
-,{date:'2026-04-07',spend:20611,roas:1.07,purchases:1},{date:'2026-04-08',spend:13999,roas:1.57,purchases:1},{date:'2026-04-11',spend:5134,roas:0,purchases:0},{date:'2026-04-12',spend:7044,roas:9.37,purchases:3},{date:'2026-04-13',spend:8502,roas:5.18,purchases:2}];
+,{date:'2026-04-07',spend:20611,roas:1.07,purchases:1},{date:'2026-04-08',spend:13999,roas:1.57,purchases:1},{date:'2026-04-11',spend:5134,roas:0,purchases:0},{date:'2026-04-12',spend:7044,roas:9.37,purchases:3},{date:'2026-04-13',spend:8502,roas:5.18,purchases:2},{date:'2026-04-14',spend:10631,roas:0,purchases:0}];
 </script>
 <!-- meta-data-end -->
 <style>
@@ -174,7 +174,7 @@ var metaDailyHistory = [
   <div class="tab" onclick="switchTab('automation')">자동화 현황</div>
   <div class="tab" onclick="switchTab('computers')">컴퓨터</div>
   <div class="tab" onclick="switchTab('flow')">플로우</div>
-  <div class="tab" onclick="switchTab('profit')">💰 수익</div>
+  <div class="tab" onclick="switchTab('profit')">💰 수익</div>
 </div>
 <div class="page active" id="page-today">
   <div class="cal-wrap" style="margin-top:4px;">
@@ -246,13 +246,13 @@ var metaDailyHistory = [
     <div class="brand-pill active" onclick="switchBrand(0)">ONCE Studio</div>
     <div class="brand-pill" onclick="switchBrand(1)">enblush</div>
     <div class="brand-pill" onclick="switchBrand(2)">EFFORTLSS</div>
-    <div class="brand-pill" onclick="switchBrand(3)">MUSE ONCE</div>
-    <div class="brand-pill" onclick="switchBrand(4)">LACE MOOD</div>
-    <div class="brand-pill" onclick="switchBrand(5)">TONE DAILY</div>
-    <div class="brand-pill" onclick="switchBrand(6)">PETIT ONCE</div>
-    <div class="brand-pill" onclick="switchBrand(7)">BLOOM ONCE</div>
-    <div class="brand-pill" onclick="switchBrand(8)">SILVER EDIT</div>
-    <div class="brand-pill" onclick="switchBrand(9)">ONCE SET</div>
+    <div class="brand-pill" onclick="switchBrand(3)">브랜드 4</div>
+    <div class="brand-pill" onclick="switchBrand(4)">브랜드 5</div>
+    <div class="brand-pill" onclick="switchBrand(5)">브랜드 6</div>
+    <div class="brand-pill" onclick="switchBrand(6)">브랜드 7</div>
+    <div class="brand-pill" onclick="switchBrand(7)">브랜드 8</div>
+    <div class="brand-pill" onclick="switchBrand(8)">브랜드 9</div>
+    <div class="brand-pill" onclick="switchBrand(9)">브랜드 10</div>
   </div>
   <div class="brand-page active" id="brand-0">
     <div class="brand-hero">
@@ -318,160 +318,13 @@ var metaDailyHistory = [
       <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">Cafe24 등록</div><span class="task-tag tag-manual">직접</span></div>
     </div>
   </div>
-  <div class="brand-page" id="brand-3">
-    <div class="brand-hero" style="background:#7C2D12;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div class="brand-hero-name">MUSE ONCE</div><div class="brand-hero-mood">명화 감성 프리미엄 · 예술적 고급감</div></div><span class="brand-status-pill status-planned">기획</span></div>
-      <div style="margin-top:10px;font-size:12px;opacity:0.85;">₩20,000~28,000 · 업셀 라인 · 레퍼런스: 아우렐 + 소유마실</div>
-    </div>
-    <div class="section-title">컨셉</div>
-    <div class="card"><div style="font-size:13px;line-height:1.6;">르누아르·모네·클림트 등 명화를 현대적으로 재해석. 아트북 같은 케이스. <b>"나만 아는 감도"</b> 포지션.</div></div>
-    <div class="section-title">제품 라인업</div>
-    <div class="card">
-      <div class="task-item"><div class="task-text">아트 젤리 케이스 (명화 프린트)</div><span class="task-tag tag-manual">₩22,000</span></div>
-      <div class="task-item"><div class="task-text">에폭시 하드 (골드 포인트)</div><span class="task-tag tag-manual">₩26,000</span></div>
-      <div class="task-item"><div class="task-text">뮤지엄 에디션 (한정)</div><span class="task-tag tag-manual">₩28,000</span></div>
-    </div>
-    <div class="section-title">광고 카피 레퍼런스</div>
-    <div class="card">
-      <div class="task-item"><div class="task-text">"오르세 미술관을 손에 담다"</div></div>
-      <div class="task-item"><div class="task-text">"당신의 일상에 한 점의 예술"</div></div>
-      <div class="task-item"><div class="task-text">"Museum in your hand"</div></div>
-    </div>
-  </div>
-  <div class="brand-page" id="brand-4">
-    <div class="brand-hero" style="background:#BE185D;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div class="brand-hero-name">LACE MOOD</div><div class="brand-hero-mood">발레코어 · 리본 · 러블리 패션</div></div><span class="brand-status-pill status-planned">기획</span></div>
-      <div style="margin-top:10px;font-size:12px;opacity:0.85;">₩18,000~25,000 · 업셀 라인 · 레퍼런스: 세컨드유니크네임</div>
-    </div>
-    <div class="section-title">컨셉</div>
-    <div class="card"><div style="font-size:13px;line-height:1.6;">2026 발레코어 트렌드 직격. 리본·레이스·진주 · Y2K 러블리. 타겟: 10대 후반~20대 초반.</div></div>
-    <div class="section-title">제품 라인업</div>
-    <div class="card">
-      <div class="task-item"><div class="task-text">리본 젤리 케이스</div><span class="task-tag tag-manual">₩18,000</span></div>
-      <div class="task-item"><div class="task-text">레이스 프린트 하드</div><span class="task-tag tag-manual">₩21,000</span></div>
-      <div class="task-item"><div class="task-text">진주 참 세트</div><span class="task-tag tag-manual">₩25,000</span></div>
-    </div>
-    <div class="section-title">광고 카피 레퍼런스</div>
-    <div class="card">
-      <div class="task-item"><div class="task-text">"리본 묶인 듯한 하루"</div></div>
-      <div class="task-item"><div class="task-text">"Ballet Core Approved"</div></div>
-      <div class="task-item"><div class="task-text">"러블리 한 스푼 더"</div></div>
-    </div>
-  </div>
-  <div class="brand-page" id="brand-5">
-    <div class="brand-hero" style="background:#94A3B8;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div class="brand-hero-name">TONE DAILY</div><div class="brand-hero-mood">미니멀 무드 컬러 · 데일리</div></div><span class="brand-status-pill status-planned">기획</span></div>
-      <div style="margin-top:10px;font-size:12px;opacity:0.85;">₩16,000~24,000 · 중가 라인 · 레퍼런스: 하우위 + 하이우</div>
-    </div>
-    <div class="section-title">컨셉</div>
-    <div class="card"><div style="font-size:13px;line-height:1.6;">무채색·파스텔 솔리드. 장식 최소화. <b>색 하나로 승부</b>. 시즌별 컬러 리뉴얼.</div></div>
-    <div class="section-title">팔레트</div>
-    <div class="card">
-      <div style="display:flex;gap:8px;flex-wrap:wrap;padding:6px 0;">
-        <div style="width:40px;height:40px;border-radius:8px;background:#E8E3DC;"></div>
-        <div style="width:40px;height:40px;border-radius:8px;background:#C7B8A8;"></div>
-        <div style="width:40px;height:40px;border-radius:8px;background:#8B9D83;"></div>
-        <div style="width:40px;height:40px;border-radius:8px;background:#4A4E56;"></div>
-        <div style="width:40px;height:40px;border-radius:8px;background:#F5D7CE;"></div>
-      </div>
-    </div>
-    <div class="section-title">제품 라인업</div>
-    <div class="card">
-      <div class="task-item"><div class="task-text">무드 젤리 (솔리드)</div><span class="task-tag tag-manual">₩16,000</span></div>
-      <div class="task-item"><div class="task-text">매트 하드 (톤온톤)</div><span class="task-tag tag-manual">₩19,000</span></div>
-      <div class="task-item"><div class="task-text">시즌 컬러 에디션</div><span class="task-tag tag-manual">₩24,000</span></div>
-    </div>
-    <div class="section-title">광고 카피 레퍼런스</div>
-    <div class="card">
-      <div class="task-item"><div class="task-text">"오늘의 톤 하나로 충분해"</div></div>
-      <div class="task-item"><div class="task-text">"Just one tone"</div></div>
-    </div>
-  </div>
-  <div class="brand-page" id="brand-6">
-    <div class="brand-hero" style="background:#F59E0B;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div class="brand-hero-name">PETIT ONCE</div><div class="brand-hero-mood">키치 · 저가 진입 퍼널</div></div><span class="brand-status-pill status-planned">기획</span></div>
-      <div style="margin-top:10px;font-size:12px;opacity:0.85;">₩9,999~22,000 · 진입 라인 · 레퍼런스: 가르송티미드 + 어프어프</div>
-    </div>
-    <div class="section-title">컨셉 (퍼널 핵심)</div>
-    <div class="card"><div style="font-size:13px;line-height:1.6;">9,900원 미끼상품으로 <b>첫 구매 유도</b>. 키치 손그림 · 스티커 감성. 구매 후 MUSE/LACE/BLOOM으로 업셀.</div></div>
-    <div class="section-title">제품 라인업</div>
-    <div class="card">
-      <div class="task-item"><div class="task-text">미끼 젤리 (단순 그래픽)</div><span class="task-tag tag-urgent">₩9,999</span></div>
-      <div class="task-item"><div class="task-text">손그림 하드</div><span class="task-tag tag-manual">₩15,000</span></div>
-      <div class="task-item"><div class="task-text">시그니처 캐릭터</div><span class="task-tag tag-manual">₩22,000</span></div>
-    </div>
-    <div class="section-title">광고 카피 레퍼런스</div>
-    <div class="card">
-      <div class="task-item"><div class="task-text">"오늘만 9,900원 폰케이스"</div></div>
-      <div class="task-item"><div class="task-text">"작은 귀여움, 큰 만족"</div></div>
-    </div>
-  </div>
-  <div class="brand-page" id="brand-7">
-    <div class="brand-hero" style="background:#A16207;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div class="brand-hero-name">BLOOM ONCE</div><div class="brand-hero-mood">빈티지 플로럴 · 시즌 한정</div></div><span class="brand-status-pill status-planned">기획</span></div>
-      <div style="margin-top:10px;font-size:12px;opacity:0.85;">₩18,000~48,000 · 프리미엄 시즌 · 레퍼런스: 아우렐 + 몽몽드</div>
-    </div>
-    <div class="section-title">컨셉</div>
-    <div class="card"><div style="font-size:13px;line-height:1.6;">빈티지 플로럴·드라이 플라워 압화. 봄/가을 시즌 한정. 선물 패키지 강화.</div></div>
-    <div class="section-title">제품 라인업</div>
-    <div class="card">
-      <div class="task-item"><div class="task-text">플로럴 젤리</div><span class="task-tag tag-manual">₩18,000</span></div>
-      <div class="task-item"><div class="task-text">압화 에폭시 하드</div><span class="task-tag tag-manual">₩32,000</span></div>
-      <div class="task-item"><div class="task-text">시즌 한정 기프트박스</div><span class="task-tag tag-manual">₩48,000</span></div>
-    </div>
-    <div class="section-title">광고 카피 레퍼런스</div>
-    <div class="card">
-      <div class="task-item"><div class="task-text">"꽃이 지기 전에"</div></div>
-      <div class="task-item"><div class="task-text">"Bloom before it fades"</div></div>
-    </div>
-  </div>
-  <div class="brand-page" id="brand-8">
-    <div class="brand-hero" style="background:#475569;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div class="brand-hero-name">SILVER EDIT</div><div class="brand-hero-mood">메탈릭 · 미러 · Y2K 트렌드</div></div><span class="brand-status-pill status-planned">기획</span></div>
-      <div style="margin-top:10px;font-size:12px;opacity:0.85;">₩20,000~28,000 · 업셀 라인 · 레퍼런스: 디자인스킨 + 소유마실</div>
-    </div>
-    <div class="section-title">컨셉</div>
-    <div class="card"><div style="font-size:13px;line-height:1.6;">실버·크롬·미러 마감. Y2K/사이버 무드. 반짝임 디테일 전문.</div></div>
-    <div class="section-title">제품 라인업</div>
-    <div class="card">
-      <div class="task-item"><div class="task-text">미러 하드 케이스</div><span class="task-tag tag-manual">₩20,000</span></div>
-      <div class="task-item"><div class="task-text">크롬 메탈릭 젤리</div><span class="task-tag tag-manual">₩24,000</span></div>
-      <div class="task-item"><div class="task-text">글리터 에폭시</div><span class="task-tag tag-manual">₩28,000</span></div>
-    </div>
-    <div class="section-title">광고 카피 레퍼런스</div>
-    <div class="card">
-      <div class="task-item"><div class="task-text">"거울처럼 매일 새롭게"</div></div>
-      <div class="task-item"><div class="task-text">"Shine your grid"</div></div>
-    </div>
-  </div>
-  <div class="brand-page" id="brand-9">
-    <div class="brand-hero" style="background:#065F46;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;"><div><div class="brand-hero-name">ONCE SET</div><div class="brand-hero-mood">세트 구성 · 객단가 상승 전용</div></div><span class="brand-status-pill status-planned">기획</span></div>
-      <div style="margin-top:10px;font-size:12px;opacity:0.85;">₩35,000~78,000 · 객단가 상승 · 레퍼런스: 디자인스킨 + 던타운</div>
-    </div>
-    <div class="section-title">컨셉 (AOV 핵심)</div>
-    <div class="card"><div style="font-size:13px;line-height:1.6;">케이스 + 그립톡 + 스트랩 + 파우치 <b>세트 패키지 전용</b>. 커플·선물·여행 테마. 객단가 2~3배 상승 목적.</div></div>
-    <div class="section-title">세트 구성</div>
-    <div class="card">
-      <div class="task-item"><div class="task-text">데일리 세트 (케이스+그립톡)</div><span class="task-tag tag-manual">₩35,000</span></div>
-      <div class="task-item"><div class="task-text">커플 세트 (2개+파우치)</div><span class="task-tag tag-manual">₩58,000</span></div>
-      <div class="task-item"><div class="task-text">선물 풀세트 (4종+박스)</div><span class="task-tag tag-manual">₩78,000</span></div>
-    </div>
-    <div class="section-title">광고 카피 레퍼런스</div>
-    <div class="card">
-      <div class="task-item"><div class="task-text">"하나만 사면 아쉬우니까"</div></div>
-      <div class="task-item"><div class="task-text">"세트가 제일 예쁠 때가 있다"</div></div>
-      <div class="task-item"><div class="task-text">"Complete the look"</div></div>
-    </div>
-  </div>
-  <div class="section-title" style="margin-top:20px;">🔄 10개 브랜드 퍼널 구조</div>
-  <div class="card" style="font-size:12px;line-height:1.7;">
-    <b>진입</b> (₩9,900~): PETIT ONCE → 첫 구매 유도<br>
-    <b>메인</b> (₩15,000~24,000): ONCE Studio / enblush / EFFORTLSS / TONE DAILY<br>
-    <b>업셀</b> (₩18,000~28,000): MUSE ONCE / LACE MOOD / SILVER EDIT / BLOOM ONCE<br>
-    <b>객단가</b> (₩35,000~78,000): ONCE SET<br>
-    <span style="color:var(--muted);font-size:11px;">* 퍼널: PETIT(진입) → 메인 구매 → 업셀 → 세트로 객단가 증가</span>
-  </div>
+  <div class="brand-page" id="brand-3"><div class="brand-hero" style="background:#6B7280;"><div class="brand-hero-name">브랜드 4</div><div class="brand-hero-mood">이름/무드 미정</div><div style="margin-top:10px;"><span class="brand-status-pill status-planned">예정</span></div></div><div class="card" style="text-align:center;padding:30px;color:var(--muted);"><div style="font-size:32px;margin-bottom:10px;">+</div><div style="font-size:14px;">브랜드 정보를 추가해주세요</div></div></div>
+  <div class="brand-page" id="brand-4"><div class="brand-hero" style="background:#6B7280;"><div class="brand-hero-name">브랜드 5</div><div class="brand-hero-mood">이름/무드 미정</div><div style="margin-top:10px;"><span class="brand-status-pill status-planned">예정</span></div></div><div class="card" style="text-align:center;padding:30px;color:var(--muted);"><div style="font-size:32px;margin-bottom:10px;">+</div><div style="font-size:14px;">브랜드 정보를 추가해주세요</div></div></div>
+  <div class="brand-page" id="brand-5"><div class="brand-hero" style="background:#6B7280;"><div class="brand-hero-name">브랜드 6</div><div class="brand-hero-mood">이름/무드 미정</div><div style="margin-top:10px;"><span class="brand-status-pill status-planned">예정</span></div></div><div class="card" style="text-align:center;padding:30px;color:var(--muted);"><div style="font-size:32px;margin-bottom:10px;">+</div><div style="font-size:14px;">브랜드 정보를 추가해주세요</div></div></div>
+  <div class="brand-page" id="brand-6"><div class="brand-hero" style="background:#6B7280;"><div class="brand-hero-name">브랜드 7</div><div class="brand-hero-mood">이름/무드 미정</div><div style="margin-top:10px;"><span class="brand-status-pill status-planned">예정</span></div></div><div class="card" style="text-align:center;padding:30px;color:var(--muted);"><div style="font-size:32px;margin-bottom:10px;">+</div><div style="font-size:14px;">브랜드 정보를 추가해주세요</div></div></div>
+  <div class="brand-page" id="brand-7"><div class="brand-hero" style="background:#6B7280;"><div class="brand-hero-name">브랜드 8</div><div class="brand-hero-mood">이름/무드 미정</div><div style="margin-top:10px;"><span class="brand-status-pill status-planned">예정</span></div></div><div class="card" style="text-align:center;padding:30px;color:var(--muted);"><div style="font-size:32px;margin-bottom:10px;">+</div><div style="font-size:14px;">브랜드 정보를 추가해주세요</div></div></div>
+  <div class="brand-page" id="brand-8"><div class="brand-hero" style="background:#6B7280;"><div class="brand-hero-name">브랜드 9</div><div class="brand-hero-mood">이름/무드 미정</div><div style="margin-top:10px;"><span class="brand-status-pill status-planned">예정</span></div></div><div class="card" style="text-align:center;padding:30px;color:var(--muted);"><div style="font-size:32px;margin-bottom:10px;">+</div><div style="font-size:14px;">브랜드 정보를 추가해주세요</div></div></div>
+  <div class="brand-page" id="brand-9"><div class="brand-hero" style="background:#6B7280;"><div class="brand-hero-name">브랜드 10</div><div class="brand-hero-mood">이름/무드 미정</div><div style="margin-top:10px;"><span class="brand-status-pill status-planned">예정</span></div></div><div class="card" style="text-align:center;padding:30px;color:var(--muted);"><div style="font-size:32px;margin-bottom:10px;">+</div><div style="font-size:14px;">브랜드 정보를 추가해주세요</div></div></div>
 </div>
 <div class="page" id="page-automation">
   <div class="section-title">자동화 상태</div>
