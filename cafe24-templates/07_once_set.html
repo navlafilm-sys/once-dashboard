@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONCE SET - 프리미엄 세트 컬렉션</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-off-white: #F9F7F4;
+            --color-sage: #8FA88B;
+            --color-warm-gray: #9E9892;
+            --color-charcoal: #333333;
+            --color-champagne: #E8D5B7;
+            --color-light-bg: #FDFBF9;
+            --color-border: #E8E3DD;
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 32px;
+            --spacing-xl: 48px;
+            --spacing-2xl: 64px;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--color-charcoal);
+            background-color: var(--color-light-bg);
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: var(--color-off-white);
+            border-bottom: 1px solid var(--color-border);
+            padding: var(--spacing-md) var(--spacing-sm);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            color: var(--color-charcoal);
+            text-decoration: none;
+        }
+
+        .header-logo span {
+            color: var(--color-sage);
+        }
+
+        .header-nav {
+            display: flex;
+            gap: var(--spacing-lg);
+            align-items: center;
+        }
+
+        .header-nav a {
+            text-decoration: none;
+            color: var(--color-charcoal);
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .header-nav a:hover {
+            color: var(--color-sage);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--color-charcoal);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, var(--color-off-white) 0%, var(--color-light-bg) 100%);
+            padding: var(--spacing-2xl) var(--spacing-sm);
+            text-align: center;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: -1px;
+            margin-bottom: var(--spacing-md);
+            color: var(--color-charcoal);
+            line-height: 1.3;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: var(--color-warm-gray);
+            margin-bottom: var(--spacing-xl);
+            font-weight: 300;
+        }
+
+        .hero-content h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-sage);
+            margin-bottom: var(--spacing-lg);
+            letter-spacing: 2px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--color-sage);
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: all 0.3s;
+            border: 2px solid var(--color-sage);
+        }
+
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--color-sage);
+        }
+
+        /* FEATURED SETS */
+        .featured-section {
+            max-width: 1200px;
+            margin: var(--spacing-2xl) auto;
+            padding: 0 var(--spacing-sm);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-xl);
+            color: var(--color-charcoal);
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .featured-card {
+            background-color: white;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .featured-card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            transform: translateY(-4px);
+        }
+
+        .featured-card-image {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, var(--color-champagne) 0%, var(--color-warm-gray) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: white;
+            font-weight: 500;
+        }
+
+        .featured-card-content {
+            padding: var(--spacing-lg);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .featured-card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-charcoal);
+        }
+
+        .featured-card-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-sage);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .featured-card-items {
+            font-size: 13px;
+            color: var(--color-warm-gray);
+            line-height: 1.8;
+            margin-bottom: auto;
+        }
+
+        .featured-card-items li {
+            margin-bottom: 6px;
+            padding-left: 16px;
+            list-style: none;
+            position: relative;
+        }
+
+        .featured-card-items li:before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: var(--color-sage);
+            font-weight: bold;
+        }
+
+        .featured-card-cta {
+            display: inline-block;
+            background-color: var(--color-charcoal);
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-md);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 4px;
+            margin-top: var(--spacing-md);
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid var(--color-charcoal);
+        }
+
+        .featured-card-cta:hover {
+            background-color: transparent;
+            color: var(--color-charcoal);
+        }
+
+        /* PRODUCT SECTION */
+        .products-section {
+            background-color: white;
+            padding: var(--spacing-2xl) var(--spacing-sm);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .products-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .product-card {
+            background-color: var(--color-light-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 240px;
+            background: linear-gradient(135deg, var(--color-off-white) 0%, var(--color-champagne) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            color: var(--color-warm-gray);
+            font-weight: 500;
+        }
+
+        .product-info {
+            padding: var(--spacing-lg);
+        }
+
+        .product-badge {
+            display: inline-block;
+            background-color: var(--color-sage);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-badge.limited {
+            background-color: var(--color-champagne);
+            color: var(--color-charcoal);
+        }
+
+        .product-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-charcoal);
+            line-height: 1.4;
+        }
+
+        .product-includes {
+            font-size: 12px;
+            color: var(--color-warm-gray);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.6;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-sage);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .add-to-cart {
+            width: 100%;
+            background-color: var(--color-charcoal);
+            color: white;
+            padding: var(--spacing-sm);
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--color-sage);
+        }
+
+        /* WHAT'S INCLUDED SECTION */
+        .whats-included {
+            max-width: 1200px;
+            margin: var(--spacing-2xl) auto;
+            padding: 0 var(--spacing-sm);
+        }
+
+        .whats-included-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+
+        .included-item {
+            background-color: white;
+            padding: var(--spacing-lg);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .included-item:hover {
+            border-color: var(--color-sage);
+            box-shadow: 0 4px 12px rgba(143, 168, 139, 0.1);
+        }
+
+        .included-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto var(--spacing-md);
+            background-color: var(--color-light-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .included-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-charcoal);
+        }
+
+        .included-desc {
+            font-size: 13px;
+            color: var(--color-warm-gray);
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+        .footer {
+            background-color: var(--color-charcoal);
+            color: white;
+            padding: var(--spacing-xl) var(--spacing-sm);
+            margin-top: var(--spacing-2xl);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .footer-section h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            color: var(--color-champagne);
+        }
+
+        .footer-section p {
+            font-size: 12px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .footer-divider {
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.1);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: var(--spacing-lg);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header-nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 32px;
+            }
+
+            .hero-content h2 {
+                font-size: 24px;
+            }
+
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            }
+
+            .whats-included-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-logo {
+                font-size: 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 26px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 22px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .whats-included-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="header-logo">ONCE <span>SET</span></a>
+            <nav class="header-nav">
+                <a href="#sets">전체 세트</a>
+                <a href="#couple">커플 세트</a>
+                <a href="#gift">기프트</a>
+                <a href="#custom">커스텀</a>
+            </nav>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>하나만 사면<br>아쉬우니까</h1>
+            <p>믹스 앤 매치로 만드는 나만의 스타일</p>
+            <h2>SET COLLECTION</h2>
+            <a href="#products" class="cta-button">세트 보러가기</a>
+        </div>
+    </section>
+
+    <!-- FEATURED SETS -->
+    <section class="featured-section" id="sets">
+        <h2 class="section-title">추천 세트</h2>
+        <div class="featured-grid">
+            <!-- Featured Set 1 -->
+            <div class="featured-card">
+                <div class="featured-card-image">케이스 × 그립톡 × 스트랩</div>
+                <div class="featured-card-content">
+                    <h3 class="featured-card-title">베스트셀러 조합</h3>
+                    <div class="featured-card-price">₩35,000</div>
+                    <ul class="featured-card-items">
+                        <li>프리미엄 케이스</li>
+                        <li>스마트 그립톡</li>
+                        <li>레더 스트랩</li>
+                        <li>선물 박스 포함</li>
+                    </ul>
+                    <a href="#" class="featured-card-cta">자세히 보기</a>
+                </div>
+            </div>
+
+            <!-- Featured Set 2 -->
+            <div class="featured-card">
+                <div class="featured-card-image">케이스 × 2개 + 파우치</div>
+                <div class="featured-card-content">
+                    <h3 class="featured-card-title">커플 세트</h3>
+                    <div class="featured-card-price">₩58,000</div>
+                    <ul class="featured-card-items">
+                        <li>케이스 2개 (커플 디자인)</li>
+                        <li>매칭 파우치</li>
+                        <li>감성 박스 패키징</li>
+                        <li>필름 보호 + 세팅</li>
+                    </ul>
+                    <a href="#" class="featured-card-cta">자세히 보기</a>
+                </div>
+            </div>
+
+            <!-- Featured Set 3 -->
+            <div class="featured-card">
+                <div class="featured-card-image">4종 풀 세트 + 프리미엄 박스</div>
+                <div class="featured-card-content">
+                    <h3 class="featured-card-title">선물 풀세트</h3>
+                    <div class="featured-card-price">₩78,000</div>
+                    <ul class="featured-card-items">
+                        <li>프리미엄 케이스</li>
+                        <li>그립톡 + 스트랩</li>
+                        <li>카드 홀더</li>
+                        <li>럭셔리 패키징</li>
+                    </ul>
+                    <a href="#" class="featured-card-cta">자세히 보기</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS SECTION -->
+    <section class="products-section" id="products">
+        <div class="products-container">
+            <h2 class="section-title">전체 세트 컬렉션</h2>
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image">데일리 세트</div>
+                    <div class="product-info">
+                        <span class="product-badge">추천</span>
+                        <h3 class="product-name">데일리 세트</h3>
+                        <p class="product-includes">케이스 + 그립톡</p>
+                        <div class="product-price">₩35,000</div>
+                        <button class="add-to-cart">장바구니에 담기</button>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image">커플 세트</div>
+                    <div class="product-info">
+                        <span class="product-badge">인기</span>
+                        <h3 class="product-name">커플 세트</h3>
+                        <p class="product-includes">케이스 2개 + 파우치</p>
+                        <div class="product-price">₩58,000</div>
+                        <button class="add-to-cart">장바구니에 담기</button>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image">선물 풀세트</div>
+                    <div class="product-info">
+                        <span class="product-badge">프리미엄</span>
+                        <h3 class="product-name">선물 풀세트</h3>
+                        <p class="product-includes">4종 + 럭셔리 박스</p>
+                        <div class="product-price">₩78,000</div>
+                        <button class="add-to-cart">장바구니에 담기</button>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-image">미니 세트</div>
+                    <div class="product-info">
+                        <h3 class="product-name">미니 세트</h3>
+                        <p class="product-includes">케이스 + 스트랩</p>
+                        <div class="product-price">₩28,000</div>
+                        <button class="add-to-cart">장바구니에 담기</button>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-image">시즌 한정 세트</div>
+                    <div class="product-info">
+                        <span class="product-badge limited">한정</span>
+                        <h3 class="product-name">시즌 한정 세트</h3>
+                        <p class="product-includes">시즌 스페셜 + 스트랩</p>
+                        <div class="product-price">₩65,000</div>
+                        <button class="add-to-cart">장바구니에 담기</button>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <div class="product-image">프렌즈 3인 세트</div>
+                    <div class="product-info">
+                        <span class="product-badge">그룹</span>
+                        <h3 class="product-name">프렌즈 3인 세트</h3>
+                        <p class="product-includes">케이스 3개 + 파우치</p>
+                        <div class="product-price">₩72,000</div>
+                        <button class="add-to-cart">장바구니에 담기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHAT'S INCLUDED -->
+    <section class="whats-included">
+        <h2 class="section-title">세트에 포함된 것들</h2>
+        <div class="whats-included-grid">
+            <div class="included-item">
+                <div class="included-icon">📱</div>
+                <h4 class="included-title">프리미엄 케이스</h4>
+                <p class="included-desc">충격 흡수 TPU + 강화유리 백 조합</p>
+            </div>
+
+            <div class="included-item">
+                <div class="included-icon">💎</div>
+                <h4 class="included-title">그립톡</h4>
+                <p class="included-desc">스마트 폴딩식 그립톡</p>
+            </div>
+
+            <div class="included-item">
+                <div class="included-icon">🎀</div>
+                <h4 class="included-title">레더 스트랩</h4>
+                <p class="included-desc">이탈리안 레더 손목 스트랩</p>
+            </div>
+
+            <div class="included-item">
+                <div class="included-icon">💳</div>
+                <h4 class="included-title">카드 홀더</h4>
+                <p class="included-desc">슬림형 카드 수납 포켓</p>
+            </div>
+
+            <div class="included-item">
+                <div class="included-icon">🎁</div>
+                <h4 class="included-title">선물 박스</h4>
+                <p class="included-desc">프리미엄 리사이클 박스</p>
+            </div>
+
+            <div class="included-item">
+                <div class="included-icon">✨</div>
+                <h4 class="included-title">세팅 서비스</h4>
+                <p class="included-desc">무료 필름 설치 및 기본 조립</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>ONCE SET</h4>
+                    <p>프리미엄 스마트폰 액세서리<br>선물하고 싶은 세트 컬렉션</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>고객 지원</h4>
+                    <p>전화: 1544-xxxx<br>이메일: support@onceset.com<br>평일 10:00~18:00</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>배송 & 반품</h4>
+                    <p>전국 무료 배송<br>상품 수령 후 7일 이내 반품<br>교환 가능</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>정보</h4>
+                    <p>개인정보 처리방침<br>이용약관<br>배송조회<br>자주 묻는 질문</p>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="footer-bottom">
+                <p>© 2024 ONCE SET. All rights reserved. | 사업자등록번호: xxx-xx-xxxxx | 통신판매신고: 제xxxx-서울-xxxxx호</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            const nav = document.querySelector('.header-nav');
+            if (nav.style.display === 'flex') {
+                nav.style.display = 'none';
+            } else {
+                nav.style.display = 'flex';
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add to cart button interaction
+        document.querySelectorAll('.add-to-cart').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const productName = this.closest('.product-card').querySelector('.product-name').textContent;
+                alert(`${productName}이(가) 장바구니에 추가되었습니다.`);
+            });
+        });
+
+        // Featured card CTA interaction
+        document.querySelectorAll('.featured-card-cta').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const setName = this.closest('.featured-card').querySelector('.featured-card-title').textContent;
+                alert(`${setName} 상품 상세페이지로 이동합니다.`);
+            });
+        });
+    </script>
+</body>
+</html>

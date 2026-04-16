@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LACE MOOD - 발레코어 · 리본 · 러블리 패션">
+    <meta name="keywords" content="리본, 레이스, 발레 패션, 러블리, 케이스">
+    <title>LACE MOOD - 리본 묶인 듯한 하루</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-blush: #F8E8EE;
+            --color-rose: #E8B4C8;
+            --color-cream: #FFF8FA;
+            --color-mauve: #8B2252;
+            --color-white: #FFFFFF;
+            --color-text: #4a4a4a;
+            --color-light-gray: #f5f5f5;
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: var(--color-text);
+            background-color: var(--color-cream);
+            line-height: 1.6;
+        }
+
+        /* ========== HEADER ========== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: var(--color-white);
+            border-bottom: 1px solid rgba(139, 34, 82, 0.1);
+            box-shadow: 0 2px 8px rgba(139, 34, 82, 0.08);
+            transition: var(--transition);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--color-rose), var(--color-mauve));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--color-white);
+            font-weight: 700;
+        }
+
+        .logo-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 24px;
+            color: var(--color-mauve);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
+        }
+
+        .nav {
+            display: none;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--color-text);
+            font-weight: 500;
+            font-size: 15px;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .nav a:hover {
+            color: var(--color-mauve);
+            border-bottom-color: var(--color-rose);
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 8px;
+        }
+
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background-color: var(--color-text);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: var(--color-white);
+            border-bottom: 1px solid rgba(139, 34, 82, 0.1);
+            padding: 20px;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            text-decoration: none;
+            color: var(--color-text);
+            font-weight: 500;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--color-light-gray);
+        }
+
+        .mobile-menu a:last-child {
+            border-bottom: none;
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            position: relative;
+            height: 500px;
+            background: linear-gradient(135deg, var(--color-blush) 0%, var(--color-rose) 50%, #E8C8D8 100%);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(139, 34, 82, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(20px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 600px;
+            padding: 40px 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
+            color: var(--color-mauve);
+            font-weight: 500;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            color: var(--color-mauve);
+            font-weight: 300;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            letter-spacing: -1px;
+        }
+
+        .hero-description {
+            font-size: 16px;
+            color: rgba(139, 34, 82, 0.8);
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 14px 40px;
+            background: var(--color-mauve);
+            color: var(--color-white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: var(--transition);
+            border: 2px solid var(--color-mauve);
+            cursor: pointer;
+            border: none;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--color-mauve);
+            box-shadow: 0 4px 15px rgba(139, 34, 82, 0.2);
+        }
+
+        /* ========== PRODUCT GRID ========== */
+        .products-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            color: var(--color-mauve);
+            margin-bottom: 50px;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--color-rose);
+            border-radius: 2px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
+            background: var(--color-white);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 2px 10px rgba(139, 34, 82, 0.08);
+        }
+
+        .product-card:hover {
+            box-shadow: 0 8px 25px rgba(139, 34, 82, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 20px 20px 0 0;
+            background: linear-gradient(135deg, var(--color-blush), var(--color-rose));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(139, 34, 82, 0.3);
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .product-image.product1 {
+            background: linear-gradient(135deg, #F8E8EE, #E8B4C8);
+        }
+
+        .product-image.product2 {
+            background: linear-gradient(135deg, #FFF8FA, #F8D8E8);
+        }
+
+        .product-image.product3 {
+            background: linear-gradient(135deg, #E8B4C8, #D89BB8);
+        }
+
+        .product-image.product4 {
+            background: linear-gradient(135deg, #F8E8EE, #F0D0DC);
+        }
+
+        .product-image.product5 {
+            background: linear-gradient(135deg, #E8C8D8, #D8A8C8);
+        }
+
+        .product-image.product6 {
+            background: linear-gradient(135deg, #FFF8FA, #F8E8EE);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-mauve);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 15px;
+        }
+
+        .product-price::before {
+            content: '₩ ';
+            font-size: 14px;
+        }
+
+        .product-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--color-rose), var(--color-mauve));
+            color: var(--color-white);
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .product-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        /* ========== BRAND STORY ========== */
+        .brand-story {
+            background: linear-gradient(135deg, var(--color-blush), var(--color-cream));
+            padding: 80px 20px;
+            margin: 60px 0;
+            border-radius: 30px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .brand-story-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .brand-story h2 {
+            font-size: 32px;
+            color: var(--color-mauve);
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .brand-story p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--color-text);
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .brand-story p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background-color: var(--color-text);
+            color: var(--color-white);
+            padding: 50px 20px;
+            margin-top: 80px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-rose);
+        }
+
+        .footer-section p {
+            font-size: 13px;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 12px;
+            border-right: 1px solid rgba(255, 255, 255, 0.3);
+            padding-right: 20px;
+            transition: var(--transition);
+        }
+
+        .footer-links a:last-child {
+            border-right: none;
+            padding-right: 0;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-rose);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
+
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                height: 60px;
+            }
+
+            .nav {
+                display: none !important;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .hero {
+                height: 400px;
+            }
+
+            .hero-title {
+                font-size: 28px;
+            }
+
+            .hero-subtitle {
+                font-size: 13px;
+            }
+
+            .hero-description {
+                font-size: 14px;
+            }
+
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 14px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .brand-story {
+                padding: 50px 20px;
+            }
+
+            .footer-section {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .products-section {
+                margin: 40px auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-container {
+                padding: 0 15px;
+            }
+
+            .logo-text {
+                font-size: 18px;
+            }
+
+            .logo-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 16px;
+            }
+
+            .hero {
+                height: 350px;
+            }
+
+            .hero-title {
+                font-size: 22px;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .product-card {
+                border-radius: 15px;
+            }
+
+            .product-image {
+                border-radius: 15px 15px 0 0;
+            }
+
+            .section-title {
+                font-size: 20px;
+                margin-bottom: 30px;
+            }
+
+            .brand-story {
+                padding: 40px 15px;
+            }
+
+            .brand-story h2 {
+                font-size: 24px;
+            }
+
+            .products-section {
+                padding: 0 15px;
+            }
+        }
+
+        /* ========== DECORATIVE ELEMENTS ========== */
+        .ribbon-decoration {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--color-rose);
+            border-radius: 50%;
+            margin: 0 8px;
+            vertical-align: middle;
+        }
+
+        .lace-divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--color-rose), transparent);
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== HEADER ========== -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">🎀</div>
+                <div class="logo-text">LACE MOOD</div>
+            </a>
+
+            <nav class="nav" id="nav">
+                <a href="#products">전체상품</a>
+                <a href="#ribbon">리본 컬렉션</a>
+                <a href="#best">BEST</a>
+                <a href="#event">이벤트</a>
+            </nav>
+
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#products">전체상품</a>
+            <a href="#ribbon">리본 컬렉션</a>
+            <a href="#best">BEST</a>
+            <a href="#event">이벤트</a>
+        </div>
+    </header>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-subtitle">발레코어 · 리본 · 러블리</div>
+            <h1 class="hero-title">리본 묶인 듯한 하루</h1>
+            <p class="hero-description">우아하고 상큼한 러블리 무드로 하루를 시작하세요</p>
+            <button class="cta-button" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">
+                지금 둘러보기
+            </button>
+        </div>
+    </section>
+
+    <!-- ========== PRODUCTS SECTION ========== -->
+    <section class="products-section" id="products">
+        <h2 class="section-title">새로운 컬렉션</h2>
+
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-image product1">
+                    리본 젤리 케이스
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">리본 젤리 케이스</h3>
+                    <div class="product-price">18,000</div>
+                    <button class="product-btn">상세보기</button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-image product2">
+                    레이스 프린트 하드
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">레이스 프린트 하드</h3>
+                    <div class="product-price">21,000</div>
+                    <button class="product-btn">상세보기</button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-image product3">
+                    진주 참 세트
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">진주 참 세트</h3>
+                    <div class="product-price">25,000</div>
+                    <button class="product-btn">상세보기</button>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="product-image product4">
+                    발레 슈즈 젤리
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">발레 슈즈 젤리</h3>
+                    <div class="product-price">19,000</div>
+                    <button class="product-btn">상세보기</button>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card">
+                <div class="product-image product5">
+                    새틴 리본 하드
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">새틴 리본 하드</h3>
+                    <div class="product-price">22,000</div>
+                    <button class="product-btn">상세보기</button>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card">
+                <div class="product-image product6">
+                    체리 레이스
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">체리 레이스</h3>
+                    <div class="product-price">20,000</div>
+                    <button class="product-btn">상세보기</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== BRAND STORY ========== -->
+    <section class="brand-story" id="ribbon">
+        <div class="brand-story-content">
+            <h2>LACE MOOD의 이야기</h2>
+            <p>
+                우아한 발레리나의 우아함과 로맨틱한 리본의 따뜻함을 담았습니다.
+            </p>
+            <p>
+                매일의 일상에 작은 럭셔리를 더하고 싶은 당신을 위해 정성스럽게 준비한 컬렉션입니다.
+            </p>
+            <p>
+                러블리한 감성으로 가득 찬 LACE MOOD와 함께 특별한 순간들을 만들어보세요.
+            </p>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <div>
+                    <h3>회사</h3>
+                    <p>
+                        LACE MOOD<br>
+                        대한민국 서울시<br>
+                        고객센터: 1234-5678
+                    </p>
+                </div>
+                <div>
+                    <h3>정책</h3>
+                    <p>
+                        개인정보처리방침<br>
+                        이용약관<br>
+                        배송정책
+                    </p>
+                </div>
+                <div>
+                    <h3>소셜</h3>
+                    <p>
+                        Instagram<br>
+                        TikTok<br>
+                        YouTube
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-links">
+                    <a href="#">개인정보처리방침</a>
+                    <a href="#">이용약관</a>
+                    <a href="#">배송조회</a>
+                    <a href="#">고객센터</a>
+                </div>
+                <p>© 2026 LACE MOOD. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== SCRIPTS ========== -->
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when link is clicked
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Add to cart functionality (placeholder)
+        document.querySelectorAll('.product-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.textContent = '장바구니 추가됨';
+                this.style.opacity = '0.8';
+                setTimeout(() => {
+                    this.textContent = '상세보기';
+                    this.style.opacity = '1';
+                }, 1500);
+            });
+        });
+
+        // Scroll header styling
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 12px rgba(139, 34, 82, 0.15)';
+            } else {
+                header.style.boxShadow = '0 2px 8px rgba(139, 34, 82, 0.08)';
+            }
+        });
+    </script>
+</body>
+</html>

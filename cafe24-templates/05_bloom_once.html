@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BLOOM ONCE - 빈티지 플로럴 & 시즌 한정 드라이플라워 상품 쇼핑몰">
+    <title>BLOOM ONCE | 꽃이 지기 전에</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #F5EDE0;
+            --rose: #C4897A;
+            --olive: #6B7F4E;
+            --brown: #4A3728;
+            --gold: #B8965A;
+            --light-gray: #F9F7F5;
+            --text-dark: #3A3A3A;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Pretendard', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif KR', serif;
+            font-weight: 600;
+            color: var(--brown);
+        }
+
+        h1 { font-size: 3.5rem; line-height: 1.2; }
+        h2 { font-size: 2.5rem; line-height: 1.3; }
+        h3 { font-size: 1.75rem; line-height: 1.4; }
+        h4 { font-size: 1.5rem; }
+
+        a {
+            text-decoration: none;
+            color: var(--brown);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--rose);
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(245, 237, 224, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(184, 150, 90, 0.2);
+            padding: 1rem 0;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--brown);
+            letter-spacing: 0.15em;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            border-bottom-color: var(--gold);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 0.4rem;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2.5px;
+            background: var(--brown);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            background: linear-gradient(135deg, var(--cream) 0%, #F0E8DE 100%);
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(196, 137, 122, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(107, 127, 78, 0.08) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-family: 'Noto Serif KR', serif;
+            color: var(--brown);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        .season-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--rose);
+            color: white;
+            padding: 1rem 3rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            border: none;
+            border-radius: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .cta-button:hover {
+            background: var(--brown);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(196, 137, 122, 0.3);
+        }
+
+        /* Product Section */
+        .products {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 3rem;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .product-card {
+            background: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(196, 137, 122, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #F0E8DE 0%, #E8DFD5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 3rem;
+            font-weight: 300;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--brown);
+            font-family: 'Noto Serif KR', serif;
+        }
+
+        .product-desc {
+            font-size: 0.85rem;
+            color: #999;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--rose);
+            font-family: 'Noto Serif KR', serif;
+        }
+
+        /* Brand Story */
+        .brand-story {
+            background: linear-gradient(to bottom, var(--cream), #F0E8DE);
+            padding: 5rem 2rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .brand-story-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .brand-story h2 {
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+        }
+
+        .brand-story-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            letter-spacing: 0.03em;
+        }
+
+        .brand-highlight {
+            color: var(--olive);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--brown);
+            color: var(--cream);
+            padding: 3rem 2rem;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            margin-top: 4rem;
+        }
+
+        footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .footer-section a {
+            color: var(--cream);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-divider {
+            border-top: 1px solid rgba(184, 150, 90, 0.2);
+            margin: 2rem 0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(184, 150, 90, 0.2);
+            font-size: 0.8rem;
+            color: rgba(245, 237, 224, 0.7);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            h1 { font-size: 2.5rem; }
+            .hero-title { font-size: 2.8rem; }
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 0 1.5rem;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: var(--cream);
+                gap: 0;
+                padding: 1.5rem;
+                border-bottom: 1px solid rgba(184, 150, 90, 0.2);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu a {
+                padding: 1rem;
+                border-bottom: 1px solid rgba(184, 150, 90, 0.1);
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.8rem; }
+
+            .hero {
+                min-height: 500px;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                padding: 0;
+            }
+
+            .product-image {
+                height: 200px;
+            }
+
+            .product-info {
+                padding: 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .products {
+                margin: 2rem auto;
+            }
+
+            .brand-story {
+                padding: 3rem 1.5rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .footer-section {
+                text-align: center;
+            }
+
+            .cta-button {
+                padding: 0.8rem 2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.5rem; }
+            h3 { font-size: 1.2rem; }
+
+            .hero {
+                min-height: 400px;
+            }
+
+            .hero-title {
+                font-size: 1.6rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero-description {
+                font-size: 0.9rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .product-image {
+                height: 250px;
+            }
+
+            .brand-story-text {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.85rem;
+            }
+
+            .season-badge {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <nav>
+            <div class="logo">BLOOM ONCE</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#products">전체상품</a></li>
+                <li><a href="#season">시즌 에디션</a></li>
+                <li><a href="#gift">기프트</a></li>
+                <li><a href="#about">ABOUT</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="season-badge">SPRING EDITION</div>
+            <h1 class="hero-title">꽃이 지기 전에</h1>
+            <p class="hero-description">자연이 남긴 순간을 영원히 간직하다</p>
+            <button class="cta-button" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">쇼핑하기</button>
+        </div>
+    </section>
+
+    <!-- Product Section -->
+    <section class="products" id="products">
+        <div class="section-title">
+            <h2>시즌 컬렉션</h2>
+        </div>
+        <div class="section-subtitle">SEASONAL COLLECTION</div>
+
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-image">🌸</div>
+                <div class="product-info">
+                    <h4 class="product-name">플로럴 젤리</h4>
+                    <p class="product-desc">투명한 젤리 속 꽃의 아름다움</p>
+                    <div class="product-price">₩18,000</div>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-image">🌿</div>
+                <div class="product-info">
+                    <h4 class="product-name">압화 에폭시 하드</h4>
+                    <p class="product-desc">오래되지 않는 시간의 기록</p>
+                    <div class="product-price">₩32,000</div>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-image">🎁</div>
+                <div class="product-info">
+                    <h4 class="product-name">시즌 한정 기프트박스</h4>
+                    <p class="product-desc">특별한 순간을 위한 선택</p>
+                    <div class="product-price">₩48,000</div>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="product-image">✨</div>
+                <div class="product-info">
+                    <h4 class="product-name">드라이플라워 투명</h4>
+                    <p class="product-desc">자연의 색감이 살아있는</p>
+                    <div class="product-price">₩24,000</div>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card">
+                <div class="product-image">💜</div>
+                <div class="product-info">
+                    <h4 class="product-name">라벤더 필드</h4>
+                    <p class="product-desc">자연의 향기를 담은 컬렉션</p>
+                    <div class="product-price">₩22,000</div>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card">
+                <div class="product-image">🌹</div>
+                <div class="product-info">
+                    <h4 class="product-name">빈티지 로즈</h4>
+                    <p class="product-desc">클래식한 아름다움의 재현</p>
+                    <div class="product-price">₩26,000</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Story -->
+    <section class="brand-story" id="about">
+        <div class="brand-story-container">
+            <h2>BLOOM ONCE</h2>
+            <p class="brand-story-text">
+                꽃은 피고, 지고, 또 다시 핀다.
+                <br><br>
+                <span class="brand-highlight">BLOOM ONCE</span>는 이 순간의 아름다움을 영원히 간직하고 싶은 분들을 위해 만들어졌습니다.
+                <br><br>
+                자연이 만든 가장 아름다운 형태를 압화, 드라이플라워, 레진 아트로 재해석하여,
+                시간 속에서도 색바래지 않는 꽃의 이야기를 전해드립니다.
+                <br><br>
+                <span class="brand-highlight">꽃과 함께하는 시간</span>이 당신의 일상에 작은 위로가 되기를 바랍니다.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h4>고객 서비스</h4>
+                <a href="#">상품 정보</a>
+                <a href="#">배송 안내</a>
+                <a href="#">교환/반품</a>
+                <a href="#">자주 묻는 질문</a>
+            </div>
+            <div class="footer-section">
+                <h4>회사 정보</h4>
+                <a href="#">회사소개</a>
+                <a href="#">채용공고</a>
+                <a href="#">제휴문의</a>
+                <a href="#">언론보도</a>
+            </div>
+            <div class="footer-section">
+                <h4>고객 지원</h4>
+                <a href="#">전화: 1544-1234</a>
+                <a href="#">이메일: hello@bloomonce.kr</a>
+                <a href="#">카카오톡: @bloomonce</a>
+                <a href="#">이용약관</a>
+            </div>
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-bottom">
+            <p>
+                © 2026 BLOOM ONCE. All Rights Reserved.<br>
+                회사명: 블룸온스 | 사업자등록번호: 000-00-00000<br>
+                주소: 서울시 강남구 테헤란로 123 | 대표자: 임채현<br>
+                통신판매신고: 2026-서울강남-0000호
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        let lastScrollTop = 0;
+        const header = document.querySelector('header');
+
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > 100) {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.08)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+
+            lastScrollTop = scrollTop;
+        });
+
+        // Product card click handler (expandable for product detail pages)
+        const productCards = document.querySelectorAll('.product-card');
+        productCards.forEach(card => {
+            card.addEventListener('click', function() {
+                // This can be extended to navigate to a product detail page
+                console.log('Product clicked:', this.querySelector('.product-name').textContent);
+            });
+        });
+    </script>
+</body>
+</html>

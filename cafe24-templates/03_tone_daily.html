@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TONE DAILY - 미니멀 라이프 스타일 브랜드">
+    <title>TONE DAILY | 오늘의 톤 하나로 충분해</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #4A4E56;
+            background-color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Color Palette */
+        :root {
+            --beige: #E8E3DC;
+            --stone: #C7B8A8;
+            --sage: #8B9D83;
+            --charcoal: #4A4E56;
+            --blush: #F5D7CE;
+            --white: #ffffff;
+            --light-gray: #f8f7f5;
+            --border-gray: #efefef;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-gray);
+            transition: box-shadow 0.3s ease;
+        }
+
+        header.scrolled {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--charcoal);
+            text-decoration: none;
+        }
+
+        .nav-desktop {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-desktop a {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-desktop a:hover {
+            color: var(--sage);
+        }
+
+        .nav-desktop a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--sage);
+            transition: width 0.3s ease;
+        }
+
+        .nav-desktop a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background-color: var(--charcoal);
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Navigation */
+        .nav-mobile {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-gray);
+            flex-direction: column;
+            list-style: none;
+            padding: 1rem 1.25rem;
+        }
+
+        .nav-mobile.active {
+            display: flex;
+        }
+
+        .nav-mobile li {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        .nav-mobile li:last-child {
+            border-bottom: none;
+        }
+
+        .nav-mobile a {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--beige) 0%, var(--light-gray) 100%);
+            padding: 4rem 1.25rem;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-content p {
+            font-size: 1rem;
+            color: var(--stone);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background-color: var(--charcoal);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .cta-button:hover {
+            background-color: var(--sage);
+            transform: translateY(-2px);
+        }
+
+        /* Color Showcase */
+        .color-showcase {
+            background-color: var(--white);
+            padding: 3rem 1.25rem;
+            overflow-x: auto;
+        }
+
+        .color-showcase h2 {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 2rem;
+            letter-spacing: -0.01em;
+        }
+
+        .color-swatches {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .color-swatch {
+            text-align: center;
+            min-width: 140px;
+        }
+
+        .swatch-box {
+            width: 140px;
+            height: 140px;
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .swatch-box:hover {
+            transform: scale(1.05);
+        }
+
+        .swatch-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 0.25rem;
+        }
+
+        .swatch-code {
+            font-size: 0.75rem;
+            color: var(--stone);
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Product Grid */
+        .products-section {
+            background-color: var(--light-gray);
+            padding: 4rem 1.25rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: 3rem;
+            letter-spacing: -0.01em;
+        }
+
+        .products-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .product-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .product-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--stone) 0%, var(--beige) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 300;
+        }
+
+        .product-info {
+            padding: 1.5rem 1.25rem;
+        }
+
+        .product-category {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--sage);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .product-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+        }
+
+        .price-currency {
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        .product-button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--beige);
+            border: 1px solid var(--stone);
+            color: var(--charcoal);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .product-button:hover {
+            background-color: var(--stone);
+            color: var(--white);
+            border-color: var(--stone);
+        }
+
+        /* Brand Story */
+        .brand-story {
+            background-color: var(--white);
+            padding: 4rem 1.25rem;
+        }
+
+        .story-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .story-container h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: 2rem;
+            letter-spacing: -0.01em;
+        }
+
+        .story-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--stone);
+            margin-bottom: 1.5rem;
+        }
+
+        .story-highlight {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin: 2rem 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--charcoal);
+            color: var(--white);
+            padding: 3rem 1.25rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-section h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--beige);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--beige);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-company {
+            font-size: 0.8rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-desktop {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero {
+                padding: 3rem 1.25rem;
+                min-height: 300px;
+            }
+
+            .color-swatches {
+                flex-wrap: wrap;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .product-image {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .story-container h2 {
+                font-size: 1.5rem;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-container {
+                padding: 1rem 1.25rem;
+            }
+
+            .logo {
+                font-size: 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero {
+                padding: 2rem 1.25rem;
+                min-height: 280px;
+            }
+
+            .color-showcase {
+                padding: 2rem 1.25rem;
+            }
+
+            .color-swatch {
+                min-width: 100px;
+            }
+
+            .swatch-box {
+                width: 100px;
+                height: 100px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+
+            .section-title {
+                font-size: 1.25rem;
+                margin-bottom: 2rem;
+            }
+
+            .story-text {
+                font-size: 0.95rem;
+            }
+
+            .products-section {
+                padding: 2rem 1.25rem;
+            }
+
+            .brand-story {
+                padding: 2rem 1.25rem;
+            }
+
+            footer {
+                padding: 2rem 1.25rem;
+                margin-top: 2rem;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.25rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="header-container">
+            <a href="#" class="logo">TONE DAILY</a>
+
+            <nav class="nav-desktop">
+                <li><a href="#products">전체상품</a></li>
+                <li><a href="#colors">시즌컬러</a></li>
+                <li><a href="#best">BEST</a></li>
+                <li><a href="#about">ABOUT</a></li>
+            </nav>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <nav class="nav-mobile" id="navMobile">
+                <li><a href="#products">전체상품</a></li>
+                <li><a href="#colors">시즌컬러</a></li>
+                <li><a href="#best">BEST</a></li>
+                <li><a href="#about">ABOUT</a></li>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>오늘의 톤<br>하나로<br>충분해</h1>
+            <p>TONE DAILY와 함께하는 미니멀한 일상</p>
+            <a href="#products" class="cta-button">쇼핑 시작하기</a>
+        </div>
+    </section>
+
+    <!-- Color Showcase -->
+    <section class="color-showcase" id="colors">
+        <h2>시즌 컬러</h2>
+        <div class="color-swatches">
+            <div class="color-swatch">
+                <div class="swatch-box" style="background-color: #E8E3DC;"></div>
+                <div class="swatch-name">Warm Beige</div>
+                <div class="swatch-code">#E8E3DC</div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch-box" style="background-color: #C7B8A8;"></div>
+                <div class="swatch-name">Stone</div>
+                <div class="swatch-code">#C7B8A8</div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch-box" style="background-color: #8B9D83;"></div>
+                <div class="swatch-name">Sage</div>
+                <div class="swatch-code">#8B9D83</div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch-box" style="background-color: #4A4E56;"></div>
+                <div class="swatch-name">Charcoal</div>
+                <div class="swatch-code">#4A4E56</div>
+            </div>
+            <div class="color-swatch">
+                <div class="swatch-box" style="background-color: #F5D7CE;"></div>
+                <div class="swatch-name">Blush</div>
+                <div class="swatch-code">#F5D7CE</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section" id="products">
+        <h2 class="section-title">인기 상품</h2>
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-image">🧴</div>
+                <div class="product-info">
+                    <div class="product-category">무드 젤리</div>
+                    <div class="product-name">무드 젤리 베이지</div>
+                    <div class="product-price"><span class="price-currency">₩</span>16,000</div>
+                    <button class="product-button">장바구니 추가</button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-image">🧴</div>
+                <div class="product-info">
+                    <div class="product-category">무드 젤리</div>
+                    <div class="product-name">무드 젤리 세이지</div>
+                    <div class="product-price"><span class="price-currency">₩</span>16,000</div>
+                    <button class="product-button">장바구니 추가</button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-image">💅</div>
+                <div class="product-info">
+                    <div class="product-category">매트 하드</div>
+                    <div class="product-name">매트 하드 차콜</div>
+                    <div class="product-price"><span class="price-currency">₩</span>19,000</div>
+                    <button class="product-button">장바구니 추가</button>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="product-image">💅</div>
+                <div class="product-info">
+                    <div class="product-category">매트 하드</div>
+                    <div class="product-name">매트 하드 블러쉬</div>
+                    <div class="product-price"><span class="price-currency">₩</span>19,000</div>
+                    <button class="product-button">장바구니 추가</button>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card">
+                <div class="product-image">✨</div>
+                <div class="product-info">
+                    <div class="product-category">시즌 에디션</div>
+                    <div class="product-name">시즌 에디션 더스티로즈</div>
+                    <div class="product-price"><span class="price-currency">₩</span>24,000</div>
+                    <button class="product-button">장바구니 추가</button>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card">
+                <div class="product-image">🎁</div>
+                <div class="product-info">
+                    <div class="product-category">세트</div>
+                    <div class="product-name">톤온톤 세트</div>
+                    <div class="product-price"><span class="price-currency">₩</span>32,000</div>
+                    <button class="product-button">장바구니 추가</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Story -->
+    <section class="brand-story" id="about">
+        <div class="story-container">
+            <h2>TONE DAILY의 철학</h2>
+            <p class="story-text">
+                TONE DAILY는 색 하나로의 승부를 믿습니다.
+            </p>
+            <p class="story-text">
+                복잡한 컬러의 조화보다는 하나의 톤으로 완성되는 미니멀한 아름다움을 추구합니다.
+                매일 선택하는 톤 하나가 당신의 일상을 정의하고, 당신의 개성을 표현합니다.
+            </p>
+            <div class="story-highlight">
+                우리는 미니멀함에서 완성도를 찾습니다.
+            </div>
+            <p class="story-text">
+                20대부터 30대까지, 자신의 스타일을 아는 사람들을 위해 만들었습니다.
+                TONE DAILY와 함께 당신만의 톤을 발견하세요.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-top">
+                <div class="footer-section">
+                    <h3>쇼핑</h3>
+                    <ul>
+                        <li><a href="#">전체상품</a></li>
+                        <li><a href="#">시즌컬러</a></li>
+                        <li><a href="#">BEST</a></li>
+                        <li><a href="#">세트 상품</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>고객지원</h3>
+                    <ul>
+                        <li><a href="#">공지사항</a></li>
+                        <li><a href="#">자주묻는질문</a></li>
+                        <li><a href="#">1:1 문의</a></li>
+                        <li><a href="#">배송조회</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>정보</h3>
+                    <ul>
+                        <li><a href="#">회사소개</a></li>
+                        <li><a href="#">채용정보</a></li>
+                        <li><a href="#">이용약관</a></li>
+                        <li><a href="#">개인정보처리방침</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>팔로우</h3>
+                    <ul>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">TikTok</a></li>
+                        <li><a href="#">YouTube</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-company">
+                    <strong>TONE DAILY</strong><br>
+                    대표: 홍길동 | 사업자등록번호: 000-00-00000<br>
+                    주소: 서울시 강남구 테헤란로 123, 456호<br>
+                    전화: 02-1234-5678 | 이메일: hello@tonedaily.com<br>
+                    통신판매신고번호: 2024-서울강남-0123
+                </div>
+                <div>
+                    &copy; 2024 TONE DAILY. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sticky Header Shadow
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 0) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Hamburger Menu
+        const hamburger = document.getElementById('hamburger');
+        const navMobile = document.getElementById('navMobile');
+
+        hamburger.addEventListener('click', function() {
+            navMobile.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        const navLinks = navMobile.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navMobile.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = navMobile.contains(event.target);
+            const isClickOnHamburger = hamburger.contains(event.target);
+
+            if (!isClickInsideNav && !isClickOnHamburger && navMobile.classList.contains('active')) {
+                navMobile.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+
+        // Smooth Scroll for Navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Product Button Interaction
+        const productButtons = document.querySelectorAll('.product-button');
+        productButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const productCard = this.closest('.product-card');
+                const productName = productCard.querySelector('.product-name').textContent;
+                const productPrice = productCard.querySelector('.product-price').textContent;
+
+                // Visual feedback
+                this.textContent = '추가됨!';
+                this.style.backgroundColor = 'var(--sage)';
+                this.style.borderColor = 'var(--sage)';
+                this.style.color = 'var(--white)';
+
+                setTimeout(() => {
+                    this.textContent = '장바구니 추가';
+                    this.style.backgroundColor = '';
+                    this.style.borderColor = '';
+                    this.style.color = '';
+                }, 1500);
+            });
+        });
+
+        // CTA Button Interaction
+        const ctaButton = document.querySelector('.cta-button');
+        ctaButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            const productsSection = document.getElementById('products');
+            productsSection.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
