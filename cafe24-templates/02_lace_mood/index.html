@@ -1,0 +1,170 @@
+<!--
+  Cafe24 디자인센터 Main Page Template
+  Path: 디자인센터 → main/index.html
+  Brand: LACE MOOD (발레코어 · 리본 · 러블리)
+  Created: 2026-04-16
+-->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LACE MOOD - 발레코어 · 리본 · 러블리</title>
+  <!--@css(/css/lace_mood.css)-->
+</head>
+<body>
+
+<!-- Hero Banner Section -->
+<section class="hero-banner">
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1 class="hero-title">리본 묶인 듯한<br>하루</h1>
+      <p class="hero-subtitle">
+        우아하고 로맨틱한 발레 스타일의<br>프리미엄 컬렉션
+      </p>
+    </div>
+    <div class="hero-image">
+      <!-- Hero background image with pink gradient -->
+      <div class="hero-gradient"></div>
+    </div>
+    <a href="/product/list.html" class="hero-cta">
+      <span>컬렉션 보러가기</span>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- Featured Products Section (추천상품) -->
+<section class="featured-products main-section">
+  <div class="section-header">
+    <h2 class="section-title">🎀 추천상품</h2>
+    <p class="section-subtitle">LACE MOOD에서 엄선한 프리미엄 컬렉션</p>
+  </div>
+
+  <div class="products-container">
+    <div module="product_listmain_1" class="product-grid">
+      <!--@repeat({$list_product},8)-->
+      <div class="product-card">
+        <div class="product-image-wrap">
+          <img src="{$image_medium}" alt="{$product_name}" class="product-image">
+          <div class="product-badge">
+            <span module="product_list_display_icon_{$product_no}"></span>
+          </div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">{$product_name}</h3>
+          <div class="product-rating" module="product_list_star_{$product_no}"></div>
+          <p class="product-price">
+            <span module="product_list_price_{$product_no}">{$product_price}</span>원
+          </p>
+          <a href="/product/detail.html?product_no={$product_no}" class="product-link">
+            자세히 보기
+          </a>
+        </div>
+      </div>
+      <!--@endrepeat-->
+    </div>
+  </div>
+
+  <a href="/product/list.html" class="view-all-link">
+    추천상품 전체보기 →
+  </a>
+</section>
+
+<!-- New Products Section (신상품) -->
+<section class="new-products main-section">
+  <div class="section-header">
+    <h2 class="section-title">✨ 신상품</h2>
+    <p class="section-subtitle">매주 새로운 컬렉션이 추가됩니다</p>
+  </div>
+
+  <div class="products-container">
+    <div module="product_listmain_2" class="product-grid">
+      <!--@repeat({$list_product},8)-->
+      <div class="product-card">
+        <div class="product-image-wrap">
+          <img src="{$image_medium}" alt="{$product_name}" class="product-image">
+          <div class="product-badge new-badge">NEW</div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">{$product_name}</h3>
+          <div class="product-rating" module="product_list_star_{$product_no}"></div>
+          <p class="product-price">
+            <span module="product_list_price_{$product_no}">{$product_price}</span>원
+          </p>
+          <a href="/product/detail.html?product_no={$product_no}" class="product-link">
+            자세히 보기
+          </a>
+        </div>
+      </div>
+      <!--@endrepeat-->
+    </div>
+  </div>
+
+  <a href="/product/list.html?sort=recent" class="view-all-link">
+    신상품 전체보기 →
+  </a>
+</section>
+
+<!-- Brand Story Section -->
+<section class="brand-story main-section">
+  <div class="story-container">
+    <div class="story-image">
+      <div class="story-image-placeholder">
+        <span class="story-icon">🎀</span>
+      </div>
+    </div>
+    <div class="story-content">
+      <h2 class="story-title">LACE MOOD의 이야기</h2>
+      <div class="story-text">
+        <p>
+          발레의 우아함과 리본의 로맨틱함을 담은<br>
+          <strong>LACE MOOD</strong>는 일상 속 특별한 순간들을<br>
+          더욱 아름답게 만드는 라이프스타일 브랜드입니다.
+        </p>
+        <p>
+          정성스럽게 선별된 소재와<br>
+          세심한 디자인으로 만들어진 제품들은<br>
+          당신의 매일을 발레처럼 우아하게 하는<br>
+          특별한 경험을 선사합니다.
+        </p>
+      </div>
+      <a href="/info/brand.html" class="story-link">
+        자세한 브랜드 스토리 →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Ribbon Collections Highlight -->
+<section class="ribbon-collection main-section">
+  <div class="section-header">
+    <h2 class="section-title">🎀 리본 컬렉션</h2>
+    <p class="section-subtitle">LACE MOOD의 시그니처 리본 디자인</p>
+  </div>
+  <div class="collection-showcase">
+    <p class="collection-description">
+      정교한 리본 디테일과 발레의 우아함이 어우러진<br>
+      프리미엄 컬렉션을 만나보세요.
+    </p>
+    <a href="/product/list.html?cate_no=1" class="collection-cta">
+      리본 컬렉션 보러가기 →
+    </a>
+  </div>
+</section>
+
+<!-- Newsletter Subscription -->
+<section class="newsletter main-section">
+  <div class="newsletter-content">
+    <h3 class="newsletter-title">뉴스레터 구독</h3>
+    <p class="newsletter-subtitle">새로운 컬렉션과 특별한 이벤트 소식을 가장 먼저 받아보세요</p>
+    <form class="newsletter-form" action="/member/email.html" method="post">
+      <input type="email" name="email" class="newsletter-input" placeholder="이메일을 입력해주세요" required>
+      <button type="submit" class="newsletter-button">구독하기</button>
+    </form>
+  </div>
+</section>
+
+</body>
+</html>

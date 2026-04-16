@@ -1,0 +1,119 @@
+<!-- ================================================
+   MUSE ONCE - 명화 감성 프리미엄
+   Cafe24 디자인센터 → product/list.html 에 붙여넣기
+   ================================================ -->
+
+<!--@css(/css/muse_once.css)-->
+
+<div id="product-list-container" class="product-list-container">
+
+  <!-- 카테고리 헤더 -->
+  <div module="product_headcategory" class="category-header">
+    <h1 class="category-title">{$category_title_text}</h1>
+    <p class="category-count">총 <strong>{$total_product_count}</strong>개</p>
+  </div>
+
+  <!-- 정렬 및 필터 메뉴 -->
+  <div module="product_normalmenu" class="product-menu">
+    <div class="menu-left">
+      <!-- 상품 개수 선택 -->
+      <select name="listnum" class="select-listnum" onchange="if(this.value) location.href='{$SEARCH_QUERY}&listnum='+this.value;">
+        <option value="20" selected>20개씩 보기</option>
+        <option value="40">40개씩 보기</option>
+        <option value="60">60개씩 보기</option>
+      </select>
+    </div>
+
+    <div class="menu-right">
+      <!-- 정렬 옵션 -->
+      <select name="sort" class="select-sort" onchange="if(this.value) location.href='{$SEARCH_QUERY}&sort='+this.value;">
+        <option value="new_product" selected>신상품순</option>
+        <option value="popular">인기순</option>
+        <option value="review_count">리뷰순</option>
+        <option value="price_low">낮은 가격순</option>
+        <option value="price_high">높은 가격순</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- 상품 리스트 -->
+  <div module="product_listnormal" class="product-list-module">
+    <!--$count:20-->
+    <ul class="prdList grid4">
+      <li id="anchorBoxId_{$product_no}" class="product-item">
+        <div class="thumbnail">
+          <a href="/product/detail.html{$param}" class="product-link">
+            <img src="{$image_medium}" alt="{$product_name}" class="product-image">
+            <div class="product-overlay">
+              <span class="overlay-text">자세히 보기</span>
+            </div>
+          </a>
+          <div class="product-badge">
+            {$soldout_icon}{$recommend_icon}{$new_icon}
+          </div>
+        </div>
+        <div class="description">
+          <p class="name">
+            <a href="/product/detail.html{$param}" class="product-name-link">{$product_name}</a>
+          </p>
+          <ul class="xans-search product-options">
+            <li class="{$item_display|display}">
+              <span class="title">{$item_title}:</span>
+              <span class="content">{$item_content}</span>
+            </li>
+          </ul>
+          <div class="product-price">
+            <span class="price" id="span_product_price_{$product_no}">{$product_price}</span>
+            <div class="product-rating">
+              <span class="stars">★★★★★</span>
+              <span class="rating-count">({$review_count})</span>
+            </div>
+          </div>
+          <div class="product-actions">
+            <button class="btn-quick-view" data-product-no="{$product_no}" title="빠른 보기">빠른 보기</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 상품이 없는 경우 메시지 -->
+  <div class="empty-product" style="display:none;">
+    <p>검색 결과가 없습니다.</p>
+    <a href="/product/list.html" class="btn-back">전체 상품으로 돌아가기</a>
+  </div>
+
+  <!-- 페이징 -->
+  <div module="product_normalpaging" class="product-paging">
+    <ul class="paging-list">
+      <!-- 페이징 버튼은 Cafe24 모듈에서 자동 생성 -->
+      {$paging_html}
+    </ul>
+  </div>
+
+  <!-- 추가 필터 섹션 (선택사항) -->
+  <div class="product-filter-section" style="display:none;">
+    <h3>상세 필터</h3>
+    <div class="filter-group">
+      <h4>가격</h4>
+      <div class="price-filter">
+        <input type="number" placeholder="최소" class="price-min" min="0">
+        <span>~</span>
+        <input type="number" placeholder="최대" class="price-max" min="0">
+        <button class="btn-apply-filter">적용</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// 빠른 보기 버튼 클릭 이벤트
+document.querySelectorAll('.btn-quick-view').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const productNo = this.dataset.productNo;
+    // Cafe24 모달 또는 팝업 오픈 로직
+    window.open('/product/detail.html?product_no=' + productNo, 'quick_view', 'width=800,height=600,scrollbars=yes');
+  });
+});
+</script>

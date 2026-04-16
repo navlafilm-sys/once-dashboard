@@ -1,0 +1,100 @@
+<!-- Cafe24 디자인센터 → product/list.html -->
+<!--@css(/css/once_set.css)-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 목록 - ONCE SET</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Header -->
+<div module="Layout_header"></div>
+
+<!-- Breadcrumb & Page Title -->
+<div class="page-header">
+    <div class="container">
+        <div module="product_headcategory" class="breadcrumb">
+            <a href="/">HOME</a> &gt; <span>{$category_name}</span>
+        </div>
+        <h1 class="page-title">{$category_name}</h1>
+    </div>
+</div>
+
+<!-- Category Navigation -->
+<div class="product-nav">
+    <div class="container">
+        <div module="product_normalmenu" class="filter-menu">
+            <a href="{$link}" class="filter-item {$class}">{$name}</a>
+        </div>
+    </div>
+</div>
+
+<!-- Products Section -->
+<section class="products-section">
+    <div class="container">
+        <!-- Product Grid -->
+        <div module="product_listnormal" class="product-grid">
+            <!--$count:20-->
+            <div id="anchorBoxId_{$product_no}" class="product-card">
+                <div class="product-image">
+                    <a href="/product/detail.html?product_no={$product_no}">
+                        <img src="{$image_medium}" alt="{$product_name}">
+                        {if $product_tag}
+                        <div class="product-badge">{$product_tag}</div>
+                        {/if}
+                    </a>
+                </div>
+                <div class="product-details">
+                    <h3 class="product-title">
+                        <a href="/product/detail.html?product_no={$product_no}">{$product_name}</a>
+                    </h3>
+                    <ul class="product-options">
+                        {if $item_display}
+                        <li class="option-item">
+                            <span class="option-label">{$item_title}:</span>
+                            <span class="option-value">{$item_content}</span>
+                        </li>
+                        {/if}
+                    </ul>
+                    <div class="product-footer">
+                        <div class="product-price">
+                            {if $discount_rate}
+                            <span class="original-price">{$origin_price|number_format}</span>
+                            <span class="discount-badge">{$discount_rate}%</span>
+                            {/if}
+                            <span class="current-price">{$price|number_format}</span>
+                            <span class="price-unit">원</span>
+                        </div>
+                        <a href="/product/detail.html?product_no={$product_no}" class="view-detail">상세보기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pagination -->
+<div class="pagination-wrapper">
+    <div class="container">
+        <div module="product_normalpaging" class="pagination">
+            <a href="{$link_first_page}" class="paging-btn">&laquo; 처음</a>
+            <a href="{$link_prev_page}" class="paging-btn">&lt; 이전</a>
+
+            {loop $page_list}
+            <a href="{$link_page}" class="paging-num {if $is_current_page}active{/if}">{$num}</a>
+            {/loop}
+
+            <a href="{$link_next_page}" class="paging-btn">다음 &gt;</a>
+            <a href="{$link_last_page}" class="paging-btn">마지막 &raquo;</a>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div module="Layout_footer"></div>
+
+</body>
+</html>

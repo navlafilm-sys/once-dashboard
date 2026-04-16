@@ -1,0 +1,155 @@
+<!-- Cafe24 디자인센터 → main/index.html -->
+<!--@css(/css/once_set.css)-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONCE SET - 프리미엄 기프트 세트</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Header -->
+<div module="Layout_header"></div>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h1 class="hero-title">하나만 사면 아쉬우니까</h1>
+        <p class="hero-subtitle">완벽하게 완성된 세트의 매력을 경험해보세요</p>
+        <a href="#featured-sets" class="hero-cta">SET COLLECTION 보러가기</a>
+    </div>
+</section>
+
+<!-- Featured Set Showcase -->
+<section class="featured-sets" id="featured-sets">
+    <div class="container">
+        <h2 class="section-title">에디션별 세트 구성</h2>
+
+        <div class="sets-grid">
+            <!-- Set 1 -->
+            <div class="set-card">
+                <div class="set-image">
+                    <img src="/images/set-01.jpg" alt="클래식 세트">
+                </div>
+                <div class="set-info">
+                    <h3>클래식 세트</h3>
+                    <ul class="set-contents">
+                        <li>프리미엄 선물 상자</li>
+                        <li>핸드크림 2종</li>
+                        <li>향초</li>
+                        <li>메시지 카드</li>
+                    </ul>
+                    <a href="/product/list.html?cate_no=1" class="set-link">상세보기</a>
+                </div>
+            </div>
+
+            <!-- Set 2 -->
+            <div class="set-card">
+                <div class="set-image">
+                    <img src="/images/set-02.jpg" alt="럭셔리 세트">
+                </div>
+                <div class="set-info">
+                    <h3>럭셔리 세트</h3>
+                    <ul class="set-contents">
+                        <li>프리미엄 패키징</li>
+                        <li>바디 에센셜 오일 3종</li>
+                        <li>스파 소금</li>
+                        <li>선물 래핑</li>
+                    </ul>
+                    <a href="/product/list.html?cate_no=1" class="set-link">상세보기</a>
+                </div>
+            </div>
+
+            <!-- Set 3 -->
+            <div class="set-card">
+                <div class="set-image">
+                    <img src="/images/set-03.jpg" alt="커플 세트">
+                </div>
+                <div class="set-info">
+                    <h3>커플 세트</h3>
+                    <ul class="set-contents">
+                        <li>그루밍 에센셜 2세트</li>
+                        <li>페어 향초</li>
+                        <li>고급 포장지</li>
+                        <li>커플 카드</li>
+                    </ul>
+                    <a href="/product/list.html?cate_no=2" class="set-link">상세보기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Best Seller Products -->
+<section class="best-sellers">
+    <div class="container">
+        <h2 class="section-title">BEST 세트</h2>
+
+        <div module="product_listmain_1">
+            <!--$count:8-->
+            <ul class="prdList">
+                <li id="anchorBoxId_{$product_no}" class="prd-item">
+                    <div class="prd-image">
+                        <a href="/product/detail.html?product_no={$product_no}">
+                            <img src="{$image_medium}" alt="{$product_name}">
+                        </a>
+                    </div>
+                    <div class="prd-info">
+                        <p class="prd-name">{$product_name}</p>
+                        <ul class="xans-search prd-details">
+                            <li class="{$item_display|display}">
+                                <span class="item-title">{$item_title}:</span>
+                                <span class="item-content">{$item_content}</span>
+                            </li>
+                        </ul>
+                        <div class="prd-price">
+                            <span class="price-label">가격</span>
+                            <span class="price-value">{$price|number_format}</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- New Arrivals -->
+<section class="new-arrivals">
+    <div class="container">
+        <h2 class="section-title">NEW ARRIVAL</h2>
+
+        <div module="product_listmain_2">
+            <!--$count:8-->
+            <ul class="prdList">
+                <li id="anchorBoxId_{$product_no}" class="prd-item">
+                    <div class="prd-image">
+                        <a href="/product/detail.html?product_no={$product_no}">
+                            <img src="{$image_medium}" alt="{$product_name}">
+                        </a>
+                    </div>
+                    <div class="prd-info">
+                        <p class="prd-name">{$product_name}</p>
+                        <ul class="xans-search prd-details">
+                            <li class="{$item_display|display}">
+                                <span class="item-title">{$item_title}:</span>
+                                <span class="item-content">{$item_content}</span>
+                            </li>
+                        </ul>
+                        <div class="prd-price">
+                            <span class="price-label">가격</span>
+                            <span class="price-value">{$price|number_format}</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<div module="Layout_footer"></div>
+
+</body>
+</html>

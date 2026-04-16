@@ -1,0 +1,95 @@
+/* Cafe24 디자인센터 → main/index.html */
+
+<!--@css(/css/silver_edit.css)-->
+
+<div class="main-container">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">CHROME EDITION</div>
+      <h1 class="hero-title">거울처럼 매일 새롭게</h1>
+      <p class="hero-subtitle">Y2K 감성과 미래적 디자인의 완벽한 조합</p>
+      <a href="/product/list.html" class="hero-cta">지금 쇼핑하기</a>
+    </div>
+  </section>
+
+  <!-- Featured Products Section -->
+  <section class="products-featured">
+    <div class="container">
+      <h2 class="section-title">추천상품</h2>
+
+      <div module="product_listmain_1" class="product-list-wrapper">
+        <!--$count:8-->
+        <ul class="prdList">
+          <li id="anchorBoxId_{$product_no}" class="product-item">
+            <div class="product-image-wrapper">
+              <a href="/product/detail.html?product_no={$product_no}" class="product-link">
+                <img src="{$image_medium}" alt="{$product_name}" class="product-image">
+              </a>
+            </div>
+            <div class="product-info">
+              <p class="product-name">{$product_name}</p>
+              <ul class="xans-search product-details">
+                <li class="{$item_display|display}">
+                  <span class="item-title">{$item_title}:</span>
+                  <span class="item-content">{$item_content}</span>
+                </li>
+              </ul>
+              <div class="product-price">
+                {$product_price}
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Products Section -->
+  <section class="products-new">
+    <div class="container">
+      <h2 class="section-title">신상품</h2>
+
+      <div module="product_listmain_2" class="product-list-wrapper">
+        <!--$count:8-->
+        <ul class="prdList">
+          <li id="anchorBoxId_{$product_no}" class="product-item">
+            <div class="product-image-wrapper">
+              <a href="/product/detail.html?product_no={$product_no}" class="product-link">
+                <img src="{$image_medium}" alt="{$product_name}" class="product-image">
+              </a>
+              <div class="product-badge">NEW</div>
+            </div>
+            <div class="product-info">
+              <p class="product-name">{$product_name}</p>
+              <ul class="xans-search product-details">
+                <li class="{$item_display|display}">
+                  <span class="item-title">{$item_title}:</span>
+                  <span class="item-content">{$item_content}</span>
+                </li>
+              </ul>
+              <div class="product-price">
+                {$product_price}
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brand Story Section -->
+  <section class="brand-story">
+    <div class="container">
+      <div class="story-content">
+        <h2 class="story-title">SILVER EDIT</h2>
+        <p class="story-text">
+          메탈릭과 미러 감성으로 만든 SILVER EDIT.
+          Y2K 감성의 화려함과 현대적 미니멀리즘이 만나
+          매일 새로운 당신을 만들어냅니다.
+        </p>
+        <a href="/service/about.html" class="story-link">더 알아보기</a>
+      </div>
+    </div>
+  </section>
+</div>

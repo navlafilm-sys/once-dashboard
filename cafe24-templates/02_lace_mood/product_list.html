@@ -1,0 +1,205 @@
+<!--
+  Cafe24 디자인센터 Product List Template
+  Path: 디자인센터 → product/list.html
+  Brand: LACE MOOD (발레코어 · 리본 · 러블리)
+  Created: 2026-04-16
+-->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>상품 목록 - LACE MOOD</title>
+  <!--@css(/css/lace_mood.css)-->
+</head>
+<body>
+
+<!-- Product List Page -->
+<div class="product-list-page">
+
+  <!-- Page Header -->
+  <div class="product-page-header">
+    <h1 class="page-title">🎀 상품 목록</h1>
+    <p class="page-subtitle">LACE MOOD의 프리미염 컬렉션</p>
+  </div>
+
+  <!-- Main Container -->
+  <div class="product-list-container">
+
+    <!-- Sidebar (Optional - Category Filter) -->
+    <aside class="product-sidebar">
+      <!-- Category Title Module -->
+      <div class="category-section">
+        <h3 class="sidebar-title">카테고리</h3>
+        <div module="product_headcategory" class="category-list">
+          <span class="category-title-text">{$category_title_text}</span>
+        </div>
+      </div>
+
+      <!-- Price Filter -->
+      <div class="filter-section">
+        <h4 class="filter-title">가격대</h4>
+        <div class="filter-options">
+          <label class="filter-option">
+            <input type="checkbox" value="0-50000">
+            <span>50,000원 이하</span>
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" value="50000-100000">
+            <span>50,000 ~ 100,000원</span>
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" value="100000-">
+            <span>100,000원 이상</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Sort Filter -->
+      <div class="filter-section">
+        <h4 class="filter-title">상품 정렬</h4>
+        <div class="filter-options">
+          <label class="filter-option">
+            <input type="radio" name="sort" value="recent">
+            <span>최신순</span>
+          </label>
+          <label class="filter-option">
+            <input type="radio" name="sort" value="popular">
+            <span>인기순</span>
+          </label>
+          <label class="filter-option">
+            <input type="radio" name="sort" value="low-price">
+            <span>낮은 가격순</span>
+          </label>
+          <label class="filter-option">
+            <input type="radio" name="sort" value="high-price">
+            <span>높은 가격순</span>
+          </label>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="product-main">
+
+      <!-- Sort Menu (Top) -->
+      <div class="product-normalmenu">
+        <div class="sort-controls">
+          <span class="result-count">
+            총 <strong module="product_listnormal_total_count">0</strong>개의 상품이 있습니다.
+          </span>
+          <div class="sort-buttons">
+            <button class="sort-btn active" data-sort="recent">최신순</button>
+            <button class="sort-btn" data-sort="popular">인기순</button>
+            <button class="sort-btn" data-sort="low-price">낮은 가격순</button>
+            <button class="sort-btn" data-sort="high-price">높은 가격순</button>
+          </div>
+          <div class="view-options">
+            <button class="view-btn grid-view active" title="그리드 보기">⊞</button>
+            <button class="view-btn list-view" title="리스트 보기">≡</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Grid -->
+      <div module="product_listnormal" class="product-listnormal">
+        <!--$count:20-->
+        <div class="product-item">
+          <div class="product-image-wrap">
+            <img src="{$image_medium}" alt="{$product_name}" class="product-image">
+            <!-- Product Badge Module -->
+            <div class="product-badge" module="product_list_display_icon_{$product_no}"></div>
+
+            <!-- Quick View Button -->
+            <a href="/product/detail.html?product_no={$product_no}" class="quick-view-link">
+              빠른보기
+            </a>
+          </div>
+
+          <div class="product-details">
+            <!-- Product Name -->
+            <h3 class="product-name">
+              <a href="/product/detail.html?product_no={$product_no}">
+                {$product_name}
+              </a>
+            </h3>
+
+            <!-- Product Rating -->
+            <div class="product-rating" module="product_list_star_{$product_no}"></div>
+
+            <!-- Product Price Module -->
+            <div class="product-price-section">
+              <span class="product-price" module="product_list_price_{$product_no}">
+                {$product_price}
+              </span>원
+            </div>
+
+            <!-- Product Options Module -->
+            <div class="product-options" module="product_list_option_{$product_no}"></div>
+
+            <!-- Add to Cart Button -->
+            <div class="product-actions">
+              <a href="/product/detail.html?product_no={$product_no}" class="add-to-cart-link">
+                장바구니 추가
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div module="product_normalpaging" class="product-normalpaging">
+        <div class="pagination">
+          <a href="#" class="page-link prev-page">이전</a>
+          <a href="#" class="page-link active">1</a>
+          <a href="#" class="page-link">2</a>
+          <a href="#" class="page-link">3</a>
+          <a href="#" class="page-link">4</a>
+          <a href="#" class="page-link">5</a>
+          <a href="#" class="page-link next-page">다음</a>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+</div>
+
+<!-- Product List Scripts -->
+<script>
+  // Sort Button Handler
+  document.querySelectorAll('.sort-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      // 정렬 로직 구현
+    });
+  });
+
+  // View Toggle Handler
+  document.querySelectorAll('.view-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const productGrid = document.querySelector('.product-listnormal');
+      if (this.classList.contains('list-view')) {
+        productGrid.classList.add('list-view');
+      } else {
+        productGrid.classList.remove('list-view');
+      }
+    });
+  });
+
+  // Filter Submit Handler
+  document.querySelectorAll('.filter-option input').forEach(input => {
+    input.addEventListener('change', function() {
+      // 필터 적용 로직
+      console.log('Filter changed');
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!--
+  Cafe24 Design Center Template
+  layout/basic/header.html
+  Brand: BLOOM ONCE (Vintage Floral, Limited Edition)
+  Last Updated: 2026-04-16
+-->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLOOM ONCE - 빈티지 플로럴 · 시즌 한정</title>
+  <!--@css(/css/bloom_once.css)-->
+</head>
+<body>
+<header class="header-wrapper">
+  <!-- Top Utility Bar -->
+  <div class="header-util">
+    <div class="util-inner">
+      <!-- User Status: Login/Logout -->
+      <!--{Layout_statelogoff}-->
+        <span class="util-item"><a href="/member/login.html">로그인</a></span>
+        <span class="util-item"><a href="/member/join.html">회원가입</a></span>
+      <!--{/Layout_statelogoff}-->
+
+      <!--{Layout_statelogon}-->
+        <span class="util-item"><a href="/member/mypage.html">마이페이지</a></span>
+        <span class="util-item"><a href="/member/logout.html">로그아웃</a></span>
+      <!--{/Layout_statelogon}-->
+
+      <!-- Order & Cart Count -->
+      <span class="util-item">
+        <a href="/order/orderlist.html">주문조회</a>
+      </span>
+      <span class="util-item util-cart">
+        <a href="/order/basket.html">
+          장바구니
+          <span class="cart-count">
+            <!--{Layout_orderBasketcount}-->
+              <strong>0</strong>
+            <!--{/Layout_orderBasketcount}-->
+          </span>
+        </a>
+      </span>
+    </div>
+  </div>
+
+  <!-- Main Header -->
+  <div class="header-main">
+    <div class="header-inner">
+      <!-- Logo -->
+      <div class="header-logo">
+        <a href="/">
+          <span class="logo-text">BLOOM ONCE</span>
+          <span class="logo-desc">Vintage Floral</span>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="header-nav" id="headerNav">
+        <!--{Layout_category}-->
+          <a href="/product/list.html?cate_no=1" class="nav-item">전체상품</a>
+          <a href="/product/list.html?cate_no=2" class="nav-item">시즌 에디션</a>
+          <a href="/product/list.html?cate_no=3" class="nav-item">기프트</a>
+          <a href="/about" class="nav-item">ABOUT</a>
+        <!--{/Layout_category}-->
+      </nav>
+
+      <!-- Mobile Toggle -->
+      <button class="header-toggle" id="mobileToggle" aria-label="메뉴 열기">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation (Hidden by default) -->
+  <nav class="header-mobile" id="headerMobile">
+    <div class="mobile-nav-list">
+      <!--{Layout_category}-->
+        <a href="/product/list.html?cate_no=1" class="mobile-nav-item">전체상품</a>
+        <a href="/product/list.html?cate_no=2" class="mobile-nav-item">시즌 에디션</a>
+        <a href="/product/list.html?cate_no=3" class="mobile-nav-item">기프트</a>
+        <a href="/about" class="mobile-nav-item">ABOUT</a>
+      <!--{/Layout_category}-->
+      <div class="mobile-nav-divider"></div>
+      <!--{Layout_statelogoff}-->
+        <a href="/member/login.html" class="mobile-nav-item">로그인</a>
+        <a href="/member/join.html" class="mobile-nav-item">회원가입</a>
+      <!--{/Layout_statelogoff}-->
+      <!--{Layout_statelogon}-->
+        <a href="/member/mypage.html" class="mobile-nav-item">마이페이지</a>
+        <a href="/member/logout.html" class="mobile-nav-item">로그아웃</a>
+      <!--{/Layout_statelogon}-->
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile Navigation Toggle Script -->
+<script>
+(function() {
+  const toggle = document.getElementById('mobileToggle');
+  const mobileNav = document.getElementById('headerMobile');
+
+  if (toggle && mobileNav) {
+    toggle.addEventListener('click', function() {
+      mobileNav.classList.toggle('active');
+      toggle.classList.toggle('active');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('header')) {
+        mobileNav.classList.remove('active');
+        toggle.classList.remove('active');
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>

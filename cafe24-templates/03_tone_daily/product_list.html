@@ -1,0 +1,198 @@
+<!-- Cafe24 SmartDesign Template -->
+<!-- Path: product/list.html -->
+<!-- Brand: TONE DAILY -->
+<!-- Version: 1.0 -->
+
+<!--@css(/css/tone_daily.css)-->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전체상품 - TONE DAILY</title>
+    <link rel="stylesheet" href="/css/tone_daily.css">
+</head>
+<body>
+<div class="product-list-container">
+
+    <!-- Product Header -->
+    <div module="product_headcategory" class="product-head">
+        <div class="category-title">
+            <h1>{$headcategory_name}</h1>
+            <p class="category-desc">
+                <!--{if $headcategory_description}-->
+                {$headcategory_description}
+                <!--{else}-->
+                TONE DAILY의 모든 상품을 만나보세요
+                <!--{/if}-->
+            </p>
+        </div>
+    </div>
+
+    <!-- Product Controls -->
+    <div class="product-controls">
+        <div class="control-left">
+            <span class="product-count">
+                상품 <strong>{$totalcount}</strong>개
+            </span>
+        </div>
+        <div class="control-right">
+            <div module="product_normalmenu" class="sort-menu">
+                <select class="sort-select" onchange="location.href=this.value;">
+                    <option value="">정렬</option>
+                    <option value="?sort=new">최신순</option>
+                    <option value="?sort=best">인기순</option>
+                    <option value="?sort=review">리뷰순</option>
+                    <option value="?sort=price_asc">낮은 가격순</option>
+                    <option value="?sort=price_desc">높은 가격순</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product List -->
+    <div module="product_listnormal" class="product-list-grid">
+        <!--$count:20-->
+        <!--{foreach $item from $smartdesign_product_normal}-->
+        <div class="product-grid-item">
+            <div class="product-card-wrapper">
+                <!-- Product Image -->
+                <div class="product-image-container">
+                    <a href="{$item.link_product_detail}">
+                        <img
+                            src="{$item.image_small}"
+                            alt="{$item.name}"
+                            class="product-image"
+                        >
+                    </a>
+
+                    <!-- Product Badge -->
+                    <div class="product-badges">
+                        <!--{if $item.product_status eq 'N'}-->
+                        <span class="badge badge-new">NEW</span>
+                        <!--{/if}-->
+                        <!--{if $item.discount_rate > 0}-->
+                        <span class="badge badge-discount">{$item.discount_rate}%</span>
+                        <!--{/if}-->
+                        <!--{if $item.product_status eq 'B'}-->
+                        <span class="badge badge-best">BEST</span>
+                        <!--{/if}-->
+                    </div>
+
+                    <!-- Quick View -->
+                    <div class="product-overlay">
+                        <a href="{$item.link_product_detail}" class="btn-quick-view">
+                            상세보기
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="product-info-section">
+                    <div class="product-category-tag">
+                        {$item.category_name}
+                    </div>
+
+                    <h3 class="product-title">
+                        <a href="{$item.link_product_detail}">
+                            {$item.name}
+                        </a>
+                    </h3>
+
+                    <!-- Product Price -->
+                    <div class="product-pricing">
+                        <!--{if $item.discount_rate > 0}-->
+                        <span class="price-original">
+                            {$item.price_text}
+                        </span>
+                        <!--{/if}-->
+                        <span class="price-final">
+                            {$item.price_sale_text}
+                        </span>
+                    </div>
+
+                    <!-- Product Rating & Review -->
+                    <div class="product-review">
+                        <div class="rating-stars">
+                            <!--{if $item.avg_rating}-->
+                            <span class="stars-filled">
+                                <!--{for $i=1 to floor($item.avg_rating)}-->
+                                ★
+                                <!--{/for}-->
+                                <!--{if $item.avg_rating % 1 > 0}-->
+                                ½
+                                <!--{/if}-->
+                            </span>
+                            <!--{else}-->
+                            <span class="stars-empty">★★★★★</span>
+                            <!--{/if}-->
+                        </div>
+                        <span class="review-count">
+                            ({$item.review_count})
+                        </span>
+                    </div>
+
+                    <!-- Add to Cart Button -->
+                    <a href="{$item.link_product_detail}" class="btn btn-add-cart">
+                        장바구니
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--{/foreach}-->
+    </div>
+
+    <!-- No Products Message -->
+    <!--{if $totalcount eq 0}-->
+    <div class="no-products">
+        <p>해당하는 상품이 없습니다.</p>
+        <a href="/" class="btn btn-secondary">
+            전체상품 보기
+        </a>
+    </div>
+    <!--{/if}-->
+
+    <!-- Pagination -->
+    <div module="product_normalpaging" class="pagination-wrapper">
+        <div class="pagination">
+            <!--{if $smartdesign_product_pagination}-->
+            {$smartdesign_product_pagination}
+            <!--{/if}-->
+        </div>
+    </div>
+
+</div>
+
+<script>
+// Product list responsive grid
+function adjustProductGrid() {
+    const container = document.querySelector('.product-list-grid');
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth < 768) {
+        // Mobile: 2 columns
+        container.classList.add('grid-2col');
+        container.classList.remove('grid-4col');
+    } else {
+        // Desktop: 4 columns
+        container.classList.add('grid-4col');
+        container.classList.remove('grid-2col');
+    }
+}
+
+// Initial call
+adjustProductGrid();
+
+// Adjust on resize
+window.addEventListener('resize', adjustProductGrid);
+
+// Smooth scroll to top on pagination click
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('pagination-link')) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+});
+</script>
+</body>
+</html>

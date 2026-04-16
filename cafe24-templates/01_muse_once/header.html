@@ -1,0 +1,127 @@
+<!-- ================================================
+   MUSE ONCE - 명화 감성 프리미엄
+   Cafe24 디자인센터 → layout/basic/header.html 에 붙여넣기
+   ================================================ -->
+
+<header id="header" class="muse-header">
+  <div class="header-top">
+    <div class="header-top-inner">
+      <!-- 회원상태 모듈 -->
+      <div class="member-status">
+        <div module="Layout_statelogoff" class="state-logoff">
+          <a href="/member/login.html" class="btn-login">로그인</a>
+          <span class="divider">|</span>
+          <a href="/member/join.html" class="btn-join">회원가입</a>
+        </div>
+        <div module="Layout_statelogon" class="state-logon" style="display:none;">
+          <span class="member-name">{$name}님</span>
+          <span class="divider">|</span>
+          <a href="/member/logout.html" class="btn-logout">로그아웃</a>
+          <span class="divider">|</span>
+          <a href="/myshop/order_list.html" class="btn-myshop">마이쇼핑</a>
+        </div>
+      </div>
+
+      <!-- 장바구니 아이콘 -->
+      <div class="cart-icon">
+        <a href="/order/basket.html" class="btn-cart">
+          <span class="cart-label">장바구니</span>
+          <span module="Layout_orderBasketcount" class="cart-count">({$count})</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="header-main">
+    <div class="header-main-inner">
+      <!-- 로고 -->
+      <div class="logo">
+        <a href="/" class="logo-link">
+          <img src="/web/upload/nuseum/logo_muse_once.png" alt="MUSE ONCE - 명화 감성 프리미엄" class="logo-img">
+          <span class="logo-text">MUSE ONCE</span>
+        </a>
+      </div>
+
+      <!-- 메인 네비게이션 -->
+      <nav class="main-nav">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="/product/list.html" class="nav-link">전체상품</a>
+          </li>
+          <li class="nav-item">
+            <a href="/product/list.html?cate_no=1" class="nav-link">신상품</a>
+          </li>
+          <li class="nav-item">
+            <a href="/product/list.html?cate_no=2" class="nav-link">BEST</a>
+          </li>
+          <li class="nav-item">
+            <a href="/product/list.html?cate_no=3" class="nav-link">이벤트</a>
+          </li>
+          <li class="nav-item">
+            <a href="/pages/about.html" class="nav-link">ABOUT</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- 검색바 -->
+      <div class="search-box">
+        <form name="frm_search" method="get" action="/product/search.html" class="search-form">
+          <input type="text" name="keyword" class="search-input" placeholder="상품 검색">
+          <button type="submit" class="btn-search">검색</button>
+        </form>
+      </div>
+
+      <!-- 모바일 메뉴 토글 -->
+      <button class="hamburger-menu" id="mobileMenuToggle" aria-label="메뉴 열기">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 카테고리 메뉴 (드롭다운) -->
+  <div class="header-category" id="categoryMenu">
+    <div class="category-inner">
+      <div module="Layout_category" class="category-item">
+        <a href="{$link_product_list}" class="category-link">
+          {$name_or_img_tag}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 모바일 네비게이션 (숨김) -->
+  <nav class="mobile-nav" id="mobileNav">
+    <ul class="mobile-nav-list">
+      <li><a href="/product/list.html" class="mobile-nav-link">전체상품</a></li>
+      <li><a href="/product/list.html?cate_no=1" class="mobile-nav-link">신상품</a></li>
+      <li><a href="/product/list.html?cate_no=2" class="mobile-nav-link">BEST</a></li>
+      <li><a href="/product/list.html?cate_no=3" class="mobile-nav-link">이벤트</a></li>
+      <li><a href="/pages/about.html" class="mobile-nav-link">ABOUT</a></li>
+      <li class="divider"></li>
+      <li><a href="/member/login.html" class="mobile-nav-link">로그인</a></li>
+      <li><a href="/member/join.html" class="mobile-nav-link">회원가입</a></li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+// 모바일 메뉴 토글
+document.getElementById('mobileMenuToggle').addEventListener('click', function() {
+  const mobileNav = document.getElementById('mobileNav');
+  mobileNav.classList.toggle('active');
+  this.classList.toggle('active');
+});
+
+// 외부 클릭시 메뉴 닫기
+document.addEventListener('click', function(event) {
+  const hamburger = document.getElementById('mobileMenuToggle');
+  const mobileNav = document.getElementById('mobileNav');
+
+  if (!event.target.closest('#mobileMenuToggle') && !event.target.closest('#mobileNav')) {
+    mobileNav.classList.remove('active');
+    hamburger.classList.remove('active');
+  }
+});
+</script>

@@ -1,0 +1,136 @@
+<!--
+  Cafe24 디자인센터 Header Template
+  Path: 디자인센터 → layout/basic/header.html
+  Brand: LACE MOOD (발레코어 · 리본 · 러블리)
+  Created: 2026-04-16
+-->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LACE MOOD - 발레코어 · 리본 · 러블리</title>
+  <!--@css(/css/lace_mood.css)-->
+</head>
+<body>
+
+<!-- Header Navigation -->
+<header class="header-wrap">
+  <div class="header-container">
+
+    <!-- Logo Section -->
+    <div class="header-logo">
+      <a href="/" class="logo-link">
+        <span class="logo-icon">🎀</span>
+        <span class="logo-text">LACE MOOD</span>
+      </a>
+    </div>
+
+    <!-- Desktop Navigation Menu -->
+    <nav class="header-nav desktop-nav">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="/product/list.html" class="nav-link">전체상품</a>
+        </li>
+        <li class="nav-item">
+          <a href="/product/list.html?cate_no=1" class="nav-link">리본 컬렉션</a>
+        </li>
+        <li class="nav-item">
+          <a href="/product/list.html?cate_no=2" class="nav-link">BEST</a>
+        </li>
+        <li class="nav-item">
+          <a href="/product/list.html?cate_no=3" class="nav-link">이벤트</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Category Module -->
+    <div class="header-category">
+      <div module="Layout_category"></div>
+    </div>
+
+    <!-- Right Side Controls -->
+    <div class="header-controls">
+      <!-- Login/Logout Module -->
+      <div class="login-module">
+        <div module="Layout_statelogoff" style="display: none;">
+          <a href="/member/login.html" class="btn-login">로그인</a>
+          <a href="/member/join.html" class="btn-join">회원가입</a>
+        </div>
+        <div module="Layout_statelogon" style="display: none;">
+          <span class="member-info">
+            <span module="Layout_memberNickname"></span>님
+          </span>
+          <a href="/member/logout.html" class="btn-logout">로그아웃</a>
+          <a href="/member/mypage.html" class="btn-mypage">마이페이지</a>
+        </div>
+      </div>
+
+      <!-- Basket/Cart Module -->
+      <a href="/order/basket.html" class="header-basket">
+        <span class="basket-icon">🛒</span>
+        <span class="basket-count" module="Layout_orderBasketcount">(0)</span>
+      </a>
+    </div>
+
+    <!-- Mobile Hamburger Menu -->
+    <button class="hamburger-menu mobile-menu-toggle" aria-label="메뉴 열기">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+
+  <!-- Mobile Navigation Menu (Hidden by default) -->
+  <nav class="mobile-nav" id="mobileNav">
+    <ul class="mobile-nav-list">
+      <li class="mobile-nav-item">
+        <a href="/product/list.html" class="mobile-nav-link">전체상품</a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="/product/list.html?cate_no=1" class="mobile-nav-link">리본 컬렉션</a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="/product/list.html?cate_no=2" class="mobile-nav-link">BEST</a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="/product/list.html?cate_no=3" class="mobile-nav-link">이벤트</a>
+      </li>
+      <li class="mobile-nav-divider"></li>
+      <li class="mobile-nav-item">
+        <a href="/member/login.html" class="mobile-nav-link">로그인</a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="/member/mypage.html" class="mobile-nav-link">마이페이지</a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="/order/basket.html" class="mobile-nav-link">장바구니</a>
+      </li>
+    </ul>
+  </nav>
+
+</header>
+
+<!-- Search Module (Optional) -->
+<div class="search-section">
+  <div class="search-container">
+    <form action="/product/search.html" method="get" class="search-form">
+      <input type="text" name="keyword" class="search-input" placeholder="상품 검색...">
+      <button type="submit" class="search-button">검색</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Mobile Menu Toggle
+  document.querySelector('.hamburger-menu').addEventListener('click', function() {
+    const mobileNav = document.getElementById('mobileNav');
+    mobileNav.classList.toggle('active');
+    this.classList.toggle('active');
+  });
+</script>
+
+</body>
+</html>
