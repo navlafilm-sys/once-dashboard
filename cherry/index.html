@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CHERRY CLUB — 오늘의 픽</title>
+<meta name="description" content="CUTE IS THE RULE. 지금 잘 나가는 것만 골라주는 쇼핑 매거진.">
+<meta property="og:title" content="CHERRY CLUB — 오늘의 픽">
+<meta property="og:description" content="CUTE IS THE RULE. 데일리룩 · 트렌드 큐레이션">
+<meta property="og:image" content="logo.png">
+<link rel="icon" href="logo.png">
+<style>
+  :root{
+    --hot:#F06BA0; --rose:#D96E9A; --soft:#F2A7C3; --mist:#FBDCE8;
+    --ink:#5C2A44; --deep:#3B1229; --white:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{
+    font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",system-ui,-apple-system,sans-serif;
+    background:
+      radial-gradient(1200px 600px at 50% -10%, #FBDCE8 0%, transparent 60%),
+      linear-gradient(180deg,#FFF6FA 0%,#FDEAF2 100%);
+    color:var(--ink); min-height:100vh;
+    display:flex; justify-content:center;
+    padding:32px 18px calc(40px + env(safe-area-inset-bottom));
+  }
+  .wrap{width:100%;max-width:440px}
+
+  /* ── 헤더 ── */
+  header{text-align:center;margin-bottom:26px}
+  .logo{
+    width:104px;height:104px;border-radius:50%;display:block;margin:0 auto 14px;
+    box-shadow:0 8px 28px rgba(240,107,160,.35), 0 0 0 4px #fff;
+  }
+  .handle{font-size:19px;font-weight:800;letter-spacing:-.02em}
+  .tag{
+    margin-top:7px;font-size:11px;font-weight:800;letter-spacing:.18em;
+    color:var(--hot);
+  }
+  .desc{margin-top:10px;font-size:13.5px;line-height:1.55;color:#7A5266}
+
+  /* ── 섹션 ── */
+  .sec{margin-top:26px}
+  .sec-h{
+    display:flex;align-items:center;gap:7px;
+    font-size:12px;font-weight:800;letter-spacing:.04em;
+    color:var(--ink);margin:0 4px 11px;
+  }
+  .sec-h .bar{flex:1;height:1px;background:linear-gradient(90deg,var(--soft),transparent)}
+
+  /* ── 버튼 ── */
+  a.btn{
+    display:flex;align-items:center;gap:13px;
+    background:#fff;border:1.5px solid var(--mist);border-radius:16px;
+    padding:15px 16px;margin-bottom:10px;text-decoration:none;color:var(--ink);
+    box-shadow:0 2px 10px rgba(92,42,68,.05);
+    transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  }
+  a.btn:active{transform:scale(.978)}
+  @media(hover:hover){
+    a.btn:hover{border-color:var(--soft);box-shadow:0 8px 22px rgba(240,107,160,.18);transform:translateY(-1px)}
+  }
+  .ic{
+    flex:0 0 38px;height:38px;border-radius:11px;
+    background:linear-gradient(135deg,var(--hot),var(--rose));
+    display:grid;place-items:center;font-size:17px;color:#fff;
+  }
+  .tx{flex:1;min-width:0}
+  .tx b{display:block;font-size:14.5px;font-weight:700;letter-spacing:-.01em}
+  .tx span{display:block;font-size:11.5px;color:#9B7288;margin-top:2px;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .arw{flex:0 0 auto;color:var(--soft);font-size:17px}
+
+  /* DM 강조 버튼 */
+  a.dm{
+    background:linear-gradient(135deg,var(--hot),var(--rose));
+    border-color:transparent;color:#fff;
+    box-shadow:0 8px 22px rgba(240,107,160,.38);
+  }
+  a.dm .ic{background:rgba(255,255,255,.22)}
+  a.dm .tx span{color:rgba(255,255,255,.85)}
+  a.dm .arw{color:rgba(255,255,255,.8)}
+
+  .empty{
+    border:1.5px dashed var(--mist);border-radius:16px;padding:15px 16px;
+    font-size:12.5px;color:#B08CA0;background:rgba(255,255,255,.5);margin-bottom:10px;
+  }
+
+  footer{margin-top:30px;text-align:center;font-size:10.5px;line-height:1.7;color:#B08CA0}
+  footer .ad{
+    display:inline-block;margin-bottom:8px;padding:5px 10px;border-radius:999px;
+    background:rgba(240,107,160,.1);color:var(--rose);font-weight:700;font-size:10px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <img class="logo" src="logo.png" alt="CHERRY CLUB">
+    <div class="handle">@cherry.clubs2</div>
+    <div class="tag">CUTE IS THE RULE</div>
+    <p class="desc">지금 잘 나가는 것만 골라주는 쇼핑 매거진.<br>살까 말까 하는 고민을 줄여드려요.</p>
+  </header>
+
+  <main id="app"></main>
+
+  <footer>
+    <span class="ad">일부 링크는 제휴 링크입니다</span><br>
+    구매 시 수수료를 받을 수 있으며, 가격은 동일합니다.<br>
+    © CHERRY CLUB
+  </footer>
+
+</div>
+
+<script>
+const ICONS = { zigzag:"👗", oliveyoung:"💄", naver:"🛒", pick:"🍒", dm:"💌", link:"🔗" };
+
+function esc(s){ return String(s??"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+
+function render(data){
+  const app = document.getElementById("app");
+  let html = "";
+
+  (data.sections || []).forEach(sec => {
+    html += `<section class="sec">
+      <div class="sec-h"><span>${esc(sec.emoji||"")} ${esc(sec.title||"")}</span><i class="bar"></i></div>`;
+
+    const items = (sec.items || []).filter(i => i.url);
+    if (!items.length) {
+      html += `<div class="empty">${esc(sec.placeholder || "곧 공개돼요 🍒")}</div>`;
+    } else {
+      items.forEach(i => {
+        html += `<a class="btn" href="${esc(i.url)}" target="_blank" rel="noopener nofollow sponsored">
+          <span class="ic">${esc(ICONS[i.icon] || ICONS.link)}</span>
+          <span class="tx"><b>${esc(i.label)}</b>${i.note ? `<span>${esc(i.note)}</span>` : ""}</span>
+          <span class="arw">›</span>
+        </a>`;
+      });
+    }
+    html += `</section>`;
+  });
+
+  // DM 섹션 (고정)
+  html += `<section class="sec">
+    <div class="sec-h"><span>💌 원하는 아이템 찾아드려요</span><i class="bar"></i></div>
+    <a class="btn dm" href="https://ig.me/m/cherry.clubs2" target="_blank" rel="noopener">
+      <span class="ic">💌</span>
+      <span class="tx"><b>DM으로 물어보기</b><span>찾는 아이템 말씀해주시면 대신 골라드려요</span></span>
+      <span class="arw">›</span>
+    </a>
+  </section>`;
+
+  app.innerHTML = html;
+}
+
+fetch("links.json?v=" + Date.now())
+  .then(r => r.json())
+  .then(render)
+  .catch(() => render({ sections: [{ title:"이번 주 픽", emoji:"🍒", items:[], placeholder:"곧 공개돼요 🍒" }] }));
+</script>
+</body>
+</html>
