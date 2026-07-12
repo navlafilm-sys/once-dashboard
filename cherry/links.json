@@ -1,32 +1,30 @@
 {
-  "_사용법": "url 만 채우면 버튼이 생깁니다. url이 비어 있으면 placeholder 문구가 대신 보입니다. icon 은 zigzag/oliveyoung/naver/pick/link 중 하나.",
   "updated": "2026-07-12",
   "sections": [
     {
       "title": "이번 주 픽",
       "emoji": "🍒",
       "placeholder": "이번 주 픽은 곧 공개돼요 🍒",
+      "items": []
+    },
+    {
+      "title": "지난 호 보기",
+      "emoji": "📖",
+      "placeholder": "첫 호가 곧 올라와요",
       "items": [
-        { "label": "장마 레인부츠 · 젤리슈즈 5선", "note": "001호에서 소개한 아이템", "icon": "zigzag", "url": "" },
-        { "label": "여름 샌들 위클리 TOP 5", "note": "002호", "icon": "zigzag", "url": "" },
-        { "label": "이번 주 픽 모아보기", "note": "지그재그 공유리워드", "icon": "pick", "url": "" }
+        {
+          "label": "장마 시작이에요 🍒",
+          "note": "001호 보러가기",
+          "icon": "pick",
+          "url": "https://www.instagram.com/p/DasGHrwHe_V/"
+        }
       ]
     },
     {
       "title": "뷰티 픽",
       "emoji": "💄",
       "placeholder": "뷰티 픽 준비 중이에요",
-      "items": [
-        { "label": "여름 립 · 쿨링 스킨케어", "note": "올리브영 큐레이터", "icon": "oliveyoung", "url": "" }
-      ]
-    },
-    {
-      "title": "꿀템",
-      "emoji": "🛒",
-      "placeholder": "꿀템 준비 중이에요",
-      "items": [
-        { "label": "가성비 데일리템", "note": "네이버 쇼핑 커넥트", "icon": "naver", "url": "" }
-      ]
+      "items": []
     }
   ]
 }
