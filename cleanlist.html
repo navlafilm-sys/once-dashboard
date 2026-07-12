@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#F2F4F6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Cleanlist</title>
+<style>
+/* ===== Cleanlist style.css — 토스 스타일 규칙 =====
+ * 사용 맥락: 고무장갑 낀 젖은 손, 한 손, 형광등 아래.
+ * → 행 전체가 버튼(64px+), 본문 17px+, 고대비, 여백 많음.
+ */
+:root {
+  --bg: #F2F4F6;
+  --card: #FFFFFF;
+  --text: #191F28;
+  --sub: #8B95A1;
+  --line: #F2F4F6;
+  --blue: #3182F6;
+  --blue-weak: #E8F1FE;
+  --danger: #F04452;
+  --danger-weak: #FDEBEC;
+  --radius: 20px;
+  --font-body: 17px;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Pretendard', 'Malgun Gothic', sans-serif;
+  background: var(--bg); color: var(--text);
+  font-size: var(--font-body); line-height: 1.5;
+  padding-bottom: 110px;
+}
+.container { max-width: 560px; margin: 0 auto; padding: 0 16px; }
+
+/* ---------- 헤더 ---------- */
+header {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(242,244,246,.92); backdrop-filter: blur(8px);
+  padding: 14px 0 10px;
+}
+.header-top { display: flex; align-items: center; justify-content: space-between; }
+h1 { font-size: 22px; font-weight: 800; margin: 0; }
+.job-date { color: var(--sub); font-size: 14px; margin-top: 2px; }
+.progress-wrap { display: flex; align-items: center; gap: 10px; margin-top: 12px; }
+.progress-bar { flex: 1; height: 10px; background: #E5E8EB; border-radius: 99px; overflow: hidden; }
+.progress-fill {
+  height: 100%; width: 0; background: var(--blue); border-radius: 99px;
+  transition: width .45s cubic-bezier(.22,1,.36,1);
+}
+.progress-count { font-weight: 800; color: var(--blue); font-size: 15px; min-width: 48px; text-align: right; }
+
+#menuBtn {
+  border: none; background: var(--card); width: 40px; height: 40px; border-radius: 12px;
+  font-size: 20px; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+#menu {
+  display: none; position: absolute; right: 16px; top: 58px;
+  background: var(--card); border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,.14);
+  overflow: hidden; z-index: 20;
+}
+#menu.open { display: block; }
+#menu button {
+  display: block; width: 100%; border: none; background: none; text-align: left;
+  padding: 15px 20px; font-size: 16px; cursor: pointer; color: var(--text);
+}
+#menu button:active { background: var(--bg); }
+
+/* ---------- 카드 & 행 ---------- */
+.card {
+  background: var(--card); border-radius: var(--radius);
+  padding: 8px 6px; margin: 12px 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05);
+}
+.sec-title { font-size: 15px; font-weight: 700; color: var(--sub); padding: 12px 14px 4px; }
+
+.row {
+  display: flex; align-items: center; gap: 14px; width: 100%;
+  min-height: 64px; padding: 12px 14px;
+  border: none; background: none; text-align: left; cursor: pointer;
+  font-size: var(--font-body); color: var(--text); font-family: inherit;
+  border-bottom: 1px solid var(--line);
+  transition: background .15s;
+}
+.row:last-child { border-bottom: none; }
+.row:active { background: var(--bg); border-radius: 14px; }
+.row-text { flex: 1; }
+.badge {
+  display: inline-block; background: var(--blue-weak); color: var(--blue);
+  font-size: 12px; font-weight: 700; border-radius: 99px; padding: 2px 9px; margin-left: 6px;
+  vertical-align: 2px;
+}
+.checkbox {
+  flex-shrink: 0; width: 30px; height: 30px; border-radius: 10px;
+  border: 2.5px solid #D1D6DB; display: flex; align-items: center; justify-content: center;
+  font-weight: 900; color: #fff; font-size: 17px;
+  transition: all .2s cubic-bezier(.34,1.56,.64,1);
+}
+.row.checking .checkbox, .row.done .checkbox {
+  background: var(--blue); border-color: var(--blue);
+  transform: scale(1.12);
+}
+.row.done .checkbox { transform: none; width: 26px; height: 26px; font-size: 14px; }
+.row.leaving { transform: translateY(16px); opacity: 0; transition: all .32s ease-in; }
+.row.done { min-height: 52px; color: var(--sub); }
+.row.done .row-text { text-decoration: line-through; text-decoration-color: #D1D6DB; font-size: 15px; }
+.stamp { color: var(--sub); font-size: 13px; font-weight: 600; white-space: nowrap; }
+
+/* ---------- 하단 고정 ---------- */
+.footer {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 10;
+  padding: 12px 16px calc(14px + env(safe-area-inset-bottom));
+  background: linear-gradient(transparent, var(--bg) 40%);
+}
+.footer-inner { max-width: 560px; margin: 0 auto; display: flex; gap: 10px; }
+#issueBtn {
+  flex-shrink: 0; border: none; border-radius: 16px; padding: 0 18px; height: 58px;
+  background: var(--card); color: var(--danger); font-weight: 700; font-size: 15px;
+  cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.08); font-family: inherit;
+}
+#issueCount { color: var(--danger); font-weight: 900; }
+#reportBtn {
+  flex: 1; border: none; border-radius: 16px; height: 58px;
+  font-size: 17px; font-weight: 800; cursor: pointer; font-family: inherit;
+  background: #E5E8EB; color: #B0B8C1; transition: all .3s;
+}
+#reportBtn:not(:disabled) {
+  background: var(--blue); color: #fff;
+  box-shadow: 0 6px 18px rgba(49,130,246,.35);
+}
+
+/* ---------- 셔터 플래시 ---------- */
+#flash {
+  position: fixed; inset: 0; background: #fff; opacity: 0; pointer-events: none; z-index: 100;
+  transition: opacity .3s;
+}
+#flash.on { opacity: .85; transition: opacity .05s; }
+
+/* ---------- 모달 ---------- */
+.modal {
+  display: none; position: fixed; inset: 0; z-index: 50;
+  background: rgba(25,31,40,.5); align-items: flex-end; justify-content: center;
+}
+.modal.open { display: flex; }
+.sheet {
+  background: var(--card); border-radius: 24px 24px 0 0; width: 100%; max-width: 560px;
+  padding: 24px 20px calc(24px + env(safe-area-inset-bottom));
+  animation: sheetUp .3s cubic-bezier(.22,1,.36,1);
+}
+@keyframes sheetUp { from { transform: translateY(40%); opacity: .5; } to { transform: none; opacity: 1; } }
+.sheet h2 { margin: 0 0 14px; font-size: 19px; }
+.sheet textarea {
+  width: 100%; border: 1.5px solid #E5E8EB; border-radius: 14px; padding: 14px;
+  font-size: 16px; font-family: inherit; min-height: 90px; resize: vertical; color: var(--text);
+}
+.sheet textarea:focus { outline: none; border-color: var(--blue); }
+.sheet-btns { display: flex; gap: 10px; margin-top: 14px; }
+.btn {
+  flex: 1; border: none; border-radius: 14px; height: 52px; font-size: 16px; font-weight: 700;
+  cursor: pointer; font-family: inherit;
+}
+.btn.primary { background: var(--blue); color: #fff; }
+.btn.ghost { background: var(--bg); color: var(--text); }
+.btn.warn { background: var(--danger-weak); color: var(--danger); }
+
+/* ---------- 파싱 화면 ---------- */
+#parseView { display: none; }
+#parseView .intro { color: var(--sub); font-size: 15px; margin: 6px 0 14px; }
+#rawText {
+  width: 100%; border: 1.5px solid #E5E8EB; border-radius: var(--radius); padding: 16px;
+  min-height: 180px; font-size: 16px; font-family: inherit; resize: vertical; color: var(--text);
+  background: var(--card);
+}
+#rawText:focus { outline: none; border-color: var(--blue); }
+#propInput, .sec-input {
+  width: 100%; border: none; background: none; font-family: inherit; color: var(--text);
+}
+#propInput {
+  background: var(--card); border-radius: 14px; padding: 14px 16px; font-size: 17px; font-weight: 700;
+  margin-top: 12px; border: 1.5px solid #E5E8EB;
+}
+.sec-input { font-size: 15px; font-weight: 700; color: var(--sub); padding: 12px 14px 4px; }
+.edit-row { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-bottom: 1px solid var(--line); }
+.item-input { flex: 1; border: none; background: none; font-size: 16px; font-family: inherit; color: var(--text); padding: 8px 0; }
+.item-input:focus { outline: none; }
+.photo-toggle {
+  border: none; background: var(--bg); border-radius: 10px; width: 40px; height: 40px;
+  font-size: 17px; cursor: pointer; opacity: .35;
+}
+.photo-toggle.on { background: var(--blue-weak); opacity: 1; }
+.del-item {
+  border: none; background: none; color: #D1D6DB; font-size: 22px; cursor: pointer; width: 32px;
+}
+.add-item {
+  border: none; background: none; color: var(--blue); font-weight: 700; font-size: 15px;
+  padding: 12px 14px; cursor: pointer; font-family: inherit;
+}
+
+/* ---------- 역할 토글 ---------- */
+.role-toggle { display: flex; background: #E5E8EB; border-radius: 12px; padding: 3px; }
+.role-toggle button {
+  border: none; background: none; padding: 8px 14px; border-radius: 10px;
+  font-size: 14px; font-weight: 700; color: var(--sub); cursor: pointer; font-family: inherit;
+}
+.role-toggle button.active { background: var(--card); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+
+/* ---------- 캘린더 ---------- */
+.cal-card { padding: 16px 12px; }
+.cal-nav { display: flex; align-items: center; justify-content: space-between; padding: 0 8px 10px; }
+.cal-nav div { font-size: 17px; font-weight: 800; }
+.cal-nav button {
+  border: none; background: var(--bg); border-radius: 10px; width: 36px; height: 36px;
+  font-size: 20px; color: var(--sub); cursor: pointer;
+}
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+.cal-dow { text-align: center; font-size: 12px; font-weight: 700; color: var(--sub); padding: 6px 0; }
+.cal-dow.sun { color: var(--danger); }
+.cal-cell {
+  aspect-ratio: 1; border: none; background: none; border-radius: 12px;
+  font-size: 15px; font-family: inherit; color: var(--text); cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+}
+.cal-cell.today { font-weight: 900; color: var(--blue); }
+.cal-cell.selected { background: var(--blue); color: #fff; font-weight: 800; }
+.cal-cell .dot { width: 6px; height: 6px; border-radius: 99px; }
+.cal-cell .dot.done { background: var(--blue); }
+.cal-cell.selected .dot { background: #fff; }
+.cal-cell .dot.pending { background: #C5CBD3; }
+
+/* ---------- 날짜별 잡 목록 ---------- */
+.day-head { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+.text-btn { border: none; background: none; color: var(--blue); font-weight: 700; font-size: 14px; cursor: pointer; font-family: inherit; padding: 8px 4px; }
+.job-card {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  background: var(--card); border: none; border-radius: var(--radius);
+  padding: 18px; margin: 10px 0; cursor: pointer; text-align: left; font-family: inherit;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05);
+}
+.job-card:active { transform: scale(.985); }
+.job-card-main { flex: 1; }
+.job-card-title { font-size: 17px; font-weight: 800; color: var(--text); }
+.job-card-note { font-size: 14px; color: var(--text); margin-top: 3px; }
+.job-card-sub { font-size: 13px; color: var(--sub); margin-top: 3px; }
+.chip { flex-shrink: 0; font-size: 13px; font-weight: 800; border-radius: 99px; padding: 6px 12px; }
+.chip.done { background: var(--blue-weak); color: var(--blue); }
+.chip.going { background: #FFF3D6; color: #D9930D; }
+.chip.wait { background: var(--bg); color: var(--sub); }
+.empty { text-align: center; color: var(--sub); padding: 28px 0; font-size: 15px; line-height: 1.6; }
+.empty small { font-size: 13px; color: #B0B8C1; }
+
+/* ---------- 잡 화면 보조 ---------- */
+.icon-btn {
+  border: none; background: var(--card); width: 40px; height: 40px; border-radius: 12px;
+  font-size: 22px; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,.06); color: var(--text);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.owner-hint {
+  margin-top: 10px; background: var(--blue-weak); color: var(--blue);
+  font-size: 13px; font-weight: 700; border-radius: 12px; padding: 10px 14px;
+}
+
+/* ---------- 광고 슬롯 ---------- */
+.ad-slot {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--card); border-radius: var(--radius); padding: 16px 18px;
+  border: 1.5px dashed #D1D6DB; color: var(--sub); font-size: 14px; line-height: 1.5;
+}
+.ad-label {
+  flex-shrink: 0; font-size: 11px; font-weight: 800; color: #B0B8C1;
+  border: 1.5px solid #D1D6DB; border-radius: 6px; padding: 2px 6px;
+}
+.ad-slot small { color: #B0B8C1; }
+
+</style>
+</head>
+<body>
+
+<!-- ================= 캘린더 (날짜별 아카이브) ================= -->
+<div id="calView">
+  <div class="container">
+    <header>
+      <div class="header-top">
+        <div>
+          <h1>청소 캘린더</h1>
+          <div class="job-date">날짜를 눌러 청소를 확인하세요</div>
+        </div>
+        <div class="role-toggle">
+          <button id="roleOwner">사장님</button>
+          <button id="roleCleaner">청소자</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="card cal-card">
+      <div class="cal-nav">
+        <button id="prevM">‹</button>
+        <div id="calTitle"></div>
+        <button id="nextM">›</button>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+    </div>
+
+    <div class="day-head">
+      <div class="sec-title" id="dayTitle" style="padding-left:4px"></div>
+      <button id="editTplBtn" class="text-btn">✏️ 체크리스트 편집</button>
+    </div>
+    <div id="dayJobs"></div>
+    <button id="addJobBtn" class="btn primary" style="width:100%;margin:4px 0 12px">+ 이 날짜에 청소 등록</button>
+
+    <!-- 광고 슬롯 (v1: ads 테이블에서 로드, v0: 자리만) -->
+    <div class="ad-slot" id="adSlot">
+      <span class="ad-label">AD</span>
+      <div class="ad-body">숙소 용품 · 청소 업체 광고 자리<br><small>광고 문의: navlafilm@gmail.com</small></div>
+    </div>
+    <button id="vocBtn" class="text-btn" style="display:block;margin:8px auto 40px">💬 개발자에게 의견 보내기</button>
+  </div>
+</div>
+
+<!-- ================= 잡(청소 1회) 화면 ================= -->
+<div id="jobView" style="display:none">
+  <div class="container">
+    <header>
+      <div class="header-top">
+        <div style="display:flex;align-items:center;gap:10px">
+          <button id="backToCal" class="icon-btn" aria-label="캘린더로">‹</button>
+          <div>
+            <h1 id="propName"></h1>
+            <div class="job-date" id="jobDate"></div>
+          </div>
+        </div>
+        <button id="delJobBtn" class="icon-btn" aria-label="삭제">🗑</button>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="progress-count" id="progressCount"></div>
+      </div>
+      <div id="ownerHint" class="owner-hint" style="display:none">사장님 모드 — 체크는 청소자 모드에서 할 수 있어요</div>
+    </header>
+
+    <div id="sections"></div>
+
+    <div class="card" id="doneCard" style="display:none">
+      <div class="sec-title" id="doneTitle"></div>
+      <div id="doneList"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-inner">
+      <button id="issueBtn">⚠ 문제 <span id="issueCount"></span></button>
+      <button id="reportBtn" disabled></button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= 지시문 → 체크리스트 ================= -->
+<div id="parseView" style="display:none">
+  <div class="container">
+    <header>
+      <div class="header-top">
+        <div>
+          <h1>체크리스트 만들기</h1>
+          <div class="job-date">지시문을 붙여넣으면 정리해드려요</div>
+        </div>
+        <button id="backBtn" class="btn ghost" style="flex:none;width:auto;padding:0 16px;height:40px;font-size:14px">← 돌아가기</button>
+      </div>
+    </header>
+    <p class="intro">카톡으로 받던/보내던 청소 지시사항을 그대로 붙여넣으세요. 형식은 상관없어요.</p>
+    <textarea id="rawText" placeholder="예)&#10;침실: 침구 다 갈아주세요, 침대 밑 머리카락 확인&#10;욕실 수건 4장 놓고 사진 찍어주세요&#10;쓰레기 버리고 새 봉투 끼우기..."></textarea>
+    <input id="propInput" placeholder="숙소 이름 (예: 스테이웰니스 A동)">
+    <button id="parseBtn" class="btn primary" style="width:100%;margin-top:12px">체크리스트로 변환</button>
+
+    <div id="previewWrap" style="display:none">
+      <p class="intro" style="margin-top:20px">아래에서 자유롭게 수정하세요. 📷 버튼 = 사진 필수 지정</p>
+      <div id="previewSections"></div>
+      <button id="useBtn" class="btn primary" style="width:100%;margin:8px 0 40px">체크리스트 저장</button>
+    </div>
+  </div>
+</div>
+
+<!-- 공용 요소 -->
+<div id="flash"></div>
+<input type="file" id="camInput" accept="image/*" capture="environment" hidden>
+<input type="file" id="albumInput" accept="image/*" hidden>
+
+<!-- 사진 첨부 선택 시트 (카톡 스타일) -->
+<div class="modal" id="photoSheet">
+  <div class="sheet">
+    <h2>사진 첨부</h2>
+    <div class="sheet-btns"><button class="btn primary" id="sheetCamera">📷 카메라로 찍기</button></div>
+    <div class="sheet-btns"><button class="btn ghost" id="sheetAlbum">🖼 앨범에서 선택</button></div>
+    <div class="sheet-btns"><button class="btn ghost" id="sheetCancel">취소</button></div>
+  </div>
+</div>
+
+<!-- 청소 등록 모달 -->
+<div class="modal" id="addJobModal">
+  <div class="sheet">
+    <h2>🧹 청소 등록 · <span id="addJobDate"></span></h2>
+    <textarea id="addJobNote" placeholder="오늘 특이사항 (예: 레이트체크아웃 14시, 수건 추가 2장)" style="min-height:70px"></textarea>
+    <div class="sheet-btns">
+      <button class="btn ghost" id="addJobCancel">취소</button>
+      <button class="btn primary" id="addJobSave">등록</button>
+    </div>
+  </div>
+</div>
+
+<!-- 문제 보고 모달 -->
+<div class="modal" id="issueModal">
+  <div class="sheet">
+    <h2>⚠ 문제 보고</h2>
+    <textarea id="issueText" placeholder="예) 침대 옆 스탠드 전구가 나갔어요"></textarea>
+    <div class="sheet-btns"><button class="btn ghost" id="issuePhotoBtn">📷 사진 첨부</button></div>
+    <div class="sheet-btns">
+      <button class="btn ghost" id="issueCancel">취소</button>
+      <button class="btn warn" id="issueSave">보고하기</button>
+    </div>
+  </div>
+</div>
+
+<!-- VOC 모달 -->
+<div class="modal" id="vocModal">
+  <div class="sheet">
+    <h2>💬 의견 보내기</h2>
+    <textarea id="vocText" placeholder="불편한 점, 있었으면 하는 기능을 적어주세요. 다음 업데이트에 반영됩니다."></textarea>
+    <div class="sheet-btns">
+      <button class="btn ghost" id="vocCancel">취소</button>
+      <button class="btn primary" id="vocSend">보내기</button>
+    </div>
+  </div>
+</div>
+
+<!-- 리포트 모달 -->
+<div class="modal" id="reportModal">
+  <div class="sheet">
+    <h2>🎉 청소 완료!</h2>
+    <textarea id="summaryText" readonly style="min-height:130px"></textarea>
+    <div class="sheet-btns">
+      <button class="btn primary" id="exportImgBtn">🖼 이미지로 내보내기 (카톡용)</button>
+    </div>
+    <div class="sheet-btns">
+      <button class="btn ghost" id="copyBtn">카톡용 요약 복사</button>
+      <button class="btn ghost" id="saveReportBtn">HTML 저장</button>
+    </div>
+    <div class="sheet-btns"><button class="btn ghost" id="reportClose">닫기</button></div>
+  </div>
+</div>
+
+<script>
+/* ===== Cleanlist store.js — 데이터 구조 + 저장 =====
+ * 3층 구조: 템플릿(원본) → 잡(청소 1회 = 템플릿 스냅샷) → 수행기록(체크시각·사진)
+ * 텍스트/상태는 localStorage, 사진은 IndexedDB (localStorage 5MB 한계 때문).
+ */
+
+// ---- UI 문자열 (다국어 대비: 하드코딩 금지) ----
+const STRINGS = {
+  progress: (a, b) => `${a} / ${b}`,
+  photoNeeded: '사진 필수',
+  doneStack: '완료됨',
+  reportBtn: '청소 완료 · 리포트 만들기',
+  reportBtnWait: (n) => `남은 항목 ${n}개`,
+  issueBtn: '⚠ 문제 보고',
+  newJob: '새 청소 시작',
+  editTemplate: '체크리스트 편집',
+  copy: '카톡용 요약 복사',
+  copied: '복사됨!',
+  saveReport: 'HTML 리포트 저장',
+  confirmNew: '새 청소를 시작할까요? 지금 기록은 사라집니다.',
+  confirmUncheck: '체크를 해제할까요?',
+};
+
+// ---- 기본 템플릿 (스테이웰니스 예시 — parse 화면에서 교체 가능) ----
+const DEFAULT_TEMPLATE = {
+  property: '스테이웰니스',
+  sections: [
+    { name: '도착', items: [
+      { text: '창문 열어 환기 시작', photo: false },
+      { text: '전 게스트 퇴실 상태 확인 (파손·분실 살피기)', photo: false },
+    ]},
+    { name: '침실', items: [
+      { text: '침구 전체 교체 (이불커버·베개커버·시트)', photo: false },
+      { text: '침대 밑·옆 머리카락 제거', photo: false },
+      { text: '침대 스테이징 완성', photo: true },
+    ]},
+    { name: '욕실', items: [
+      { text: '변기 안팎 청소', photo: false },
+      { text: '세면대·거울 물때 제거', photo: false },
+      { text: '배수구 머리카락 제거', photo: false },
+      { text: '수건 4장 교체·비치', photo: true },
+      { text: '어메니티 채우기 (샴푸·바디워시·치약)', photo: false },
+    ]},
+    { name: '주방', items: [
+      { text: '설거지·건조된 식기 정리', photo: false },
+      { text: '싱크대·인덕션 닦기', photo: false },
+      { text: '냉장고 안 남은 음식 비우기', photo: false },
+      { text: '쓰레기통 비우기 + 새 봉투', photo: true },
+    ]},
+    { name: '거실', items: [
+      { text: '바닥 청소기 + 물걸레', photo: false },
+      { text: '테이블·선반 먼지 닦기', photo: false },
+      { text: '리모컨·충전기 제자리', photo: false },
+    ]},
+    { name: '마무리', items: [
+      { text: '창문 닫기·커튼 정돈', photo: false },
+      { text: '전체 스테이징 최종 확인', photo: true },
+      { text: '조명·에어컨 끄고 퇴실', photo: false },
+    ]},
+  ],
+};
+
+// ---- localStorage ----
+const LS_TEMPLATE = 'cl_template_v1';
+const LS_JOB = 'cl_job_v1';       // 구버전(단일 잡) — 마이그레이션용으로만 남김
+const LS_JOBS = 'cl_jobs_v1';     // 날짜별 아카이브: { jobId: job }
+const LS_ROLE = 'cl_role_v1';     // 'owner' | 'cleaner'
+
+function localDateStr(d = new Date()) {
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+
+function loadJobs() {
+  let jobs = {};
+  try { jobs = JSON.parse(localStorage.getItem(LS_JOBS)) || {}; } catch (e) { jobs = {}; }
+  // 구버전 단일 잡 → 아카이브로 마이그레이션
+  try {
+    const old = JSON.parse(localStorage.getItem(LS_JOB));
+    if (old && old.checklist && !jobs[old.id]) {
+      jobs[old.id] = old;
+      localStorage.removeItem(LS_JOB);
+      localStorage.setItem(LS_JOBS, JSON.stringify(jobs));
+    }
+  } catch (e) {}
+  return jobs;
+}
+function saveJobs(jobs) { localStorage.setItem(LS_JOBS, JSON.stringify(jobs)); }
+
+function loadTemplate() {
+  try { const t = JSON.parse(localStorage.getItem(LS_TEMPLATE)); if (t && t.sections) return t; } catch (e) {}
+  return JSON.parse(JSON.stringify(DEFAULT_TEMPLATE));
+}
+function saveTemplate(t) { localStorage.setItem(LS_TEMPLATE, JSON.stringify(t)); }
+
+function loadJob() {
+  try { const j = JSON.parse(localStorage.getItem(LS_JOB)); if (j && j.checklist) return j; } catch (e) {}
+  return null;
+}
+function saveJob(job) { localStorage.setItem(LS_JOB, JSON.stringify(job)); }
+
+// 잡 생성 = 템플릿 "복사" (템플릿을 나중에 고쳐도 과거 리포트가 안 바뀌게)
+function newJob(template, note, date) {
+  let seq = 0;
+  const checklist = template.sections.map(sec => ({
+    name: sec.name,
+    items: sec.items.map(it => ({ id: 'i' + (seq++), text: it.text, photo: !!it.photo })),
+  }));
+  return {
+    id: 'job_' + Date.now(),
+    property: template.property,
+    date: date || localDateStr(),
+    note: note || '',
+    createdAt: new Date().toISOString(),
+    checklist,
+    state: {},   // { itemId: { checkedAt, photoKey } }
+    issues: [],  // [{ text, photoKey, at }]
+  };
+}
+
+// ---- IndexedDB (사진 전용) ----
+const dbPromise = new Promise((resolve, reject) => {
+  const req = indexedDB.open('cleanlist', 1);
+  req.onupgradeneeded = () => req.result.createObjectStore('photos');
+  req.onsuccess = () => resolve(req.result);
+  req.onerror = () => reject(req.error);
+});
+async function putPhoto(key, blob) {
+  const db = await dbPromise;
+  return new Promise((res, rej) => {
+    const tx = db.transaction('photos', 'readwrite');
+    tx.objectStore('photos').put(blob, key);
+    tx.oncomplete = res; tx.onerror = () => rej(tx.error);
+  });
+}
+async function getPhoto(key) {
+  const db = await dbPromise;
+  return new Promise((res, rej) => {
+    const r = db.transaction('photos').objectStore('photos').get(key);
+    r.onsuccess = () => res(r.result || null); r.onerror = () => rej(r.error);
+  });
+}
+async function delPhoto(key) {
+  const db = await dbPromise;
+  return new Promise((res) => {
+    const tx = db.transaction('photos', 'readwrite');
+    tx.objectStore('photos').delete(key);
+    tx.oncomplete = res; tx.onerror = res;
+  });
+}
+async function photoToDataURL(key) {
+  const blob = await getPhoto(key);
+  if (!blob) return null;
+  return new Promise(res => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.readAsDataURL(blob); });
+}
+
+// ---- 사진 압축 (긴 변 1280px, JPEG 0.7 → 장당 100~300KB) + EXIF 회전 보정 ----
+// stampDate를 주면 사진 우하단에 타임스탬프를 직접 새김 (타임스탬프 카메라 앱처럼)
+async function compressImage(file, maxDim = 1280, quality = 0.7, stampDate = null) {
+  let bmp = null;
+  if (window.createImageBitmap) {
+    try { bmp = await createImageBitmap(file, { imageOrientation: 'from-image' }); }
+    catch (e) { try { bmp = await createImageBitmap(file); } catch (e2) {} }
+  }
+  if (!bmp) { // 구형 브라우저 폴백
+    bmp = await new Promise((res, rej) => {
+      const img = new Image();
+      img.onload = () => res(img); img.onerror = rej;
+      img.src = URL.createObjectURL(file);
+    });
+  }
+  const w = bmp.width || bmp.naturalWidth, h = bmp.height || bmp.naturalHeight;
+  const scale = Math.min(1, maxDim / Math.max(w, h));
+  const c = document.createElement('canvas');
+  c.width = Math.round(w * scale); c.height = Math.round(h * scale);
+  const ctx = c.getContext('2d');
+  ctx.drawImage(bmp, 0, 0, c.width, c.height);
+  if (stampDate) drawTimestamp(ctx, c.width, c.height, stampDate);
+  return new Promise(res => c.toBlob(res, 'image/jpeg', quality));
+}
+
+// 사진 우하단에 "2026-07-12 14:32" 각인 (흰 글자 + 검은 그림자, 사진 크기에 비례)
+function drawTimestamp(ctx, w, h, d) {
+  const p2 = (n) => String(n).padStart(2, '0');
+  const text = `${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())} ${p2(d.getHours())}:${p2(d.getMinutes())}`;
+  const fs = Math.max(20, Math.round(w * 0.05));
+  const pad = Math.round(w * 0.03);
+  ctx.save();
+  ctx.font = `800 ${fs}px -apple-system, BlinkMacSystemFont, sans-serif`;
+  ctx.textAlign = 'right';
+  ctx.textBaseline = 'bottom';
+  ctx.shadowColor = 'rgba(0,0,0,.85)';
+  ctx.shadowBlur = fs * 0.3;
+  ctx.shadowOffsetY = 1;
+  ctx.fillStyle = '#FFFFFF';
+  ctx.fillText(text, w - pad, h - pad);
+  ctx.restore();
+}
+
+// ---- 시간 표시 ----
+function fmtTime(iso) {
+  const d = new Date(iso);
+  return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+}
+
+</script>
+<script>
+/* ===== Cleanlist app.js =====
+ * 구조: 캘린더(날짜별 아카이브) → 잡(청소 1회) → 체크 화면
+ * 역할: 사장님 = 날짜에 청소 등록·삭제·체크리스트 편집 / 청소자 = 체크·사진·문제보고
+ * (v0는 한 기기에서 모드 전환. v1에서 링크/계정으로 분리)
+ */
+
+let jobs = loadJobs();                    // { jobId: job } — 날짜별 아카이브
+let role = localStorage.getItem(LS_ROLE) || 'cleaner';
+let job = null;                           // 현재 열린 잡
+let selectedDate = localDateStr();
+let calCursor = new Date();               // 표시 중인 달
+let pendingTarget = null;                 // { type:'item', id } | { type:'issue' }
+let issuePhotoBlob = null;
+
+const $ = (s) => document.querySelector(s);
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function persist() { if (job) jobs[job.id] = job; saveJobs(jobs); }
+
+// ---------- 뷰 전환 ----------
+function showView(name) {
+  ['calView', 'jobView', 'parseView'].forEach(v => $('#' + v).style.display = 'none');
+  $('#' + { calendar: 'calView', job: 'jobView', parse: 'parseView' }[name]).style.display = 'block';
+  if (name === 'calendar') renderCalendar();
+}
+window.showView = showView;
+
+// ---------- 역할 ----------
+function setRole(r) {
+  role = r; localStorage.setItem(LS_ROLE, r);
+  $('#roleOwner').classList.toggle('active', r === 'owner');
+  $('#roleCleaner').classList.toggle('active', r === 'cleaner');
+  renderCalendar();
+  if (job) renderJob();
+}
+$('#roleOwner').addEventListener('click', () => setRole('owner'));
+$('#roleCleaner').addEventListener('click', () => setRole('cleaner'));
+
+// ---------- 캘린더 ----------
+function jobsOn(dateStr) { return Object.values(jobs).filter(j => j.date === dateStr); }
+function jobDone(j) { const t = j.checklist.flatMap(s => s.items); return t.length > 0 && t.every(it => j.state[it.id]); }
+function jobProgress(j) { const t = j.checklist.flatMap(s => s.items); return [t.filter(it => j.state[it.id]).length, t.length]; }
+
+function renderCalendar() {
+  const y = calCursor.getFullYear(), m = calCursor.getMonth();
+  $('#calTitle').textContent = `${y}년 ${m + 1}월`;
+
+  const grid = $('#calGrid');
+  grid.innerHTML = '';
+  ['일', '월', '화', '수', '목', '금', '토'].forEach((d, i) => {
+    const el = document.createElement('div');
+    el.className = 'cal-dow' + (i === 0 ? ' sun' : '');
+    el.textContent = d;
+    grid.appendChild(el);
+  });
+  const first = new Date(y, m, 1).getDay();
+  const days = new Date(y, m + 1, 0).getDate();
+  for (let i = 0; i < first; i++) grid.appendChild(document.createElement('div'));
+  const today = localDateStr();
+  for (let d = 1; d <= days; d++) {
+    const ds = localDateStr(new Date(y, m, d));
+    const cell = document.createElement('button');
+    cell.className = 'cal-cell' + (ds === today ? ' today' : '') + (ds === selectedDate ? ' selected' : '');
+    const dayJobs = jobsOn(ds);
+    let dot = '';
+    if (dayJobs.length) dot = `<span class="dot ${dayJobs.every(jobDone) ? 'done' : 'pending'}"></span>`;
+    cell.innerHTML = `<span>${d}</span>${dot}`;
+    cell.addEventListener('click', () => { selectedDate = ds; renderCalendar(); });
+    grid.appendChild(cell);
+  }
+
+  // 선택 날짜의 청소 목록
+  const [yy, mm, dd] = selectedDate.split('-');
+  const dow = ['일', '월', '화', '수', '목', '금', '토'][new Date(+yy, mm - 1, +dd).getDay()];
+  $('#dayTitle').textContent = `${+mm}월 ${+dd}일 (${dow})`;
+  const list = $('#dayJobs');
+  list.innerHTML = '';
+  const dayJobs = jobsOn(selectedDate).sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+  if (!dayJobs.length) {
+    list.innerHTML = `<div class="empty">등록된 청소가 없어요<br><small>아래 버튼으로 이 날짜에 청소를 등록하세요</small></div>`;
+  }
+  dayJobs.forEach(j => {
+    const [done, total] = jobProgress(j);
+    const status = jobDone(j) ? '<span class="chip done">완료</span>'
+      : done > 0 ? '<span class="chip going">진행중</span>' : '<span class="chip wait">예정</span>';
+    const card = document.createElement('button');
+    card.className = 'job-card';
+    card.innerHTML = `
+      <div class="job-card-main">
+        <div class="job-card-title">${esc(j.property)}</div>
+        ${j.note ? `<div class="job-card-note">📌 ${esc(j.note)}</div>` : ''}
+        <div class="job-card-sub">${done}/${total} 항목${j.issues.length ? ` · ⚠ ${j.issues.length}` : ''}</div>
+      </div>${status}`;
+    card.addEventListener('click', () => openJob(j.id));
+    list.appendChild(card);
+  });
+
+}
+$('#prevM').addEventListener('click', () => { calCursor = new Date(calCursor.getFullYear(), calCursor.getMonth() - 1, 1); renderCalendar(); });
+$('#nextM').addEventListener('click', () => { calCursor = new Date(calCursor.getFullYear(), calCursor.getMonth() + 1, 1); renderCalendar(); });
+$('#editTplBtn').addEventListener('click', () => showView('parse'));
+
+// ---------- 청소 등록 (사장님) ----------
+$('#addJobBtn').addEventListener('click', () => {
+  $('#addJobDate').textContent = selectedDate;
+  $('#addJobModal').classList.add('open');
+});
+$('#addJobCancel').addEventListener('click', () => $('#addJobModal').classList.remove('open'));
+$('#addJobSave').addEventListener('click', () => {
+  const note = $('#addJobNote').value.trim();
+  const j = newJob(loadTemplate(), note, selectedDate);
+  jobs[j.id] = j; saveJobs(jobs);
+  $('#addJobNote').value = '';
+  $('#addJobModal').classList.remove('open');
+  renderCalendar();
+});
+
+// ---------- 잡 화면 ----------
+function openJob(id) { job = jobs[id]; renderJob(); showView('job'); }
+$('#backToCal').addEventListener('click', () => { job = null; showView('calendar'); });
+$('#delJobBtn').addEventListener('click', async () => {
+  if (!confirm('이 청소를 삭제할까요? 사진·기록이 모두 지워집니다.')) return;
+  for (const st of Object.values(job.state)) if (st.photoKey) await delPhoto(st.photoKey);
+  for (const is of job.issues) if (is.photoKey) await delPhoto(is.photoKey);
+  delete jobs[job.id]; saveJobs(jobs);
+  job = null; showView('calendar');
+});
+
+function allItems() { return job.checklist.flatMap(s => s.items); }
+function doneCount() { return allItems().filter(it => job.state[it.id]).length; }
+
+function renderJob() {
+  $('#propName').textContent = job.property;
+  $('#jobDate').textContent = job.date + (job.note ? ' · ' + job.note : '');
+  $('#issueBtn').style.display = role === 'cleaner' ? '' : 'none';
+  $('#ownerHint').style.display = role === 'owner' ? '' : 'none';
+
+  const total = allItems().length, done = doneCount();
+  $('#progressCount').textContent = STRINGS.progress(done, total);
+  $('#progressFill').style.width = total ? (done / total * 100) + '%' : '0%';
+
+  const secWrap = $('#sections');
+  secWrap.innerHTML = '';
+  job.checklist.forEach(sec => {
+    const remain = sec.items.filter(it => !job.state[it.id]);
+    if (!remain.length) return;
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `<div class="sec-title">${esc(sec.name)}</div>`;
+    remain.forEach(it => card.appendChild(rowEl(it, false)));
+    secWrap.appendChild(card);
+  });
+
+  const doneItems = allItems().filter(it => job.state[it.id])
+    .sort((a, b) => job.state[b.id].checkedAt.localeCompare(job.state[a.id].checkedAt));
+  const doneCard = $('#doneCard');
+  if (doneItems.length) {
+    doneCard.style.display = '';
+    $('#doneTitle').textContent = `${STRINGS.doneStack} ${doneItems.length}`;
+    const list = $('#doneList');
+    list.innerHTML = '';
+    doneItems.forEach(it => list.appendChild(rowEl(it, true)));
+  } else doneCard.style.display = 'none';
+
+  const btn = $('#reportBtn');
+  if (done === total && total > 0) { btn.disabled = false; btn.textContent = STRINGS.reportBtn; }
+  else { btn.disabled = true; btn.textContent = STRINGS.reportBtnWait(total - done); }
+  $('#issueCount').textContent = job.issues.length ? job.issues.length : '';
+}
+
+function rowEl(it, isDone) {
+  const st = job.state[it.id];
+  const row = document.createElement('button');
+  row.className = 'row' + (isDone ? ' done' : '');
+  row.innerHTML = `
+    <span class="checkbox">${isDone ? '✓' : ''}</span>
+    <span class="row-text">${esc(it.text)}
+      ${it.photo && !isDone ? `<span class="badge">📷 ${STRINGS.photoNeeded}</span>` : ''}
+    </span>
+    ${isDone ? `<span class="stamp">${st.photoKey ? '📷 ' : ''}${fmtTime(st.checkedAt)}</span>` : ''}`;
+  row.addEventListener('click', () => {
+    if (role !== 'cleaner') { alert('체크는 청소자 모드에서 할 수 있어요.'); return; }
+    isDone ? uncheck(it) : tapItem(it, row);
+  });
+  return row;
+}
+
+// ---------- 체크 인터랙션 ----------
+function tapItem(it, row) {
+  if (it.photo) { pendingTarget = { type: 'item', id: it.id }; openPhotoSheet(); return; }
+  animateCheck(row, () => check(it.id, null));
+}
+function animateCheck(row, after) {
+  row.classList.add('checking');
+  row.querySelector('.checkbox').textContent = '✓';
+  if (navigator.vibrate) navigator.vibrate(15);
+  setTimeout(() => { row.classList.add('leaving'); setTimeout(after, 320); }, 260);
+}
+function check(id, photoKey) {
+  job.state[id] = { checkedAt: new Date().toISOString(), photoKey: photoKey || null };
+  persist(); renderJob();
+}
+async function uncheck(it) {
+  if (!confirm(STRINGS.confirmUncheck)) return;
+  const st = job.state[it.id];
+  if (st && st.photoKey) await delPhoto(st.photoKey);
+  delete job.state[it.id];
+  persist(); renderJob();
+}
+
+// ---------- 사진 첨부 시트 (카톡 스타일: 카메라 / 앨범) ----------
+function openPhotoSheet() { $('#photoSheet').classList.add('open'); }
+function closePhotoSheet() { $('#photoSheet').classList.remove('open'); }
+$('#sheetCamera').addEventListener('click', () => { closePhotoSheet(); $('#camInput').click(); });
+$('#sheetAlbum').addEventListener('click', () => { closePhotoSheet(); $('#albumInput').click(); });
+$('#sheetCancel').addEventListener('click', () => { closePhotoSheet(); pendingTarget = null; });
+
+// 카메라/앨범 공용 — 타임스탬프를 사진에 직접 새김
+// (카메라 = 지금 시각, 앨범 = 사진 파일의 촬영/수정 시각 → 옛날 사진을 지금 찍은 척 못함)
+async function handlePhotoFile(file) {
+  if (!file || !pendingTarget) return;
+  const target = pendingTarget; pendingTarget = null;
+  flash();
+  const stampDate = new Date(file.lastModified || Date.now());
+  try {
+    const blob = await compressImage(file, 1280, 0.7, stampDate);
+    if (target.type === 'item') {
+      const key = job.id + '_' + target.id;
+      await putPhoto(key, blob);
+      check(target.id, key);
+    } else if (target.type === 'issue') {
+      issuePhotoBlob = blob;
+      $('#issuePhotoBtn').textContent = '📷 사진 1장 첨부됨';
+    }
+  } catch (err) { alert('사진 저장 실패: ' + err.message); }
+}
+$('#camInput').addEventListener('change', (e) => { const f = e.target.files[0]; e.target.value = ''; handlePhotoFile(f); });
+$('#albumInput').addEventListener('change', (e) => { const f = e.target.files[0]; e.target.value = ''; handlePhotoFile(f); });
+
+function flash() {
+  const f = $('#flash');
+  f.classList.add('on');
+  setTimeout(() => f.classList.remove('on'), 350);
+}
+
+// ---------- 문제 보고 (청소자) ----------
+$('#issueBtn').addEventListener('click', () => $('#issueModal').classList.add('open'));
+$('#issueCancel').addEventListener('click', closeIssue);
+$('#issuePhotoBtn').addEventListener('click', () => { pendingTarget = { type: 'issue' }; openPhotoSheet(); });
+$('#issueSave').addEventListener('click', async () => {
+  const text = $('#issueText').value.trim();
+  if (!text && !issuePhotoBlob) { closeIssue(); return; }
+  let photoKey = null;
+  if (issuePhotoBlob) {
+    photoKey = job.id + '_issue_' + Date.now();
+    await putPhoto(photoKey, issuePhotoBlob);
+  }
+  job.issues.push({ text, photoKey, at: new Date().toISOString() });
+  persist(); closeIssue(); renderJob();
+});
+function closeIssue() {
+  $('#issueModal').classList.remove('open');
+  $('#issueText').value = ''; issuePhotoBlob = null;
+  $('#issuePhotoBtn').textContent = '📷 사진 첨부';
+}
+
+// ---------- 리포트 ----------
+$('#reportBtn').addEventListener('click', openReport);
+$('#reportClose').addEventListener('click', () => $('#reportModal').classList.remove('open'));
+$('#copyBtn').addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText($('#summaryText').value); }
+  catch (e) { $('#summaryText').select(); document.execCommand('copy'); }
+  $('#copyBtn').textContent = STRINGS.copied;
+  setTimeout(() => $('#copyBtn').textContent = STRINGS.copy, 1500);
+});
+$('#saveReportBtn').addEventListener('click', async () => {
+  const html = await buildReportHTML();
+  const blob = new Blob([html], { type: 'text/html' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `청소리포트_${job.property}_${job.date}.html`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+});
+
+function timeRange() {
+  const times = Object.values(job.state).map(s => s.checkedAt).sort();
+  if (!times.length) return '';
+  return fmtTime(times[0]) + '~' + fmtTime(times[times.length - 1]);
+}
+
+function openReport() {
+  const total = allItems().length;
+  const photos = Object.values(job.state).filter(s => s.photoKey).length;
+  const lines = [
+    `✅ [${job.property}] 청소 완료`,
+    `📅 ${job.date} (${timeRange()})`,
+    `☑ ${doneCount()}/${total} 항목 완료 · 📷 사진 ${photos}장`,
+  ];
+  if (job.note) lines.push(`📌 ${job.note}`);
+  job.issues.forEach(is => lines.push(`⚠ 특이사항: ${is.text}${is.photoKey ? ' (사진 있음)' : ''}`));
+  lines.push('상세 내역·사진은 첨부 리포트 참고');
+  $('#summaryText').value = lines.join('\n');
+  $('#reportModal').classList.add('open');
+}
+
+async function buildReportHTML() {
+  const total = allItems().length;
+  let body = '';
+  for (const sec of job.checklist) {
+    body += `<h2>${esc(sec.name)}</h2><ul>`;
+    for (const it of sec.items) {
+      const st = job.state[it.id];
+      body += `<li><span class="ok">✓</span> ${esc(it.text)} <span class="t">${st ? fmtTime(st.checkedAt) : '-'}</span>`;
+      if (st && st.photoKey) {
+        const url = await photoToDataURL(st.photoKey);
+        if (url) body += `<br><img src="${url}" alt="">`;
+      }
+      body += '</li>';
+    }
+    body += '</ul>';
+  }
+  let issuesHtml = '';
+  if (job.issues.length) {
+    issuesHtml = '<h2 class="warn">⚠ 특이사항</h2><ul>';
+    for (const is of job.issues) {
+      issuesHtml += `<li>${esc(is.text)} <span class="t">${fmtTime(is.at)}</span>`;
+      if (is.photoKey) {
+        const url = await photoToDataURL(is.photoKey);
+        if (url) issuesHtml += `<br><img src="${url}" alt="">`;
+      }
+      issuesHtml += '</li>';
+    }
+    issuesHtml += '</ul>';
+  }
+  const photos = Object.values(job.state).filter(s => s.photoKey).length;
+  return `<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>청소 리포트 · ${esc(job.property)} · ${job.date}</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Pretendard',sans-serif;background:#F2F4F6;color:#191F28;margin:0;padding:20px;line-height:1.6}
+.wrap{max-width:560px;margin:0 auto;background:#fff;border-radius:20px;padding:28px}
+h1{font-size:22px;margin:0 0 4px} .meta{color:#8B95A1;font-size:15px;margin-bottom:20px}
+.pill{display:inline-block;background:#E8F1FE;color:#3182F6;border-radius:99px;padding:4px 12px;font-weight:700;font-size:14px;margin-right:6px}
+h2{font-size:16px;margin:22px 0 8px;color:#4E5968} h2.warn{color:#F04452}
+ul{list-style:none;margin:0;padding:0} li{padding:9px 0;border-bottom:1px solid #F2F4F6;font-size:15px}
+.ok{color:#3182F6;font-weight:800} .t{color:#8B95A1;font-size:13px;float:right}
+img{max-width:100%;border-radius:12px;margin-top:8px}
+.foot{text-align:center;color:#B0B8C1;font-size:12px;margin-top:24px}
+</style></head><body><div class="wrap">
+<h1>✅ ${esc(job.property)} 청소 완료</h1>
+<div class="meta">${job.date} · ${timeRange()}${job.note ? ' · ' + esc(job.note) : ''}</div>
+<div><span class="pill">${doneCount()}/${total} 완료</span><span class="pill">📷 ${photos}장</span>${job.issues.length ? `<span class="pill" style="background:#FDEBEC;color:#F04452">⚠ ${job.issues.length}건</span>` : ''}</div>
+${issuesHtml}${body}
+<div class="foot">Cleanlist로 만든 리포트 · 생성 ${new Date().toLocaleString('ko-KR')}</div>
+</div></body></html>`;
+}
+
+
+// ---------- 이미지 내보내기 (카톡용) ----------
+// 요약 카드 + 구역별 카드 + 타임스탬프 각인된 증빙 사진을 한 번에 공유 시트로.
+const CW = 1080, CP = 72;
+function makeCanvas(h) {
+  const c = document.createElement('canvas'); c.width = CW; c.height = h;
+  const x = c.getContext('2d'); x.fillStyle = '#FFFFFF'; x.fillRect(0, 0, CW, h);
+  return [c, x];
+}
+function fnt(x, size, weight, color) {
+  x.font = `${weight} ${size}px -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif`;
+  x.fillStyle = color;
+}
+function wrapTxt(x, text, maxW) {
+  const out = []; let line = '';
+  for (const ch of String(text)) {
+    if (x.measureText(line + ch).width > maxW) { out.push(line); line = ch; } else line += ch;
+  }
+  if (line) out.push(line);
+  return out.length ? out : [''];
+}
+function canvasBlob(c) { return new Promise(r => c.toBlob(r, 'image/png')); }
+
+async function cardSummary() {
+  const total = allItems().length;
+  const photos = Object.values(job.state).filter(s => s.photoKey).length;
+  const tmp = document.createElement('canvas').getContext('2d');
+  fnt(tmp, 38, '400', '#000');
+  const noteLines = job.note ? wrapTxt(tmp, '📌 ' + job.note, CW - CP * 2) : [];
+  fnt(tmp, 38, '700', '#000');
+  const issueLines = job.issues.flatMap(is => wrapTxt(tmp, '⚠ ' + (is.text || '사진 보고'), CW - CP * 2));
+  const h = 420 + (noteLines.length + issueLines.length) * 56 + 110;
+  const [c, x] = makeCanvas(h);
+  x.fillStyle = '#3182F6'; x.fillRect(0, 0, CW, 14);
+  fnt(x, 62, '800', '#191F28'); x.fillText('✅ ' + job.property + ' 청소 완료', CP, 150);
+  fnt(x, 40, '400', '#8B95A1'); x.fillText(job.date + '  ' + timeRange(), CP, 220);
+  fnt(x, 44, '700', '#3182F6'); x.fillText(`${doneCount()}/${total} 항목 완료 · 📷 사진 ${photos}장`, CP, 310);
+  let y = 390;
+  fnt(x, 38, '400', '#191F28'); noteLines.forEach(l => { x.fillText(l, CP, y); y += 56; });
+  fnt(x, 38, '700', '#F04452'); issueLines.forEach(l => { x.fillText(l, CP, y); y += 56; });
+  fnt(x, 28, '400', '#B0B8C1'); x.fillText('Cleanlist', CP, h - 46);
+  return canvasBlob(c);
+}
+
+async function cardSection(sec) {
+  const tmp = document.createElement('canvas').getContext('2d');
+  fnt(tmp, 40, '400', '#000');
+  const rows = sec.items.map(it => {
+    const st = job.state[it.id];
+    return { lines: wrapTxt(tmp, it.text, CW - CP * 2 - 280), time: st ? fmtTime(st.checkedAt) : '-', photo: !!(st && st.photoKey) };
+  });
+  const bodyH = rows.reduce((a, r) => a + r.lines.length * 54 + 44, 0);
+  const h = 200 + bodyH + 100;
+  const [c, x] = makeCanvas(h);
+  x.fillStyle = '#3182F6'; x.fillRect(0, 0, CW, 14);
+  fnt(x, 50, '800', '#191F28'); x.fillText(sec.name, CP, 122);
+  let y = 210;
+  rows.forEach(r => {
+    fnt(x, 44, '800', '#3182F6'); x.fillText('✓', CP, y);
+    r.lines.forEach((l, i) => {
+      fnt(x, 40, '400', '#191F28'); x.fillText(l, CP + 64, y);
+      if (i === 0) {
+        fnt(x, 32, '600', '#8B95A1'); x.textAlign = 'right';
+        x.fillText((r.photo ? '📷 ' : '') + r.time, CW - CP, y);
+        x.textAlign = 'left';
+      }
+      y += 54;
+    });
+    y += 44;
+    x.strokeStyle = '#F2F4F6'; x.lineWidth = 2;
+    x.beginPath(); x.moveTo(CP, y - 30); x.lineTo(CW - CP, y - 30); x.stroke();
+  });
+  fnt(x, 28, '400', '#B0B8C1'); x.fillText('Cleanlist', CP, h - 40);
+  return canvasBlob(c);
+}
+
+$('#exportImgBtn').addEventListener('click', exportImages);
+async function exportImages() {
+  const btn = $('#exportImgBtn');
+  btn.textContent = '이미지 만드는 중...';
+  try {
+    const files = [];
+    files.push(new File([await cardSummary()], `01_${job.property}_${job.date}_요약.png`, { type: 'image/png' }));
+    let n = 2;
+    for (const sec of job.checklist) {
+      files.push(new File([await cardSection(sec)], `${String(n++).padStart(2, '0')}_${sec.name}.png`, { type: 'image/png' }));
+    }
+    for (const sec of job.checklist) for (const it of sec.items) {
+      const st = job.state[it.id];
+      if (st && st.photoKey) {
+        const b = await getPhoto(st.photoKey);
+        if (b) files.push(new File([b], `사진_${it.text.slice(0, 12)}.jpg`, { type: 'image/jpeg' }));
+      }
+    }
+    for (const is of job.issues) if (is.photoKey) {
+      const b = await getPhoto(is.photoKey);
+      if (b) files.push(new File([b], `문제_${(is.text || '보고').slice(0, 12)}.jpg`, { type: 'image/jpeg' }));
+    }
+    if (navigator.canShare && navigator.canShare({ files })) {
+      await navigator.share({ files, title: `${job.property} 청소 완료` }); // 공유 시트 → 카톡 선택
+    } else {
+      files.forEach(f => { const a = document.createElement('a'); a.href = URL.createObjectURL(f); a.download = f.name; a.click(); });
+      alert(files.length + '장이 저장됐어요. 카톡에서 사진으로 첨부해 보내세요.');
+    }
+  } catch (e) { if (e.name !== 'AbortError') alert('내보내기 실패: ' + e.message); }
+  btn.textContent = '🖼 이미지로 내보내기 (카톡용)';
+}
+
+// ---------- VOC (의견 보내기) — v1에서 /api/voc POST로 교체 ----------
+$('#vocBtn').addEventListener('click', () => $('#vocModal').classList.add('open'));
+$('#vocCancel').addEventListener('click', () => $('#vocModal').classList.remove('open'));
+$('#vocSend').addEventListener('click', () => {
+  const t = $('#vocText').value.trim();
+  if (t) {
+    const list = JSON.parse(localStorage.getItem('cl_voc_v1') || '[]');
+    list.push({ text: t, role, at: new Date().toISOString() });
+    localStorage.setItem('cl_voc_v1', JSON.stringify(list));
+    location.href = 'mailto:navlafilm@gmail.com?subject=' + encodeURIComponent('[Cleanlist 의견]') + '&body=' + encodeURIComponent(t);
+  }
+  $('#vocText').value = '';
+  $('#vocModal').classList.remove('open');
+});
+
+// ---------- 시작 ----------
+setRole(role);
+showView('calendar');
+
+</script>
+<script>
+/* ===== Cleanlist parse.js — 지시문 → 체크리스트 변환 (사장님 화면) =====
+ * v0: 규칙 기반 (데모용). v1에서 Claude API 호출로 교체 — 편집 미리보기는 유지할 것.
+ */
+
+const SECTION_WORDS = ['침실','안방','작은방','방','욕실','화장실','샤워','주방','부엌','싱크',
+  '거실','세탁','빨래','현관','발코니','베란다','테라스','마당','외부','옥상',
+  '마무리','퇴실','체크아웃','도착','입실','비품','소모품','어메니티','냉장고','침구','기타'];
+
+function stripBullet(line) {
+  return line.replace(/^[\s\-\*·•●■>~]+/, '')
+             .replace(/^\d+[\.\)]\s*/, '')
+             .replace(/^[①-⑳]\s*/, '')
+             .trim();
+}
+
+function isSectionHeader(line) {
+  if (/[:：>]$/.test(line)) return true;
+  if (line.length <= 8 && SECTION_WORDS.some(w => line.includes(w))
+      && !/[해하세요니다줘요기]$|주세요|할 것|하기/.test(line)) return true;
+  return false;
+}
+
+function guessSection(line) {
+  for (const w of SECTION_WORDS) if (line.includes(w)) return null; // 항목 내 키워드는 섹션 이동 안함
+  return null;
+}
+
+function parseInstructions(raw) {
+  let text = raw.trim();
+  // 줄이 거의 없는 긴 덩어리면 문장 단위로 쪼갬
+  let lines = text.split(/\n+/).map(stripBullet).filter(Boolean);
+  if (lines.length <= 2 && text.length > 80) {
+    lines = text.split(/(?<=[.!?다요])\s+/).map(stripBullet).filter(Boolean);
+  }
+  const sections = [];
+  let current = null;
+  const ensure = (name) => {
+    current = sections.find(s => s.name === name);
+    if (!current) { current = { name, items: [] }; sections.push(current); }
+    return current;
+  };
+  const GREETING = /^(안녕|감사|수고|고생|잘\s?부탁|이번\s?주도|오늘도)/;
+  for (const line of lines) {
+    if (GREETING.test(line) && line.length < 30) continue; // 인사말 제외
+    if (isSectionHeader(line)) {
+      ensure(line.replace(/[:：>]$/, '').trim() || '기본');
+      continue;
+    }
+    if (!current) ensure('기본');
+    // 한 줄에 여러 지시가 콤마/그리고로 이어진 경우 분리 (짧은 절만)
+    const parts = line.length > 40 ? line.split(/,\s*|\s+그리고\s+/) : [line];
+    for (const p of parts) {
+      const t = p.trim();
+      if (t.length < 2) continue;
+      current.items.push({ text: t, photo: /사진|인증|찍/.test(t) });
+    }
+  }
+  return { property: '', sections: sections.filter(s => s.items.length) };
+}
+
+// ---------- 미리보기 렌더 (편집 가능 — 파싱 오류의 보험) ----------
+const $p = (s) => document.querySelector(s);
+let parsed = null;
+
+$p('#parseBtn').addEventListener('click', () => {
+  const raw = $p('#rawText').value;
+  if (!raw.trim()) return;
+  parsed = parseInstructions(raw);
+  renderPreview();
+});
+
+function renderPreview() {
+  $p('#previewWrap').style.display = '';
+  const wrap = $p('#previewSections');
+  wrap.innerHTML = '';
+  parsed.sections.forEach((sec, si) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `<input class="sec-input" data-si="${si}" value="${escAttr(sec.name)}">`;
+    sec.items.forEach((it, ii) => {
+      const row = document.createElement('div');
+      row.className = 'edit-row';
+      row.innerHTML = `
+        <input class="item-input" data-si="${si}" data-ii="${ii}" value="${escAttr(it.text)}">
+        <button class="photo-toggle ${it.photo ? 'on' : ''}" data-si="${si}" data-ii="${ii}" title="사진 필수 토글">📷</button>
+        <button class="del-item" data-si="${si}" data-ii="${ii}">×</button>`;
+      card.appendChild(row);
+    });
+    const add = document.createElement('button');
+    add.className = 'add-item'; add.textContent = '+ 항목 추가'; add.dataset.si = si;
+    card.appendChild(add);
+    wrap.appendChild(card);
+  });
+}
+
+function escAttr(s) { return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+
+$p('#previewSections').addEventListener('click', (e) => {
+  const t = e.target;
+  if (t.classList.contains('photo-toggle')) {
+    const it = parsed.sections[t.dataset.si].items[t.dataset.ii];
+    it.photo = !it.photo; t.classList.toggle('on', it.photo);
+  } else if (t.classList.contains('del-item')) {
+    parsed.sections[t.dataset.si].items.splice(t.dataset.ii, 1);
+    syncInputs(); renderPreview();
+  } else if (t.classList.contains('add-item')) {
+    syncInputs();
+    parsed.sections[t.dataset.si].items.push({ text: '', photo: false });
+    renderPreview();
+  }
+});
+
+function syncInputs() {
+  document.querySelectorAll('.sec-input').forEach(inp => parsed.sections[inp.dataset.si].name = inp.value.trim() || '기본');
+  document.querySelectorAll('.item-input').forEach(inp => parsed.sections[inp.dataset.si].items[inp.dataset.ii].text = inp.value.trim());
+}
+
+// ---------- 확정 → 템플릿 저장 (새로 등록하는 청소부터 적용, 지난 아카이브는 불변) ----------
+$p('#useBtn').addEventListener('click', () => {
+  syncInputs();
+  parsed.sections.forEach(s => s.items = s.items.filter(it => it.text.length > 1));
+  const tpl = {
+    property: $p('#propInput').value.trim() || '내 숙소',
+    sections: parsed.sections.filter(s => s.items.length),
+  };
+  if (!tpl.sections.length) { alert('항목이 없습니다.'); return; }
+  saveTemplate(tpl);
+  alert('체크리스트가 저장됐어요. 새로 등록하는 청소부터 적용됩니다.');
+  showView('calendar');
+});
+
+$p('#backBtn').addEventListener('click', () => showView('calendar'));
+
+</script>
+</body>
+</html>
