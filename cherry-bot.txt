@@ -208,7 +208,7 @@ async function poll() {
   }
 }
 
-Deno.cron("poll comments", "* * * * *", poll);
+Deno.cron("poll comments", "*/2 * * * *", poll);          // 2분마다 (연산량 절감)
 Deno.cron("refresh token", "0 3 * * 1", refreshToken);   // 매주 월요일 03:00 갱신
 
 // ── 웹훅 서명 ────────────────────────────────────────────
