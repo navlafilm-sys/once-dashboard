@@ -227,16 +227,19 @@ async function verifySig(body: string, sig: string | null) {
 Deno.serve(async (req) => {
   const u = new URL(req.url);
 
-  // 클릭 추적 리다이렉트
+  // 클릭 추적. beacon=1 이면 카운트만(204), 아니면 예전처럼 리다이렉트.
   if (u.pathname === "/c") {
-    const id = u.searchParams.get("id") ?? "?";
-    const to = u.searchParams.get("u");
-    if (!to) return new Response("missing u", { status: 400 });
+    const id  = u.searchParams.get("id") ?? "?";
     const day = new Date().toISOString().slice(0, 10);
     await kv.atomic()
       .sum(["click", id], 1n)
       .sum(["click_day", day, id], 1n)
       .commit();
+    if (u.searchParams.get("beacon")) {
+      return new Response(null, { status: 204, headers: { "Access-Control-Allow-Origin": "*" } });
+    }
+    const to = u.searchParams.get("u");
+    if (!to) return new Response("ok", { status: 200 });
     return Response.redirect(to, 302);
   }
 
