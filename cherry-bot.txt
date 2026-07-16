@@ -1,0 +1,301 @@
+// CHERRY CLUB — 댓글 → DM 자동응답 봇 (호별 링크 발송)
+// Deno Deploy + Deno KV.  1분마다 폴링 → 키워드 댓글 감지 → 프라이빗 리플라이 DM
+//
+// 핵심: 댓글이 달린 게시물(media_id) → links.json 의 해당 "호" 를 찾아
+//       그 호의 어필리에이트 링크를 DM 본문에 바로 넣어 보낸다.
+
+const ENV_TOKEN = Deno.env.get("IG_TOKEN")!;   // 최초 부트스트랩용
+const IG_ID     = Deno.env.get("IG_USER_ID")!;
+const VERIFY    = Deno.env.get("VERIFY_TOKEN")!;
+const SECRET    = Deno.env.get("APP_SECRET")!;
+
+const API   = "https://graph.instagram.com/v23.0";
+const SITE  = "https://cherryclubmag.github.io";
+const TRACK = "https://peppy-duck-1231.navlafilm-sys.deno.net/c";
+
+const KEYWORDS = ["링크", "정보", "구매", "어디", "가격", "정보요", "링크요"];
+const STOPWORD = "그만";
+
+const kv = await Deno.openKv();
+
+// ── 토큰 자동 갱신 ────────────────────────────────────────
+// IG 장기 토큰은 60일 만료. env 고정값이면 만료 시 봇이 조용히 죽는다.
+// → KV 에 보관하고 매주 refresh. env 는 최초 1회 부트스트랩으로만 사용.
+async function getToken(): Promise<string> {
+  const kvTok = (await kv.get<string>(["ig_token"])).value;
+  if (kvTok) return kvTok;
+  await kv.set(["ig_token"], ENV_TOKEN);          // 최초 저장
+  return ENV_TOKEN;
+}
+
+async function refreshToken() {
+  try {
+    const cur = await getToken();
+    const r = await fetch(
+      `${API}/refresh_access_token?grant_type=ig_refresh_token&access_token=${cur}`,
+    );
+    const j = await r.json();
+    if (r.ok && j.access_token) {
+      await kv.set(["ig_token"], j.access_token);
+      await kv.set(["token_refreshed"], new Date().toISOString());
+      console.log("토큰 갱신 성공 · +%d일", j.expires_in ? Math.round(j.expires_in / 86400) : 60);
+    } else {
+      console.log("토큰 갱신 실패", JSON.stringify(j));
+      await kv.set(["token_error"], new Date().toISOString());
+    }
+  } catch (e) {
+    console.log("토큰 갱신 예외", e);
+  }
+}
+
+// ── 정책 한도 ────────────────────────────────────────────
+const WINDOW_MS   = 7 * 24 * 60 * 60 * 1000;   // 댓글 후 7일 내 1회
+const PER_USER_MS = 24 * 60 * 60 * 1000;       // 유저당 24시간 1회
+const HOURLY_CAP  = 180;                        // 시간당 180건
+
+// ── links.json 캐시 (5분) ────────────────────────────────
+type Item  = { name: string; brand?: string; product?: string; url?: string; aff?: boolean };
+type Issue = { no: string; title: string; cat: string; media_id?: string;
+               permalink?: string; items?: Item[] };
+let cache: { at: number; issues: Issue[] } = { at: 0, issues: [] };
+
+async function issues(): Promise<Issue[]> {
+  if (Date.now() - cache.at < 5 * 60 * 1000 && cache.issues.length) return cache.issues;
+  try {
+    const r = await fetch(`${SITE}/links.json?t=${Date.now()}`);
+    const d = await r.json();
+    cache = { at: Date.now(), issues: d.issues || [] };
+  } catch (e) {
+    console.log("links.json 로드 실패", e);
+  }
+  return cache.issues;
+}
+
+const clean = (u: string) => `${TRACK}?id=dm&u=${encodeURIComponent(u)}`;
+
+// ── DM 본문 만들기 ───────────────────────────────────────
+async function compose(mediaId: string): Promise<string> {
+  const list = await issues();
+  const iss  = list.find((i) => i.media_id && i.media_id === mediaId);
+
+  // 어느 호인지 모르면 홈으로
+  if (!iss) {
+    return [
+      "안녕하세요, 체리클럽이에요 🍒",
+      "",
+      "이번 픽들은 여기서 한 번에 볼 수 있어요 👇",
+      SITE,
+      "",
+      `(더 이상 받고 싶지 않으면 "${STOPWORD}" 이라고 답장해 주세요)`,
+    ].join("\n");
+  }
+
+  const deep  = `${SITE}/?no=${iss.no}`;
+  const items = (iss.items || []).filter((p) => p.url);
+
+  // 제휴 링크(수수료 발생)가 하나라도 있으면 공정위 표시 문구 필요
+  const hasAff = (iss.items || []).some((p) => p.aff);
+
+  const lines = [
+    `🍒 ${iss.no}호 · ${iss.title}`,
+    "",
+  ];
+
+  if (items.length) {
+    lines.push("이 호에 나온 아이템 링크예요 👇", "");
+    items.slice(0, 5).forEach((p, i) => {
+      const nm = p.brand ? `${p.brand} ${p.product ?? ""}`.trim() : p.name;
+      lines.push(`${i + 1}. ${nm}`, clean(p.url!));
+    });
+    if (items.length > 5) lines.push("", `그 외 ${items.length - 5}개는 여기서 👇`, deep);
+  } else {
+    lines.push("아이템 전체는 여기서 볼 수 있어요 👇", deep);
+  }
+
+  if (hasAff) {
+    lines.push("", "※ 일부 링크는 제휴 링크로, 구매 시 수수료를 받을 수 있어요. (가격은 동일)");
+  }
+  lines.push("", `(더 이상 받고 싶지 않으면 "${STOPWORD}" 이라고 답장해 주세요)`);
+  return lines.join("\n");
+}
+
+// ── 프라이빗 리플라이 ────────────────────────────────────
+async function privateReply(commentId: string, text: string) {
+  const tok = await getToken();
+  const r = await fetch(`${API}/${IG_ID}/messages`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${tok}` },
+    body: JSON.stringify({ recipient: { comment_id: commentId }, message: { text } }),
+  });
+  const j = await r.json();
+  if (!r.ok) { console.log("DM 실패", JSON.stringify(j)); return false; }
+  console.log("DM 발송 성공", j.message_id ?? "");
+  return true;
+}
+
+// ── 댓글 1건 처리 ────────────────────────────────────────
+async function processComment(
+  commentId: string, fromId: string, rawText: string, tsMs: number, mediaId: string,
+) {
+  const text = (rawText || "").toLowerCase();
+
+  // 옵트아웃
+  if (text.includes(STOPWORD)) {
+    await kv.set(["optout", fromId], true);
+    return;
+  }
+  if ((await kv.get(["optout", fromId])).value) return;
+
+  // 키워드
+  if (!KEYWORDS.some((k) => text.includes(k))) return;
+
+  // 중복
+  if ((await kv.get(["done", commentId])).value) return;
+
+  // 7일 창
+  if (tsMs && Date.now() - tsMs > WINDOW_MS) return;
+
+  // 유저당 24시간
+  const last = (await kv.get(["user", fromId])).value as number | null;
+  if (last && Date.now() - last < PER_USER_MS) {
+    await kv.set(["done", commentId], true, { expireIn: WINDOW_MS });
+    return;
+  }
+
+  // 시간당 캡
+  const hour = new Date().toISOString().slice(0, 13);
+  const cnt = ((await kv.get(["hour", hour])).value as number | null) ?? 0;
+  if (cnt >= HOURLY_CAP) return;
+
+  const body = await compose(mediaId);
+  const ok = await privateReply(commentId, body);
+  if (ok) {
+    await kv.set(["done", commentId], true, { expireIn: WINDOW_MS });
+    await kv.set(["user", fromId], Date.now(), { expireIn: PER_USER_MS });
+    await kv.set(["hour", hour], cnt + 1, { expireIn: 3600_000 });
+  }
+}
+
+// ── 폴링 ─────────────────────────────────────────────────
+async function poll() {
+  try {
+    const tok = await getToken();
+    const mr = await fetch(
+      `${API}/${IG_ID}/media?fields=id,timestamp&limit=10&access_token=${tok}`,
+    );
+    const md = await mr.json();
+    if (md.error) {                                  // 토큰 만료/오류 감지
+      console.log("미디어 조회 오류", JSON.stringify(md.error));
+      await kv.set(["token_error"], new Date().toISOString());
+      if (md.error.code === 190) await refreshToken();   // 만료면 즉시 갱신 시도
+      return;
+    }
+    for (const m of md.data ?? []) {
+      const cr = await fetch(
+        `${API}/${m.id}/comments?fields=id,text,timestamp,from&limit=25&access_token=${tok}`,
+      );
+      const cd = await cr.json();
+      for (const c of cd.data ?? []) {
+        const fromId = c.from?.id ?? "";
+        if (!fromId || fromId === IG_ID) continue;   // 내 댓글 제외
+        const ts = c.timestamp ? Date.parse(c.timestamp) : Date.now();
+        await processComment(c.id, fromId, c.text ?? "", ts, m.id);
+      }
+    }
+    await kv.set(["last_poll"], new Date().toISOString());   // 헬스체크용
+  } catch (e) {
+    console.log("폴링 오류", e);
+  }
+}
+
+Deno.cron("poll comments", "* * * * *", poll);
+Deno.cron("refresh token", "0 3 * * 1", refreshToken);   // 매주 월요일 03:00 갱신
+
+// ── 웹훅 서명 ────────────────────────────────────────────
+async function verifySig(body: string, sig: string | null) {
+  if (!sig) return false;
+  const key = await crypto.subtle.importKey(
+    "raw", new TextEncoder().encode(SECRET),
+    { name: "HMAC", hash: "SHA-256" }, false, ["sign"],
+  );
+  const mac = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(body));
+  const hex = [...new Uint8Array(mac)].map((b) => b.toString(16).padStart(2, "0")).join("");
+  return sig === `sha256=${hex}`;
+}
+
+// ── HTTP ─────────────────────────────────────────────────
+Deno.serve(async (req) => {
+  const u = new URL(req.url);
+
+  // 클릭 추적 리다이렉트
+  if (u.pathname === "/c") {
+    const id = u.searchParams.get("id") ?? "?";
+    const to = u.searchParams.get("u");
+    if (!to) return new Response("missing u", { status: 400 });
+    const day = new Date().toISOString().slice(0, 10);
+    await kv.atomic()
+      .sum(["click", id], 1n)
+      .sum(["click_day", day, id], 1n)
+      .commit();
+    return Response.redirect(to, 302);
+  }
+
+  if (u.pathname === "/stats") {
+    const total: Record<string, number> = {};
+    for await (const e of kv.list({ prefix: ["click"] })) {
+      total[String(e.key[1])] = Number(e.value);
+    }
+    const days: Record<string, Record<string, number>> = {};
+    for await (const e of kv.list({ prefix: ["click_day"] })) {
+      const d = String(e.key[1]), id = String(e.key[2]);
+      (days[d] ??= {})[id] = Number(e.value);
+    }
+    return Response.json({ total, days });
+  }
+
+  if (u.pathname === "/run") { await poll(); return new Response("polled"); }
+
+  if (u.pathname === "/refresh") { await refreshToken(); return new Response("refreshed"); }
+
+  // 봇 상태 한눈에 보기
+  if (u.pathname === "/health") {
+    const last = (await kv.get<string>(["last_poll"])).value;
+    const refd = (await kv.get<string>(["token_refreshed"])).value;
+    const err  = (await kv.get<string>(["token_error"])).value;
+    const ageMin = last ? Math.round((Date.now() - Date.parse(last)) / 60000) : null;
+    return Response.json({
+      alive: ageMin !== null && ageMin < 5,     // 5분 내 폴링했으면 정상
+      last_poll: last, last_poll_min_ago: ageMin,
+      token_last_refreshed: refd, token_error_at: err,
+    });
+  }
+
+  // 웹훅 검증
+  if (u.pathname === "/webhook" && req.method === "GET") {
+    if (u.searchParams.get("hub.verify_token") === VERIFY) {
+      return new Response(u.searchParams.get("hub.challenge") ?? "");
+    }
+    return new Response("forbidden", { status: 403 });
+  }
+
+  // 웹훅 수신
+  if (u.pathname === "/webhook" && req.method === "POST") {
+    const body = await req.text();
+    if (!(await verifySig(body, req.headers.get("x-hub-signature-256")))) {
+      return new Response("bad sig", { status: 401 });
+    }
+    const d = JSON.parse(body);
+    for (const e of d.entry ?? []) {
+      for (const ch of e.changes ?? []) {
+        if (ch.field !== "comments") continue;
+        const v = ch.value ?? {};
+        await processComment(
+          v.id, v.from?.id ?? "", v.text ?? "", Date.now(), v.media?.id ?? "",
+        );
+      }
+    }
+    return new Response("ok");
+  }
+
+  return new Response("cherry bot alive");
+});
